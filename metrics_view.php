@@ -38,6 +38,13 @@ if ((!$exists) or ($status != 0)) {
 
 <div id="example-table"></div>
 
+<div>
+<br>
+<span style="background-color: red; display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span> Failed 
+<span style="background-color: orange; display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span> Processing 
+<span style="background-color: green; display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span> Success 
+</div>
+
 <script>
 
 var tabledata = '.$data.';
@@ -49,10 +56,10 @@ var table = new Tabulator("#example-table", {
 	paginationSize:15,
 	clipboard:true,
 	initialSort: [
-        {column: "ID", dir: "desc"}
+        {column: "SubmissionDate", dir: "desc"}
     ],
 	columns: [
-		{"title": "ID", "field": "ID", formatter:function(cell, formatterParams) { return "<a href=\'/index.php/metrics?id=" + cell.getValue() + "\'>" + cell.getValue() + "</a>"; } },
+		{"title": "ID", "field": "ID", formatter:function(cell, formatterParams) { var status = cell.getRow().getCell("Status").getValue(); return (status == 0) ? "<a href=\'/index.php/metrics?id=" + cell.getValue() + "\'>" + cell.getValue() + "</a>" : cell.getValue(); } },
 		{"title": "Status", "field": "Status", formatter: "traffic", formatterParams: { min: 0, max: 2, color: ["green", "orange", "red"] } },
 		{"title": "Author", "field": "Author"},
 		{"title": "Model Name", "field": "ModelName" },

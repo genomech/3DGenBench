@@ -34,7 +34,7 @@ foreach ($TssList as $index) {
 	if ($res == '0') die(Message('Resolution not defined', true));
 	if ($samp == '0') die(Message('Sample not defined', true));
 	$ProcessingList[$index] = array(
-		'ID' => 'bmid'.$index,
+		'ID' => 'bm'.strtoupper(dechex(intval($index))),
 		'Author' => $Author,
 		'ModelName' => $Model,
 		'SampleName' => $samp,
@@ -67,7 +67,7 @@ $values = array();
 foreach ($ProcessingList as $index => $meta) array_push($values, '("'.$meta['ID'].'", 1, "'.$meta['Author'].'", "'.$meta['ModelName'].'", "'.$meta['SampleName'].'", '.$meta['Resolution'].', "'.date('Y-m-d H:i:s').'")');
 $query .= implode(', ', $values).';';
 $conn = $dbh->exec($query);
-if (!$conn) die(Message('Database error: '.$dbh->errorCode(), true));
+if (!$conn) die(Message('Database error: '.$dbh->errorCode().' ('.$dbh->errorInfo()[2].')', true));
 $dbh = null;
 
 // MAKE SCRIPT

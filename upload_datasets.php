@@ -13,7 +13,7 @@ echo '
 <style>
 
 	.default_cont { display: inline-block; padding: 10px; width: 20%; }
-	.button_cont { display: inline-block; padding: 10px; width: 10%; }
+	.button_cont { display: inline-block; padding: 10px; width: 20%; }
 
 </style>';
 
@@ -56,14 +56,13 @@ echo '
 		return 0;
 	}
 
-	function addBlock(first) {
+	function addBlock(TS) {
 		
 		var container = document.getElementById("submission_form");
 		if (container.children.length > 13) { alert("Too many datasets!"); return 0; }
 		var SamplesList = '.json_encode($SamplesList).';
 		var ResolutionsList = '.json_encode($ResolutionsList).';
 		var FilesList = '.json_encode($UploadedFilesList).';
-		var TS = new Date().getTime();
 		var block_id = "block_" + TS;
 		var obj_block = document.createElement("div");
 		obj_block.setAttribute("id", block_id);
@@ -72,7 +71,7 @@ echo '
 		addSelect(TS, obj_block, ResolutionsList, "resolution", "Resolution");
 		addSelect(TS, obj_block, FilesList, "file_WT", "WT Contacts File");
 		addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Contacts File");
-		if (!first) addDeleteButton(TS, obj_block);
+		addDeleteButton(TS, obj_block);
 		return 0;
 	}
 	
@@ -83,6 +82,19 @@ echo '
 		iframe.contentWindow.document.close();
 	}
 	
+	function addSampleBlock() {
+		var ts = new Date().getTime();
+		addBlock(ts);
+	}
+	
+	function addTest() {
+		var ts = new Date().getTime();
+		addBlock(ts);
+		document.getElementById("sample_" + ts).value = "Bor";
+		document.getElementById("resolution_" + ts).value = "5000";
+		document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/model80.0_WT_Bor_predicted.txt";
+		document.getElementById("file_MUT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/model80.0_Mut_Bor_predicted.txt";
+	}
 </script>';
 
 // HTML
@@ -118,10 +130,14 @@ echo '
 	<h3>Datasets</h3>
 </form>
 
-<script>addBlock(true);</script>
+<script>addSampleBlock();</script>
 
 <div class="button_cont">
-	<a href="#" onclick="addBlock(false);">Add</a>
-</div>';
+	<a id="add_sample" href="#" onclick="addSampleBlock();">Add Unit</a>
+</div><br>
+<div class="button_cont">
+	<a id="add_tetsaaa" href="#" onclick="addTest();">Add Test Unit</a>
+</div>
+';
 
 ?> 
