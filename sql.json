@@ -1,0 +1,32 @@
+{
+	"CreateMetricsTable": "CREATE TABLE bm_metrics (
+    ID                                       STRING   PRIMARY KEY ON CONFLICT ROLLBACK
+                                                      UNIQUE ON CONFLICT ROLLBACK
+                                                      NOT NULL ON CONFLICT ROLLBACK,
+    Status                                   INTEGER  NOT NULL ON CONFLICT ROLLBACK,
+    [Metadata.Author]                        STRING   NOT NULL ON CONFLICT ROLLBACK,
+    [Metadata.ModelName]                     STRING   NOT NULL ON CONFLICT ROLLBACK,
+    [Metadata.SampleName]                    STRING   NOT NULL ON CONFLICT ROLLBACK,
+    [Metadata.Resolution]                    INTEGER  NOT NULL ON CONFLICT ROLLBACK,
+    [Metadata.SubmissionDate]                DATETIME NOT NULL,
+    [Metrics.Pearson.WT]                     DOUBLE,
+    [Metrics.Pearson.MUT]                    DOUBLE,
+    [Metrics.SCC.WT]                         DOUBLE,
+    [Metrics.SCC.MUT]                        DOUBLE,
+    [Metrics.InsulationScorePearson.WT]      DOUBLE,
+    [Metrics.InsulationScorePearson.MUT]     DOUBLE,
+    [Metrics.InsulationScoreMutVsWtPearson]  DOUBLE,
+    [Metrics.EctopicInsulation.AUC]          DOUBLE,
+    [Metrics.EctopicInsulation.Precision]    STRING,
+    [Metrics.EctopicInsulation.Recall]       STRING,
+    [Metrics.EctopicInsulation.Thresholds]   STRING,
+    [Metrics.EctopicArrayGraph.EXP]          STRING,
+    [Metrics.EctopicArrayGraph.PRED]         STRING,
+    [Metrics.EctopicInteractions.AUC]        DOUBLE,
+    [Metrics.EctopicInteractions.Precision]  STRING,
+    [Metrics.EctopicInteractions.Recall]     STRING,
+    [Metrics.EctopicInteractions.Thresholds] STRING,
+    [Metrics.RandomInteractions.Random]      STRING,
+    [Metrics.RandomInteractions.Real]        INTEGER
+);"
+}
