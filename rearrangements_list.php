@@ -2,29 +2,37 @@
 
 require(__DIR__.'/shared.php');
 
-$data = json_encode(TsvToArray(__DIR__.'/rearrangements_table.tsv'));
+// Get Data
+$DataArray = TsvToArray(GetRearrTable());
 
+// Tabulator load (http://tabulator.info/)
 echo '
 <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
 <script type="text/javascript" src="https://unpkg.com/tabulator-tables/dist/js/tabulator.min.js"></script>
 <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
+';
 
+// Download panel
+echo '
 <div>
 Download:
 <a href="#" id="download-csv">CSV</a> | <a href="#" id="download-json">JSON</a> | <a href="#" id="download-xlsx">XLSX</a>
 </div>
+';
 
-<div id="example-table"></div>
+// Draw table
+echo '
+<div id="rearr-table"></div>
 
 <script>
 
-var tabledata = '.$data.';
+var tabledata = '.json_encode($DataArray).';
 
-var table = new Tabulator("#example-table", {
-	data:tabledata,
-	pagination:"local",
-	paginationSize:15,
-	clipboard:true,
+var table = new Tabulator("#rearr-table", {
+	data: tabledata,
+	pagination: "local",
+	paginationSize: 15,
+	clipboard: true,
 	columns: [
 		{"title": "ID", "field": "rearrangement_ID", formatter:function(cell, formatterParams) { return "<span style=\'font-weight:bold;\'>" + cell.getValue() + "</span>"; } },
 		{"title": "Rearrangement Type", "field": "rearrangement_type"},
@@ -60,5 +68,7 @@ document.getElementById("download-csv").addEventListener("click", function() { t
 document.getElementById("download-json").addEventListener("click", function() { table.download("json", "rearrangements_table.json"); });
 document.getElementById("download-xlsx").addEventListener("click", function() { table.download("xlsx", "rearrangements_table.xlsx", {sheetName:"My Data"}); });
 
-</script>';
+</script>
+';
+
 ?>

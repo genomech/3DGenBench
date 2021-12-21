@@ -8,6 +8,8 @@ $SamplesList = GetSamples();
 $ResolutionsList = GetResolutions();
 $UploadedFilesList = GetUploadedFiles($User);
 
+$ModelsList = ''; foreach (GetModelsUser() as $Model) $ModelsList .= '<option value="'.htmlspecialchars($Model).'"></option>';
+
 // CSS
 echo '
 <style>
@@ -115,7 +117,8 @@ echo '
 		
 		<div class="default_cont">
 			<label for="submission_model">Model Name:</label>
-			<input type="text" name="submission_model" value="">
+			<input type="text" name="submission_model" id="models_list" list="models_list">
+			<datalist id="models_list">'.$ModelsList.'</datalist>
 		</div>
 		
 		<div class="default_cont">
