@@ -38,10 +38,11 @@ echo '
 <script>
 var tabledata = '.json_encode($TableArray).';
 var table = new Tabulator("#metrics-table", {
+	placeholder: "No data available!",
+	height: "488px",
 	layout: "fitColumns",
 	data: tabledata,
 	pagination: "local",
-	paginationSize: 15,
 	clipboard: true,
 	initialSort: [
         {column: "SubmissionDate", dir: "desc"}

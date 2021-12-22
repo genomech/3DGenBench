@@ -34,9 +34,10 @@ function IDFormatter() { return { "formatter": function(cell, formatterParams) {
 var tabledata = '.json_encode($DataArray).';
 
 var table = new Tabulator("#rearr-table", {
+	placeholder: "No data available!",
+	height: "500px",
 	data: tabledata,
 	pagination: "local",
-	paginationSize: 15,
 	clipboard: true,
 	columns: [
 		{ ...{ "title": "ID", "field": "rearrangement_ID" }, ...IDFormatter() },

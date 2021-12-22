@@ -2,91 +2,185 @@
 
 $IsView = htmlspecialchars($_GET['isview']);
 
+$Width = 1200;
+$Height = 600;
+
+$GenomicCoordinatesTilesetUID = 'NyITQvZsS_mOFNlz5C2LJg';
+$GenomicCoordinatesWidth = 30;
+
 if ($IsView == '') {
-echo '<iframe width="1000" height="1000" src="../../../datasets/higlass.php?isview=true"></iframe>';
+echo '<iframe width="'.$Width.'" height="'.$Height.'" src="../../../datasets/higlass.php?isview=true"></iframe>';
 } else {
 
 echo '
 <!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <title>Minimal Working Example &middot; HiGlass</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/higlass@1.6.6/dist/hglib.css">
-
-  <style type="text/css">
-    html, body {
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
-  </style>
-
-  <script crossorigin src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/pixi.js@5/dist/pixi.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-bootstrap@0.32.1/dist/react-bootstrap.min.js"></script>
-  <script crossorigin src="https://unpkg.com/higlass@1.6.6/dist/hglib.min.js"></script>
-</head>
-<body></body>
-<script>
-const hgApi = window.hglib.viewer(
-  document.body,
-  "http://alena-spn.icgbio.ru:8888/api/v1/viewconfs/?d=default",
-  {
-  "viewconf": {
-    "editable": true,
-    "zoomFixed": false,
-    "trackSourceServers": [
-      "http://higlass.io/api/v1"
-    ],
-    "exportViewUrl": "http://alena-spn.icgbio.ru:8888/api/v1/viewconfs/",
-    "views": [
-      {
-        "tracks": {
-          "top": [],
-          "left": [],
-          "center": [],
-          "right": [],
-          "bottom": []
-        },
-        "initialXDomain": [
-          243883495.14563107,
-          2956116504.854369
-        ],
-        "initialYDomain": [
-          804660194.1747572,
-          2395339805.825243
-        ],
-        "layout": {
-          "w": 12,
-          "h": 12,
-          "x": 0,
-          "y": 0,
-          "i": "EwiSznw8ST2HF3CjHx-tCg",
-          "moved": false,
-          "static": false
-        },
-        "uid": "EwiSznw8ST2HF3CjHx-tCg"
-      }
-    ],
-    "zoomLocks": {
-      "locksByViewUid": {},
-      "locksDict": {}
-    },
-    "locationLocks": {
-      "locksByViewUid": {},
-      "locksDict": {}
-    },
-    "valueScaleLocks": {
-      "locksByViewUid": {},
-      "locksDict": {}
-    }
-  }
-}
-);
-</script>
+	<head>
+		<meta charset="utf-8">
+		
+		<link rel="stylesheet" href="https://unpkg.com/higlass@1.5.7/dist/hglib.css" type="text/css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css">
+		
+		<script crossorigin src="https://unpkg.com/react@16.6/umd/react.production.min.js"></script>
+		<script crossorigin src="https://unpkg.com/react-dom@16.6/umd/react-dom.production.min.js"></script>
+		<script crossorigin src="https://unpkg.com/pixi.js@5/dist/pixi.min.js"></script>
+		<!-- To render HiGlass with the Canvas API include the pixi.js-legacy instead of pixi.js -->
+		<!-- <script crossorigin src="https://unpkg.com/pixi.js-legacy@5/dist/pixi-legacy.min.js"></script> -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.32.1/react-bootstrap.min.js"></script>
+		
+		<script src="https://unpkg.com/higlass@1.6/dist/hglib.min.js"></script>
+	</head>
+	
+	<body>
+	<pre id="json"></pre>
+		<div id="higlass-container" style="width: '.$Width.'px; height: '.$Height.'px; background-color: white;"></div>
+	</body>
+	
+	<script>
+		
+		function MakeSessionID() {
+			var Length = 16;
+			var Result = "";
+			var Characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+			for ( var i = 0; i < Length; i++ ) Result += Characters.charAt(Math.floor(Math.random() * Characters.length));
+			return Result;
+		}
+		
+		function GenerateGenomeTrack(Label, SessionID, Position) { return { 
+			"server": "http://higlass.io/api/v1",
+			"tilesetUid": "'.$GenomicCoordinatesTilesetUID.'",
+			"uid": Label + "_" + SessionID,
+			"type": Position + "-chromosome-labels",
+			"options": { "color": "#606060", "stroke": "#ffffff", "fontSize": 12},
+			"width": '.$GenomicCoordinatesWidth.',
+			"height": '.$GenomicCoordinatesWidth.'
+			}; }
+		
+		function GenerateHeatmapTrack(Label, TileSetID, SessionID, Name, Position) { return {
+			"filetype": "cooler",
+			"server": "http://higlass.io/api/v1",
+			"tilesetUid": TileSetID,
+			"uid": Label + "_" + SessionID,
+			"type": "heatmap",
+			"options": {
+				"backgroundColor": "transparent",
+				"labelPosition": { "top": "topRight", "bottom": "bottomLeft" }[Position],
+				"labelLeftMargin": 0,
+				"labelRightMargin": 0,
+				"labelTopMargin": 0,
+				"labelBottomMargin": 0,
+				"labelShowResolution": true,
+				"labelShowAssembly": true,
+				"colorRange": [
+					"white",
+					"rgba(245,166,35,1.0)",
+					"rgba(208,2,27,1.0)",
+					"black"
+				],
+				"colorbarBackgroundColor": "#ffffff",
+				"maxZoom": null,
+				"minWidth": 500,
+				"minHeight": 500,
+				"colorbarPosition": {"top": "topRight", "bottom": "bottomLeft"}[Position],
+				"trackBorderWidth": 0,
+				"trackBorderColor": "black",
+				"heatmapValueScaling": "log",
+				"showMousePosition": false,
+				"mousePositionColor": "#000000",
+				"showTooltip": false,
+				"extent": {"top": "upper-right", "bottom": "lower-left"}[Position],
+				"zeroValueColor": null,
+				"name": Name,
+				"scaleStartPercent": "0.00000",
+				"scaleEndPercent": "1.00000"
+			},
+			"transforms": [
+				{
+					"name": "ICE",
+					"value": "weight"
+				}
+			],
+			"width": 355,
+			"height": 478
+		}; }
+		
+		function GenerateView(ViewID, SessionID, TopTilesetID, TopName, BottomTilesetID, BottomName, X, Y) { return JSON.parse(JSON.stringify({
+			"tracks": {
+				"top": [ GenerateGenomeTrack(ViewID + "_GenomeTrackH", SessionID, "horizontal") ],
+				"left": [ GenerateGenomeTrack(ViewID + "_GenomeTrackV", SessionID, "vertical") ],
+				"center": [
+					{
+						"uid": ViewID + "_TracksContainer_" + SessionID,
+						"type": "combined",
+						"contents": [
+							GenerateHeatmapTrack(ViewID + "_TrackTopRight", TopTilesetID, SessionID, TopName, "top"),
+							GenerateHeatmapTrack(ViewID + "_TrackBottomLeft", BottomTilesetID, SessionID, BottomName, "bottom")
+						],
+						"width": 355,
+						"height": 478,
+						"options": {}
+					}
+				],
+				"right": [],
+				"bottom": [],
+				"whole": [],
+				"gallery": []
+			},
+			"initialXDomain": [
+				1921290268.7335002,
+				2322915098.6186795
+			],
+			"initialYDomain": [
+				2031858208.2829888,
+				2421198043.37168
+			],
+			"layout": {
+				"w": 6,
+				"h": 6,
+				"x": 6 * X,
+				"y": 6 * Y,
+				"moved": false,
+				"static": false
+			},
+			"uid": "View_" + ViewID + "_" + SessionID
+		})); }
+		
+		 function GenerateLock(LockID, SessionID, View1, View2) { 
+			var VSID1 = "View_" + View1 + "_" + SessionID;
+			var VSID2 = "View_" + View2 + "_" + SessionID;
+			var LID = LockID + "_" + SessionID;
+			return JSON.parse("{ \"locksByViewUid\": { \"" + VSID2 + "\": \"" + LID + "\", \"" + VSID1 + "\": \"" + LID + "\" }, \"locksDict\": { \"" + LID + "\": { \"" + VSID2 + "\": [ 1090752478.8873124, 1099371687.717565, 200779.88244223595 ], \"" + VSID1 + "\": [ 1092559497.8292904, 1099170907.835121, 200779.88244223595 ], \"uid\": \"" + LID + "\" } } }"); 
+		}
+		 
+		const SessionID = MakeSessionID();
+		
+		const WTView = GenerateView("WT", SessionID, "MT6YGW2LTmuXNvMFK8kvaA", "Wutz2017.HeLa.Control_G1_sync.HindIII.1000.mcool (WT)", "F1TbgvFxQoicsvbni7aS-w", "Wutz2017.HeLa.CTCF-AID_t0.HindIII.1000.mcool (WT)", 0, 0);
+		const MUTView = GenerateView("MUT", SessionID, "MT6YGW2LTmuXNvMFK8kvaA", "Wutz2017.HeLa.Control_G1_sync.HindIII.1000.mcool (MUT)", "F1TbgvFxQoicsvbni7aS-w", "Wutz2017.HeLa.CTCF-AID_t0.HindIII.1000.mcool (MUT)", 1, 0);
+		const objZoomLock = GenerateLock("ZoomLock", SessionID, "WT", "MUT");
+		const objLocationLock = GenerateLock("LocationLock", SessionID, "WT", "MUT");
+		
+		const ViewConfig = {
+			
+			"editable": true,
+			"zoomFixed": false,
+			"trackSourceServers": [ "/api/v1", "http://higlass.io/api/v1" ],
+			"exportViewUrl": "/api/v1/viewconfs/",
+			
+			"views": [ WTView, MUTView ],
+			"zoomLocks": objZoomLock,
+			"locationLocks": objLocationLock
+		};
+		
+		document.getElementById("json").textContent = JSON.stringify(ViewConfig);
+		
+		const hgApi = hglib.viewer(
+			document.getElementById("higlass-container"),
+			ViewConfig,
+			{ bounded: true }
+		);
+		
+	</script>
 </html>
+
 ';
 }
 
