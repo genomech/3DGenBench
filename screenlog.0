@@ -340,3 +340,174 @@ INFO:matplotlib.font_manager:generated new fontManager
 2021-12-20 20:03:04,603       INFO         zoomify_cooler                     Copying base matrices and producing 1 new zoom levels.
 2021-12-20 20:03:04,603       INFO         zoomify_cooler                     Bin size: 5000
 2021-12-20 20:03:04,607       INFO         Timer                              Save MCOOLs [00:00:00]
+WARNING:matplotlib:Matplotlib created a temporary config/cache directory at /tmp/matplotlib-db9irgjj because the default path (/var/www/.config/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+INFO:matplotlib.font_manager:Failed to extract font properties from /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf: In FT2Font: Can not load face.  Unknown file format.
+INFO:matplotlib.font_manager:generated new fontManager
+2021-12-21 19:06:41,119       INFO         Cool2Cool                          Input COOL: https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/SRR3179588/inter_5kb.cool
+2021-12-21 19:06:41,119       INFO         Cool2Cool                          Output COOL: /tmp/tmpfvec4gl8/Wt-Exp.cool
+2021-12-21 19:06:41,119       INFO         Cool2Cool                          Chrom: chr11
+2021-12-21 19:08:26,408       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Wt-Exp.cool::/"
+2021-12-21 19:08:26,408       INFO         create                             Writing chroms
+2021-12-21 19:08:26,409       INFO         create                             Writing bins
+2021-12-21 19:08:26,429       INFO         create                             Writing pixels
+2021-12-21 19:08:26,870       INFO         create                             Writing indexes
+2021-12-21 19:08:26,927       INFO         create                             Writing info
+2021-12-21 19:08:26,933       INFO         Tsv2Cool                           Input TSV: /storage/fairwind/3DGenBench/upload/guest/model80.0_WT_Bor_predicted.txt
+2021-12-21 19:08:26,933       INFO         Tsv2Cool                           Output COOL: /tmp/tmpfvec4gl8/Wt-Pred.cool
+2021-12-21 19:08:26,933       INFO         Tsv2Cool                           Template COOL: /tmp/tmpfvec4gl8/Wt-Exp.cool
+2021-12-21 19:08:26,933       INFO         Tsv2Cool                           Chrom: chr11
+2021-12-21 19:08:26,933       INFO         Tsv2Cool                           Resolution: 5 kb
+2021-12-21 19:08:33,218       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Wt-Pred.cool::/"
+2021-12-21 19:08:33,218       INFO         create                             Writing chroms
+2021-12-21 19:08:33,219       INFO         create                             Writing bins
+2021-12-21 19:08:33,240       INFO         create                             Writing pixels
+2021-12-21 19:08:33,292       INFO         create                             Writing indexes
+2021-12-21 19:08:33,301       INFO         create                             Writing info
+2021-12-21 19:08:33,304       INFO         Cool2Cool                          Input COOL: https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/SRR3179590/inter_5kb.cool
+2021-12-21 19:08:33,304       INFO         Cool2Cool                          Output COOL: /tmp/tmpfvec4gl8/Mut-Exp.cool
+2021-12-21 19:08:33,304       INFO         Cool2Cool                          Chrom: chr11
+2021-12-21 19:10:07,270       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Mut-Exp.cool::/"
+2021-12-21 19:10:07,270       INFO         create                             Writing chroms
+2021-12-21 19:10:07,271       INFO         create                             Writing bins
+2021-12-21 19:10:07,291       INFO         create                             Writing pixels
+2021-12-21 19:10:07,612       INFO         create                             Writing indexes
+2021-12-21 19:10:07,665       INFO         create                             Writing info
+2021-12-21 19:10:07,670       INFO         Tsv2Cool                           Input TSV: /storage/fairwind/3DGenBench/upload/guest/model80.0_Mut_Bor_predicted.txt
+2021-12-21 19:10:07,670       INFO         Tsv2Cool                           Output COOL: /tmp/tmpfvec4gl8/Mut-Pred.cool
+2021-12-21 19:10:07,670       INFO         Tsv2Cool                           Template COOL: /tmp/tmpfvec4gl8/Wt-Exp.cool
+2021-12-21 19:10:07,670       INFO         Tsv2Cool                           Chrom: chr11
+2021-12-21 19:10:07,671       INFO         Tsv2Cool                           Resolution: 5 kb
+2021-12-21 19:10:13,993       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Mut-Pred.cool::/"
+2021-12-21 19:10:13,993       INFO         create                             Writing chroms
+2021-12-21 19:10:13,994       INFO         create                             Writing bins
+2021-12-21 19:10:14,015       INFO         create                             Writing pixels
+2021-12-21 19:10:14,067       INFO         create                             Writing indexes
+2021-12-21 19:10:14,077       INFO         create                             Writing info
+2021-12-21 19:10:14,092       INFO         Timer                              Temp files created [00:03:32]
+2021-12-21 19:10:14,092       INFO         AlignCools                         Input COOL [A]: /tmp/tmpfvec4gl8/Wt-Exp.cool
+2021-12-21 19:10:14,092       INFO         AlignCools                         Output COOL [A]: /tmp/tmpfvec4gl8/Wt-Exp-SampleTypeAligned.cool
+2021-12-21 19:10:14,092       INFO         AlignCools                         Input COOL [B]: /tmp/tmpfvec4gl8/Wt-Pred.cool
+2021-12-21 19:10:14,092       INFO         AlignCools                         Output COOL [B]: /tmp/tmpfvec4gl8/Wt-Pred-SampleTypeAligned.cool
+2021-12-21 19:10:14,092       INFO         AlignCools                         Chrom: chr11
+2021-12-21 19:10:14,835       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Wt-Exp-SampleTypeAligned.cool::/"
+2021-12-21 19:10:14,835       INFO         create                             Writing chroms
+2021-12-21 19:10:14,836       INFO         create                             Writing bins
+2021-12-21 19:10:14,856       INFO         create                             Writing pixels
+2021-12-21 19:10:14,903       INFO         create                             Writing indexes
+2021-12-21 19:10:14,912       INFO         create                             Writing info
+2021-12-21 19:10:14,947       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Wt-Pred-SampleTypeAligned.cool::/"
+2021-12-21 19:10:14,947       INFO         create                             Writing chroms
+2021-12-21 19:10:14,948       INFO         create                             Writing bins
+2021-12-21 19:10:14,967       INFO         create                             Writing pixels
+2021-12-21 19:10:15,018       INFO         create                             Writing indexes
+2021-12-21 19:10:15,028       INFO         create                             Writing info
+2021-12-21 19:10:15,031       INFO         AlignCools                         Input COOL [A]: /tmp/tmpfvec4gl8/Mut-Exp.cool
+2021-12-21 19:10:15,031       INFO         AlignCools                         Output COOL [A]: /tmp/tmpfvec4gl8/Mut-Exp-SampleTypeAligned.cool
+2021-12-21 19:10:15,031       INFO         AlignCools                         Input COOL [B]: /tmp/tmpfvec4gl8/Mut-Pred.cool
+2021-12-21 19:10:15,031       INFO         AlignCools                         Output COOL [B]: /tmp/tmpfvec4gl8/Mut-Pred-SampleTypeAligned.cool
+2021-12-21 19:10:15,031       INFO         AlignCools                         Chrom: chr11
+2021-12-21 19:10:15,681       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Mut-Exp-SampleTypeAligned.cool::/"
+2021-12-21 19:10:15,681       INFO         create                             Writing chroms
+2021-12-21 19:10:15,682       INFO         create                             Writing bins
+2021-12-21 19:10:15,702       INFO         create                             Writing pixels
+2021-12-21 19:10:15,748       INFO         create                             Writing indexes
+2021-12-21 19:10:15,758       INFO         create                             Writing info
+2021-12-21 19:10:15,791       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Mut-Pred-SampleTypeAligned.cool::/"
+2021-12-21 19:10:15,791       INFO         create                             Writing chroms
+2021-12-21 19:10:15,792       INFO         create                             Writing bins
+2021-12-21 19:10:15,811       INFO         create                             Writing pixels
+2021-12-21 19:10:15,861       INFO         create                             Writing indexes
+2021-12-21 19:10:15,870       INFO         create                             Writing info
+2021-12-21 19:10:22,261       INFO         Timer                              Sample type align [00:00:08]
+2021-12-21 19:10:22,261       INFO         AlignCools                         Input COOL [A]: /tmp/tmpfvec4gl8/Wt-Exp.cool
+2021-12-21 19:10:22,261       INFO         AlignCools                         Output COOL [A]: /tmp/tmpfvec4gl8/Wt-Exp-DataTypeAligned.cool
+2021-12-21 19:10:22,261       INFO         AlignCools                         Input COOL [B]: /tmp/tmpfvec4gl8/Mut-Exp.cool
+2021-12-21 19:10:22,261       INFO         AlignCools                         Output COOL [B]: /tmp/tmpfvec4gl8/Mut-Exp-DataTypeAligned.cool
+2021-12-21 19:10:22,261       INFO         AlignCools                         Chrom: chr11
+2021-12-21 19:10:23,315       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Wt-Exp-DataTypeAligned.cool::/"
+2021-12-21 19:10:23,315       INFO         create                             Writing chroms
+2021-12-21 19:10:23,316       INFO         create                             Writing bins
+2021-12-21 19:10:23,336       INFO         create                             Writing pixels
+2021-12-21 19:10:23,457       INFO         create                             Writing indexes
+2021-12-21 19:10:23,490       INFO         create                             Writing info
+2021-12-21 19:10:23,559       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Mut-Exp-DataTypeAligned.cool::/"
+2021-12-21 19:10:23,559       INFO         create                             Writing chroms
+2021-12-21 19:10:23,560       INFO         create                             Writing bins
+2021-12-21 19:10:23,579       INFO         create                             Writing pixels
+2021-12-21 19:10:23,698       INFO         create                             Writing indexes
+2021-12-21 19:10:23,731       INFO         create                             Writing info
+2021-12-21 19:10:23,733       INFO         AlignCools                         Input COOL [A]: /tmp/tmpfvec4gl8/Wt-Pred.cool
+2021-12-21 19:10:23,733       INFO         AlignCools                         Output COOL [A]: /tmp/tmpfvec4gl8/Wt-Pred-DataTypeAligned.cool
+2021-12-21 19:10:23,733       INFO         AlignCools                         Input COOL [B]: /tmp/tmpfvec4gl8/Mut-Pred.cool
+2021-12-21 19:10:23,733       INFO         AlignCools                         Output COOL [B]: /tmp/tmpfvec4gl8/Mut-Pred-DataTypeAligned.cool
+2021-12-21 19:10:23,733       INFO         AlignCools                         Chrom: chr11
+2021-12-21 19:10:24,150       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Wt-Pred-DataTypeAligned.cool::/"
+2021-12-21 19:10:24,151       INFO         create                             Writing chroms
+2021-12-21 19:10:24,152       INFO         create                             Writing bins
+2021-12-21 19:10:24,171       INFO         create                             Writing pixels
+2021-12-21 19:10:24,218       INFO         create                             Writing indexes
+2021-12-21 19:10:24,227       INFO         create                             Writing info
+2021-12-21 19:10:24,260       INFO         create                             Creating cooler at "/tmp/tmpfvec4gl8/Mut-Pred-DataTypeAligned.cool::/"
+2021-12-21 19:10:24,260       INFO         create                             Writing chroms
+2021-12-21 19:10:24,261       INFO         create                             Writing bins
+2021-12-21 19:10:24,280       INFO         create                             Writing pixels
+2021-12-21 19:10:24,328       INFO         create                             Writing indexes
+2021-12-21 19:10:24,336       INFO         create                             Writing info
+2021-12-21 19:10:24,350       INFO         Timer                              Data type align [00:00:02]
+2021-12-21 19:10:25,169       INFO         Timer                              Pearson [00:00:00]
+2021-12-21 19:10:30,729       INFO         Timer                              SCC [00:00:05]
+2021-12-21 19:10:30,729       INFO         InsulationData                     Window: 25000
+2021-12-21 19:10:32,351       INFO         Timer                              Insulation Dataset [00:00:01]
+2021-12-21 19:10:32,352       INFO         Timer                              Insulation Score Pearson [00:00:00]
+2021-12-21 19:10:32,352       INFO         Timer                              Insulation Score (Mut/Wt) Pearson [00:00:00]
+2021-12-21 19:10:32,522       INFO         Timer                              Ectopic Insulation PR Curve [00:00:00]
+2021-12-21 19:10:32,522       INFO         EctopicInteractionsArray           WT COOL: /tmp/tmpfvec4gl8/Wt-Exp.cool
+2021-12-21 19:10:32,522       INFO         EctopicInteractionsArray           Mut COOL: /tmp/tmpfvec4gl8/Mut-Exp.cool
+2021-12-21 19:10:32,522       INFO         EctopicInteractionsArray           Capture: chr11:109140001-115015000
+2021-12-21 19:10:32,522       INFO         EctopicInteractionsArray           Rearrangement: chr11:111522545-111540886
+2021-12-21 19:10:32,522       INFO         EctopicInteractionsArray           Normalized: no
+2021-12-21 19:10:32,938       INFO         EctopicInteractionsArray           Diff array prepared
+2021-12-21 19:10:33,070       INFO         EctopicInteractionsArray           Diff matrix normalized
+/var/www/html/datasets/.pyenv/lib/python3.8/site-packages/numpy/lib/type_check.py:461: VisibleDeprecationWarning: Creating an ndarray from ragged nested sequences (which is a list-or-tuple of lists-or-tuples-or ndarrays with different lengths or shapes) is deprecated. If you meant to do this, you must specify 'dtype=object' when creating the ndarray.
+  x = _nx.array(x, subok=True, copy=copy)
+2021-12-21 19:10:33,075       INFO         EctopicInteractionsArray           Diagonals created
+2021-12-21 19:10:33,800       INFO         EctopicInteractionsArray           Ectopic interactions on diagonals found
+2021-12-21 19:10:33,800       INFO         EctopicInteractionsArray           WT COOL: /tmp/tmpfvec4gl8/Wt-Pred.cool
+2021-12-21 19:10:33,800       INFO         EctopicInteractionsArray           Mut COOL: /tmp/tmpfvec4gl8/Mut-Pred.cool
+2021-12-21 19:10:33,800       INFO         EctopicInteractionsArray           Capture: chr11:109140001-115015000
+2021-12-21 19:10:33,800       INFO         EctopicInteractionsArray           Rearrangement: chr11:111522545-111540886
+2021-12-21 19:10:33,800       INFO         EctopicInteractionsArray           Normalized: yes
+2021-12-21 19:10:34,150       INFO         EctopicInteractionsArray           Diff array prepared
+2021-12-21 19:10:34,264       INFO         EctopicInteractionsArray           Diff matrix normalized
+2021-12-21 19:10:34,267       INFO         EctopicInteractionsArray           Diagonals created
+2021-12-21 19:10:35,493       INFO         EctopicInteractionsArray           Ectopic interactions on diagonals found
+2021-12-21 19:10:35,493       INFO         Timer                              Ectopic Array [00:00:02]
+2021-12-21 19:10:35,894       INFO         Timer                              Ectopic Array Graph [00:00:00]
+2021-12-21 19:10:36,624       INFO         Timer                              Ectopic Interactions PR Curve [00:00:00]
+2021-12-21 19:10:36,624       INFO         RandomEctopicIntersections         N: 5000
+2021-12-21 19:10:36,624       INFO         RandomEctopicIntersections         Sigma: 2
+2021-12-21 19:14:01,165       INFO         Timer                              Random Interactions [00:03:24]
+2021-12-21 19:14:01,165       INFO         CreateDataFiles                    DB Connected
+2021-12-21 19:14:01,317       INFO         CreateDataFiles                    DB Closed
+2021-12-21 19:14:01,317       INFO         Timer                              SQL [00:00:00]
+2021-12-21 19:14:01,317       INFO         MakeMcool                          Input COOL: /tmp/tmpfvec4gl8/Wt-Exp-SampleTypeAligned.cool
+2021-12-21 19:14:01,317       INFO         MakeMcool                          Output MCOOL: /storage/fairwind/3DGenBench/cool/bm17DDCE2E28A/bm17DDCE2E28A-WtExp.cool
+2021-12-21 19:14:01,318       INFO         MakeMcool                          Resolution: 5 kb
+2021-12-21 19:14:01,352       INFO         zoomify_cooler                     Copying base matrices and producing 1 new zoom levels.
+2021-12-21 19:14:01,352       INFO         zoomify_cooler                     Bin size: 5000
+2021-12-21 19:14:01,361       INFO         MakeMcool                          Input COOL: /tmp/tmpfvec4gl8/Wt-Pred-SampleTypeAligned.cool
+2021-12-21 19:14:01,361       INFO         MakeMcool                          Output MCOOL: /storage/fairwind/3DGenBench/cool/bm17DDCE2E28A/bm17DDCE2E28A-WtPred.cool
+2021-12-21 19:14:01,361       INFO         MakeMcool                          Resolution: 5 kb
+2021-12-21 19:14:01,372       INFO         zoomify_cooler                     Copying base matrices and producing 1 new zoom levels.
+2021-12-21 19:14:01,372       INFO         zoomify_cooler                     Bin size: 5000
+2021-12-21 19:14:01,377       INFO         MakeMcool                          Input COOL: /tmp/tmpfvec4gl8/Mut-Exp-SampleTypeAligned.cool
+2021-12-21 19:14:01,377       INFO         MakeMcool                          Output MCOOL: /storage/fairwind/3DGenBench/cool/bm17DDCE2E28A/bm17DDCE2E28A-MutExp.cool
+2021-12-21 19:14:01,377       INFO         MakeMcool                          Resolution: 5 kb
+2021-12-21 19:14:01,385       INFO         zoomify_cooler                     Copying base matrices and producing 1 new zoom levels.
+2021-12-21 19:14:01,385       INFO         zoomify_cooler                     Bin size: 5000
+2021-12-21 19:14:01,390       INFO         MakeMcool                          Input COOL: /tmp/tmpfvec4gl8/Mut-Pred-SampleTypeAligned.cool
+2021-12-21 19:14:01,390       INFO         MakeMcool                          Output MCOOL: /storage/fairwind/3DGenBench/cool/bm17DDCE2E28A/bm17DDCE2E28A-MutPred.cool
+2021-12-21 19:14:01,390       INFO         MakeMcool                          Resolution: 5 kb
+2021-12-21 19:14:01,398       INFO         zoomify_cooler                     Copying base matrices and producing 1 new zoom levels.
+2021-12-21 19:14:01,398       INFO         zoomify_cooler                     Bin size: 5000
+2021-12-21 19:14:01,402       INFO         Timer                              Save MCOOLs [00:00:00]

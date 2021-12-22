@@ -26,6 +26,11 @@ echo '
 
 <script>
 
+function DownloadFormatter() { return { "formatter": function(cell, formatterParams) { return (cell.getValue() != "_") ? "<a href=\'" + cell.getValue() + "\' target=\'blank\'>Download</a>" : "—"; } } }
+function ExploreFormatter() { return { "formatter": function(cell, formatterParams) { return (cell.getValue() != "_") ? "<a href=\'" + cell.getValue() + "\' target=\'blank\'>Explore</a>" : "—"; } } }
+function CoordFormatter() { return { "width": 150, "hozAlign": "right", "formatter": function(cell, formatterParams) { return (!isNaN(parseInt(cell.getValue()))) ? parseInt(cell.getValue()).toLocaleString("en") : "—"; } } }
+function IDFormatter() { return { "formatter": function(cell, formatterParams) { return "<span style=\'font-weight:bold;\'>" + cell.getValue() + "</span>"; } } }
+
 var tabledata = '.json_encode($DataArray).';
 
 var table = new Tabulator("#rearr-table", {
@@ -34,33 +39,33 @@ var table = new Tabulator("#rearr-table", {
 	paginationSize: 15,
 	clipboard: true,
 	columns: [
-		{"title": "ID", "field": "rearrangement_ID", formatter:function(cell, formatterParams) { return "<span style=\'font-weight:bold;\'>" + cell.getValue() + "</span>"; } },
+		{ ...{ "title": "ID", "field": "rearrangement_ID" }, ...IDFormatter() },
 		{"title": "Rearrangement Type", "field": "rearrangement_type"},
 		{"title": "Cell Type", "field": "cell_type"},
-		{"title": "WT Archived Data", "field": "capture_WT_data_archive", formatter:"link", formatterParams: { label: "Download", target:"_blank" } },
-		{"title": "MUT Archived Data", "field": "capture_Mut_data_archive", formatter:"link", formatterParams: { label: "Download", target:"_blank" } },
-		{"title": "WT FTP Folder", "field": "capture_WT_data", formatter:"link", formatterParams: { label: "Explore", target:"_blank" } },
-		{"title": "MUT FTP Folder", "field": "capture_Mut_data", formatter:"link", formatterParams: { label: "Explore", target:"_blank" } },
+		{ ...{ "title": "WT Archived Data", "field": "capture_WT_data_archive" }, ...DownloadFormatter() },
+		{ ...{ "title": "MUT Archived Data", "field": "capture_Mut_data_archive" }, ...DownloadFormatter() },
+		{ ...{ "title": "WT FTP Folder", "field": "capture_WT_data" }, ...ExploreFormatter() },
+		{ ...{ "title": "MUT FTP Folder", "field": "capture_Mut_data" }, ...ExploreFormatter() },
 		{"title": "Citation", "field": "cite"},
 		{"title": "Genome Assembly", "field": "genome_assembly"},
 		{"title": "Chrom", "field": "chr"},
-		{"title": "Prediction Start", "field": "start_prediction", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Prediction End", "field": "end_prediction", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Capture Start", "field": "start_capture", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Capture End", "field": "end_capture", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #1 Start", "field": "start1", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #1 End", "field": "end1", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #2 Start", "field": "start2", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #2 End", "field": "end2", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #3 Start", "field": "start3", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #3 End", "field": "end3", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #4 Start", "field": "start4", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #4 End", "field": "end4", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #5 Start", "field": "start5", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #5 End", "field": "end5", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #6 Start", "field": "start6", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "Rearr #6 End", "field": "end6", formatter:"money", width: 150, hozAlign:"right", formatterParams: { decimal:".", thousand:",", symbol:"", symbolAfter:"", precision:false } },
-		{"title": "CTCF Data", "field": "CTCF_data", formatter:"link", formatterParams: { label: "Download", target:"_blank" } },
+		{ ...{ "title": "Prediction Start", "field": "start_prediction" }, ...CoordFormatter() },
+		{ ...{ "title": "Prediction End", "field": "end_prediction" }, ...CoordFormatter() },
+		{ ...{ "title": "Capture Start", "field": "start_capture" }, ...CoordFormatter() },
+		{ ...{ "title": "Capture End", "field": "end_capture" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #1 Start", "field": "start1" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #1 End", "field": "end1" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #2 Start", "field": "start2" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #2 End", "field": "end2" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #3 Start", "field": "start3" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #3 End", "field": "end3" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #4 Start", "field": "start4" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #4 End", "field": "end4" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #5 Start", "field": "start5" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #5 End", "field": "end5" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #6 Start", "field": "start6" }, ...CoordFormatter() },
+		{ ...{ "title": "Rearr #6 End", "field": "end6" }, ...CoordFormatter() },
+		{ ...{ "title": "CTCF Data", "field": "CTCF_data" }, ...DownloadFormatter() }
 	],
 });
 
