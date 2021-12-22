@@ -81,7 +81,7 @@ foreach ($ProcessingList as $index => $meta) {
 	$cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; } fi; \'; ';
 }
 
-$cmd .= 'screen -L -dm bash -c "${CMD}";';
+$cmd .= 'screen -dm bash -c "${CMD}";';
 // echo $cmd;
 shell_exec($cmd);
 
