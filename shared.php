@@ -14,8 +14,7 @@ $GLOBALS['bmCool'] = __DIR__.'/cool';
 
 // GET CONST FUNC
 
-// function GetWPUser() { return esc_html(wp_get_current_user()->user_login); }
-function GetWPUser() { return 'guest'; }
+function GetWPUser() { $User = esc_html(wp_get_current_user()->user_login); return ($User == "") ? 'guest' : $User; }
 function GetCondaActivate() { return $GLOBALS['bmCondaEnv'].'/bin/activate base'; }
 function GetBenchmarkPipeline() { return $GLOBALS['bmPipelineScript']; }
 function GetRearrTable() { return $GLOBALS['bmRearrTable']; }

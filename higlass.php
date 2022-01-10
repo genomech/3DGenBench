@@ -1,16 +1,12 @@
 <?php
 
-$IsView = htmlspecialchars($_GET['isview']);
+$UID = htmlspecialchars($_GET['id']);
 
 $Width = 1200;
 $Height = 600;
 
 $GenomicCoordinatesTilesetUID = 'NyITQvZsS_mOFNlz5C2LJg';
 $GenomicCoordinatesWidth = 30;
-
-if ($IsView == '') {
-echo '<iframe width="'.$Width.'" height="'.$Height.'" src="../../../datasets/higlass.php?isview=true"></iframe>';
-} else {
 
 echo '
 <!DOCTYPE html>
@@ -31,7 +27,6 @@ echo '
 	</head>
 	
 	<body>
-	<pre id="json"></pre>
 		<div id="higlass-container" style="width: '.$Width.'px; height: '.$Height.'px; background-color: white;"></div>
 	</body>
 	
@@ -57,7 +52,7 @@ echo '
 		
 		function GenerateHeatmapTrack(Label, TileSetID, SessionID, Name, Position) { return {
 			"filetype": "cooler",
-			"server": "http://higlass.io/api/v1",
+			"server": "http://alena-spn.icgbio.ru:8888/api/v1",
 			"tilesetUid": TileSetID,
 			"uid": Label + "_" + SessionID,
 			"type": "heatmap",
@@ -126,12 +121,12 @@ echo '
 				"gallery": []
 			},
 			"initialXDomain": [
-				1921290268.7335002,
-				2322915098.6186795
+				0,
+				1000000
 			],
 			"initialYDomain": [
-				2031858208.2829888,
-				2421198043.37168
+				0,
+				1000000
 			],
 			"layout": {
 				"w": 6,
@@ -153,14 +148,14 @@ echo '
 		 
 		const SessionID = MakeSessionID();
 		
-		const WTView = GenerateView("WT", SessionID, "MT6YGW2LTmuXNvMFK8kvaA", "Wutz2017.HeLa.Control_G1_sync.HindIII.1000.mcool (WT)", "F1TbgvFxQoicsvbni7aS-w", "Wutz2017.HeLa.CTCF-AID_t0.HindIII.1000.mcool (WT)", 0, 0);
-		const MUTView = GenerateView("MUT", SessionID, "MT6YGW2LTmuXNvMFK8kvaA", "Wutz2017.HeLa.Control_G1_sync.HindIII.1000.mcool (MUT)", "F1TbgvFxQoicsvbni7aS-w", "Wutz2017.HeLa.CTCF-AID_t0.HindIII.1000.mcool (MUT)", 1, 0);
+		const WTView = GenerateView("WT", SessionID, "'.$UID.'-WtExp", "ID: '.$UID.', WT [Control]", "'.$UID.'-WtPred", "ID: '.$UID.', WT [Prediction]", 0, 0);
+		const MUTView = GenerateView("MUT", SessionID, "'.$UID.'-MutExp", "ID: '.$UID.', MUT [Control]", "'.$UID.'-MutPred", "ID: '.$UID.', MUT [Prediction]", 1, 0);
 		const objZoomLock = GenerateLock("ZoomLock", SessionID, "WT", "MUT");
 		const objLocationLock = GenerateLock("LocationLock", SessionID, "WT", "MUT");
 		
 		const ViewConfig = {
 			
-			"editable": true,
+			"editable": false,
 			"zoomFixed": false,
 			"trackSourceServers": [ "/api/v1", "http://higlass.io/api/v1" ],
 			"exportViewUrl": "/api/v1/viewconfs/",
@@ -169,8 +164,6 @@ echo '
 			"zoomLocks": objZoomLock,
 			"locationLocks": objLocationLock
 		};
-		
-		document.getElementById("json").textContent = JSON.stringify(ViewConfig);
 		
 		const hgApi = hglib.viewer(
 			document.getElementById("higlass-container"),
@@ -182,6 +175,5 @@ echo '
 </html>
 
 ';
-}
 
 ?>

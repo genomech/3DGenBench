@@ -54,6 +54,26 @@ def Timer(EndMessage: str, StartMessage: str = None):
 	yield
 	logging.info(f"{EndMessage} [{SecToTime(time.time() - StartTime)}]")
 
+# ------======| BASH |======------
+
+def SimpleSubprocess(Name, Command, CheckPipefail = False, Env = None, AllowedCodes = []) -> None:
+	
+	# Timestamp
+	with Timer(Name) as _:
+	
+		# Compose command
+		Command = (f"source {Env}; " if Env is not None else f"") + (f"set -o pipefail; " if CheckPipefail else f"") + Command
+		logging.debug(Command)
+		
+		# Shell
+		Shell = subprocess.Popen(Command, shell=True, executable="/bin/bash", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+		Stdout, Stderr = Shell.communicate()
+		if (Shell.returncode != 0) and (Shell.returncode not in AllowedCodes): raise OSError(f"Command '{Name}' has returned non-zero exit code [{str(Shell.returncode)}]\nDetails: {Stderr.decode('utf-8')}")
+		if Shell.returncode in AllowedCodes: logging.warning(f"Command '{Name}' has returned ALLOWED non-zero exit code [{str(Shell.returncode)}]")
+	
+	# Return
+	return Stdout[:-1]
+
 # ------======| DATA LOADING |======------
 
 def BinSearch(Chrom, End, BinDict):
@@ -172,9 +192,14 @@ def IntersectEctopicMatrices(MatrixA, MatrixB, SD):
 	Condition = lambda Matrix: numpy.logical_and(numpy.isfinite(Matrix), numpy.logical_or(Matrix < -SD, Matrix > SD))
 	return numpy.sum(numpy.logical_and(Condition(MatrixA), Condition(MatrixB)))
 
-def MakeMcool(InputCool, OutputMcool, Resolution):
+def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
 	for Line in [f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}", f"Resolution: {int(Resolution / 1000)} kb"]: logging.info(Line)
-	cooler.zoomify_cooler(InputCool, OutputMcool, [Resolution], 1000)
+	with tempfile.TemporaryDirectory() as TempDir:
+		TempFile = os.path.join(TempDir, "temp.cool")
+		SimpleSubprocess(Name = "CoolerZoomify", Command = f"cooler zoomify -n 8 -r {Resolution}N --balance -o \"{TempFile}\" \"{InputCool}\"")
+		SimpleSubprocess(Name = "Copy2DockerTmp", Command = f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.cool')}\"")
+		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\"")
+		SimpleSubprocess(Name = "Copy2MCoolDir", Command = f"cp \"{TempFile}\" \"{OutputMcool}\"")
 
 # ------======| METRICS |======------
 
@@ -219,7 +244,7 @@ def EctopicGraphArray(RawArray):
 # ------======| DRAFT VISUALIZATION |======------
 
 def VisualizeCool(InputCool, OutputPng, Region):
-	subprocess.Popen(f"cooler show --out \"{OutputPng}\" -b --dpi 150 \"{InputCool}\" {Region}", shell = True, executable = "/bin/bash", stderr = subprocess.PIPE).communicate()
+	SimpleSubprocess(Name = "VisualizeCool", Command = f"cooler show --out \"{OutputPng}\" -b --dpi 150 \"{InputCool}\" {Region}")
 
 def VisualizePR(PRData, Name, FN):
 	Precision, Recall = json.loads(PRData["Precision"]), json.loads(PRData["Recall"])
@@ -395,6 +420,9 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		# DRAFT
 		VisualizeRandom(RandomData = RandomInteractions, FN = os.path.join(CoolDirID, f".{UnitID}-RealVsRandomEctopicInteractions.png"))
 	
+	with Timer(f"Save MCOOLs") as _:
+		for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, DockerTmp = "/home/fairwind/hg-tmp")
+	
 	# SAVE
 	with Timer(f"SQL") as _:
 		try:
@@ -416,8 +444,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 				logging.info("DB Closed")
 		
 	
-	with Timer(f"Save MCOOLs") as _:
-		for Key in SampleTypeAligned.keys(): MakeMcool(InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize)
+	
 
 # ------======| MAIN |======------
 
