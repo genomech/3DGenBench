@@ -342,10 +342,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		for Type, Cool in SampleTypeAligned.items(): 
 			VisualizeCool(InputCool = Cool.store, OutputPng = os.path.join(CoolDirID, f".{UnitID}-{Type[0]}{Type[1]}SampleTypeAligned.png"), Region = f"{Chrom}:{CaptureStart}-{CaptureEnd}")
 		
-	with Timer(f"Data type align") as _:
-		DataTypeAligned = {Type: os.path.join(TempDir.name, f"{'-'.join(Type)}-DataTypeAligned.cool") for Type in FileNamesInput.keys()}
-		for DT in ["Exp", "Pred"]: AlignCools(TempFiles[("Wt", DT)], TempFiles[("Mut", DT)], DataTypeAligned[("Wt", DT)], DataTypeAligned[("Mut", DT)], Chrom)
-		DataTypeAligned = {Type: cooler.Cooler(FN) for Type, FN in DataTypeAligned.items()}
+	
 	
 	# METRICS
 	
