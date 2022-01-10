@@ -330,8 +330,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		for Type, FN in FileNamesInput.items():
 			if Type[1] == "Exp": Cool2Cool(FN, TempFiles[Type], Chrom)
 			if Type[1] == "Pred": Tsv2Cool(FN, TempFiles[Type], TempFiles[("Wt", "Exp")], Chrom, BinSize)
-		Datasets = {Type: cooler.Cooler(FN) for Type, FN in TempFiles.items()}
-	
+
 	# Align
 	with Timer(f"Sample type align") as _:
 		SampleTypeAligned = {Type: os.path.join(TempDir.name, f"{'-'.join(Type)}-SampleTypeAligned.cool") for Type in FileNamesInput.keys()}
@@ -342,7 +341,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		for Type, Cool in SampleTypeAligned.items(): 
 			VisualizeCool(InputCool = Cool.store, OutputPng = os.path.join(CoolDirID, f".{UnitID}-{Type[0]}{Type[1]}SampleTypeAligned.png"), Region = f"{Chrom}:{CaptureStart}-{CaptureEnd}")
 		
-	
+
 	
 	# METRICS
 	
@@ -358,7 +357,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
 	# Insulation
 	with Timer(f"Insulation Dataset") as _:
-		InsDataset = InsulationData(Datasets, Window=BinSize * 5)
+		InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5)
 	
 	with Timer(f"Insulation Score Pearson") as _:
 		Data["Metrics.InsulationScorePearson.WT"] = PearsonCorr(InsDataset["sum_balanced_Wt-Exp"], InsDataset["sum_balanced_Wt-Pred"])
@@ -383,8 +382,8 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
 	# Ectopic
 	with Timer(f"Ectopic Array") as _:
-		EctopicArrayExp = EctopicInteractionsArray(Datasets[("Wt", "Exp")], Datasets[("Mut", "Exp")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=False)
-		EctopicArrayPred = EctopicInteractionsArray(Datasets[("Wt", "Pred")], Datasets[("Mut", "Pred")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=True)
+		EctopicArrayExp = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Exp")], SampleTypeAligned[("Mut", "Exp")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=False)
+		EctopicArrayPred = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Pred")], SampleTypeAligned[("Mut", "Pred")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=True)
 	
 	with Timer(f"Ectopic Array Graph") as _:
 		Data["Metrics.EctopicArrayGraph.EXP"] = EctopicGraphArray(EctopicArrayExp)
