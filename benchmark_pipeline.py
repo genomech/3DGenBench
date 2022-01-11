@@ -32,7 +32,7 @@ pandarallel.pandarallel.initialize(nb_workers = cpu_count(), verbose = 0)
 
 C_SCC_MAXDIST = 1500000
 C_SCC_H = 2
-C_CONTACT_COEF = 100
+C_CONTACT_COEF = 1000
 C_RANDOM_INTER_N = 5000
 C_RANDOM_INTER_SIGMA = 2
 
@@ -83,16 +83,21 @@ def BinSearch(Chrom, End, BinDict):
 		raise RuntimeError(f"Unknown bin")
 
 def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, BinSize):
-	for Line in [f"Input TSV: {TsvFN}", f"Output COOL: {OutputCoolFN}", f"Template COOL: {TemplateCoolFN}", f"Chrom: {Chrom}", f"Resolution: {int(BinSize / 1000)} kb"]: logging.info(Line)
+	for Line in [f"Input TSV: {TsvFN}", f"Output COOL: {OutputCoolFN}", f"Template COOL: {TemplateCoolFN}",
+				 f"Chrom: {Chrom}", f"Resolution: {int(BinSize / 1000)} kb"]: logging.info(Line)
 	DType = {"chrom": str, "end1": int, "end2": int, "balanced": float}
 	Pixels = pandas.read_csv(TsvFN, sep='\t', names=DType.keys(), dtype=DType, header=None)
 	Bins = cooler.Cooler(TemplateCoolFN).bins().fetch(Chrom)
 	Bins["weight"] = 1 / C_CONTACT_COEF
 	Bins = Bins.reset_index(drop=True)
 	BinsDict = {(Line["chrom"], Line["end"]): index for index, Line in Bins.iterrows()}
-	for num in [1, 2]: Pixels[f"bin{num}_id"] = Pixels.parallel_apply(lambda x: BinSearch(x["chrom"], x[f"end{num}"], BinsDict), axis=1)
-	Pixels["count"] = Pixels["balanced"].parallel_apply(lambda x: int(x * pow(C_CONTACT_COEF, 2)))
+	for num in [1, 2]: Pixels[f"bin{num}_id"] = Pixels.parallel_apply(
+		lambda x: BinSearch(x["chrom"], x[f"end{num}"], BinsDict), axis=1)
+	Pixels.dropna(inplace=True)
+	Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
 	Pixels = Pixels[["bin1_id", "bin2_id", "count"]]
+	# check that all values are more than 1 and cooler won't delete it in new cool file
+	assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
 	cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
@@ -105,17 +110,26 @@ def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
 		Bins = Data.bins().fetch(Chrom)
 		BinDict = {item: index for index, item in enumerate(Bins.index.to_list())}
 		Bins = Bins.reset_index()
-		Pixels = Data.matrix(as_pixels=True, balance=False).fetch(Chrom)
+		Pixels = Data.matrix(as_pixels=True, balance=True).fetch(Chrom)
 		for col in ["bin1_id", "bin2_id"]: Pixels[col] = Pixels[col].apply(lambda x: BinDict[x])
+		Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
+		Pixels.dropna(inplace=True)
+		# check that all values are more than 1 and cooler won't delete it in new cool file
+		assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+		Bins["weight"] = 1 / C_CONTACT_COEF
 		cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 def AlignCools(InputFNA, InputFNB, OutputFNA, OutputFNB, Chrom):
-	for Line in [f"Input COOL [A]: {InputFNA}", f"Output COOL [A]: {OutputFNA}", f"Input COOL [B]: {InputFNB}", f"Output COOL [B]: {OutputFNB}", f"Chrom: {Chrom}"]: logging.info(Line)
+	for Line in [f"Input COOL [A]: {InputFNA}", f"Output COOL [A]: {OutputFNA}", f"Input COOL [B]: {InputFNB}",
+				 f"Output COOL [B]: {OutputFNB}", f"Chrom: {Chrom}"]: logging.info(Line)
 	InputA, InputB = cooler.Cooler(InputFNA), cooler.Cooler(InputFNB)
 	BinsA, BinsB = InputA.bins().fetch(Chrom), InputB.bins().fetch(Chrom)
-	PixelsA, PixelsB = InputA.matrix(as_pixels=True, balance=False).fetch(Chrom), InputB.matrix(as_pixels=True, balance=False).fetch(Chrom)
+	PixelsA, PixelsB = InputA.matrix(as_pixels=True, balance=False).fetch(Chrom), InputB.matrix(as_pixels=True,balance=False).fetch(Chrom)
+	PixelsA.dropna(inplace=True)
+	PixelsB.dropna(inplace=True)
 	MergePixels = pandas.merge(PixelsA, PixelsB, how="inner", on=["bin1_id", "bin2_id"])
-	PixelsA, PixelsB = MergePixels[["bin1_id", "bin2_id", "count_x"]].rename(columns={"count_x": "count"}), MergePixels[["bin1_id", "bin2_id", "count_y"]].rename(columns={"count_y": "count"})
+	PixelsA, PixelsB = MergePixels[["bin1_id", "bin2_id", "count_x"]].rename(columns={"count_x": "count"}), \
+					   MergePixels[["bin1_id", "bin2_id", "count_y"]].rename(columns={"count_y": "count"})
 	cooler.create_cooler(OutputFNA, BinsA, PixelsA)
 	cooler.create_cooler(OutputFNB, BinsB, PixelsB)
 
