@@ -149,6 +149,7 @@ def InsulationData(Datasets, Window):
 		NonZero.name = f"sum_balanced_sigma_Mut/Wt-{DT}"
 		Result = pandas.concat([Result, NonZero], axis=1)
 	Result["Y-True"] = Result["sum_balanced_sigma_Mut/Wt-Exp"].apply(lambda x: (x == x) and ((x > 2) or (x < -2)))
+	Result = Result.query("start >= @capture_start & end <= @capture_end")
 	return Result
 
 def EctopicInteractionsArray(CoolWT, CoolMut, Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized):
