@@ -135,12 +135,13 @@ def AlignCools(InputFNA, InputFNB, OutputFNA, OutputFNB, Chrom):
 
 def GetMatrix(Cool, Chrom): return Cool.matrix(as_pixels=True, balance=True).fetch(Chrom)
 
-def InsulationData(Datasets, Window):
+def InsulationData(Datasets, Window, capture_start, capture_end):
 	for Line in [f"Window: {Window}"]: logging.info(Line)
 	InsScores = {Type: insulation.calculate_insulation_score(Data, [Window], ignore_diags=2, append_raw_scores=True).rename(columns={f"sum_balanced_{Window}": f"sum_balanced_{'-'.join(Type)}"}) for Type, Data in Datasets.items()}
 	Result = None
 	for Type, Data in InsScores.items(): Result = Data.copy() if Result is None else pandas.merge(Result, Data, how="inner", on=["chrom", "start", "end"])
 	Result = Result[["chrom", "start", "end"] + [f"sum_balanced_{'-'.join(Type)}" for Type in InsScores.keys()]]
+	Result = Result.query("start >= @capture_start & end <= @capture_end")
 	for DT in ["Exp", "Pred"]: 
 		Result[f"sum_balanced_Mut/Wt-{DT}"] = Result.apply(lambda x: 0 if x[f"sum_balanced_Wt-{DT}"] == 0 else (x[f"sum_balanced_Mut-{DT}"] / x[f"sum_balanced_Wt-{DT}"]), axis=1)
 		NonZero = Result[f"sum_balanced_Mut/Wt-{DT}"][Result[f"sum_balanced_Mut/Wt-{DT}"] != 0]
@@ -149,7 +150,6 @@ def InsulationData(Datasets, Window):
 		NonZero.name = f"sum_balanced_sigma_Mut/Wt-{DT}"
 		Result = pandas.concat([Result, NonZero], axis=1)
 	Result["Y-True"] = Result["sum_balanced_sigma_Mut/Wt-Exp"].apply(lambda x: (x == x) and ((x > 2) or (x < -2)))
-	Result = Result.query("start >= @capture_start & end <= @capture_end")
 	return Result
 
 def EctopicInteractionsArray(CoolWT, CoolMut, Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized):
@@ -386,7 +386,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
 	# Insulation
 	with Timer(f"Insulation Dataset") as _:
-		InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5)
+		InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, capture_start=CaptureStart, capture_end=CaptureEnd)
 	
 	with Timer(f"Insulation Score Pearson") as _:
 		Data["Metrics.InsulationScorePearson.WT"] = PearsonCorr(InsDataset["sum_balanced_Wt-Exp"], InsDataset["sum_balanced_Wt-Pred"])
