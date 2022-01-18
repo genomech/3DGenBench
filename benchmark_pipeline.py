@@ -216,6 +216,14 @@ def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
 		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\"")
 		SimpleSubprocess(Name = "Copy2MCoolDir", Command = f"cp \"{TempFile}\" \"{OutputMcool}\"")
 
+def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
+	for Line in [f"Output Bedgraph: {OutputBedgraph}"]: logging.info(Line)
+	with tempfile.TemporaryDirectory() as TempDir:
+		TempFile = os.path.join(TempDir, "temp.bedgraph")
+        InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
+		SimpleSubprocess(Name = "Copy2DockerTmp", Command = f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
+		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.bedgraph')}\" --filetype bedgraph --datatype bedlike --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\"")
+		SimpleSubprocess(Name = "Copy2MCoolDir", Command = f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
 # ------======| METRICS |======------
 
 def PearsonCorr(SeriesA, SeriesB): return SeriesA.corr(SeriesB, method="pearson")
@@ -331,7 +339,13 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		("Mut", "Exp"): os.path.join(CoolDirID, f"{UnitID}-MutExp.cool"),
 		("Mut", "Pred"): os.path.join(CoolDirID, f"{UnitID}-MutPred.cool")
 		}
-	
+
+	FileNamesBedgraphOutput = {
+		("Wt", "Exp"): os.path.join(CoolDirID, f"{UnitID}-WtExp.bedgraph"),
+		("Wt", "Pred"): os.path.join(CoolDirID, f"{UnitID}-WtPred.begraph"),
+		("Mut", "Exp"): os.path.join(CoolDirID, f"{UnitID}-MutExp.bedgraph"),
+		("Mut", "Pred"): os.path.join(CoolDirID, f"{UnitID}-MutPred.bedgraph")
+	}
 	# Create ts
 	SubmissionDate = datetime.datetime.now(datetime.timezone.utc).isoformat()
 	
@@ -380,6 +394,14 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 	
 	with Timer(f"Insulation Score (Mut/Wt) Pearson") as _:
 		Data["Metrics.InsulationScoreMutVsWtPearson"] = PearsonCorr(InsDataset["sum_balanced_Mut/Wt-Exp"], InsDataset["sum_balanced_Mut/Wt-Pred"])
+
+	# save insulatory score bedgraphs
+	with Timer(f"Save Bedgraphs") as _:
+		for Key in FileNamesBedgraphOutput.keys(): MakeBedgraph(
+			ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
+			InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key[0] + '-' + Key[1]]],
+			OutputBedgraph=FileNamesBedgraphOutput[Key],
+			DockerTmp="/home/fairwind/hg-tmp")
 
 	# Insulatory AUC
 	with Timer(f"Ectopic Insulation PR Curve") as _:
