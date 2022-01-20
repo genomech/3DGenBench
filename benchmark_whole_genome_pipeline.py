@@ -30,7 +30,6 @@ pandarallel.pandarallel.initialize(nb_workers=cpu_count(), verbose=0)
 
 # ------======| CONST |======------
 
-C_SCC_MAXDIST = 1500000
 C_SCC_H = 2
 C_CONTACT_COEF = 1000
 C_RANDOM_INTER_N = 5000
@@ -166,75 +165,7 @@ def InsulationData(Datasets, Window, capture_start, capture_end):
                                                                                                       "end"])
     Result = Result[["chrom", "start", "end"] + [f"sum_balanced_{'-'.join(Type)}" for Type in InsScores.keys()]]
     Result = Result.query("start >= @capture_start & end <= @capture_end")
-    for DT in ["Exp", "Pred"]:
-        Result[f"sum_balanced_Mut/Wt-{DT}"] = Result.apply(lambda x: 0 if x[f"sum_balanced_Wt-{DT}"] == 0 else (
-                    x[f"sum_balanced_Mut-{DT}"] / x[f"sum_balanced_Wt-{DT}"]), axis=1)
-        NonZero = Result[f"sum_balanced_Mut/Wt-{DT}"][Result[f"sum_balanced_Mut/Wt-{DT}"] != 0]
-        Mean, Std = numpy.mean(NonZero), numpy.std(NonZero)
-        NonZero = NonZero.apply(lambda x: (x - Mean) / Std)
-        NonZero.name = f"sum_balanced_sigma_Mut/Wt-{DT}"
-        Result = pandas.concat([Result, NonZero], axis=1)
-    Result["Y-True"] = Result["sum_balanced_sigma_Mut/Wt-Exp"].apply(lambda x: (x == x) and ((x > 2) or (x < -2)))
     return Result
-
-
-def EctopicInteractionsArray(CoolWT, CoolMut, Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized):
-    Capture = f"{Chrom}:{CaptureStart}-{CaptureEnd}"
-    Rearr = f"{Chrom}:{RearrStart}-{RearrEnd}"
-    for Line in [f"WT COOL: {CoolWT.store}", f"Mut COOL: {CoolMut.store}", f"Capture: {Capture}",
-                 f"Rearrangement: {Rearr}", f"Normalized: {'yes' if Normalized else 'no'}"]: logging.info(Line)
-
-    def PrepareData(Cool):
-        Data = numpy.nan_to_num(Cool.matrix(balance=False).fetch(Capture))
-        RearrStartBin = (RearrStart - CaptureStart) // Cool.binsize
-        RearrEndBin = (RearrEnd - CaptureStart) // Cool.binsize
-        Data[RearrStartBin:RearrEndBin + 1, :] = numpy.zeros(Data[RearrStartBin:RearrEndBin + 1, :].shape)
-        Data[:, RearrStartBin:RearrEndBin + 1] = numpy.zeros(Data[:, RearrStartBin:RearrEndBin + 1].shape)
-        return Data
-
-    SumData = lambda Data: sum(list(map(sum, Data)))
-
-    DataWT, DataMut = PrepareData(CoolWT), PrepareData(CoolMut)
-    SumWT, SumMut = SumData(DataWT), SumData(DataMut)
-    DataMut = DataMut * (1 if Normalized else (SumWT / SumMut))
-    DiffArray = DataMut - DataWT
-
-    logging.info(f"Diff array prepared")
-
-    for i in range(len(DiffArray)):
-        X, Y = numpy.array(range(0, len(DiffArray) - i)), numpy.array(range(i, len(DiffArray)))
-        Coeff = numpy.average(DataWT[X, Y])
-        if Coeff != 0: DiffArray[X, Y], DiffArray[Y, X] = (DiffArray[X, Y] / Coeff), (DiffArray[X, Y] / Coeff)
-
-    logging.info(f"Diff matrix normalized")
-
-    DiffDiags = [(k, numpy.diag(DiffArray, k=k)) for k in range(len(DiffArray))]
-    numpy.nan_to_num(DiffDiags, copy=False)
-
-    EctopicArray = numpy.zeros_like(DataMut)
-
-    logging.info(f"Diagonals created")
-
-    for k, kDiag in DiffDiags:
-        NonZero = numpy.nonzero(kDiag)
-        if NonZero[0].size == 0: continue
-        PercTop, PercBottom = numpy.percentile(kDiag[NonZero], 96), numpy.percentile(kDiag[NonZero], 4)
-        Diag96Perc = [item for item in kDiag if (PercBottom < item < PercTop) and (item != 0)]
-        if len(Diag96Perc) < 10: continue
-        DiagMean, DiagStd = numpy.mean(Diag96Perc), numpy.std(Diag96Perc)
-        if DiagStd == 0: continue
-        for n, Contact in enumerate(kDiag):
-            if Contact != 0: EctopicArray[k + n, n] = (Contact - DiagMean) / DiagStd
-
-    logging.info(f"Ectopic interactions on diagonals found")
-
-    return EctopicArray
-
-
-def IntersectEctopicMatrices(MatrixA, MatrixB, SD):
-    Condition = lambda Matrix: numpy.logical_and(numpy.isfinite(Matrix), numpy.logical_or(Matrix < -SD, Matrix > SD))
-    return numpy.sum(numpy.logical_and(Condition(MatrixA), Condition(MatrixB)))
-
 
 def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
     for Line in [f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}",
@@ -267,7 +198,13 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
 def PearsonCorr(SeriesA, SeriesB): return SeriesA.corr(SeriesB, method="pearson")
 
 
-def SCC(CoolA, CoolB, MaxDist, h): return hicrep.genome_scc(CoolA, CoolB, max_dist=MaxDist, h=h)
+def SCC(CoolA, CoolB, region_start, region_end, h):
+    raise NotImplementedError
+    #TODO how to choose h, what is the impact of 1st diagonal
+    region_size = region_end-region_start
+    MaxDist_inRegion = region_size - (int(region_size/5))
+    MaxDist = 1000000 if MaxDist_inRegion>1000000 else MaxDist_inRegion
+    return hicrep.genome_scc(CoolA, CoolB, max_dist=MaxDist, h=h)
 
 
 def PRCurve(YTrue, Probas):
@@ -420,21 +357,17 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
                           OutputPng=os.path.join(CoolDirID, f".{UnitID}-{Type}SampleTypeAligned.png"),
                           Region=f"{Chrom}:{PredictionStart}-{PredictionEnd}")
 
-    # # METRICS
-    #
-    # # Pearson
-    # with Timer(f"Pearson") as _:
-    #     Data["Metrics.Pearson.WT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Wt", "Exp")], Chrom)["balanced"],
-    #                                              GetMatrix(SampleTypeAligned[("Wt", "Pred")], Chrom)["balanced"])
-    #     Data["Metrics.Pearson.MUT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Mut", "Exp")], Chrom)["balanced"],
-    #                                               GetMatrix(SampleTypeAligned[("Mut", "Pred")], Chrom)["balanced"])
-    #
-    # # SCC
-    # with Timer(f"SCC") as _:
-    #     Data["Metrics.SCC.WT"] = SCC(SampleTypeAligned[("Wt", "Exp")], SampleTypeAligned[("Wt", "Pred")],
-    #                                  MaxDist=C_SCC_MAXDIST, h=C_SCC_H)
-    #     Data["Metrics.SCC.MUT"] = SCC(SampleTypeAligned[("Mut", "Exp")], SampleTypeAligned[("Mut", "Pred")],
-    #                                   MaxDist=C_SCC_MAXDIST, h=C_SCC_H)
+    # METRICS
+
+    # Pearson
+    with Timer(f"Pearson") as _:
+        Data["Metrics.Pearson"] = PearsonCorr(GetMatrix(SampleTypeAligned["Exp"], Chrom)["balanced"],
+                                                 GetMatrix(SampleTypeAligned["Pred"], Chrom)["balanced"])
+
+    # SCC
+    with Timer(f"SCC") as _:
+        Data["Metrics.SCC"] = SCC(SampleTypeAligned["Exp"], SampleTypeAligned["Pred"],
+                                     region_start=PredictionStart, region_end=PredictionEnd, h=C_SCC_H)
     #
     # # Insulation
     # with Timer(f"Insulation Dataset") as _:
