@@ -127,6 +127,7 @@ def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
         for col in ["bin1_id", "bin2_id"]: Pixels[col] = Pixels[col].apply(lambda x: BinDict[x])
         Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
         Pixels.dropna(inplace=True)
+        Pixels = Pixels[Pixels["count"]!=0]
         # check that all values are more than 1 and cooler won't delete it in new cool file
         assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
         Bins["weight"] = 1 / C_CONTACT_COEF
@@ -369,11 +370,10 @@ def CreateParser():
     Parser.add_argument('-s', '--sample', required=True, type=str, help=f"Sample name")
     Parser.add_argument('-r', '--resolution', required=True, type=int, help=f"Resolution")
     Parser.add_argument('-t', '--table', required=True, type=str, help=f"Main table path")
-    Parser.add_argument('-W', '--wildtype', required=True, type=str, help=f"WT prediction TSV path")
-    Parser.add_argument('-M', '--mutation', required=True, type=str, help=f"Mut prediction TSV path")
     Parser.add_argument('-d', '--db', required=True, type=str, help=f"SQLite DB path")
     Parser.add_argument('-c', '--cooldir', required=True, type=str, help=f"COOL root dir")
     Parser.add_argument('-l', '--log', required=True, type=str, help=f"Log file")
+    Parser.add_argument('-P', '--prediction', required=True, type=str, help=f"prediction TSV path")
 
     return Parser
 
@@ -403,14 +403,13 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
     # Create temp files
     with Timer(f"Temp files created") as _:
         TempDir = tempfile.TemporaryDirectory()
-        TempFiles = {Type: os.path.join(TempDir.name, f"{'-'.join(Type)}.cool") for Type in FileNamesInput.keys()}
+        TempFiles = {Type: os.path.join(TempDir.name, f"{Type}.cool") for Type in FileNamesInput.keys()}
         for Type, FN in FileNamesInput.items():
-            if Type[1] == "Exp": Cool2Cool(FN, TempFiles[Type], Chrom)
-            if Type[1] == "Pred": Tsv2Cool(FN, TempFiles[Type], TempFiles[("Wt", "Exp")], Chrom, BinSize)
-
+            if Type == "Exp": Cool2Cool(FN, TempFiles[Type], Chrom)
+            if Type == "Pred": Tsv2Cool(FN, TempFiles[Type], TempFiles["Exp"], Chrom, BinSize)
     # Align
     with Timer(f"Sample type align") as _:
-        SampleTypeAligned = {Type: os.path.join(TempDir.name, f"{'-'.join(Type)}-SampleTypeAligned.cool") for Type in
+        SampleTypeAligned = {Type: os.path.join(TempDir.name, f"{Type}-SampleTypeAligned.cool") for Type in
                              FileNamesInput.keys()}
         AlignCools(TempFiles["Exp"], TempFiles["Pred"],SampleTypeAligned["Exp"], SampleTypeAligned["Pred"], Chrom)
         SampleTypeAligned = {Type: cooler.Cooler(FN) for Type, FN in SampleTypeAligned.items()}
@@ -418,7 +417,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
         # DRAFT
         for Type, Cool in SampleTypeAligned.items():
             VisualizeCool(InputCool=Cool.store,
-                          OutputPng=os.path.join(CoolDirID, f".{UnitID}-{Type[0]}{Type[1]}SampleTypeAligned.png"),
+                          OutputPng=os.path.join(CoolDirID, f".{UnitID}-{Type}SampleTypeAligned.png"),
                           Region=f"{Chrom}:{PredictionStart}-{PredictionEnd}")
 
     # # METRICS
@@ -554,7 +553,7 @@ def Main():
     ConfigureLogger(Namespace.log)
 
     # Load Main Table
-    MainTable = pandas.read_csv(Namespace.table, sep='\t', dtype=str).set_index("rearrangement_ID").rename_axis(None,
+    MainTable = pandas.read_csv(Namespace.table, sep='\t', dtype=str).set_index("genome_locus_name").rename_axis(None,
                                                                                                                 axis=0).transpose().to_dict()
     try:
         SampleData = MainTable[Namespace.sample]
@@ -562,11 +561,8 @@ def Main():
         raise ValueError(f"Unknown Sample Name: '{Namespace.sample}'")
 
     FileNamesInput = {
-        ("Wt", "Exp"): os.path.join(SampleData["capture_WT_data"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
-        ("Wt", "Pred"): Namespace.wildtype,
-        ("Mut", "Exp"): os.path.join(SampleData["capture_Mut_data"],
-                                     f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
-        ("Mut", "Pred"): Namespace.mutation
+        "Exp": os.path.join(SampleData["processed_hic_data"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
+        "Pred": Namespace.prediction,
     }
 
     CreateDataFiles(
@@ -577,10 +573,8 @@ def Main():
         FileNamesInput=FileNamesInput,
         CoolDir=Namespace.cooldir,
         Chrom=SampleData["chr"],
-        CaptureStart=int(SampleData["start_capture"]),
-        CaptureEnd=int(SampleData["end_capture"]),
-        RearrStart=int(SampleData["start1"]),
-        RearrEnd=int(SampleData["end1"]),
+        PredictionStart=int(SampleData["start"]),
+        PredictionEnd=int(SampleData["send"]),
         BinSize=Namespace.resolution,
         SqlDB=Namespace.db)
 

@@ -1,0 +1,3 @@
+genome_locus_name	path_to_processed_hic_data	cell_type	locus_chr	locus_start	locus_end	organism	genome_assembly
+K562_0to_20Mb	./hic_data/whole_genome/K562/	K562	chr11	0	20000000	human	hg19
+GM12878_22to_42Mb	./hic_data/whole_genome/GM12878/hic_Gm12878_chr1_22to42Mb_10kb.cool	GM12878	chr1	22000000	42000000	human	hg19
