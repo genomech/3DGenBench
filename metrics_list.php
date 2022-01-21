@@ -50,7 +50,7 @@ var table = new Tabulator("#metrics-table", {
 	columns: [
 		{"title": "ID", "field": "ID", formatter:function(cell, formatterParams) {
 			var status = cell.getRow().getCell("Status").getValue();
-			return (status == 0) ? "<a href=\'/index.php/metrics?id=" + cell.getValue() + "\'>" + cell.getValue() + "</a>" : cell.getValue(); 
+			return (status == 0) ? "<a href=\'/index.php/'.GetMetricsPage().'?id=" + cell.getValue() + "\'>" + cell.getValue() + "</a>" : cell.getValue(); 
 			} 
 		},
 		{"title": "Status", "field": "Status", formatter: "traffic", formatterParams: { min: 0, max: 2, color: ["green", "orange", "red"] } },

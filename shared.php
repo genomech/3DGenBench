@@ -14,6 +14,8 @@ $GLOBALS['bmMetrics'] = __DIR__.'/benchmark_db.sqlite3';
 $GLOBALS['bmLogs'] = __DIR__.'/logs';
 $GLOBALS['bmCool'] = __DIR__.'/cool';
 $GLOBALS['bmSubmission'] = '/'.(basename(__DIR__) == '3DGenBench_sandbox' ? 'datasets_sandbox' : 'datasets').'/submission.php';  // KOSTYL!
+$GLOBALS['bmHiGlass'] = '../../../'.(basename(__DIR__) == '3DGenBench_sandbox' ? 'datasets_sandbox' : 'datasets').'/higlass.php';  // KOSTYL!
+$GLOBALS['bmMetricsPage'] = (basename(__DIR__) == '3DGenBench_sandbox' ? '__test__/submissions_list_test' : 'metrics');  // KOSTYL!
 
 // GET CONST FUNC
 
@@ -25,6 +27,8 @@ function GetMetrics() { return $GLOBALS['bmMetrics']; }
 function GetLogs() { return $GLOBALS['bmLogs']; }
 function GetCool() { return $GLOBALS['bmCool']; }
 function GetSubmissionScript() { return $GLOBALS['bmSubmission']; }
+function GetHiGlass() { return $GLOBALS['bmHiGlass']; }
+function GetMetricsPage() {  return $GLOBALS['bmMetricsPage']; }
 
 // FUNC
 
