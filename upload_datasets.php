@@ -102,7 +102,7 @@ echo '
 // HTML
 
 echo '
-<form id="submission_form" action="/datasets/submission.php" target="formresponse" method="POST">
+<form id="submission_form" action="'.GetSubmissionScript().'" target="formresponse" method="POST">
 	
 	<input type="hidden" name="submission_secret" value="'.$Secret.'">
 	
