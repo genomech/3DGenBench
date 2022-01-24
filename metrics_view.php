@@ -162,7 +162,7 @@ else {
 		'Real' => $Record['Metrics.RandomInteractions.Real']
 		), 'RandomInteractions', 'Random Interactions'); 
 	
-//  	echo '<iframe width="1200" height="600" src="../../../datasets/higlass.php?id='.$UnitID.'"></iframe>';
+	echo '<iframe width="1200" height="600" src="'.GetHiGlass().'?id='.$UnitID.'"></iframe>';
 }
 
 ?> 
