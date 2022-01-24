@@ -3,7 +3,7 @@ __version__ = "0.1b"
 __date__ = "2021 Nov 1"
 
 from contextlib import contextmanager
-from cooltools import insulation
+from cooltools import insulation, eigdecomp
 from hicreppy import hicrep
 from multiprocessing import cpu_count
 from sklearn.metrics import precision_recall_curve, auc
@@ -22,7 +22,8 @@ import sqlite3
 import tempfile
 import time
 import warnings
-
+import pandas as pd
+import numpy as np
 import requests
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
@@ -32,9 +33,6 @@ pandarallel.pandarallel.initialize(nb_workers=cpu_count(), verbose=0)
 
 C_SCC_H = 2
 C_CONTACT_COEF = 1000
-C_RANDOM_INTER_N = 5000
-C_RANDOM_INTER_SIGMA = 2
-
 
 ## ------======| LOGGING |======------
 
@@ -153,19 +151,75 @@ def AlignCools(InputFNA, InputFNB, OutputFNA, OutputFNB, Chrom):
 def GetMatrix(Cool, Chrom): return Cool.matrix(as_pixels=True, balance=True).fetch(Chrom)
 
 
-def InsulationData(Datasets, Window, capture_start, capture_end):
+def InsulationData(Datasets, Window, region_start, region_end):
     for Line in [f"Window: {Window}"]: logging.info(Line)
     InsScores = {
-        Type: insulation.calculate_insulation_score(Data, [Window], ignore_diags=2, append_raw_scores=True).rename(
-            columns={f"sum_balanced_{Window}": f"sum_balanced_{'-'.join(Type)}"}) for Type, Data in Datasets.items()}
+        Type: insulation.calculate_insulation_score(CoolData, [Window], ignore_diags=2, append_raw_scores=True).rename(
+            columns={f"sum_balanced_{Window}": f"sum_balanced_{Type}"}) for Type, CoolData in Datasets.items()}
     Result = None
     for Type, Data in InsScores.items(): Result = Data.copy() if Result is None else pandas.merge(Result, Data,
                                                                                                   how="inner",
                                                                                                   on=["chrom", "start",
                                                                                                       "end"])
-    Result = Result[["chrom", "start", "end"] + [f"sum_balanced_{'-'.join(Type)}" for Type in InsScores.keys()]]
-    Result = Result.query("start >= @capture_start & end <= @capture_end")
+    Result = Result[["chrom", "start", "end"] + [f"sum_balanced_{Type}" for Type in InsScores.keys()]]
+    Result = Result.query("start >= @region_start & end <= @region_end")
     return Result
+
+def Calculate_compartment_score(PrefixName, CoolFile):
+    SimpleSubprocess(Name="CooltoolsCall-compartments",
+                     Command=f"~/.local/bin/cooltools call-compartments --n-eigs 1 -o \"{PrefixName}\" \"{CoolFile}\"")
+
+def Create_compartment_partition_and_input(CompScoreFilePath, CoolFile, OutFolder, Chrom,Type, Resolution):
+    comp_score = pd.read_csv(CompScoreFilePath, sep="\t")
+    cool_data = cooler.Cooler(CoolFile).matrix(as_pixels=True, balance=True, join=True).fetch(Chrom)
+    count_data = pd.DataFrame(data={'chr': cool_data["chrom1"], 'contact_st': cool_data["end1"],
+                                    'contact_en': cool_data["end2"], 'contact_count': cool_data["count"],
+                                    'balanced': cool_data["balanced"]})
+    min_bin = min(min(count_data["contact_st"]), min(count_data["contact_en"]))
+    max_bin = max(max(count_data["contact_st"]), max(count_data["contact_en"]))
+    max_bin_name = int((max_bin - min_bin)/Resolution)
+    comp_score["bin_name"] = comp_score["end"].apply(lambda x: int((x-min_bin)/Resolution))
+    comp_score["comp"] = comp_score["E1"].apply(lambda x: "A" if x>0 else "B")
+    comp_score["masked"] = comp_score["E1"].isnull()
+    comp_score["masked"] = comp_score["masked"].apply(lambda x: "MASKED" if x else np.nan)
+    comp_score = comp_score[(comp_score.bin_name >=0) & (comp_score.bin_name <= max_bin_name)]
+    if Type == "Exp":
+        comp_score[["bin_name", "comp", "masked"]].to_csv(OutFolder+"compartment_partition.txt", sep=" ", index=False, header=False)
+    merge_data = pd.merge(count_data, comp_score, how="inner", left_on=["contact_st"], right_on=["end"])
+    merge2_data = pd.merge(merge_data, comp_score, how="inner", left_on=["contact_en"], right_on=["end"])
+    merge2_data["comp_type"] = merge2_data[["bin_name_x", "bin_name_y"]].apply(lambda x: "same" if x[0]==x[1] else "else", axis=1)
+    merge2_data[["bin_name_x", "bin_name_y", "balanced", "comp_type"]].to_csv("input_matrix_"+Type+".tab", sep=" ", index=False, header=False)
+
+def calculate_compartment_strength_and_Ps(Type, OutFolder):
+    print("calculate for")
+    nbins = len(open(OutFolder+"compartment_partition.txt").readlines())
+    SimpleSubprocess(Name="compartmentScore_and_Ps_calculation",
+                     Command=f"bash ./3DGenBench/scripts_for_comp_strength/compartmentScore_and_Ps_calculation.sh \"{str(nbins)}\" \"{Type}\" \"{OutFolder}\"")
+
+def Calculate_compartment_strength_and_Ps(Datasets, Chrom, Resolution, OutFolder):
+    # Calculate E1 vector for Exp and Pred and save it in file
+    [Calculate_compartment_score(PrefixName=OutFolder+"/"+Type, CoolFile=CoolFile) for Type, CoolFile in Datasets.items()]
+    # create input files with compartment partition for Marco script
+    [Create_compartment_partition_and_input(CompScoreFilePath=OutFolder+"/"+Type+".cis.vecs.tsv", CoolFile=CoolFile, OutFolder=OutFolder,
+                                            Chrom=Chrom, Type=Type, Resolution=Resolution) for Type, CoolFile in Datasets.items()]
+    #calcilate compartment strength and P(s) using Marco's script
+    [calculate_compartment_strength_and_Ps(Type=Type, OutFolder=OutFolder) for Type, CoolFile in Datasets.items()]
+
+def Comp_score_corr(control_data_file, predicted_data_file):
+    control_comp_strength = pd.read_csv(control_data_file, sep=" ", names=["bin", "comp_type", "comp_strength"])
+    predicted_comp_strength = pd.read_csv(predicted_data_file, sep=" ", names=["bin", "comp_type", "comp_strength"])
+    merge_data = pd.merge(control_comp_strength, predicted_comp_strength, how="inner", on=["bin", "comp_type"])
+    assert len(merge_data)==len(control_comp_strength)==len(predicted_comp_strength)
+    pearson_corr = merge_data["comp_strength_x"].corr(merge_data["comp_strength_y"], method="pearson")
+    return pearson_corr
+
+def Ps_corr(control_data_file, predicted_data_file):
+    control_Ps = pd.read_csv(control_data_file, sep=" ", names=["bin", "average_contact"])
+    predicted_Ps = pd.read_csv(predicted_data_file, sep=" ", names=["bin", "average_contact"])
+    merge_data = pd.merge(control_Ps, predicted_Ps, how="inner", on=["bin"])
+    assert len(merge_data)==len(control_Ps)==len(predicted_Ps)
+    pearson_corr = merge_data["average_contact_x"].corr(merge_data["average_contact_y"], method="pearson")
+    return pearson_corr
 
 def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
     for Line in [f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}",
@@ -186,6 +240,8 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
     with tempfile.TemporaryDirectory() as TempDir:
         TempFile = os.path.join(TempDir, "temp.bedgraph")
     InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
+    # InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
+    #TODO check that this script is working for HiGlass
     SimpleSubprocess(Name="Copy2DockerTmp",
                      Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
     SimpleSubprocess(Name="HiGlassIngest",
@@ -199,49 +255,11 @@ def PearsonCorr(SeriesA, SeriesB): return SeriesA.corr(SeriesB, method="pearson"
 
 
 def SCC(CoolA, CoolB, region_start, region_end, h):
-    raise NotImplementedError
     #TODO how to choose h, what is the impact of 1st diagonal
     region_size = region_end-region_start
     MaxDist_inRegion = region_size - (int(region_size/5))
     MaxDist = 1000000 if MaxDist_inRegion>1000000 else MaxDist_inRegion
     return hicrep.genome_scc(CoolA, CoolB, max_dist=MaxDist, h=h)
-
-
-def PRCurve(YTrue, Probas):
-    YTrueNumpy = numpy.nan_to_num(YTrue)
-    ProbasNumpy = numpy.nan_to_num(Probas)
-    Precision, Recall, Thresholds = precision_recall_curve(YTrueNumpy, ProbasNumpy)
-
-    return {
-        "AUC": auc(Recall, Precision),
-        "Precision": json.dumps(Precision.tolist()),
-        "Recall": json.dumps(Recall.tolist()),
-        "Thresholds": json.dumps(Thresholds.tolist())
-    }
-
-
-def RandomEctopicIntersections(EctopicArrayExp, EctopicArrayPred, n=C_RANDOM_INTER_N, sigma=C_RANDOM_INTER_SIGMA):
-    for Line in [f"N: {n}", f"Sigma: {sigma}"]: logging.info(Line)
-    RandomIntersections = []
-    EctopicPredRandom = numpy.copy(EctopicArrayPred)
-    Finite = numpy.where(numpy.isfinite(EctopicArrayPred))
-    Rand = EctopicArrayPred[Finite].flatten()
-    for i in range(n):
-        numpy.random.shuffle(Rand)
-        EctopicPredRandom[Finite] = Rand
-        RandomIntersections.append(int(IntersectEctopicMatrices(EctopicArrayExp, EctopicPredRandom, sigma)))
-    ExpPredIntersection = int(IntersectEctopicMatrices(EctopicArrayExp, EctopicArrayPred, sigma))
-    return {
-        "Random": json.dumps(RandomIntersections),
-        "Real": ExpPredIntersection
-    }
-
-
-def EctopicGraphArray(RawArray):
-    PlottingArray = numpy.copy(RawArray)
-    PlottingArray = PlottingArray.astype('float')
-    PlottingArray[numpy.logical_and(PlottingArray < 2, PlottingArray > -2)] = numpy.nan
-    return json.dumps(PlottingArray[150:350, 150:350].tolist())
 
 
 # ------======| DRAFT VISUALIZATION |======------
@@ -337,7 +355,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
     # Create data struct
     Data = {}
 
-    # Create temp files
+    # Create temp cool files
     with Timer(f"Temp files created") as _:
         TempDir = tempfile.TemporaryDirectory()
         TempFiles = {Type: os.path.join(TempDir.name, f"{Type}.cool") for Type in FileNamesInput.keys()}
@@ -368,93 +386,38 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
     with Timer(f"SCC") as _:
         Data["Metrics.SCC"] = SCC(SampleTypeAligned["Exp"], SampleTypeAligned["Pred"],
                                      region_start=PredictionStart, region_end=PredictionEnd, h=C_SCC_H)
-    #
-    # # Insulation
-    # with Timer(f"Insulation Dataset") as _:
-    #     InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, capture_start=CaptureStart,
-    #                                 capture_end=CaptureEnd)
-    #
-    # with Timer(f"Insulation Score Pearson") as _:
-    #     Data["Metrics.InsulationScorePearson.WT"] = PearsonCorr(InsDataset["sum_balanced_Wt-Exp"],
-    #                                                             InsDataset["sum_balanced_Wt-Pred"])
-    #     Data["Metrics.InsulationScorePearson.MUT"] = PearsonCorr(InsDataset["sum_balanced_Mut-Exp"],
-    #                                                              InsDataset["sum_balanced_Mut-Pred"])
-    #
-    # with Timer(f"Insulation Score (Mut/Wt) Pearson") as _:
-    #     Data["Metrics.InsulationScoreMutVsWtPearson"] = PearsonCorr(InsDataset["sum_balanced_Mut/Wt-Exp"],
-    #                                                                 InsDataset["sum_balanced_Mut/Wt-Pred"])
-    #
-    # # save insulatory score bedgraphs
-    # with Timer(f"Save Bedgraphs") as _:
-    #     for Key in FileNamesBedgraphOutput.keys(): MakeBedgraph(
-    #         ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
-    #         InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key[0] + '-' + Key[1]]],
-    #         OutputBedgraph=FileNamesBedgraphOutput[Key],
-    #         DockerTmp="/home/fairwind/hg-tmp")
-    #
-    # # Insulatory AUC
-    # with Timer(f"Ectopic Insulation PR Curve") as _:
-    #     EctopicInsulationPR = PRCurve(
-    #         YTrue=InsDataset["Y-True"],
-    #         Probas=InsDataset["sum_balanced_sigma_Mut/Wt-Pred"]
-    #     )
-    #     Data["Metrics.EctopicInsulation.AUC"] = EctopicInsulationPR["AUC"]
-    #     Data["Metrics.EctopicInsulation.Precision"] = EctopicInsulationPR["Precision"]
-    #     Data["Metrics.EctopicInsulation.Recall"] = EctopicInsulationPR["Recall"]
-    #     Data["Metrics.EctopicInsulation.Thresholds"] = EctopicInsulationPR["Thresholds"]
-    #
-    #     # DRAFT
-    #     VisualizePR(PRData=EctopicInsulationPR, Name="Ectopic Insulation",
-    #                 FN=os.path.join(CoolDirID, f".{UnitID}-EctopicInsulationPRCurve.png"))
-    #
-    # # Ectopic
-    # with Timer(f"Ectopic Array") as _:
-    #     EctopicArrayExp = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Exp")], SampleTypeAligned[("Mut", "Exp")],
-    #                                                Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd,
-    #                                                Normalized=False)
-    #     EctopicArrayPred = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Pred")],
-    #                                                 SampleTypeAligned[("Mut", "Pred")], Chrom, CaptureStart, CaptureEnd,
-    #                                                 RearrStart, RearrEnd, Normalized=True)
-    #
-    # with Timer(f"Ectopic Array Graph") as _:
-    #     Data["Metrics.EctopicArrayGraph.EXP"] = EctopicGraphArray(EctopicArrayExp)
-    #     Data["Metrics.EctopicArrayGraph.PRED"] = EctopicGraphArray(EctopicArrayPred)
-    #
-    #     # DRAFT
-    #     for Key in ["Metrics.EctopicArrayGraph.EXP", "Metrics.EctopicArrayGraph.PRED"]: VisualizeEctopicArray(
-    #         EctopicArray=Data[Key], FN=os.path.join(CoolDirID, f".{UnitID}-{Key}EctopicArray.png"))
-    #
-    # with Timer(f"Ectopic Interactions PR Curve") as _:
-    #     EctopicInteractions = PRCurve(
-    #         YTrue=[(i == i) and ((i > 2) or (i < -2)) for i in EctopicArrayExp.flatten()],
-    #         Probas=EctopicArrayPred.flatten()
-    #     )
-    #
-    #     Data["Metrics.EctopicInteractions.AUC"] = EctopicInteractions["AUC"]
-    #     Data["Metrics.EctopicInteractions.Precision"] = EctopicInteractions["Precision"]
-    #     Data["Metrics.EctopicInteractions.Recall"] = EctopicInteractions["Recall"]
-    #     Data["Metrics.EctopicInteractions.Thresholds"] = EctopicInteractions["Thresholds"]
-    #
-    #     # DRAFT
-    #     VisualizePR(PRData=EctopicInteractions, Name="Ectopic Interactions",
-    #                 FN=os.path.join(CoolDirID, f".{UnitID}-EctopicInteractionsPRCurve.png"))
-    #
-    # # Random
-    # with Timer(f"Random Interactions") as _:
-    #     RandomInteractions = RandomEctopicIntersections(EctopicArrayExp, EctopicArrayPred)
-    #
-    #     Data["Metrics.RandomInteractions.Random"] = RandomInteractions["Random"]
-    #     Data["Metrics.RandomInteractions.Real"] = RandomInteractions["Real"]
-    #
-    #     # DRAFT
-    #     VisualizeRandom(RandomData=RandomInteractions,
-    #                     FN=os.path.join(CoolDirID, f".{UnitID}-RealVsRandomEctopicInteractions.png"))
-    #
-    # with Timer(f"Save MCOOLs") as _:
-    #     for Key in SampleTypeAligned.keys(): MakeMcool(ID=os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0],
-    #                                                    InputCool=SampleTypeAligned[Key].store,
-    #                                                    OutputMcool=FileNamesOutput[Key], Resolution=BinSize,
-    #                                                    DockerTmp="/home/fairwind/hg-tmp")
+
+    # Insulation
+    with Timer(f"Insulation Dataset") as _:
+        InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, region_start=PredictionStart,
+                                    region_end=PredictionEnd)
+
+    with Timer(f"Insulation Score Pearson") as _:
+        Data["Metrics.InsulationScorePearson"] = PearsonCorr(InsDataset["sum_balanced_Exp"],
+                                                                InsDataset["sum_balanced_Pred"])
+
+    # save insulatory score bedgraphs
+    with Timer(f"Save Bedgraphs") as _:
+        for Key in FileNamesBedgraphOutput.keys(): MakeBedgraph(
+            ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
+            InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key[0] + '-' + Key[1]]],
+            OutputBedgraph=FileNamesBedgraphOutput[Key],
+            DockerTmp="/home/fairwind/hg-tmp")
+    # Compartment score
+    with Timer(f"Compartment strength") as _:
+        Datasets = {Type: os.path.join(TempDir.name, f"{Type}-SampleTypeAligned.cool") for Type in FileNamesInput.keys()}
+        Calculate_compartment_strength_and_Ps(OutFolder=CoolDirID+"/", Datasets=Datasets, Chrom =Chrom, Resolution=BinSize)
+        # Pearson corr of compartment strength
+        Data["Metrics.CompartmentStrengthPearson"] = Comp_score_corr(control_data_file=CoolDirID + "/compartment_strength_per_bin_Exp.txt",
+                                          predicted_data_file=CoolDirID + "/compartment_strength_per_bin_Pred.txt")
+        # Pearson corr of P(s)
+        Data["Metrics.PsPearson"] = Ps_corr(control_data_file=CoolDirID + "/average_number_of_contacts_vs_gendist_matrix_Exp.txt",
+                          predicted_data_file=CoolDirID + "/average_number_of_contacts_vs_gendist_matrix_Pred.txt")
+    with Timer(f"Save MCOOLs") as _:
+        for Key in SampleTypeAligned.keys(): MakeMcool(ID=os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0],
+                                                       InputCool=SampleTypeAligned[Key].store,
+                                                       OutputMcool=FileNamesOutput[Key], Resolution=BinSize,
+                                                       DockerTmp="/home/fairwind/hg-tmp")
     #
     # # SAVE
     # with Timer(f"SQL") as _:
