@@ -5,6 +5,7 @@ require(__DIR__.'/shared.php');
 $Author = $_POST['submission_user'];
 $Model = $_POST['submission_model'];
 $Secret = $_POST['submission_secret'];
+$DataType = $_POST['data_type'];
 
 // Check secret
 if (!CheckSecret($Author, $Secret)) die(Message('There is an impostor among us', true));
@@ -13,7 +14,11 @@ if (!CheckSecret($Author, $Secret)) die(Message('There is an impostor among us',
 if (!preg_match('/^[A-Za-z0-9_]{5,100}$/', $Model)) die(Message('Wrong model name (5-100 Latin and numeric chars only)', true));
 
 // Load Data
-$SamplesList = GetSamples();
+switch ($DataType) {
+	case 'p': $SamplesList = GetSamples(); break;
+	case 's': $SamplesList = GetSamplesWG(); break;
+	default: die(Message('Wrong data type', true)); 
+	}
 $ResolutionsList = GetResolutions();
 $UploadedFilesList = GetUploadedFiles($Author);
 
@@ -49,20 +54,28 @@ $Repeats = array();
 foreach ($TssList as $index) {
 	
 	$wt_file = htmlspecialchars_decode($_POST['file_WT_'.$index]);
-	$mut_file = htmlspecialchars_decode($_POST['file_MUT_'.$index]);
-	if (($wt_file == '0') or ($mut_file == '0')) die(Message('No files were selected', true));
-	if ((!file_exists($wt_file)) or (!file_exists($mut_file))) die(Message('Some files were not found. Please reload the page', true));
-	if ((!in_array($wt_file, $Repeats)) and (!in_array($mut_file, $Repeats)) and ($wt_file != $mut_file)) array_push($Repeats, $wt_file, $mut_file);
+	if ($wt_file == '0') die(Message('No WT files were selected', true));
+	if (!file_exists($wt_file)) die(Message('Some WT files were not found. Please reload the page', true));
+	if (!in_array($wt_file, $Repeats)) array_push($Repeats, $wt_file);
 	else die(Message('Some files have been chosen more than 1 times', true));
 	$ProcessingList[$index]['WT'] = $wt_file;
-	$ProcessingList[$index]['MUT'] = $mut_file;
+	
+	if ($DataType == 'p') {
+		$mut_file = htmlspecialchars_decode($_POST['file_MUT_'.$index]);
+		if ($mut_file == '0') die(Message('No MUT files were selected', true));
+		if (!file_exists($mut_file)) die(Message('Some MUT files were not found. Please reload the page', true));
+		if (!in_array($mut_file, $Repeats)) array_push($Repeats, $mut_file);
+		else die(Message('Some files have been chosen more than 1 times', true));
+		$ProcessingList[$index]['MUT'] = $mut_file;
+	}
 }
 
 // SQL
 
+$TableName = array('p' => 'bm_metrics', 's' => 'bm_metrics_wg')[$DataType];
 $dbpath = 'sqlite:'.GetMetrics();
 try { $dbh  = new PDO($dbpath); } catch(Exception $e) { die(Message('Cannot open the database: '.$e, true)); }
-$query = 'INSERT INTO bm_metrics ( ID, Status, [Metadata.Author], [Metadata.ModelName], [Metadata.SampleName], [Metadata.Resolution], [Metadata.SubmissionDate]) VALUES ';
+$query = 'INSERT INTO '.$TableName.' ( ID, Status, [Metadata.Author], [Metadata.ModelName], [Metadata.SampleName], [Metadata.Resolution], [Metadata.SubmissionDate]) VALUES ';
 $values = array();
 foreach ($ProcessingList as $index => $meta) array_push($values, '("'.$meta['ID'].'", 1, "'.$meta['Author'].'", "'.$meta['ModelName'].'", "'.$meta['SampleName'].'", '.$meta['Resolution'].', "'.date('Y-m-d H:i:s').'")');
 $query .= implode(', ', $values).';';
@@ -77,7 +90,7 @@ $cmd = 'CMD="source '.GetCondaActivate().'; "; ';
 foreach ($ProcessingList as $index => $meta) {
 	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipeline().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetRearrTable().'" -W "'.$meta['WT'].'" -M "'.$meta['MUT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; ';
 	$cmd .= 'CMD=\'\'$CMD\'if [ $? -ne 0 ]; then { echo "\'; ';
-	$cmd .= 'CMD=""$CMD"update bm_metrics set Status=\'2\' where ID=\''.$meta['ID'].'\';";';
+	$cmd .= 'CMD=""$CMD"update '.$TableName.' set Status=\'2\' where ID=\''.$meta['ID'].'\';";';
 	$cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; } fi; \'; ';
 }
 

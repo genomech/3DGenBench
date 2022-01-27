@@ -6,15 +6,27 @@ require_once(__DIR__.'/shared.php');
 $AuthorID = htmlspecialchars($_GET['bm_author']);
 
 // GET DB DATA
-$SqlQuery = (($AuthorID != '') ? 'SELECT * FROM bm_metrics WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics;');
-$DBResponse = DBSelect($SqlQuery);
+$DBPairedMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics;'));
+$DBSingleMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics_wg WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics_wg;'));
 
 // MAKE TABLE ARRAY
 $TableArray = array(); 
-while ($Row = $DBResponse->fetch()) {
+while ($Row = $DBPairedMetrics->fetch()) {
 	array_push($TableArray, array(
 		'ID' => $Row['ID'],
 		'Status' => intval($Row['Status']),
+		'Type' => 'Paired',
+		'Author' => $Row['Metadata.Author'],
+		'ModelName' => $Row['Metadata.ModelName'],
+		'SampleName' => $Row['Metadata.SampleName'],
+		'Resolution' => intval($Row['Metadata.Resolution']),
+		'SubmissionDate' => $Row['Metadata.SubmissionDate']
+		)); }
+while ($Row = $DBSingleMetrics->fetch()) {
+	array_push($TableArray, array(
+		'ID' => $Row['ID'],
+		'Status' => intval($Row['Status']),
+		'Type' => 'Single',
 		'Author' => $Row['Metadata.Author'],
 		'ModelName' => $Row['Metadata.ModelName'],
 		'SampleName' => $Row['Metadata.SampleName'],
@@ -54,6 +66,7 @@ var table = new Tabulator("#metrics-table", {
 			} 
 		},
 		{"title": "Status", "field": "Status", formatter: "traffic", formatterParams: { min: 0, max: 2, color: ["green", "orange", "red"] } },
+		{"title": "Type", "field": "Type"},
 		{"title": "Author", "field": "Author"},
 		{"title": "Model Name", "field": "ModelName" },
 		{"title": "Sample Name", "field": "SampleName" },

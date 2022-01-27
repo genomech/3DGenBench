@@ -5,6 +5,7 @@ require(__DIR__.'/shared.php');
 $User = GetWPUser();
 $Secret = GetSecret($User);
 $SamplesList = GetSamples();
+$WGSamplesList = GetSamplesWG();
 $ResolutionsList = GetResolutions();
 $UploadedFilesList = GetUploadedFiles($User);
 
@@ -58,11 +59,12 @@ echo '
 		return 0;
 	}
 
-	function addBlock(TS) {
+	function addBlock(TS, DataType) {
 		
 		var container = document.getElementById("submission_form");
 		if (container.children.length > 13) { alert("Too many datasets!"); return 0; }
-		var SamplesList = '.json_encode($SamplesList).';
+		if (DataType == "p") var SamplesList = '.json_encode($SamplesList).';
+		if (DataType == "s") var SamplesList = '.json_encode($WGSamplesList).';
 		var ResolutionsList = '.json_encode($ResolutionsList).';
 		var FilesList = '.json_encode($UploadedFilesList).';
 		var block_id = "block_" + TS;
@@ -73,6 +75,7 @@ echo '
 		addSelect(TS, obj_block, ResolutionsList, "resolution", "Resolution");
 		addSelect(TS, obj_block, FilesList, "file_WT", "WT Contacts File");
 		addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Contacts File");
+		if (DataType == "s") document.getElementById("file_MUT_" + TS).disabled = true;
 		addDeleteButton(TS, obj_block);
 		return 0;
 	}
@@ -85,13 +88,15 @@ echo '
 	}
 	
 	function addSampleBlock() {
+		var tp = document.getElementById("data_type").value;
 		var ts = new Date().getTime();
-		addBlock(ts);
+		addBlock(ts, tp);
 	}
 	
 	function addTest() {
+		var tp = document.getElementById("data_type").value;
 		var ts = new Date().getTime();
-		addBlock(ts);
+		addBlock(ts, tp);
 		document.getElementById("sample_" + ts).value = "Bor";
 		document.getElementById("resolution_" + ts).value = "5000";
 		document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/model80.0_WT_Bor_predicted.txt";
@@ -122,11 +127,12 @@ echo '
 		</div>
 		
 		<div class="default_cont">
-			<input type="submit" value="Submit" onclick="SubmitOnClick()">
+			<label for="data_type">Type:</label>
+			<select name="data_type" id="data_type" onchange="for (elem of document.querySelectorAll(\'[id^=block_]\')) elem.remove(); addSampleBlock();"><option value="p">Paired [WT/MUT]</option><option value="s">Single</option></select>
 		</div>
 		
 		<div class="default_cont">
-			<iframe name="formresponse" id="formresponse" height="75" width="400"></iframe>
+			<input type="submit" value="Submit" onclick="SubmitOnClick()"><iframe name="formresponse" id="formresponse" height="75" width="400"></iframe>
 		</div>
 	</div>
 	
