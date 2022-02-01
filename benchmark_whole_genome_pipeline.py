@@ -3,7 +3,8 @@ __version__ = "0.1b"
 __date__ = "2021 Nov 1"
 
 from contextlib import contextmanager
-from cooltools import insulation, eigdecomp
+from cooltools import insulation
+from cooltools.api import eigdecomp
 from hicreppy import hicrep
 from multiprocessing import cpu_count
 from sklearn.metrics import precision_recall_curve, auc
