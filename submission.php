@@ -91,7 +91,7 @@ foreach ($ProcessingList as $index => $meta) {
 	if ($DataType == 'p') {
 	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipeline().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetRearrTable().'" -W "'.$meta['WT'].'" -M "'.$meta['MUT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; '; 
 	} elseif ($DataType == 's') {
-	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipeline().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetRearrTable().'" -W "'.$meta['WT'].'" -M "'.$meta['MUT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; '; }
+	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineWG().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetWGTable().'" -P "'.$meta['WT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; '; }
 	
 	$cmd .= 'CMD=\'\'$CMD\'if [ $? -ne 0 ]; then { echo "\'; ';
 	$cmd .= 'CMD=""$CMD"update '.$TableName.' set Status=\'2\' where ID=\''.$meta['ID'].'\';";';
@@ -99,7 +99,7 @@ foreach ($ProcessingList as $index => $meta) {
 }
 
 $cmd .= 'screen -dm bash -c "${CMD}";';
-// echo $cmd;
+echo $cmd;
 shell_exec($cmd);
 
 echo Message('Unit added to queue', false);

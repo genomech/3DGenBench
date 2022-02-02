@@ -3,7 +3,7 @@ __version__ = "0.1b"
 __date__ = "2021 Nov 1"
 
 from contextlib import contextmanager
-from cooltools import insulation
+from cooltools.api import insulation
 from cooltools.api import eigdecomp
 from hicreppy import hicrep
 from multiprocessing import cpu_count
@@ -168,7 +168,7 @@ def InsulationData(Datasets, Window, region_start, region_end):
 
 def Calculate_compartment_score(PrefixName, CoolFile):
     SimpleSubprocess(Name="CooltoolsCall-compartments",
-                     Command=f"~/.local/bin/cooltools call-compartments --n-eigs 1 -o \"{PrefixName}\" \"{CoolFile}\"")
+                     Command=f"cooltools eigs-cis --n-eigs 1 -o \"{PrefixName}\" \"{CoolFile}\"")
 
 def Create_compartment_partition_and_input(CompScoreFilePath, CoolFile, OutFolder, Chrom,Type, Resolution):
     comp_score = pd.read_csv(CompScoreFilePath, sep="\t")
@@ -240,14 +240,14 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
     for Line in [f"Output Bedgraph: {OutputBedgraph}"]: logging.info(Line)
     with tempfile.TemporaryDirectory() as TempDir:
         TempFile = os.path.join(TempDir, "temp.bedgraph")
-    InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
-    # InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
-    #TODO check that this script is working for HiGlass
-    SimpleSubprocess(Name="Copy2DockerTmp",
+        InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
+        # InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
+        #TODO check that this script is working for HiGlass
+        SimpleSubprocess(Name="Copy2DockerTmp",
                      Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
-    SimpleSubprocess(Name="HiGlassIngest",
+        SimpleSubprocess(Name="HiGlassIngest",
                      Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.bedgraph')}\" --filetype bedgraph --datatype bedlike --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\"")
-    SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
+        SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
 
 
 # ------======| METRICS |======------
@@ -392,6 +392,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
     with Timer(f"Insulation Dataset") as _:
         InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, region_start=PredictionStart,
                                     region_end=PredictionEnd)
+        print(InsDataset)
 
     with Timer(f"Insulation Score Pearson") as _:
         Data["Metrics.InsulationScorePearson"] = PearsonCorr(InsDataset["sum_balanced_Exp"],
@@ -401,7 +402,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
     with Timer(f"Save Bedgraphs") as _:
         for Key in FileNamesBedgraphOutput.keys(): MakeBedgraph(
             ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
-            InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key[0] + '-' + Key[1]]],
+            InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key]],
             OutputBedgraph=FileNamesBedgraphOutput[Key],
             DockerTmp="/home/fairwind/hg-tmp")
     # Compartment score
@@ -458,7 +459,7 @@ def Main():
         raise ValueError(f"Unknown Sample Name: '{Namespace.sample}'")
 
     FileNamesInput = {
-        "Exp": os.path.join(SampleData["processed_hic_data"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
+        "Exp": os.path.join(SampleData["path_to_processed_hic_data"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
         "Pred": Namespace.prediction,
     }
 
@@ -469,9 +470,9 @@ def Main():
         SampleName=Namespace.sample,
         FileNamesInput=FileNamesInput,
         CoolDir=Namespace.cooldir,
-        Chrom=SampleData["chr"],
-        PredictionStart=int(SampleData["start"]),
-        PredictionEnd=int(SampleData["send"]),
+        Chrom=SampleData["locus_chr"],
+        PredictionStart=int(SampleData["locus_start"]),
+        PredictionEnd=int(SampleData["locus_end"]),
         BinSize=Namespace.resolution,
         SqlDB=Namespace.db)
 

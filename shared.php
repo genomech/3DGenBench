@@ -7,6 +7,7 @@ echo (basename(__DIR__) == '3DGenBench_sandbox' ? '<font color="red">TEST BRANCH
 $GLOBALS['bmRearrTable'] = __DIR__.'/rearrangements_table.tsv';
 $GLOBALS['bmWGTable'] = __DIR__.'/whole_genome_regions.txt';
 $GLOBALS['bmPipelineScript'] = __DIR__.'/benchmark_pipeline.py';
+$GLOBALS['bmPipelineScriptWG'] = __DIR__.'/benchmark_whole_genome_pipeline.py';
 $GLOBALS['bmJsonConfig'] = __DIR__.'/config.json';
 $GLOBALS['bmCondaEnv'] = __DIR__.'/.pyenv';
 $GLOBALS['bmExpDatasets'] = __DIR__.'/exp_datasets';
@@ -23,6 +24,7 @@ $GLOBALS['bmMetricsPage'] = (basename(__DIR__) == '3DGenBench_sandbox' ? '__test
 function GetWPUser() { $User = esc_html(wp_get_current_user()->user_login); return ($User == "") ? 'guest' : $User; }
 function GetCondaActivate() { return $GLOBALS['bmCondaEnv'].'/bin/activate base'; }
 function GetBenchmarkPipeline() { return $GLOBALS['bmPipelineScript']; }
+function GetBenchmarkPipelineWG() { return $GLOBALS['bmPipelineScriptWG']; }
 function GetRearrTable() { return $GLOBALS['bmRearrTable']; }
 function GetWGTable() { return $GLOBALS['bmWGTable']; }
 function GetMetrics() { return $GLOBALS['bmMetrics']; }
