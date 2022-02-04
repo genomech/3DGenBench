@@ -43,8 +43,10 @@ def ExceptionHook(Type, Value, Traceback): logging.exception(f"{Type.__name__}: 
 
 def ConfigureLogger(LogFileName: str = os.devnull, Level: int = logging.INFO) -> None:
     Formatter = "%(asctime)-30s%(levelname)-13s%(funcName)-35s%(message)s"
-    logging.basicConfig(level=Level, format=Formatter,
-                        handlers=[logging.FileHandler(LogFileName), logging.StreamHandler(sys.stderr)], force=True)
+    logger = logging.getLogger()
+    while logger.hasHandlers(): logger.removeHandler(logger.handlers[0])
+    Handlers = [logging.FileHandler(LogFileName), logging.StreamHandler(sys.stderr)]
+    logging.basicConfig(level=Level, format=Formatter, handlers=Handlers)
     sys.excepthook = ExceptionHook
 
 
@@ -189,13 +191,13 @@ def Create_compartment_partition_and_input(CompScoreFilePath, CoolFile, OutFolde
     merge_data = pd.merge(count_data, comp_score, how="inner", left_on=["contact_st"], right_on=["end"])
     merge2_data = pd.merge(merge_data, comp_score, how="inner", left_on=["contact_en"], right_on=["end"])
     merge2_data["comp_type"] = merge2_data[["bin_name_x", "bin_name_y"]].apply(lambda x: "same" if x[0]==x[1] else "else", axis=1)
-    merge2_data[["bin_name_x", "bin_name_y", "balanced", "comp_type"]].to_csv("input_matrix_"+Type+".tab", sep=" ", index=False, header=False)
+    merge2_data[["bin_name_x", "bin_name_y", "balanced", "comp_type"]].to_csv(OutFolder+"input_matrix_"+Type+".tab", sep=" ", index=False, header=False)
 
 def calculate_compartment_strength_and_Ps(Type, OutFolder):
     print("calculate for")
     nbins = len(open(OutFolder+"compartment_partition.txt").readlines())
     SimpleSubprocess(Name="compartmentScore_and_Ps_calculation",
-                     Command=f"bash ./3DGenBench/scripts_for_comp_strength/compartmentScore_and_Ps_calculation.sh \"{str(nbins)}\" \"{Type}\" \"{OutFolder}\"")
+                     Command=f"bash scripts_for_comp_strength/compartmentScore_and_Ps_calculation.sh \"{str(nbins)}\" \"{Type}\" \"{OutFolder}\"")
 
 def Calculate_compartment_strength_and_Ps(Datasets, Chrom, Resolution, OutFolder):
     # Calculate E1 vector for Exp and Pred and save it in file
@@ -245,8 +247,10 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
         #TODO check that this script is working for HiGlass
         SimpleSubprocess(Name="Copy2DockerTmp",
                      Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
+        SimpleSubprocess(Name="Clodius",
+                     Command=f"clodius aggregate bedgraph \"{TempFile}\" --output-file \"{os.path.join(DockerTmp, 'bm_temp.hitile')}\" --assembly hg19")
         SimpleSubprocess(Name="HiGlassIngest",
-                     Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.bedgraph')}\" --filetype bedgraph --datatype bedlike --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\"")
+                     Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.hitile --filetype hitile --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem hg19")
         SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
 
 
@@ -420,26 +424,26 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
                                                        InputCool=SampleTypeAligned[Key].store,
                                                        OutputMcool=FileNamesOutput[Key], Resolution=BinSize,
                                                        DockerTmp="/home/fairwind/hg-tmp")
-    #
-    # # SAVE
-    # with Timer(f"SQL") as _:
-    #     try:
-    #         sqlite_connection = sqlite3.connect(SqlDB)
-    #         cursor = sqlite_connection.cursor()
-    #         logging.info("DB Connected")
-    #
-    #         AllMetricsSQL = ', '.join([f"'{key}'='{value}'" for key, value in Data.items()])
-    #         sqlite_select_query = f"update bm_metrics set Status='0', {AllMetricsSQL} where ID='{UnitID}';"
-    #         cursor.execute(sqlite_select_query)
-    #         sqlite_connection.commit()
-    #         cursor.close()
-    #     except sqlite3.Error as error:
-    #         logging.info("SQLite3 Error")
-    #         raise error
-    #     finally:
-    #         if (sqlite_connection):
-    #             sqlite_connection.close()
-    #             logging.info("DB Closed")
+    
+    # SAVE
+    with Timer(f"SQL") as _:
+        try:
+            sqlite_connection = sqlite3.connect(SqlDB)
+            cursor = sqlite_connection.cursor()
+            logging.info("DB Connected")
+    
+            AllMetricsSQL = json.dumps(Data, ensure_ascii=False)
+            sqlite_select_query = f"update bm_metrics_wg set Status='0', [Data.JSON]='{AllMetricsSQL}' where ID='{UnitID}';"
+            cursor.execute(sqlite_select_query)
+            sqlite_connection.commit()
+            cursor.close()
+        except sqlite3.Error as error:
+            logging.info("SQLite3 Error")
+            raise error
+        finally:
+            if (sqlite_connection):
+                sqlite_connection.close()
+                logging.info("DB Closed")
 
 
 # ------======| MAIN |======------
