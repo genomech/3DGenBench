@@ -94,11 +94,16 @@ def BinSearch(Chrom, End, BinDict):
         raise RuntimeError(f"Unknown bin")
 
 
-def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, BinSize):
+def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, PredictionStart, PredictionEnd, BinSize):
     for Line in [f"Input TSV: {TsvFN}", f"Output COOL: {OutputCoolFN}", f"Template COOL: {TemplateCoolFN}",
                  f"Chrom: {Chrom}", f"Resolution: {int(BinSize / 1000)} kb"]: logging.info(Line)
     DType = {"chrom": str, "end1": int, "end2": int, "balanced": float}
     Pixels = pandas.read_csv(TsvFN, sep='\t', names=DType.keys(), dtype=DType, header=None)
+    #delete 2 first diagonals
+    Pixels["distance"] = abs(Pixels["end2"] - Pixels["end1"])
+    Pixels = Pixels[Pixels["distance"]>BinSize*2]
+    #delete all contacts out of expected predicted region
+    Pixels = Pixels[(Pixels["end2"]>=PredictionStart) & (Pixels["end2"]<=PredictionEnd)]
     Bins = cooler.Cooler(TemplateCoolFN).bins().fetch(Chrom)
     Bins["weight"] = 1 / C_CONTACT_COEF
     Bins = Bins.reset_index(drop=True)
@@ -370,7 +375,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
             TempFiles = {Type: os.path.join(CoolDirID, f"{Type}.cool") for Type in FileNamesInput.keys()}
         for Type, FN in FileNamesInput.items():
             if Type == "Exp": Cool2Cool(FN, TempFiles[Type], Chrom)
-            if Type == "Pred": Tsv2Cool(FN, TempFiles[Type], TempFiles["Exp"], Chrom, BinSize)
+            if Type == "Pred": Tsv2Cool(FN, TempFiles[Type], TempFiles["Exp"], Chrom, PredictionStart, PredictionEnd, BinSize)
     # Align
     with Timer(f"Sample type align") as _:
         if not testing:
@@ -381,13 +386,11 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
                                  FileNamesInput.keys()}
         AlignCools(TempFiles["Exp"], TempFiles["Pred"],SampleTypeAligned["Exp"], SampleTypeAligned["Pred"], Chrom)
         SampleTypeAligned = {Type: cooler.Cooler(FN) for Type, FN in SampleTypeAligned.items()}
-
         # DRAFT
         for Type, Cool in SampleTypeAligned.items():
             VisualizeCool(InputCool=Cool.store,
                           OutputPng=os.path.join(CoolDirID, f".{UnitID}-{Type}SampleTypeAligned.png"),
                           Region=f"{Chrom}:{PredictionStart}-{PredictionEnd}")
-
     # METRICS
 
     # Pearson
