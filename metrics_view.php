@@ -169,13 +169,50 @@ else {
 			'Real' => $Record['Metrics.RandomInteractions.Real']
 			), 'RandomInteractions', 'Random Interactions'); 
 		
-		echo '<iframe width="1200" height="600" src="'.GetHiGlass().'?id='.$UnitID.'"></iframe>';
+		echo '<iframe width="1200" height="600" src="'.GetHiGlass().'?id='.$UnitID.'&type=p"></iframe>';
 	}
 	
 	if ($Record['Metadata.Type'] == 's') {
+		
+		$MetricsData = json_decode($Record['Data.JSON'], true);
+		
+		echo '<script src="https://www.gstatic.com/charts/loader.js"></script>
+		
+		<script type="text/javascript">
+		google.charts.load("current", { packages: ["corechart", "scatter"]});
+		</script>
+		
+		<div style="display: inline-block; width: 50%;">
+		
+		<h2>Unit Data</h2>
+		
+		<table>
+		<tr><td><b>Author ID:</b></td><td>'.$Record['Metadata.Author'].'</td></tr>
+		<tr><td><b>Model Name:</b></td><td>'.$Record['Metadata.ModelName'].'</td></tr>
+		<tr><td><b>Resolution:</b></td><td>'.strval(intval($Record['Metadata.Resolution'] / 1000)).' kb</td></tr>
+		<tr><td><b>Submission Date:</b></td><td>'.date('d M Y, H:i:s', strtotime($Record['Metadata.SubmissionDate'])).'</td></tr>
+		</table>
+		
+		</div>
+		
+		<div style="display: inline-block; width: 50%;">
+		<h2>Sample Data</h2>
+		<table>
+		<tr><td><b>Sample Name:</b></td><td>'.$Record['Metadata.SampleName'].'</td></tr>
+		</table>
+		</div>
+		
+		<h2>Metrics</h2>
+		
+		<table>
+		<tr><td><b>Pearson:</b></td><td>'.$MetricsData['Metrics.Pearson'].'</td></tr>
+		<tr><td><b>SCC:</b></td><td>'.$MetricsData['Metrics.SCC'].'</td></tr>
+		<tr><td><b>Insulation Score Pearson:</b></td><td>'.$MetricsData['Metrics.InsulationScorePearson'].'</td></tr>
+		<tr><td><b>Compartment Strength Pearson:</b></td><td>'.$MetricsData['Metrics.CompartmentStrengthPearson'].'</td></tr>
+		<tr><td><b>Ps Pearson:</b></td><td>'.$MetricsData['Metrics.PsPearson'].'</td></tr>
+		</table>';
 	
-		echo 'Hello!'; 
-	
+	echo '<iframe width="1200" height="600" src="'.GetHiGlass().'?id='.$UnitID.'&type=s"></iframe>';
 	}
 
 }

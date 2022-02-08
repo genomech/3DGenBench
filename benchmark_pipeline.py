@@ -42,7 +42,10 @@ def ExceptionHook(Type, Value, Traceback): logging.exception(f"{Type.__name__}: 
 
 def ConfigureLogger(LogFileName: str = os.devnull, Level: int = logging.INFO) -> None:
 	Formatter = "%(asctime)-30s%(levelname)-13s%(funcName)-35s%(message)s"
-	logging.basicConfig(level = Level, format = Formatter, handlers = [logging.FileHandler(LogFileName), logging.StreamHandler(sys.stderr)], force = True)
+	logger = logging.getLogger()
+	while logger.hasHandlers(): logger.removeHandler(logger.handlers[0])
+	Handlers = [logging.FileHandler(LogFileName), logging.StreamHandler(sys.stderr)]
+	logging.basicConfig(level=Level, format=Formatter, handlers=Handlers)
 	sys.excepthook = ExceptionHook
 
 def SecToTime(Sec: float) -> str: return f"{int(Sec / 3600):02}:{int((Sec // 60) % 60):02}:{int(Sec % 60):02}"
