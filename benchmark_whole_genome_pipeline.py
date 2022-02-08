@@ -337,9 +337,10 @@ def CreateParser():
 # ------======| FILE CREATOR |======------
 
 def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, CoolDir, Chrom, PredictionStart, PredictionEnd,
-                     BinSize, SqlDB):
+                     BinSize, SqlDB, testing=False):
     CoolDirID = os.path.join(CoolDir, UnitID)
-    os.mkdir(CoolDirID)
+    if not os.path.exists(CoolDirID):
+        os.mkdir(CoolDirID)
 
     FileNamesOutput = {
         "Exp": os.path.join(CoolDirID, f"{UnitID}-Exp.cool"),
@@ -358,15 +359,22 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
     # Create temp cool files
     with Timer(f"Temp files created") as _:
-        TempDir = tempfile.TemporaryDirectory()
-        TempFiles = {Type: os.path.join(TempDir.name, f"{Type}.cool") for Type in FileNamesInput.keys()}
+        if not testing:
+            TempDir = tempfile.TemporaryDirectory()
+            TempFiles = {Type: os.path.join(TempDir.name, f"{Type}.cool") for Type in FileNamesInput.keys()}
+        else:
+            TempFiles = {Type: os.path.join(CoolDirID, f"{Type}.cool") for Type in FileNamesInput.keys()}
         for Type, FN in FileNamesInput.items():
             if Type == "Exp": Cool2Cool(FN, TempFiles[Type], Chrom)
             if Type == "Pred": Tsv2Cool(FN, TempFiles[Type], TempFiles["Exp"], Chrom, BinSize)
     # Align
     with Timer(f"Sample type align") as _:
-        SampleTypeAligned = {Type: os.path.join(TempDir.name, f"{Type}-SampleTypeAligned.cool") for Type in
-                             FileNamesInput.keys()}
+        if not testing:
+            SampleTypeAligned = {Type: os.path.join(TempDir.name, f"{Type}-SampleTypeAligned.cool") for Type in
+                                 FileNamesInput.keys()}
+        else:
+            SampleTypeAligned = {Type: os.path.join(CoolDirID, f"{Type}-SampleTypeAligned.cool") for Type in
+                                 FileNamesInput.keys()}
         AlignCools(TempFiles["Exp"], TempFiles["Pred"],SampleTypeAligned["Exp"], SampleTypeAligned["Pred"], Chrom)
         SampleTypeAligned = {Type: cooler.Cooler(FN) for Type, FN in SampleTypeAligned.items()}
 
