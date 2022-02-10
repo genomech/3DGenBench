@@ -114,29 +114,25 @@ def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, PredictionStart, Predic
     Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
     Pixels = Pixels[["bin1_id", "bin2_id", "count"]]
     # check that all values are more than 1 and cooler won't delete it in new cool file
-    assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+    # assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
     cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 
 def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
     for Line in [f"Input COOL: {InputCoolFN}", f"Output COOL: {OutputCoolFN}", f"Chrom: {Chrom}"]: logging.info(Line)
-    with tempfile.TemporaryDirectory() as TempDir:
-        TempFile = os.path.join(TempDir, "input.cool")
-        response = requests.get(InputCoolFN, stream=True)
-        with open(TempFile, "wb") as handle: [handle.write(data) for data in response.iter_content()]
-        Data = cooler.Cooler(TempFile)
-        Bins = Data.bins().fetch(Chrom)
-        BinDict = {item: index for index, item in enumerate(Bins.index.to_list())}
-        Bins = Bins.reset_index()
-        Pixels = Data.matrix(as_pixels=True, balance=True).fetch(Chrom)
-        for col in ["bin1_id", "bin2_id"]: Pixels[col] = Pixels[col].apply(lambda x: BinDict[x])
-        Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
-        Pixels.dropna(inplace=True)
-        Pixels = Pixels[Pixels["count"]!=0]
-        # check that all values are more than 1 and cooler won't delete it in new cool file
-        assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
-        Bins["weight"] = 1 / C_CONTACT_COEF
-        cooler.create_cooler(OutputCoolFN, Bins, Pixels)
+    Data = cooler.Cooler(InputCoolFN)
+    Bins = Data.bins().fetch(Chrom)
+    BinDict = {item: index for index, item in enumerate(Bins.index.to_list())}
+    Bins = Bins.reset_index()
+    Pixels = Data.matrix(as_pixels=True, balance=True).fetch(Chrom)
+    for col in ["bin1_id", "bin2_id"]: Pixels[col] = Pixels[col].apply(lambda x: BinDict[x])
+    Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
+    Pixels.dropna(inplace=True)
+    Pixels = Pixels[Pixels["count"]!=0]
+    # check that all values are more than 1 and cooler won't delete it in new cool file
+    assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+    Bins["weight"] = 1 / C_CONTACT_COEF
+    cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 
 def AlignCools(InputFNA, InputFNB, OutputFNA, OutputFNB, Chrom):
@@ -347,7 +343,10 @@ def CreateParser():
 
 def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, CoolDir, Chrom, PredictionStart, PredictionEnd,
                      BinSize, SqlDB, testing=False):
-    CoolDirID = os.path.join(CoolDir, UnitID)
+    if testing:
+        CoolDirID = os.path.join(CoolDir, UnitID, SampleName)
+    else:
+        CoolDirID = os.path.join(CoolDir, UnitID)
     if not os.path.exists(CoolDirID):
         os.mkdir(CoolDirID)
 
@@ -392,12 +391,10 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
                           OutputPng=os.path.join(CoolDirID, f".{UnitID}-{Type}SampleTypeAligned.png"),
                           Region=f"{Chrom}:{PredictionStart}-{PredictionEnd}")
     # METRICS
-
     # Pearson
     with Timer(f"Pearson") as _:
         Data["Metrics.Pearson"] = PearsonCorr(GetMatrix(SampleTypeAligned["Exp"], Chrom)["balanced"],
                                                  GetMatrix(SampleTypeAligned["Pred"], Chrom)["balanced"])
-
     # SCC
     with Timer(f"SCC") as _:
         Data["Metrics.SCC"] = SCC(SampleTypeAligned["Exp"], SampleTypeAligned["Pred"],
@@ -435,14 +432,14 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
                                                        InputCool=SampleTypeAligned[Key].store,
                                                        OutputMcool=FileNamesOutput[Key], Resolution=BinSize,
                                                        DockerTmp="/home/fairwind/hg-tmp")
-    
+
     # SAVE
     with Timer(f"SQL") as _:
         try:
             sqlite_connection = sqlite3.connect(SqlDB)
             cursor = sqlite_connection.cursor()
             logging.info("DB Connected")
-    
+
             AllMetricsSQL = json.dumps(Data, ensure_ascii=False)
             sqlite_select_query = f"update bm_metrics_wg set Status='0', [Data.JSON]='{AllMetricsSQL}' where ID='{UnitID}';"
             cursor.execute(sqlite_select_query)
@@ -474,7 +471,7 @@ def Main():
         raise ValueError(f"Unknown Sample Name: '{Namespace.sample}'")
 
     FileNamesInput = {
-        "Exp": os.path.join(SampleData["path_to_processed_hic_data"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
+        "Exp": os.path.join("/storage/hic_data_for_3DBench/", SampleData["cell_type"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
         "Pred": Namespace.prediction,
     }
 
