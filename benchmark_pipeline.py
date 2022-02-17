@@ -224,9 +224,16 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
 	with tempfile.TemporaryDirectory() as TempDir:
 		TempFile = os.path.join(TempDir, "temp.bedgraph")
 		InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
-		SimpleSubprocess(Name = "Copy2DockerTmp", Command = f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
-		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.bedgraph')}\" --filetype bedgraph --datatype bedlike --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\"")
-		SimpleSubprocess(Name = "Copy2MCoolDir", Command = f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
+		# InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
+		#TODO check that this script is working for HiGlass
+		SimpleSubprocess(Name="Copy2DockerTmp",
+						Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
+		SimpleSubprocess(Name="Clodius",
+						Command=f"clodius aggregate bedgraph \"{TempFile}\" --output-file \"{os.path.join(DockerTmp, 'bm_temp.hitile')}\" --assembly hg19")
+		SimpleSubprocess(Name="HiGlassIngest",
+						Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.hitile --filetype hitile --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem hg19")
+		SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
+
 # ------======| METRICS |======------
 
 def PearsonCorr(SeriesA, SeriesB): return SeriesA.corr(SeriesB, method="pearson")
