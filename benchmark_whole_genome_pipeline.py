@@ -114,7 +114,7 @@ def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, PredictionStart, Predic
     Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
     Pixels = Pixels[["bin1_id", "bin2_id", "count"]]
     # check that all values are more than 1 and cooler won't delete it in new cool file
-    # assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+    assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
     cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 
@@ -128,9 +128,7 @@ def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
     for col in ["bin1_id", "bin2_id"]: Pixels[col] = Pixels[col].apply(lambda x: BinDict[x])
     Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
     Pixels.dropna(inplace=True)
-    Pixels = Pixels[Pixels["count"]!=0]
-    # check that all values are more than 1 and cooler won't delete it in new cool file
-    assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+    Pixels = Pixels[Pixels["count"]>1]
     Bins["weight"] = 1 / C_CONTACT_COEF
     cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
@@ -195,7 +193,6 @@ def Create_compartment_partition_and_input(CompScoreFilePath, CoolFile, OutFolde
     merge2_data[["bin_name_x", "bin_name_y", "balanced", "comp_type"]].to_csv(OutFolder+"input_matrix_"+Type+".tab", sep=" ", index=False, header=False)
 
 def calculate_compartment_strength_and_Ps(Type, OutFolder):
-    print("calculate for")
     nbins = len(open(OutFolder+"compartment_partition.txt").readlines())
     SimpleSubprocess(Name="compartmentScore_and_Ps_calculation",
                      Command=f"bash scripts_for_comp_strength/compartmentScore_and_Ps_calculation.sh \"{str(nbins)}\" \"{Type}\" \"{OutFolder}\"")
@@ -206,7 +203,7 @@ def Calculate_compartment_strength_and_Ps(Datasets, Chrom, Resolution, OutFolder
     # create input files with compartment partition for Marco script
     [Create_compartment_partition_and_input(CompScoreFilePath=OutFolder+"/"+Type+".cis.vecs.tsv", CoolFile=CoolFile, OutFolder=OutFolder,
                                             Chrom=Chrom, Type=Type, Resolution=Resolution) for Type, CoolFile in Datasets.items()]
-    #calcilate compartment strength and P(s) using Marco's script
+    #calculate compartment strength and P(s) using Marco's script
     [calculate_compartment_strength_and_Ps(Type=Type, OutFolder=OutFolder) for Type, CoolFile in Datasets.items()]
 
 def Comp_score_corr(control_data_file, predicted_data_file):
@@ -239,20 +236,38 @@ def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
         SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputMcool}\"")
 
 
-def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
+def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp, testing=False):
     for Line in [f"Output Bedgraph: {OutputBedgraph}"]: logging.info(Line)
     with tempfile.TemporaryDirectory() as TempDir:
         TempFile = os.path.join(TempDir, "temp.bedgraph")
         InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
-        # InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
-        #TODO check that this script is working for HiGlass
-        SimpleSubprocess(Name="Copy2DockerTmp",
-                     Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
-        SimpleSubprocess(Name="Clodius",
-                     Command=f"clodius aggregate bedgraph \"{TempFile}\" --output-file \"{os.path.join(DockerTmp, 'bm_temp.hitile')}\" --assembly hg19")
-        SimpleSubprocess(Name="HiGlassIngest",
-                     Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.hitile --filetype hitile --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem hg19")
-        SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
+        if testing:
+            InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
+        else:
+            SimpleSubprocess(Name="Copy2DockerTmp",
+                         Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
+            SimpleSubprocess(Name="Clodius",
+                         Command=f"clodius aggregate bedgraph \"{TempFile}\" --output-file \"{os.path.join(DockerTmp, 'bm_temp.hitile')}\" --assembly hg19")
+            SimpleSubprocess(Name="HiGlassIngest",
+                         Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.hitile --filetype hitile --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem hg19")
+            SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
+
+def MakeBedgraph_for_compartments(ID, Input_vector_file, OutputBedgraph, DockerTmp, testing=False):
+    for Line in [f"Output Bedgraph: {OutputBedgraph}"]: logging.info(Line)
+    with tempfile.TemporaryDirectory() as TempDir:
+        TempFile = os.path.join(TempDir, "temp.bedgraph")
+        Comp_score = pd.read_csv(Input_vector_file, sep="\t")
+        Comp_score.to_csv(TempFile, sep="\t", index=False, header=False)
+        if testing:
+            Comp_score.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
+        else:
+            SimpleSubprocess(Name="Copy2DockerTmp",
+                         Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
+            SimpleSubprocess(Name="Clodius",
+                         Command=f"clodius aggregate bedgraph \"{TempFile}\" --output-file \"{os.path.join(DockerTmp, 'bm_temp.hitile')}\" --assembly hg19")
+            SimpleSubprocess(Name="HiGlassIngest",
+                         Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.hitile --filetype hitile --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem hg19")
+            SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
 
 
 # ------======| METRICS |======------
@@ -359,6 +374,10 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
         "Exp": os.path.join(CoolDirID, f"{UnitID}-Exp.bedgraph"),
         "Pred": os.path.join(CoolDirID, f"{UnitID}-Pred.begraph"),
     }
+    FileNamesBedgraphCompOutput = {
+        "Exp": os.path.join(CoolDirID, f"{UnitID}-Exp.comp.bedgraph"),
+        "Pred": os.path.join(CoolDirID, f"{UnitID}-Pred.comp.begraph"),
+    }
     # Create ts
     SubmissionDate = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
@@ -388,7 +407,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
         # DRAFT
         for Type, Cool in SampleTypeAligned.items():
             VisualizeCool(InputCool=Cool.store,
-                          OutputPng=os.path.join(CoolDirID, f".{UnitID}-{Type}SampleTypeAligned.png"),
+                          OutputPng=os.path.join(CoolDirID, f".{UnitID}-{Type}.png"),
                           Region=f"{Chrom}:{PredictionStart}-{PredictionEnd}")
     # METRICS
     # Pearson
@@ -400,58 +419,66 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
         Data["Metrics.SCC"] = SCC(SampleTypeAligned["Exp"], SampleTypeAligned["Pred"],
                                      region_start=PredictionStart, region_end=PredictionEnd, h=C_SCC_H)
 
-    # Insulation
-    with Timer(f"Insulation Dataset") as _:
-        InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, region_start=PredictionStart,
-                                    region_end=PredictionEnd)
-        print(InsDataset)
+        # Insulation
+        with Timer(f"Insulation Dataset") as _:
+            InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, region_start=PredictionStart,
+                                        region_end=PredictionEnd)
+            print(InsDataset)
 
-    with Timer(f"Insulation Score Pearson") as _:
-        Data["Metrics.InsulationScorePearson"] = PearsonCorr(InsDataset["sum_balanced_Exp"],
-                                                                InsDataset["sum_balanced_Pred"])
+        with Timer(f"Insulation Score Pearson") as _:
+            Data["Metrics.InsulationScorePearson"] = PearsonCorr(InsDataset["sum_balanced_Exp"],
+                                                                    InsDataset["sum_balanced_Pred"])
 
-    # save insulatory score bedgraphs
-    with Timer(f"Save Bedgraphs") as _:
-        for Key in FileNamesBedgraphOutput.keys(): MakeBedgraph(
-            ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
-            InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key]],
-            OutputBedgraph=FileNamesBedgraphOutput[Key],
-            DockerTmp="/home/fairwind/hg-tmp")
-    # Compartment score
-    with Timer(f"Compartment strength") as _:
-        Datasets = {Type: os.path.join(TempDir.name, f"{Type}-SampleTypeAligned.cool") for Type in FileNamesInput.keys()}
-        Calculate_compartment_strength_and_Ps(OutFolder=CoolDirID+"/", Datasets=Datasets, Chrom =Chrom, Resolution=BinSize)
-        # Pearson corr of compartment strength
-        Data["Metrics.CompartmentStrengthPearson"] = Comp_score_corr(control_data_file=CoolDirID + "/compartment_strength_per_bin_Exp.txt",
-                                          predicted_data_file=CoolDirID + "/compartment_strength_per_bin_Pred.txt")
-        # Pearson corr of P(s)
-        Data["Metrics.PsPearson"] = Ps_corr(control_data_file=CoolDirID + "/average_number_of_contacts_vs_gendist_matrix_Exp.txt",
-                          predicted_data_file=CoolDirID + "/average_number_of_contacts_vs_gendist_matrix_Pred.txt")
-    with Timer(f"Save MCOOLs") as _:
-        for Key in SampleTypeAligned.keys(): MakeMcool(ID=os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0],
-                                                       InputCool=SampleTypeAligned[Key].store,
-                                                       OutputMcool=FileNamesOutput[Key], Resolution=BinSize,
-                                                       DockerTmp="/home/fairwind/hg-tmp")
+        # save insulatory score bedgraphs
+        with Timer(f"Save Bedgraphs") as _:
+            for Key in FileNamesBedgraphOutput.keys(): MakeBedgraph(
+                ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
+                InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key]],
+                OutputBedgraph=FileNamesBedgraphOutput[Key],
+                DockerTmp="/home/fairwind/hg-tmp")
+        # Compartment score
+        with Timer(f"Compartment strength") as _:
+            Datasets = {Type: os.path.join(TempDir.name, f"{Type}-SampleTypeAligned.cool") for Type in FileNamesInput.keys()}
+            Calculate_compartment_strength_and_Ps(OutFolder=CoolDirID+"/", Datasets=Datasets, Chrom =Chrom, Resolution=BinSize)
+            # Pearson corr of compartment strength
+            Data["Metrics.CompartmentStrengthPearson"] = Comp_score_corr(control_data_file=CoolDirID + "/compartment_strength_per_bin_Exp.txt",
+                                              predicted_data_file=CoolDirID + "/compartment_strength_per_bin_Pred.txt")
+            # Pearson corr of P(s)
+            Data["Metrics.PsPearson"] = Ps_corr(control_data_file=CoolDirID + "/average_number_of_contacts_vs_gendist_matrix_Exp.txt",
+                              predicted_data_file=CoolDirID + "/average_number_of_contacts_vs_gendist_matrix_Pred.txt")
+            #save bedgraphs for compartments
+            # save insulatory score bedgraphs
+            with Timer(f"Save Bedgraphs") as _:
+                for Key in FileNamesBedgraphCompOutput.keys():
+                    MakeBedgraph_for_compartments(ID=os.path.splitext(os.path.basename(FileNamesBedgraphCompOutput[Key]))[0],
+                        Input_vector_file=CoolDirID+Key+".cis.vecs.tsv",
+                        OutputBedgraph=FileNamesBedgraphCompOutput[Key],
+                        DockerTmp="/home/fairwind/hg-tmp")
+        with Timer(f"Save MCOOLs") as _:
+            for Key in SampleTypeAligned.keys(): MakeMcool(ID=os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0],
+                                                           InputCool=SampleTypeAligned[Key].store,
+                                                           OutputMcool=FileNamesOutput[Key], Resolution=BinSize,
+                                                           DockerTmp="/home/fairwind/hg-tmp")
 
-    # SAVE
-    with Timer(f"SQL") as _:
-        try:
-            sqlite_connection = sqlite3.connect(SqlDB)
-            cursor = sqlite_connection.cursor()
-            logging.info("DB Connected")
+        # SAVE
+        with Timer(f"SQL") as _:
+            try:
+                sqlite_connection = sqlite3.connect(SqlDB)
+                cursor = sqlite_connection.cursor()
+                logging.info("DB Connected")
 
-            AllMetricsSQL = json.dumps(Data, ensure_ascii=False)
-            sqlite_select_query = f"update bm_metrics_wg set Status='0', [Data.JSON]='{AllMetricsSQL}' where ID='{UnitID}';"
-            cursor.execute(sqlite_select_query)
-            sqlite_connection.commit()
-            cursor.close()
-        except sqlite3.Error as error:
-            logging.info("SQLite3 Error")
-            raise error
-        finally:
-            if (sqlite_connection):
-                sqlite_connection.close()
-                logging.info("DB Closed")
+                AllMetricsSQL = json.dumps(Data, ensure_ascii=False)
+                sqlite_select_query = f"update bm_metrics_wg set Status='0', [Data.JSON]='{AllMetricsSQL}' where ID='{UnitID}';"
+                cursor.execute(sqlite_select_query)
+                sqlite_connection.commit()
+                cursor.close()
+            except sqlite3.Error as error:
+                logging.info("SQLite3 Error")
+                raise error
+            finally:
+                if (sqlite_connection):
+                    sqlite_connection.close()
+                    logging.info("DB Closed")
 
 
 # ------======| MAIN |======------
