@@ -53,6 +53,36 @@ if ($DataType == 'p') {
 				"height": '.$GenomicCoordinatesWidth.'
 				}; }
 			
+			function GenerateInsulationTrack(Label, TileSetID, SessionID, Position) { return {
+			"filetype": "hitile",
+			"server": "http://alena-spn.cytogen.ru:8231/api/v1",
+			"tilesetUid": TileSetID,
+			"uid": "AiCfPNJpT3aUuFCq3F_WQA",
+			"type": Position + "-bar",
+            "options": {
+              "align": "bottom",
+              "labelColor": "[glyph-color]",
+              "labelPosition": { "horizontal": "topRight", "vertical": "bottomLeft" }[Position],
+              "labelLeftMargin": 0,
+              "labelRightMargin": 0,
+              "labelTopMargin": 0,
+              "labelBottomMargin": 0,
+              "labelShowResolution": false,
+              "labelShowAssembly": true,
+              "axisLabelFormatting": "scientific",
+              "axisPositionHorizontal": "right",
+              "barFillColor": "darkgreen",
+              "valueScaling": "linear",
+              "trackBorderWidth": 0,
+              "trackBorderColor": "black",
+              "labelTextOpacity": 0.4,
+              "barOpacity": 1,
+              "name": TileSetID + "[Insulation]"
+            },
+            "width": '.$GenomicCoordinatesWidth.',
+			"height": '.$GenomicCoordinatesWidth.'
+          }; }
+			
 			function GenerateHeatmapTrack(Label, TileSetID, SessionID, Name, Position) { return {
 				"filetype": "cooler",
 				"server": "http://alena-spn.cytogen.ru:8231/api/v1",
@@ -103,8 +133,20 @@ if ($DataType == 'p') {
 			
 			function GenerateView(ViewID, SessionID, TopTilesetID, TopName, BottomTilesetID, BottomName, X, Y) { return JSON.parse(JSON.stringify({
 				"tracks": {
-					"top": [ GenerateGenomeTrack(ViewID + "_GenomeTrackH", SessionID, "horizontal") ],
-					"left": [ GenerateGenomeTrack(ViewID + "_GenomeTrackV", SessionID, "vertical") ],
+					"top": [ {
+            "type": "combined",
+            "uid": SessionID + "_TopTracks",
+            "width": '.$GenomicCoordinatesWidth.',
+			"height": '.$GenomicCoordinatesWidth.',
+            "options": {},
+            "contents": [ GenerateInsulationTrack(ViewID + "_InsulationTrackH", TopTilesetID + "-InsHitile", SessionID, "horizontal"), GenerateGenomeTrack(ViewID + "_GenomeTrackH", SessionID, "horizontal") ] } ],
+					"left": [ {
+            "type": "combined",
+            "uid": SessionID + "_LeftTracks",
+            "width": '.$GenomicCoordinatesWidth.',
+			"height": '.$GenomicCoordinatesWidth.',
+            "options": {},
+            "contents": [ GenerateInsulationTrack(ViewID + "_InsulationTrackV", BottomTilesetID + "-InsHitile", SessionID, "vertical"), GenerateGenomeTrack(ViewID + "_GenomeTrackV", SessionID, "vertical") ] } ],
 					"center": [
 						{
 							"uid": ViewID + "_TracksContainer_" + SessionID,
@@ -123,14 +165,7 @@ if ($DataType == 'p') {
 					"whole": [],
 					"gallery": []
 				},
-				"initialXDomain": [
-					0,
-					1000000
-				],
-				"initialYDomain": [
-					0,
-					1000000
-				],
+				
 				"layout": {
 					"w": 6,
 					"h": 6,
@@ -146,7 +181,7 @@ if ($DataType == 'p') {
 				var VSID1 = "View_" + View1 + "_" + SessionID;
 				var VSID2 = "View_" + View2 + "_" + SessionID;
 				var LID = LockID + "_" + SessionID;
-				return JSON.parse("{ \"locksByViewUid\": { \"" + VSID2 + "\": \"" + LID + "\", \"" + VSID1 + "\": \"" + LID + "\" }, \"locksDict\": { \"" + LID + "\": { \"" + VSID2 + "\": [ 1090752478.8873124, 1099371687.717565, 200779.88244223595 ], \"" + VSID1 + "\": [ 1092559497.8292904, 1099170907.835121, 200779.88244223595 ], \"uid\": \"" + LID + "\" } } }"); 
+				return JSON.parse("{ \"locksByViewUid\": { \"" + VSID2 + "\": \"" + LID + "\", \"" + VSID1 + "\": \"" + LID + "\" }, \"locksDict\": { \"" + LID + "\": { \"" + VSID2 + "\": [ 1, 1, 1 ], \"" + VSID1 + "\": [ 1, 1, 1 ], \"uid\": \"" + LID + "\" } } }"); 
 			}
 			
 			const SessionID = MakeSessionID();
@@ -173,7 +208,7 @@ if ($DataType == 'p') {
 				ViewConfig,
 				{ bounded: true }
 			);
-			
+			hgApi.zoomToDataExtent();
 		</script>
 	</html>
 
@@ -232,7 +267,7 @@ elseif ($DataType == 's') {
 			function GenerateInsulationTrack(Label, TileSetID, SessionID, Position) { return {
             "filetype": "hitile",
             "server": "http://alena-spn.cytogen.ru:8231/api/v1",
-            "tilesetUid": "bm17EBF103643-Exp-InsHitile",
+            "tilesetUid": TileSetID,
             "uid": "AiCfPNJpT3aUuFCq3F_WQA",
             "type": Position + "-bar",
             "options": {
@@ -341,14 +376,6 @@ elseif ($DataType == 's') {
 					"whole": [],
 					"gallery": []
 				},
-				"initialXDomain": [
-					0,
-					1000000
-				],
-				"initialYDomain": [
-					0,
-					1000000
-				],
 				"layout": {
 					"w": 6,
 					"h": 6,
@@ -386,7 +413,7 @@ elseif ($DataType == 's') {
 				ViewConfig,
 				{ bounded: true }
 			);
-			
+			hgApi.zoomToDataExtent();
 		</script>
 	</html>
 
