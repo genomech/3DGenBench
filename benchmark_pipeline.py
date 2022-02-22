@@ -3,7 +3,7 @@ __version__ = "0.1b"
 __date__ = "2021 Nov 1"
 
 from contextlib import contextmanager
-from cooltools import insulation
+from cooltools.api import insulation
 from hicreppy import hicrep
 from multiprocessing import cpu_count
 from sklearn.metrics import precision_recall_curve, auc
@@ -40,7 +40,7 @@ C_RANDOM_INTER_SIGMA = 2
 
 def ExceptionHook(Type, Value, Traceback): logging.exception(f"{Type.__name__}: {Value}", exc_info=(Type, Value, Traceback))
 
-def ConfigureLogger(LogFileName: str = os.devnull, Level: int = logging.INFO) -> None:
+def ConfigureLogger(LogFileName: str = os.devnull, Level: int = logging.DEBUG) -> None:
 	Formatter = "%(asctime)-30s%(levelname)-13s%(funcName)-35s%(message)s"
 	logger = logging.getLogger()
 	while logger.hasHandlers(): logger.removeHandler(logger.handlers[0])
@@ -210,16 +210,16 @@ def IntersectEctopicMatrices(MatrixA, MatrixB, SD):
 	Condition = lambda Matrix: numpy.logical_and(numpy.isfinite(Matrix), numpy.logical_or(Matrix < -SD, Matrix > SD))
 	return numpy.sum(numpy.logical_and(Condition(MatrixA), Condition(MatrixB)))
 
-def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
+def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp, Assembly):
 	for Line in [f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}", f"Resolution: {int(Resolution / 1000)} kb"]: logging.info(Line)
 	with tempfile.TemporaryDirectory() as TempDir:
 		TempFile = os.path.join(TempDir, "temp.cool")
 		SimpleSubprocess(Name = "CoolerZoomify", Command = f"cooler zoomify -n 8 -r {Resolution}N --balance -o \"{TempFile}\" \"{InputCool}\"")
 		SimpleSubprocess(Name = "Copy2DockerTmp", Command = f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.cool')}\"")
-		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\"")
+		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\" --coordSystem {Assembly}")
 		SimpleSubprocess(Name = "Copy2MCoolDir", Command = f"cp \"{TempFile}\" \"{OutputMcool}\"")
 
-def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
+def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp):
 	for Line in [f"Output Bedgraph: {OutputBedgraph}"]: logging.info(Line)
 	with tempfile.TemporaryDirectory() as TempDir:
 		TempFile = os.path.join(TempDir, "temp.bedgraph")
@@ -227,11 +227,15 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
 		# InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
 		#TODO check that this script is working for HiGlass
 		SimpleSubprocess(Name="Copy2DockerTmp",
-						Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
-		SimpleSubprocess(Name="Clodius",
-						Command=f"clodius aggregate bedgraph \"{TempFile}\" --output-file \"{os.path.join(DockerTmp, 'bm_temp.hitile')}\" --assembly hg19")
+					Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
+		SimpleSubprocess(Name="ChromSizes",
+					Command=f"grep -P '{Chrom}\\t' ./chrom.sizes/{Assembly}.chrom.sizes > {os.path.join(DockerTmp, 'chrom.size')}")
+		SimpleSubprocess(Name="Bedgraph2BigWig",
+					Command=f"bedGraphToBigWig \"{TempFile}\" \"{os.path.join(DockerTmp, 'chrom.size')}\" \"{os.path.join(DockerTmp, 'bm_temp.bigwig')}\"")
+		SimpleSubprocess(Name="HiGlassIngestCoords",
+						Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/chrom.size --filetype chromsizes-tsv --datatype chromsizes --coordSystem \"{ID}-CoordSystem\" --uid \"{ID}-Coord\" --project-name \"3DGenBench\" --name \"{ID}-Coord\"")
 		SimpleSubprocess(Name="HiGlassIngest",
-						Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.hitile --filetype hitile --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem hg19")
+						Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.bigwig --filetype bigwig --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem \"{ID}-CoordSystem\"")
 		SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
 
 # ------======| METRICS |======------
@@ -338,7 +342,7 @@ def CreateParser():
 
 # ------======| FILE CREATOR |======------
 
-def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, CoolDir, Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, BinSize, SqlDB):
+def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, CoolDir, Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, BinSize, Assembly, SqlDB):
 	
 	CoolDirID = os.path.join(CoolDir, UnitID)
 	os.mkdir(CoolDirID)
@@ -411,7 +415,9 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 			ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
 			InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key[0] + '-' + Key[1]]],
 			OutputBedgraph=FileNamesBedgraphOutput[Key],
-			DockerTmp="/home/fairwind/hg-tmp")
+			Assembly=Assembly,
+			Chrom=Chrom,
+			DockerTmp="/home/fairwind/tmp")
 
 	# Insulatory AUC
 	with Timer(f"Ectopic Insulation PR Curve") as _:
@@ -464,7 +470,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		VisualizeRandom(RandomData = RandomInteractions, FN = os.path.join(CoolDirID, f".{UnitID}-RealVsRandomEctopicInteractions.png"))
 	
 	with Timer(f"Save MCOOLs") as _:
-		for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, DockerTmp = "/home/fairwind/hg-tmp")
+		for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, Assembly=Assembly, DockerTmp = "/home/fairwind/tmp")
 	
 	# SAVE
 	with Timer(f"SQL") as _:
@@ -525,6 +531,7 @@ def Main():
 		RearrStart = int(SampleData["start1"]),
 		RearrEnd = int(SampleData["end1"]),
 		BinSize = Namespace.resolution,
+		Assembly = SampleData["genome_assembly"],
 		SqlDB = Namespace.db)
 
 if __name__ == "__main__": Main()

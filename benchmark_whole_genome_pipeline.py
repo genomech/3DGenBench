@@ -33,7 +33,7 @@ pandarallel.pandarallel.initialize(nb_workers=cpu_count(), verbose=0)
 # ------======| CONST |======------
 
 C_SCC_H = 2
-C_CONTACT_COEF = 1000
+C_CONTACT_COEF = 10000
 
 ## ------======| LOGGING |======------
 
@@ -114,25 +114,32 @@ def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, PredictionStart, Predic
     Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
     Pixels = Pixels[["bin1_id", "bin2_id", "count"]]
     # check that all values are more than 1 and cooler won't delete it in new cool file
-    # assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+    assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
     cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 
 def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
     for Line in [f"Input COOL: {InputCoolFN}", f"Output COOL: {OutputCoolFN}", f"Chrom: {Chrom}"]: logging.info(Line)
-    Data = cooler.Cooler(InputCoolFN)
-    Bins = Data.bins().fetch(Chrom)
-    BinDict = {item: index for index, item in enumerate(Bins.index.to_list())}
-    Bins = Bins.reset_index()
-    Pixels = Data.matrix(as_pixels=True, balance=True).fetch(Chrom)
-    for col in ["bin1_id", "bin2_id"]: Pixels[col] = Pixels[col].apply(lambda x: BinDict[x])
-    Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
-    Pixels.dropna(inplace=True)
-    Pixels = Pixels[Pixels["count"]!=0]
-    # check that all values are more than 1 and cooler won't delete it in new cool file
-    assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
-    Bins["weight"] = 1 / C_CONTACT_COEF
-    cooler.create_cooler(OutputCoolFN, Bins, Pixels)
+    with tempfile.TemporaryDirectory() as TempDir:
+        if InputCoolFN[:4] == "http":
+            TempFile = os.path.join(TempDir, "input.cool")
+            response = requests.get(InputCoolFN, stream=True)
+            with open(TempFile, "wb") as handle: [handle.write(data) for data in response.iter_content()]
+            Data = cooler.Cooler(TempFile)
+        else:
+            Data = cooler.Cooler(InputCoolFN)
+        Bins = Data.bins().fetch(Chrom)
+        BinDict = {item: index for index, item in enumerate(Bins.index.to_list())}
+        Bins = Bins.reset_index()
+        Pixels = Data.matrix(as_pixels=True, balance=True).fetch(Chrom)
+        for col in ["bin1_id", "bin2_id"]: Pixels[col] = Pixels[col].apply(lambda x: BinDict[x])
+        Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
+        Pixels.dropna(inplace=True)
+        Pixels = Pixels[Pixels["count"] != 0]
+        # check that all values are more than 1 and cooler won't delete it in new cool file
+        assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+        Bins["weight"] = 1 / C_CONTACT_COEF
+        cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 
 def AlignCools(InputFNA, InputFNB, OutputFNA, OutputFNB, Chrom):
@@ -239,7 +246,7 @@ def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
         SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputMcool}\"")
 
 
-def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
+def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp):
     for Line in [f"Output Bedgraph: {OutputBedgraph}"]: logging.info(Line)
     with tempfile.TemporaryDirectory() as TempDir:
         TempFile = os.path.join(TempDir, "temp.bedgraph")
@@ -248,10 +255,12 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, DockerTmp):
         #TODO check that this script is working for HiGlass
         SimpleSubprocess(Name="Copy2DockerTmp",
                      Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
-        SimpleSubprocess(Name="Clodius",
-                     Command=f"clodius aggregate bedgraph \"{TempFile}\" --output-file \"{os.path.join(DockerTmp, 'bm_temp.hitile')}\" --assembly hg19")
+        SimpleSubprocess(Name="ChromSizes",
+                     Command=f"grep -P '{Chrom}\\t' ./chrom.sizes/{Assembly}.chrom.sizes > {os.path.join(TempDir, 'chrom.size')}")
+        SimpleSubprocess(Name="Bedgraph2BigWig",
+                     Command=f"bedGraphToBigWig \"{TempFile}\" \"{os.path.join(TempDir, 'chrom.size')}\" \"{os.path.join(DockerTmp, 'bm_temp.bigwig')}\"")
         SimpleSubprocess(Name="HiGlassIngest",
-                     Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.hitile --filetype hitile --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem hg19")
+                     Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.bigwig --filetype bigwig --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem {Assembly}")
         SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
 
 
@@ -342,7 +351,7 @@ def CreateParser():
 # ------======| FILE CREATOR |======------
 
 def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, CoolDir, Chrom, PredictionStart, PredictionEnd,
-                     BinSize, SqlDB, testing=False):
+                     BinSize, Assembly, SqlDB, testing=False):
     if testing:
         CoolDirID = os.path.join(CoolDir, UnitID, SampleName)
     else:
@@ -416,7 +425,9 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
             ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
             InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key]],
             OutputBedgraph=FileNamesBedgraphOutput[Key],
-            DockerTmp="/home/fairwind/hg-tmp")
+            Assembly=Assembly,
+            Chrom=Chrom,
+            DockerTmp="/home/fairwind/tmp")
     # Compartment score
     with Timer(f"Compartment strength") as _:
         Datasets = {Type: os.path.join(TempDir.name, f"{Type}-SampleTypeAligned.cool") for Type in FileNamesInput.keys()}
@@ -471,7 +482,7 @@ def Main():
         raise ValueError(f"Unknown Sample Name: '{Namespace.sample}'")
 
     FileNamesInput = {
-        "Exp": os.path.join("/storage/hic_data_for_3DBench/", SampleData["cell_type"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
+        "Exp": os.path.join(SampleData["path_to_processed_hic_data"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
         "Pred": Namespace.prediction,
     }
 
@@ -486,6 +497,7 @@ def Main():
         PredictionStart=int(SampleData["locus_start"]),
         PredictionEnd=int(SampleData["locus_end"]),
         BinSize=Namespace.resolution,
+        Assembly=SampleData["genome_assembly"],
         SqlDB=Namespace.db)
 
 
