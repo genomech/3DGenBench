@@ -210,13 +210,13 @@ def IntersectEctopicMatrices(MatrixA, MatrixB, SD):
 	Condition = lambda Matrix: numpy.logical_and(numpy.isfinite(Matrix), numpy.logical_or(Matrix < -SD, Matrix > SD))
 	return numpy.sum(numpy.logical_and(Condition(MatrixA), Condition(MatrixB)))
 
-def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp, Assembly):
+def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
 	for Line in [f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}", f"Resolution: {int(Resolution / 1000)} kb"]: logging.info(Line)
 	with tempfile.TemporaryDirectory() as TempDir:
 		TempFile = os.path.join(TempDir, "temp.cool")
 		SimpleSubprocess(Name = "CoolerZoomify", Command = f"cooler zoomify -n 8 -r {Resolution}N --balance -o \"{TempFile}\" \"{InputCool}\"")
 		SimpleSubprocess(Name = "Copy2DockerTmp", Command = f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.cool')}\"")
-		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\" --coordSystem {Assembly}")
+		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\" --coordSystem \"{ID}-CoordSystem\"")
 		SimpleSubprocess(Name = "Copy2MCoolDir", Command = f"cp \"{TempFile}\" \"{OutputMcool}\"")
 
 def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp):
@@ -470,7 +470,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		VisualizeRandom(RandomData = RandomInteractions, FN = os.path.join(CoolDirID, f".{UnitID}-RealVsRandomEctopicInteractions.png"))
 	
 	with Timer(f"Save MCOOLs") as _:
-		for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, Assembly=Assembly, DockerTmp = "/home/fairwind/tmp")
+		for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, DockerTmp = "/home/fairwind/tmp")
 	
 	# SAVE
 	with Timer(f"SQL") as _:

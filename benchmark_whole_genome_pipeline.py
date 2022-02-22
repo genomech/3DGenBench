@@ -233,18 +233,13 @@ def Ps_corr(control_data_file, predicted_data_file):
     return pearson_corr
 
 def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
-    for Line in [f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}",
-                 f"Resolution: {int(Resolution / 1000)} kb"]: logging.info(Line)
+    for Line in [f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}", f"Resolution: {int(Resolution / 1000)} kb"]: logging.info(Line)
     with tempfile.TemporaryDirectory() as TempDir:
         TempFile = os.path.join(TempDir, "temp.cool")
-        SimpleSubprocess(Name="CoolerZoomify",
-                         Command=f"cooler zoomify -n 8 -r {Resolution}N --balance -o \"{TempFile}\" \"{InputCool}\"")
-        SimpleSubprocess(Name="Copy2DockerTmp",
-                         Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.cool')}\"")
-        SimpleSubprocess(Name="HiGlassIngest",
-                         Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\"")
-        SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputMcool}\"")
-
+        SimpleSubprocess(Name = "CoolerZoomify", Command = f"cooler zoomify -n 8 -r {Resolution}N --balance -o \"{TempFile}\" \"{InputCool}\"")
+        SimpleSubprocess(Name = "Copy2DockerTmp", Command = f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.cool')}\"")
+        SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\" --coordSystem \"{ID}-CoordSystem\"")
+        SimpleSubprocess(Name = "Copy2MCoolDir", Command = f"cp \"{TempFile}\" \"{OutputMcool}\"")
 
 def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp):
     for Line in [f"Output Bedgraph: {OutputBedgraph}"]: logging.info(Line)
@@ -254,13 +249,15 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp):
         # InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
         #TODO check that this script is working for HiGlass
         SimpleSubprocess(Name="Copy2DockerTmp",
-                     Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
+                    Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
         SimpleSubprocess(Name="ChromSizes",
-                     Command=f"grep -P '{Chrom}\\t' ./chrom.sizes/{Assembly}.chrom.sizes > {os.path.join(TempDir, 'chrom.size')}")
+                    Command=f"grep -P '{Chrom}\\t' ./chrom.sizes/{Assembly}.chrom.sizes > {os.path.join(DockerTmp, 'chrom.size')}")
         SimpleSubprocess(Name="Bedgraph2BigWig",
-                     Command=f"bedGraphToBigWig \"{TempFile}\" \"{os.path.join(TempDir, 'chrom.size')}\" \"{os.path.join(DockerTmp, 'bm_temp.bigwig')}\"")
+                    Command=f"bedGraphToBigWig \"{TempFile}\" \"{os.path.join(DockerTmp, 'chrom.size')}\" \"{os.path.join(DockerTmp, 'bm_temp.bigwig')}\"")
+        SimpleSubprocess(Name="HiGlassIngestCoords",
+                        Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/chrom.size --filetype chromsizes-tsv --datatype chromsizes --coordSystem \"{ID}-CoordSystem\" --uid \"{ID}-Coord\" --project-name \"3DGenBench\" --name \"{ID}-Coord\"")
         SimpleSubprocess(Name="HiGlassIngest",
-                     Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.bigwig --filetype bigwig --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem {Assembly}")
+                        Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.bigwig --filetype bigwig --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem \"{ID}-CoordSystem\"")
         SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
 
 
@@ -442,7 +439,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
         for Key in SampleTypeAligned.keys(): MakeMcool(ID=os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0],
                                                        InputCool=SampleTypeAligned[Key].store,
                                                        OutputMcool=FileNamesOutput[Key], Resolution=BinSize,
-                                                       DockerTmp="/home/fairwind/hg-tmp")
+                                                       DockerTmp="/home/fairwind/tmp")
 
     # SAVE
     with Timer(f"SQL") as _:
