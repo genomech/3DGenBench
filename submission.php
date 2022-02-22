@@ -99,7 +99,7 @@ foreach ($ProcessingList as $index => $meta) {
 }
 
 $cmd .= 'screen -dm bash -c "${CMD}";';
-echo $cmd;
+# echo $cmd;
 shell_exec($cmd);
 
 echo Message('Unit added to queue', false);
