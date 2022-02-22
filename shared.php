@@ -1,9 +1,13 @@
 <?php
 
+echo (basename(__DIR__) == '3DGenBench_sandbox' ? '<font color="red">TEST BRANCH</font><br>' : ''); // KOSTYL!
+
 // CONST
 
 $GLOBALS['bmRearrTable'] = __DIR__.'/rearrangements_table.tsv';
+$GLOBALS['bmWGTable'] = __DIR__.'/whole_genome_regions.txt';
 $GLOBALS['bmPipelineScript'] = __DIR__.'/benchmark_pipeline.py';
+$GLOBALS['bmPipelineScriptWG'] = __DIR__.'/benchmark_whole_genome_pipeline.py';
 $GLOBALS['bmJsonConfig'] = __DIR__.'/config.json';
 $GLOBALS['bmCondaEnv'] = __DIR__.'/.pyenv';
 $GLOBALS['bmExpDatasets'] = __DIR__.'/exp_datasets';
@@ -11,16 +15,24 @@ $GLOBALS['bmUploads'] = __DIR__.'/upload';
 $GLOBALS['bmMetrics'] = __DIR__.'/benchmark_db.sqlite3';
 $GLOBALS['bmLogs'] = __DIR__.'/logs';
 $GLOBALS['bmCool'] = __DIR__.'/cool';
+$GLOBALS['bmSubmission'] = '/'.(basename(__DIR__) == '3DGenBench_sandbox' ? 'datasets_sandbox' : 'datasets').'/submission.php';  // KOSTYL!
+$GLOBALS['bmHiGlass'] = '../../../'.(basename(__DIR__) == '3DGenBench_sandbox' ? 'datasets_sandbox' : 'datasets').'/higlass.php';  // KOSTYL!
+$GLOBALS['bmMetricsPage'] = (basename(__DIR__) == '3DGenBench_sandbox' ? '__test__/submissions_list_test' : 'metrics');  // KOSTYL!
 
 // GET CONST FUNC
 
 function GetWPUser() { $User = esc_html(wp_get_current_user()->user_login); return ($User == "") ? 'guest' : $User; }
 function GetCondaActivate() { return $GLOBALS['bmCondaEnv'].'/bin/activate base'; }
 function GetBenchmarkPipeline() { return $GLOBALS['bmPipelineScript']; }
+function GetBenchmarkPipelineWG() { return $GLOBALS['bmPipelineScriptWG']; }
 function GetRearrTable() { return $GLOBALS['bmRearrTable']; }
+function GetWGTable() { return $GLOBALS['bmWGTable']; }
 function GetMetrics() { return $GLOBALS['bmMetrics']; }
 function GetLogs() { return $GLOBALS['bmLogs']; }
 function GetCool() { return $GLOBALS['bmCool']; }
+function GetSubmissionScript() { return $GLOBALS['bmSubmission']; }
+function GetHiGlass() { return $GLOBALS['bmHiGlass']; }
+function GetMetricsPage() {  return $GLOBALS['bmMetricsPage']; }
 
 // FUNC
 
@@ -64,6 +76,12 @@ function GetResolutions() {
 function GetSamples() {
 	$SamplesList = array('0' => '(none)');
 	foreach (TsvToArray($GLOBALS['bmRearrTable']) as $Row) $SamplesList[$Row['rearrangement_ID']] = $Row['rearrangement_ID'];
+	return $SamplesList;
+}
+
+function GetSamplesWG() {
+	$SamplesList = array('0' => '(none)');
+	foreach (TsvToArray($GLOBALS['bmWGTable']) as $Row) $SamplesList[$Row['genome_locus_name']] = $Row['genome_locus_name'];
 	return $SamplesList;
 }
 

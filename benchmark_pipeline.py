@@ -3,7 +3,7 @@ __version__ = "0.1b"
 __date__ = "2021 Nov 1"
 
 from contextlib import contextmanager
-from cooltools import insulation
+from cooltools.api import insulation
 from hicreppy import hicrep
 from multiprocessing import cpu_count
 from sklearn.metrics import precision_recall_curve, auc
@@ -32,7 +32,7 @@ pandarallel.pandarallel.initialize(nb_workers = cpu_count(), verbose = 0)
 
 C_SCC_MAXDIST = 1500000
 C_SCC_H = 2
-C_CONTACT_COEF = 100
+C_CONTACT_COEF = 1000
 C_RANDOM_INTER_N = 5000
 C_RANDOM_INTER_SIGMA = 2
 
@@ -40,9 +40,12 @@ C_RANDOM_INTER_SIGMA = 2
 
 def ExceptionHook(Type, Value, Traceback): logging.exception(f"{Type.__name__}: {Value}", exc_info=(Type, Value, Traceback))
 
-def ConfigureLogger(LogFileName: str = os.devnull, Level: int = logging.INFO) -> None:
+def ConfigureLogger(LogFileName: str = os.devnull, Level: int = logging.DEBUG) -> None:
 	Formatter = "%(asctime)-30s%(levelname)-13s%(funcName)-35s%(message)s"
-	logging.basicConfig(level = Level, format = Formatter, handlers = [logging.FileHandler(LogFileName), logging.StreamHandler(sys.stderr)], force = True)
+	logger = logging.getLogger()
+	while logger.hasHandlers(): logger.removeHandler(logger.handlers[0])
+	Handlers = [logging.FileHandler(LogFileName), logging.StreamHandler(sys.stderr)]
+	logging.basicConfig(level=Level, format=Formatter, handlers=Handlers)
 	sys.excepthook = ExceptionHook
 
 def SecToTime(Sec: float) -> str: return f"{int(Sec / 3600):02}:{int((Sec // 60) % 60):02}:{int(Sec % 60):02}"
@@ -83,16 +86,21 @@ def BinSearch(Chrom, End, BinDict):
 		raise RuntimeError(f"Unknown bin")
 
 def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, BinSize):
-	for Line in [f"Input TSV: {TsvFN}", f"Output COOL: {OutputCoolFN}", f"Template COOL: {TemplateCoolFN}", f"Chrom: {Chrom}", f"Resolution: {int(BinSize / 1000)} kb"]: logging.info(Line)
+	for Line in [f"Input TSV: {TsvFN}", f"Output COOL: {OutputCoolFN}", f"Template COOL: {TemplateCoolFN}",
+				 f"Chrom: {Chrom}", f"Resolution: {int(BinSize / 1000)} kb"]: logging.info(Line)
 	DType = {"chrom": str, "end1": int, "end2": int, "balanced": float}
 	Pixels = pandas.read_csv(TsvFN, sep='\t', names=DType.keys(), dtype=DType, header=None)
 	Bins = cooler.Cooler(TemplateCoolFN).bins().fetch(Chrom)
 	Bins["weight"] = 1 / C_CONTACT_COEF
 	Bins = Bins.reset_index(drop=True)
 	BinsDict = {(Line["chrom"], Line["end"]): index for index, Line in Bins.iterrows()}
-	for num in [1, 2]: Pixels[f"bin{num}_id"] = Pixels.parallel_apply(lambda x: BinSearch(x["chrom"], x[f"end{num}"], BinsDict), axis=1)
-	Pixels["count"] = Pixels["balanced"].parallel_apply(lambda x: int(x * pow(C_CONTACT_COEF, 2)))
+	for num in [1, 2]: Pixels[f"bin{num}_id"] = Pixels.parallel_apply(
+		lambda x: BinSearch(x["chrom"], x[f"end{num}"], BinsDict), axis=1)
+	Pixels.dropna(inplace=True)
+	Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
 	Pixels = Pixels[["bin1_id", "bin2_id", "count"]]
+	# check that all values are more than 1 and cooler won't delete it in new cool file
+	assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
 	cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
@@ -105,28 +113,38 @@ def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
 		Bins = Data.bins().fetch(Chrom)
 		BinDict = {item: index for index, item in enumerate(Bins.index.to_list())}
 		Bins = Bins.reset_index()
-		Pixels = Data.matrix(as_pixels=True, balance=False).fetch(Chrom)
+		Pixels = Data.matrix(as_pixels=True, balance=True).fetch(Chrom)
 		for col in ["bin1_id", "bin2_id"]: Pixels[col] = Pixels[col].apply(lambda x: BinDict[x])
+		Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
+		Pixels.dropna(inplace=True)
+		# check that all values are more than 1 and cooler won't delete it in new cool file
+		assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+		Bins["weight"] = 1 / C_CONTACT_COEF
 		cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 def AlignCools(InputFNA, InputFNB, OutputFNA, OutputFNB, Chrom):
-	for Line in [f"Input COOL [A]: {InputFNA}", f"Output COOL [A]: {OutputFNA}", f"Input COOL [B]: {InputFNB}", f"Output COOL [B]: {OutputFNB}", f"Chrom: {Chrom}"]: logging.info(Line)
+	for Line in [f"Input COOL [A]: {InputFNA}", f"Output COOL [A]: {OutputFNA}", f"Input COOL [B]: {InputFNB}",
+				 f"Output COOL [B]: {OutputFNB}", f"Chrom: {Chrom}"]: logging.info(Line)
 	InputA, InputB = cooler.Cooler(InputFNA), cooler.Cooler(InputFNB)
 	BinsA, BinsB = InputA.bins().fetch(Chrom), InputB.bins().fetch(Chrom)
-	PixelsA, PixelsB = InputA.matrix(as_pixels=True, balance=False).fetch(Chrom), InputB.matrix(as_pixels=True, balance=False).fetch(Chrom)
+	PixelsA, PixelsB = InputA.matrix(as_pixels=True, balance=False).fetch(Chrom), InputB.matrix(as_pixels=True,balance=False).fetch(Chrom)
+	PixelsA.dropna(inplace=True)
+	PixelsB.dropna(inplace=True)
 	MergePixels = pandas.merge(PixelsA, PixelsB, how="inner", on=["bin1_id", "bin2_id"])
-	PixelsA, PixelsB = MergePixels[["bin1_id", "bin2_id", "count_x"]].rename(columns={"count_x": "count"}), MergePixels[["bin1_id", "bin2_id", "count_y"]].rename(columns={"count_y": "count"})
+	PixelsA, PixelsB = MergePixels[["bin1_id", "bin2_id", "count_x"]].rename(columns={"count_x": "count"}), \
+					   MergePixels[["bin1_id", "bin2_id", "count_y"]].rename(columns={"count_y": "count"})
 	cooler.create_cooler(OutputFNA, BinsA, PixelsA)
 	cooler.create_cooler(OutputFNB, BinsB, PixelsB)
 
 def GetMatrix(Cool, Chrom): return Cool.matrix(as_pixels=True, balance=True).fetch(Chrom)
 
-def InsulationData(Datasets, Window):
+def InsulationData(Datasets, Window, capture_start, capture_end):
 	for Line in [f"Window: {Window}"]: logging.info(Line)
 	InsScores = {Type: insulation.calculate_insulation_score(Data, [Window], ignore_diags=2, append_raw_scores=True).rename(columns={f"sum_balanced_{Window}": f"sum_balanced_{'-'.join(Type)}"}) for Type, Data in Datasets.items()}
 	Result = None
 	for Type, Data in InsScores.items(): Result = Data.copy() if Result is None else pandas.merge(Result, Data, how="inner", on=["chrom", "start", "end"])
 	Result = Result[["chrom", "start", "end"] + [f"sum_balanced_{'-'.join(Type)}" for Type in InsScores.keys()]]
+	Result = Result.query("start >= @capture_start & end <= @capture_end")
 	for DT in ["Exp", "Pred"]: 
 		Result[f"sum_balanced_Mut/Wt-{DT}"] = Result.apply(lambda x: 0 if x[f"sum_balanced_Wt-{DT}"] == 0 else (x[f"sum_balanced_Mut-{DT}"] / x[f"sum_balanced_Wt-{DT}"]), axis=1)
 		NonZero = Result[f"sum_balanced_Mut/Wt-{DT}"][Result[f"sum_balanced_Mut/Wt-{DT}"] != 0]
@@ -198,8 +216,27 @@ def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
 		TempFile = os.path.join(TempDir, "temp.cool")
 		SimpleSubprocess(Name = "CoolerZoomify", Command = f"cooler zoomify -n 8 -r {Resolution}N --balance -o \"{TempFile}\" \"{InputCool}\"")
 		SimpleSubprocess(Name = "Copy2DockerTmp", Command = f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.cool')}\"")
-		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\"")
+		SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\" --coordSystem \"{ID}-CoordSystem\"")
 		SimpleSubprocess(Name = "Copy2MCoolDir", Command = f"cp \"{TempFile}\" \"{OutputMcool}\"")
+
+def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp):
+	for Line in [f"Output Bedgraph: {OutputBedgraph}"]: logging.info(Line)
+	with tempfile.TemporaryDirectory() as TempDir:
+		TempFile = os.path.join(TempDir, "temp.bedgraph")
+		InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
+		# InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
+		#TODO check that this script is working for HiGlass
+		SimpleSubprocess(Name="Copy2DockerTmp",
+					Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
+		SimpleSubprocess(Name="ChromSizes",
+					Command=f"grep -P '{Chrom}\\t' ./chrom.sizes/{Assembly}.chrom.sizes > {os.path.join(DockerTmp, 'chrom.size')}")
+		SimpleSubprocess(Name="Bedgraph2BigWig",
+					Command=f"bedGraphToBigWig \"{TempFile}\" \"{os.path.join(DockerTmp, 'chrom.size')}\" \"{os.path.join(DockerTmp, 'bm_temp.bigwig')}\"")
+		SimpleSubprocess(Name="HiGlassIngestCoords",
+						Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/chrom.size --filetype chromsizes-tsv --datatype chromsizes --coordSystem \"{ID}-CoordSystem\" --uid \"{ID}-Coord\" --project-name \"3DGenBench\" --name \"{ID}-Coord\"")
+		SimpleSubprocess(Name="HiGlassIngest",
+						Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.bigwig --filetype bigwig --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem \"{ID}-CoordSystem\"")
+		SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
 
 # ------======| METRICS |======------
 
@@ -305,7 +342,7 @@ def CreateParser():
 
 # ------======| FILE CREATOR |======------
 
-def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, CoolDir, Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, BinSize, SqlDB):
+def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, CoolDir, Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, BinSize, Assembly, SqlDB):
 	
 	CoolDirID = os.path.join(CoolDir, UnitID)
 	os.mkdir(CoolDirID)
@@ -316,7 +353,13 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		("Mut", "Exp"): os.path.join(CoolDirID, f"{UnitID}-MutExp.cool"),
 		("Mut", "Pred"): os.path.join(CoolDirID, f"{UnitID}-MutPred.cool")
 		}
-	
+
+	FileNamesBedgraphOutput = {
+		("Wt", "Exp"): os.path.join(CoolDirID, f"{UnitID}-WtExp.bedgraph"),
+		("Wt", "Pred"): os.path.join(CoolDirID, f"{UnitID}-WtPred.begraph"),
+		("Mut", "Exp"): os.path.join(CoolDirID, f"{UnitID}-MutExp.bedgraph"),
+		("Mut", "Pred"): os.path.join(CoolDirID, f"{UnitID}-MutPred.bedgraph")
+	}
 	# Create ts
 	SubmissionDate = datetime.datetime.now(datetime.timezone.utc).isoformat()
 	
@@ -330,8 +373,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		for Type, FN in FileNamesInput.items():
 			if Type[1] == "Exp": Cool2Cool(FN, TempFiles[Type], Chrom)
 			if Type[1] == "Pred": Tsv2Cool(FN, TempFiles[Type], TempFiles[("Wt", "Exp")], Chrom, BinSize)
-		Datasets = {Type: cooler.Cooler(FN) for Type, FN in TempFiles.items()}
-	
+
 	# Align
 	with Timer(f"Sample type align") as _:
 		SampleTypeAligned = {Type: os.path.join(TempDir.name, f"{'-'.join(Type)}-SampleTypeAligned.cool") for Type in FileNamesInput.keys()}
@@ -342,10 +384,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		for Type, Cool in SampleTypeAligned.items(): 
 			VisualizeCool(InputCool = Cool.store, OutputPng = os.path.join(CoolDirID, f".{UnitID}-{Type[0]}{Type[1]}SampleTypeAligned.png"), Region = f"{Chrom}:{CaptureStart}-{CaptureEnd}")
 		
-	with Timer(f"Data type align") as _:
-		DataTypeAligned = {Type: os.path.join(TempDir.name, f"{'-'.join(Type)}-DataTypeAligned.cool") for Type in FileNamesInput.keys()}
-		for DT in ["Exp", "Pred"]: AlignCools(TempFiles[("Wt", DT)], TempFiles[("Mut", DT)], DataTypeAligned[("Wt", DT)], DataTypeAligned[("Mut", DT)], Chrom)
-		DataTypeAligned = {Type: cooler.Cooler(FN) for Type, FN in DataTypeAligned.items()}
+
 	
 	# METRICS
 	
@@ -361,7 +400,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
 	# Insulation
 	with Timer(f"Insulation Dataset") as _:
-		InsDataset = InsulationData(Datasets, Window=BinSize * 5)
+		InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, capture_start=CaptureStart, capture_end=CaptureEnd)
 	
 	with Timer(f"Insulation Score Pearson") as _:
 		Data["Metrics.InsulationScorePearson.WT"] = PearsonCorr(InsDataset["sum_balanced_Wt-Exp"], InsDataset["sum_balanced_Wt-Pred"])
@@ -369,6 +408,16 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 	
 	with Timer(f"Insulation Score (Mut/Wt) Pearson") as _:
 		Data["Metrics.InsulationScoreMutVsWtPearson"] = PearsonCorr(InsDataset["sum_balanced_Mut/Wt-Exp"], InsDataset["sum_balanced_Mut/Wt-Pred"])
+
+	# save insulatory score bedgraphs
+	with Timer(f"Save Bedgraphs") as _:
+		for Key in FileNamesBedgraphOutput.keys(): MakeBedgraph(
+			ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
+			InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key[0] + '-' + Key[1]]],
+			OutputBedgraph=FileNamesBedgraphOutput[Key],
+			Assembly=Assembly,
+			Chrom=Chrom,
+			DockerTmp="/home/fairwind/tmp")
 
 	# Insulatory AUC
 	with Timer(f"Ectopic Insulation PR Curve") as _:
@@ -386,8 +435,8 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
 	# Ectopic
 	with Timer(f"Ectopic Array") as _:
-		EctopicArrayExp = EctopicInteractionsArray(Datasets[("Wt", "Exp")], Datasets[("Mut", "Exp")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=False)
-		EctopicArrayPred = EctopicInteractionsArray(Datasets[("Wt", "Pred")], Datasets[("Mut", "Pred")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=True)
+		EctopicArrayExp = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Exp")], SampleTypeAligned[("Mut", "Exp")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=False)
+		EctopicArrayPred = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Pred")], SampleTypeAligned[("Mut", "Pred")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=True)
 	
 	with Timer(f"Ectopic Array Graph") as _:
 		Data["Metrics.EctopicArrayGraph.EXP"] = EctopicGraphArray(EctopicArrayExp)
@@ -421,7 +470,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		VisualizeRandom(RandomData = RandomInteractions, FN = os.path.join(CoolDirID, f".{UnitID}-RealVsRandomEctopicInteractions.png"))
 	
 	with Timer(f"Save MCOOLs") as _:
-		for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, DockerTmp = "/home/fairwind/hg-tmp")
+		for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, DockerTmp = "/home/fairwind/tmp")
 	
 	# SAVE
 	with Timer(f"SQL") as _:
@@ -477,11 +526,12 @@ def Main():
 		FileNamesInput = FileNamesInput, 
 		CoolDir = Namespace.cooldir,
 		Chrom = SampleData["chr"],
-		CaptureStart = int(SampleData["start_capture"]),
-		CaptureEnd = int(SampleData["end_capture"]),
+		CaptureStart = int(SampleData["start_prediction"]),
+		CaptureEnd = int(SampleData["end_prediction"]),
 		RearrStart = int(SampleData["start1"]),
 		RearrEnd = int(SampleData["end1"]),
 		BinSize = Namespace.resolution,
+		Assembly = SampleData["genome_assembly"],
 		SqlDB = Namespace.db)
 
 if __name__ == "__main__": Main()

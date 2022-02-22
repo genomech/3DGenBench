@@ -4,6 +4,7 @@ require(__DIR__.'/shared.php');
 
 // Get Data
 $DataArray = TsvToArray(GetRearrTable());
+$DataArrayWG = TsvToArray(GetWGTable());
 
 // Tabulator load (http://tabulator.info/)
 echo '
@@ -12,18 +13,26 @@ echo '
 <script type="text/javascript" src="https://oss.sheetjs.com/sheetjs/xlsx.full.min.js"></script>
 ';
 
-// Download panel
+// Draw table
 echo '
-<div>
+
+<div id="tabs">
+  <div id="fragment-1">
+    <div>
 Download:
 <a href="#" id="download-csv">CSV</a> | <a href="#" id="download-json">JSON</a> | <a href="#" id="download-xlsx">XLSX</a>
 </div>
-';
-
-// Draw table
-echo '
 <div id="rearr-table"></div>
-
+  </div>
+  <div id="fragment-2">
+    <div>
+Download:
+<a href="#" id="download-csv-wg">CSV</a> | <a href="#" id="download-json-wg">JSON</a> | <a href="#" id="download-xlsx-wg">XLSX</a>
+</div>
+<div id="wg-table"></div>
+  </div>
+</div>
+ 
 <script>
 
 function DownloadFormatter() { return { "formatter": function(cell, formatterParams) { return (cell.getValue() != "_") ? "<a href=\'" + cell.getValue() + "\' target=\'blank\'>Download</a>" : "—"; } } }
@@ -32,13 +41,17 @@ function CoordFormatter() { return { "width": 150, "hozAlign": "right", "formatt
 function IDFormatter() { return { "formatter": function(cell, formatterParams) { return "<span style=\'font-weight:bold;\'>" + cell.getValue() + "</span>"; } } }
 
 var tabledata = '.json_encode($DataArray).';
+var wgdata = '.json_encode($DataArrayWG).';
 
 var table = new Tabulator("#rearr-table", {
 	placeholder: "No data available!",
-	height: "500px",
+	height: "300px",
 	data: tabledata,
 	pagination: "local",
 	clipboard: true,
+	initialSort: [
+        {column: "rearrangement_ID", dir: "asc"}
+    ],
 	columns: [
 		{ ...{ "title": "ID", "field": "rearrangement_ID" }, ...IDFormatter() },
 		{"title": "Rearrangement Type", "field": "rearrangement_type"},
@@ -70,10 +83,34 @@ var table = new Tabulator("#rearr-table", {
 	],
 });
 
+var wgtable = new Tabulator("#wg-table", {
+	placeholder: "No data available!",
+	height: "300px",
+	data: wgdata,
+	pagination: "local",
+	clipboard: true,
+	layout: "fitColumns",
+	initialSort: [
+        {column: "genome_locus_name", dir: "asc"}
+    ],
+	columns: [
+		{ ...{ "title": "ID", "field": "genome_locus_name" }, ...IDFormatter() },
+		{"title": "Cell Type", "field": "cell_type"},
+		{ ...{ "title": "FTP Folder", "field": "path_to_processed_hic_data" }, ...ExploreFormatter() },
+		{"title": "Genome Assembly", "field": "genome_assembly"},
+		{"title": "Chrom", "field": "locus_chr"},
+		{ ...{ "title": "Locus Start", "field": "locus_start" }, ...CoordFormatter() },
+		{ ...{ "title": "Locus End", "field": "locus_end" }, ...CoordFormatter() }
+	],
+});
+
 document.getElementById("download-csv").addEventListener("click", function() { table.download("csv", "rearrangements_table.csv"); });
 document.getElementById("download-json").addEventListener("click", function() { table.download("json", "rearrangements_table.json"); });
 document.getElementById("download-xlsx").addEventListener("click", function() { table.download("xlsx", "rearrangements_table.xlsx", {sheetName:"My Data"}); });
 
+document.getElementById("download-csv-wg").addEventListener("click", function() { wgtable.download("csv", "wg_table.csv"); });
+document.getElementById("download-json-wg").addEventListener("click", function() { wgtable.download("json", "wg_table.json"); });
+document.getElementById("download-xlsx-wg").addEventListener("click", function() { wgtable.download("xlsx", "wg_table.xlsx", {sheetName:"My Data"}); });
 </script>
 ';
 
