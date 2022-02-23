@@ -94,13 +94,21 @@ echo '
 	}
 	
 	function addTest() {
+		for (elem of document.querySelectorAll(\'[id^=block_]\')) elem.remove();
 		var tp = document.getElementById("data_type").value;
 		var ts = new Date().getTime();
 		addBlock(ts, tp);
-		document.getElementById("sample_" + ts).value = "Bor";
-		document.getElementById("resolution_" + ts).value = "5000";
-		document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/model80.0_WT_Bor_predicted.txt";
-		document.getElementById("file_MUT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/model80.0_Mut_Bor_predicted.txt";
+		if (tp == "p") {
+			document.getElementById("sample_" + ts).value = "Bor";
+			document.getElementById("resolution_" + ts).value = "5000";
+			document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/Bor_5kb_WT_3DPredictor.txt";
+			document.getElementById("file_MUT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/Bor_5kb_MUT_3DPredictor";
+		}
+		if (tp == "s") {
+			document.getElementById("sample_" + ts).value = "GM12878_chr19_36to56Mb";
+			document.getElementById("resolution_" + ts).value = "10000";
+			document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/chr19_22to42_10kb_GM12878_model30_smarterprediction.txt";
+		}
 	}
 </script>';
 

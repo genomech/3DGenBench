@@ -1,4 +1,4 @@
 genome_locus_name	path_to_processed_hic_data	cell_type	locus_chr	locus_start	locus_end	organism	genome_assembly
-K562_0to_20Mb	./hic_data/whole_genome/K562/	K562	chr11	0	20000000	human	hg19
-GM12878_22to_42Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_[remake]/GM12878	GM12878	chr1	22000000	42000000	human	hg19
-GM12878_chr19_36to56Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_[remake]/GM12878	GM12878	chr19	36000000	56000000	human	hg19
+K562_0to_20Mb	/storage/hic_data_for_3DBench/hic_data/whole_genome/K562/	K562	chr11	0	20000000	human	hg19
+GM12878_22to_42Mb	/storage/hic_data_for_3DBench/GM12878/	GM12878	chr1	22000000	42000000	human	hg19
+GM12878_chr19_36to56Mb	/storage/hic_data_for_3DBench/GM12878	GM12878	chr19	36000000	56000000	human	hg19

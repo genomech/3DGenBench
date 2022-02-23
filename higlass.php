@@ -9,7 +9,7 @@ if ($DataType == 'p') {
 	$Height = 600;
 
 	$GenomicCoordinatesTilesetUID = 'NyITQvZsS_mOFNlz5C2LJg';
-	$GenomicCoordinatesWidth = 30;
+	$GenomicCoordinatesWidth = 40;
 
 	echo '
 	<!DOCTYPE html>
@@ -53,11 +53,11 @@ if ($DataType == 'p') {
 				"height": '.$GenomicCoordinatesWidth.'
 				}; }
 			
-			function GenerateInsulationTrack(Label, TileSetID, SessionID, Position) { return {
+			function GenerateInsulationTrack(Label, TileSetID, SessionID, Position, Color) { return {
 			"filetype": "hitile",
 			"server": "http://alena-spn.cytogen.ru:8231/api/v1",
 			"tilesetUid": TileSetID,
-			"uid": "AiCfPNJpT3aUuFCq3F_WQA",
+			"uid": Label + "_" + SessionID,
 			"type": Position + "-bar",
             "options": {
               "align": "bottom",
@@ -68,10 +68,10 @@ if ($DataType == 'p') {
               "labelTopMargin": 0,
               "labelBottomMargin": 0,
               "labelShowResolution": false,
-              "labelShowAssembly": true,
+              "labelShowAssembly": false,
               "axisLabelFormatting": "scientific",
               "axisPositionHorizontal": "right",
-              "barFillColor": "darkgreen",
+              "barFillColor": Color,
               "valueScaling": "linear",
               "trackBorderWidth": 0,
               "trackBorderColor": "black",
@@ -133,20 +133,11 @@ if ($DataType == 'p') {
 			
 			function GenerateView(ViewID, SessionID, TopTilesetID, TopName, BottomTilesetID, BottomName, X, Y) { return JSON.parse(JSON.stringify({
 				"tracks": {
-					"top": [ {
-            "type": "combined",
-            "uid": SessionID + "_TopTracks",
-            "width": '.$GenomicCoordinatesWidth.',
-			"height": '.$GenomicCoordinatesWidth.',
-            "options": {},
-            "contents": [ GenerateInsulationTrack(ViewID + "_InsulationTrackH", TopTilesetID + "-InsHitile", SessionID, "horizontal"), GenerateGenomeTrack(ViewID + "_GenomeTrackH", SessionID, "horizontal") ] } ],
-					"left": [ {
-            "type": "combined",
-            "uid": SessionID + "_LeftTracks",
-            "width": '.$GenomicCoordinatesWidth.',
-			"height": '.$GenomicCoordinatesWidth.',
-            "options": {},
-            "contents": [ GenerateInsulationTrack(ViewID + "_InsulationTrackV", BottomTilesetID + "-InsHitile", SessionID, "vertical"), GenerateGenomeTrack(ViewID + "_GenomeTrackV", SessionID, "vertical") ] } ],
+					"top": [ 
+				GenerateInsulationTrack(ViewID + "_InsulationTrackH", TopTilesetID + "-InsHitile", SessionID, "horizontal", "darkgreen"),
+				GenerateInsulationTrack(ViewID + "_InsulationTrackV", BottomTilesetID + "-InsHitile", SessionID, "horizontal", "blue")
+			],
+					"left": [ ],
 					"center": [
 						{
 							"uid": ViewID + "_TracksContainer_" + SessionID,
@@ -264,12 +255,12 @@ elseif ($DataType == 's') {
 				"height": '.$GenomicCoordinatesWidth.'
 				}; }
 				
-			function GenerateInsulationTrack(Label, TileSetID, SessionID, Position) { return {
-            "filetype": "hitile",
-            "server": "http://alena-spn.cytogen.ru:8231/api/v1",
-            "tilesetUid": TileSetID,
-            "uid": "AiCfPNJpT3aUuFCq3F_WQA",
-            "type": Position + "-bar",
+			function GenerateInsulationTrack(Label, TileSetID, SessionID, Position, Color) { return {
+			"filetype": "hitile",
+			"server": "http://alena-spn.cytogen.ru:8231/api/v1",
+			"tilesetUid": TileSetID,
+			"uid": Label + "_" + SessionID,
+			"type": Position + "-bar",
             "options": {
               "align": "bottom",
               "labelColor": "[glyph-color]",
@@ -279,10 +270,10 @@ elseif ($DataType == 's') {
               "labelTopMargin": 0,
               "labelBottomMargin": 0,
               "labelShowResolution": false,
-              "labelShowAssembly": true,
+              "labelShowAssembly": false,
               "axisLabelFormatting": "scientific",
               "axisPositionHorizontal": "right",
-              "barFillColor": "darkgreen",
+              "barFillColor": Color,
               "valueScaling": "linear",
               "trackBorderWidth": 0,
               "trackBorderColor": "black",
@@ -344,20 +335,8 @@ elseif ($DataType == 's') {
 			
 			function GenerateView(ViewID, SessionID, TopTilesetID, TopName, BottomTilesetID, BottomName, X, Y) { return JSON.parse(JSON.stringify({
 				"tracks": {
-					"top": [ {
-            "type": "combined",
-            "uid": SessionID + "_TopTracks",
-            "width": '.$GenomicCoordinatesWidth.',
-			"height": '.$GenomicCoordinatesWidth.',
-            "options": {},
-            "contents": [ GenerateInsulationTrack(ViewID + "_InsulationTrackH", TopTilesetID + "-InsHitile", SessionID, "horizontal"), GenerateGenomeTrack(ViewID + "_GenomeTrackH", SessionID, "horizontal") ] } ],
-					"left": [ {
-            "type": "combined",
-            "uid": SessionID + "_LeftTracks",
-            "width": '.$GenomicCoordinatesWidth.',
-			"height": '.$GenomicCoordinatesWidth.',
-            "options": {},
-            "contents": [ GenerateInsulationTrack(ViewID + "_InsulationTrackV", BottomTilesetID + "-InsHitile", SessionID, "vertical"), GenerateGenomeTrack(ViewID + "_GenomeTrackV", SessionID, "vertical") ] } ],
+					"top": [ GenerateInsulationTrack(ViewID + "_InsulationTrackH", TopTilesetID + "-InsHitile", SessionID, "horizontal", "darkgreen"), GenerateInsulationTrack(ViewID + "_InsulationTrackV", BottomTilesetID + "-InsHitile", SessionID, "horizontal", "blue")],
+					"left": [],
 					"center": [
 						{
 							"uid": ViewID + "_TracksContainer_" + SessionID,
