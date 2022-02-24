@@ -144,7 +144,7 @@ echo '
 	</div>
 	<iframe name="formresponse" id="formresponse" height="50" width="100%"></iframe>
 	<br>
-	<h3>Datasets &nbsp; &nbsp; &nbsp;<button type="button" class="button btn-default color2" onclick="window.open(\'index.php/tutorial/\', \'_blank\');">Datasets Upload Howto</button> </h3>
+	<h3>Datasets &nbsp; &nbsp; &nbsp;<button type="button" class="button btn-default color2" onclick="window.open(\'index.php/tutorial#uploading\', \'_blank\');">Datasets Upload Howto</button> </h3>
 </form>
 
 <script>addSampleBlock();</script>
