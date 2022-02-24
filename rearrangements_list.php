@@ -17,6 +17,7 @@ echo '
 echo '
 
 <div id="tabs">
+<h2>Rearrangements Dataset (Paired)</h2>
   <div id="fragment-1">
     <div>
 Download:
@@ -24,6 +25,8 @@ Download:
 </div>
 <div id="rearr-table"></div>
   </div>
+  <br><br>
+  <h2>Genome Regions Dataset (Single)</h2>
   <div id="fragment-2">
     <div>
 Download:
@@ -37,6 +40,7 @@ Download:
 
 function DownloadFormatter() { return { "formatter": function(cell, formatterParams) { return (cell.getValue() != "_") ? "<a href=\'" + cell.getValue() + "\' target=\'blank\'>Download</a>" : "—"; } } }
 function ExploreFormatter() { return { "formatter": function(cell, formatterParams) { return (cell.getValue() != "_") ? "<a href=\'" + cell.getValue() + "\' target=\'blank\'>Explore</a>" : "—"; } } }
+function ExploreWGFormatter() { return { "formatter": function(cell, formatterParams) { return (cell.getValue() != "_") ? "<a href=\'http://alena-spn.cytogen.ru:8230" + cell.getValue().slice(8) + "\' target=\'blank\'>Explore</a>" : "—"; } } }
 function CoordFormatter() { return { "width": 150, "hozAlign": "right", "formatter": function(cell, formatterParams) { return (!isNaN(parseInt(cell.getValue()))) ? parseInt(cell.getValue()).toLocaleString("en") : "—"; } } }
 function IDFormatter() { return { "formatter": function(cell, formatterParams) { return "<span style=\'font-weight:bold;\'>" + cell.getValue() + "</span>"; } } }
 
@@ -96,11 +100,11 @@ var wgtable = new Tabulator("#wg-table", {
 	columns: [
 		{ ...{ "title": "ID", "field": "genome_locus_name" }, ...IDFormatter() },
 		{"title": "Cell Type", "field": "cell_type"},
-		{ ...{ "title": "FTP Folder", "field": "path_to_processed_hic_data" }, ...ExploreFormatter() },
+		{ ...{ "title": "FTP Folder", "field": "path_to_processed_hic_data" }, ...ExploreWGFormatter() },
 		{"title": "Genome Assembly", "field": "genome_assembly"},
 		{"title": "Chrom", "field": "locus_chr"},
-		{ ...{ "title": "Locus Start", "field": "locus_start" }, ...CoordFormatter() },
-		{ ...{ "title": "Locus End", "field": "locus_end" }, ...CoordFormatter() }
+		{ ...{ "title": "Prediction Start", "field": "locus_start" }, ...CoordFormatter() },
+		{ ...{ "title": "Prediction End", "field": "locus_end" }, ...CoordFormatter() }
 	],
 });
 

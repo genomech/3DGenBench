@@ -211,7 +211,7 @@ elseif ($DataType == 's') {
 	$Height = 600;
 
 	$GenomicCoordinatesTilesetUID = 'NyITQvZsS_mOFNlz5C2LJg';
-	$GenomicCoordinatesWidth = 100;
+	$GenomicCoordinatesWidth = 40;
 	
 	echo '
 	<!DOCTYPE html>
