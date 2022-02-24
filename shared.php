@@ -39,8 +39,8 @@ function GetMetricsPage() {  return $GLOBALS['bmMetricsPage']; }
 // Error/Success Message
 
 function Message($Message, $IsError) {
-	if ($IsError) { return '<font color="red">'.$Message.'</font>'; }
-	else { return '<font color="green">'.$Message.'</font>'; }
+	if ($IsError) { return '<p style="font-family: Roboto,sans-serif; color: red;">'.$Message.'</p>'; }
+	else { return '<p style="font-family: Roboto,sans-serif; color: green;">'.$Message.'</p>'; }
 }
 
 // Data load func
