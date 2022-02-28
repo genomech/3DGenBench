@@ -119,7 +119,7 @@ You can use <button disabled>Add test unit</button> button to load example of pr
 Alternatively, example samples can be loaded as shown in the figure below.
 </p>
 
-<figure><img src="/wp-content/uploads/2021/12/example_input-1024x349.png" alt="" class="wp-image-326"></figure>
+<figure><img src="/wp-content/uploads/2022/02/image.png" alt="" class="wp-image-326"></figure>
 
 <p style="color: black;">
 The page allows you to submit predictions for several samples using the <button disabled>Add unit</button> button.
@@ -170,6 +170,10 @@ This gives us fold changes of the TAD separation score for each locus (bin).
 Then, we design the values falling above 3 standard deviations of the distributions of fold changes as ectopic insulation.</li>
 <li>To provide quantitative measurement of ectopic insulatory score changes, we use measures of the overlap between ectopic insulation points identified using experimental and predicted maps (recall, precision, area under precision-recall curve).</li>
 </ul>
-Two additional metrics are used for comparison of predicted and experimental hi-c contacts in te case of Genome regions dataset (single):
+
+<p style="color: black;">Two additional metrics are used for comparison of predicted and experimental hi-c contacts in te case of Genome regions dataset (single):</p>
+
+<ul style="color: black;">
 <li>Pearson's correlation between experimental and predicted decay of contact frequency with genomic distance P(s).</li>
-<li>Pearson's correlation between experimental and predicted compartment strength computetd as in <a href="https://doi.org/10.1038/s41586-019-1275-3">Martin Falk et al. (2019)</a>.
+<li>Pearson's correlation between experimental and predicted compartment strength computetd as in <a href="https://doi.org/10.1038/s41586-019-1275-3">Martin Falk et al. (2019)</a>.</li>
+</ul>
