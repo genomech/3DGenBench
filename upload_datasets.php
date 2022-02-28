@@ -120,7 +120,6 @@ echo '
 	<input type="hidden" name="submission_secret" value="'.$Secret.'">
 	
 	<h3>General Submission Info</h3>
-	
 	<div>
 		<div class="default_cont">
 			<label for="submission_user">Username:</label>
@@ -140,11 +139,12 @@ echo '
 		</div>
 		
 		<div class="default_cont">
-			<input type="submit" value="Submit" onclick="SubmitOnClick()"><iframe name="formresponse" id="formresponse" height="75" width="400"></iframe>
+			<input type="submit" value="Submit" onclick="SubmitOnClick()">
 		</div>
 	</div>
-	
-	<h3>Datasets</h3>
+	<iframe name="formresponse" id="formresponse" height="50" width="100%"></iframe>
+	<br>
+	<h3>Datasets &nbsp; &nbsp; &nbsp;<button type="button" class="button btn-default color2" onclick="window.open(\'index.php/tutorial#uploading\', \'_blank\');">Datasets Upload Howto</button> </h3>
 </form>
 
 <script>addSampleBlock();</script>

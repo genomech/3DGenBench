@@ -6,6 +6,8 @@ require_once(__DIR__.'/shared.php');
 $UnitID = htmlspecialchars($_GET['id']);
 
 // GET DATA FROM DB
+
+
 $DBPairedData = DBSelect('SELECT * FROM bm_metrics WHERE ID="'.$UnitID.'";');
 $DBSingleData = DBSelect('SELECT * FROM bm_metrics_wg WHERE ID="'.$UnitID.'";');
 
@@ -18,8 +20,19 @@ while ($Row = $DBSingleData->fetch()) { $Row['Metadata.Type'] = 's'; array_push(
 $RecordExists = count($TableArray);
 if ($RecordExists) $RecordStatus = $TableArray[0]['Status']; else $RecordStatus = -1;
 if (count($TableArray) > 1) die(Message('Database error: "'.$UnitID.'" is duplicated', true));
-
+// print_r($TableArray);
 $DataType = $TableArray[0]['Metadata.Type'];
+
+if ($DataType == 'p') { 
+	$DataArray = TsvToArray(GetRearrTable());
+	foreach ($DataArray as $DataRow) { if ($DataRow['rearrangement_ID'] == $TableArray[0]['Metadata.SampleName']) { $LocusAssembly = $DataRow['genome_assembly']; $LocusChr = $DataRow['chr']; $LocusStart = $DataRow['start_prediction']; $LocusEnd = $DataRow['end_prediction']; } }
+}
+if ($DataType == 's') {
+	$DataArray = TsvToArray(GetWGTable());
+	foreach ($DataArray as $DataRow) { if ($DataRow['genome_locus_name'] == $TableArray[0]['Metadata.SampleName']) { $LocusAssembly = $DataRow['genome_assembly']; $LocusChr = $DataRow['locus_chr']; $LocusStart = $DataRow['locus_start']; $LocusEnd = $DataRow['locus_end']; } }
+}
+
+// print_r($DataArray);
 
 // LOAD metrics_list.php IF THERE ARE NO RESULTS
 if ((!$RecordExists) or ($RecordStatus != 0) or (!in_array($DataType, array('p', 's')))) { include(__DIR__.'/metrics_list.php'); }
@@ -135,6 +148,7 @@ else {
 		<h2>Sample Data</h2>
 		<table>
 		<tr><td><b>Sample Name:</b></td><td>'.$Record['Metadata.SampleName'].'</td></tr>
+		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
 		</table>
 		</div>
 		
@@ -199,6 +213,7 @@ else {
 		<h2>Sample Data</h2>
 		<table>
 		<tr><td><b>Sample Name:</b></td><td>'.$Record['Metadata.SampleName'].'</td></tr>
+		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
 		</table>
 		</div>
 		
