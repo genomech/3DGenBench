@@ -100,7 +100,7 @@ def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, BinSize):
 	Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
 	Pixels = Pixels[["bin1_id", "bin2_id", "count"]]
 	# check that all values are more than 1 and cooler won't delete it in new cool file
-	assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+	assert len(Pixels[Pixels["count"] > 1]) == len(Pixels), f""
 	cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):

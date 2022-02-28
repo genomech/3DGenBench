@@ -23,7 +23,7 @@ There are four steps required to obtain 3DGenBench scores:
 <h2><a name="Explore_hic_dataset"><strong>Step 1.</strong> Exploring the Hi-C dataset</a></h2>
 
 <p style="color: black;">
-List of datasets of containing capture Hi-C and complementary epigenetic data, such as CTCF ChIP-seq, for wild-type and mutated samples (<i>Mus musculus</i>, <i>Homo sapiens</i> cell lines) can be found under <button disabled><b>DATASETS</b></button> button at the main page.
+There are two main datasets for prediction. Rearrangements dataset (paired) contains capture Hi-C and complementary epigenetic data, such as CTCF ChIP-seq, for wild-type and mutated samples (<i>Mus musculus</i>, <i>Homo sapiens</i> cell lines). Genome regions dataset (single) contains loci for prediction larger than 10 MB without mutations. These datasets can be found under <button disabled><b>DATASETS</b></button> button at the main page.
 </p>
 
 <p style="color: black;">
@@ -114,12 +114,12 @@ The uploaded files will appear in drop-down list at the next (submission) step.
 <h2><a name="compute_metrics"><strong>Step 4.</strong> Provide samples metadata and compute metrics</a></h2>
 
 <p style="color: black;">
-Once the data is uploaded, click the <button disabled>COMPUTE METRICS</button> button at home menu and fill all the fields related to the predicted sample.
+Once the data is uploaded, click the <button disabled>COMPUTE METRICS</button> button at home menu, chose the type of prediction (single or paired) and fill all the fields related to the predicted sample.
 You can use <button disabled>Add test unit</button> button to load example of predicted contacts file.
 Alternatively, example samples can be loaded as shown in the figure below.
 </p>
 
-<figure><img src="/wp-content/uploads/2021/12/example_input-1024x349.png" alt="" class="wp-image-326"></figure>
+<figure><img src="/wp-content/uploads/2022/02/image.png" alt="" class="wp-image-326"></figure>
 
 <p style="color: black;">
 The page allows you to submit predictions for several samples using the <button disabled>Add unit</button> button.
@@ -169,4 +169,11 @@ For calculating ectopic insulation score, we divide the TAD-separation score (co
 This gives us fold changes of the TAD separation score for each locus (bin).
 Then, we design the values falling above 3 standard deviations of the distributions of fold changes as ectopic insulation.</li>
 <li>To provide quantitative measurement of ectopic insulatory score changes, we use measures of the overlap between ectopic insulation points identified using experimental and predicted maps (recall, precision, area under precision-recall curve).</li>
+</ul>
+
+<p style="color: black;">Two additional metrics are used for comparison of predicted and experimental hi-c contacts in te case of Genome regions dataset (single):</p>
+
+<ul style="color: black;">
+<li>Pearson's correlation between experimental and predicted decay of contact frequency with genomic distance P(s).</li>
+<li>Pearson's correlation between experimental and predicted compartment strength computetd as in <a href="https://doi.org/10.1038/s41586-019-1275-3">Martin Falk et al. (2019)</a>.</li>
 </ul>
