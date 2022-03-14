@@ -486,7 +486,7 @@ def Main():
         raise ValueError(f"Unknown Sample Name: '{Namespace.sample}'")
 
     FileNamesInput = {
-        "Exp": os.path.join(SampleData["path_to_processed_hic_data"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
+        "Exp": os.path.join(SampleData["path_to_processed_hic_data_AlenaServer"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
         "Pred": Namespace.prediction,
     }
 
