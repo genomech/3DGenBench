@@ -114,7 +114,9 @@ def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, PredictionStart, Predic
     Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
     Pixels = Pixels[["bin1_id", "bin2_id", "count"]]
     # check that all values are more than 1 and cooler won't delete it in new cool file
-    assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+    if len(Pixels) - len(Pixels[Pixels["count"] > 1]) >=100:
+        logging.warning(f"more than 100 contacts in cool file {OutputCoolFN}", "are equal to zero after normalization")
+        assert len(Pixels) - len(Pixels[Pixels["count"] > 1]) >=100
     cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
 
@@ -241,24 +243,27 @@ def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
         SimpleSubprocess(Name = "HiGlassIngest", Command = f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename \"{os.path.join('/tmp', 'bm_temp.cool')}\" --filetype cooler --datatype matrix --uid \"{ID}\" --project-name \"3DGenBench\" --name \"{ID}\" --coordSystem \"{ID}-CoordSystem\"")
         SimpleSubprocess(Name = "Copy2MCoolDir", Command = f"cp \"{TempFile}\" \"{OutputMcool}\"")
 
-def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp):
+def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp, testing=False):
     for Line in [f"Output Bedgraph: {OutputBedgraph}"]: logging.info(Line)
     with tempfile.TemporaryDirectory() as TempDir:
         TempFile = os.path.join(TempDir, "temp.bedgraph")
-        InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
-        # InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
+        if not testing:
+            InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
+        else:
+            InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
         #TODO check that this script is working for HiGlass
-        SimpleSubprocess(Name="Copy2DockerTmp",
-                    Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
-        SimpleSubprocess(Name="ChromSizes",
-                    Command=f"grep -P '{Chrom}\\t' ./chrom.sizes/{Assembly}.chrom.sizes > {os.path.join(DockerTmp, 'chrom.size')}")
-        SimpleSubprocess(Name="Bedgraph2BigWig",
-                    Command=f"bedGraphToBigWig \"{TempFile}\" \"{os.path.join(DockerTmp, 'chrom.size')}\" \"{os.path.join(DockerTmp, 'bm_temp.bigwig')}\"")
-        SimpleSubprocess(Name="HiGlassIngestCoords",
-                        Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/chrom.size --filetype chromsizes-tsv --datatype chromsizes --coordSystem \"{ID}-CoordSystem\" --uid \"{ID}-Coord\" --project-name \"3DGenBench\" --name \"{ID}-Coord\"")
-        SimpleSubprocess(Name="HiGlassIngest",
-                        Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.bigwig --filetype bigwig --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem \"{ID}-CoordSystem\"")
-        SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
+        if not testing:
+            SimpleSubprocess(Name="Copy2DockerTmp",
+                        Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")
+            SimpleSubprocess(Name="ChromSizes",
+                        Command=f"grep -P '{Chrom}\\t' ./chrom.sizes/{Assembly}.chrom.sizes > {os.path.join(DockerTmp, 'chrom.size')}")
+            SimpleSubprocess(Name="Bedgraph2BigWig",
+                        Command=f"bedGraphToBigWig \"{TempFile}\" \"{os.path.join(DockerTmp, 'chrom.size')}\" \"{os.path.join(DockerTmp, 'bm_temp.bigwig')}\"")
+            SimpleSubprocess(Name="HiGlassIngestCoords",
+                            Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/chrom.size --filetype chromsizes-tsv --datatype chromsizes --coordSystem \"{ID}-CoordSystem\" --uid \"{ID}-Coord\" --project-name \"3DGenBench\" --name \"{ID}-Coord\"")
+            SimpleSubprocess(Name="HiGlassIngest",
+                            Command=f"docker exec higlass-container python higlass-server/manage.py ingest_tileset --filename /tmp/bm_temp.bigwig --filetype bigwig --datatype vector --uid \"{ID}-InsHitile\" --project-name \"3DGenBench\" --name \"{ID}--InsHitile\" --coordSystem \"{ID}-CoordSystem\"")
+            SimpleSubprocess(Name="Copy2MCoolDir", Command=f"cp \"{TempFile}\" \"{OutputBedgraph}\"")
 
 
 # ------======| METRICS |======------
@@ -351,6 +356,8 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
                      BinSize, Assembly, SqlDB, testing=False):
     if testing:
         CoolDirID = os.path.join(CoolDir, UnitID, SampleName)
+        if not os.path.exists(os.path.join(CoolDir, UnitID)):
+            os.mkdir(os.path.join(CoolDir, UnitID))
     else:
         CoolDirID = os.path.join(CoolDir, UnitID)
     if not os.path.exists(CoolDirID):
