@@ -1,7 +1,7 @@
 <?php
 
 // SHARED
-require_once(__DIR__.'/shared.php');
+require_once('shared.php');
 
 $AuthorID = htmlspecialchars($_GET['bm_author']);
 
@@ -36,6 +36,8 @@ while ($Row = $DBSingleMetrics->fetch()) {
 
 // HTML + JS
 
+echo GetHeader('Submissions List');
+
 // Tabulator load (http://tabulator.info/)
 echo '
 <link href="https://unpkg.com/tabulator-tables/dist/css/tabulator.min.css" rel="stylesheet">
@@ -45,8 +47,9 @@ echo '
 
 // Make Table
 echo '
+<div style="padding: 30px 0 0 0;">
 <div id="metrics-table"></div>
-
+</div>
 <script>
 var tabledata = '.json_encode($TableArray).';
 var table = new Tabulator("#metrics-table", {
@@ -62,7 +65,7 @@ var table = new Tabulator("#metrics-table", {
 	columns: [
 		{"title": "ID", "field": "ID", formatter:function(cell, formatterParams) {
 			var status = cell.getRow().getCell("Status").getValue();
-			return (status == 0) ? "<a href=\'/index.php/'.GetMetricsPage().'?id=" + cell.getValue() + "\'>" + cell.getValue() + "</a>" : cell.getValue(); 
+			return (status == 0) ? "<a href=\''.GetMetricsPage().'?id=" + cell.getValue() + "\'>" + cell.getValue() + "</a>" : cell.getValue(); 
 			} 
 		},
 		{"title": "Status", "field": "Status", formatter: "traffic", formatterParams: { min: 0, max: 2, color: ["green", "orange", "red"] } },
@@ -79,13 +82,13 @@ var table = new Tabulator("#metrics-table", {
 
 // Add Legend
 echo '
-<div>
+<div style="padding: 10px 0 0 0;">
 <span style="background-color: red; display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span> Failed 
 <span style="background-color: orange; display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span> Processing 
 <span style="background-color: green; display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span> Success 
 </div>
 ';
-
+echo GetFooter();
 ?> 
  
  

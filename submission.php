@@ -1,6 +1,6 @@
 <?php
 
-require(__DIR__.'/shared.php');
+require('shared.php');
 
 $Author = $_POST['submission_user'];
 $Model = $_POST['submission_model'];
