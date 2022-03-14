@@ -106,10 +106,13 @@ def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, BinSize):
 def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
 	for Line in [f"Input COOL: {InputCoolFN}", f"Output COOL: {OutputCoolFN}", f"Chrom: {Chrom}"]: logging.info(Line)
 	with tempfile.TemporaryDirectory() as TempDir:
-		TempFile = os.path.join(TempDir, "input.cool")
-		response = requests.get(InputCoolFN, stream=True)
-		with open(TempFile, "wb") as handle: [handle.write(data) for data in response.iter_content()]
-		Data = cooler.Cooler(TempFile)
+		if InputCoolFN[:4] == "http":
+			TempFile = os.path.join(TempDir, "input.cool")
+			response = requests.get(InputCoolFN, stream=True)
+			with open(TempFile, "wb") as handle: [handle.write(data) for data in response.iter_content()]
+			Data = cooler.Cooler(TempFile)
+		else:
+			Data = cooler.Cooler(InputCoolFN)
 		Bins = Data.bins().fetch(Chrom)
 		BinDict = {item: index for index, item in enumerate(Bins.index.to_list())}
 		Bins = Bins.reset_index()
@@ -387,12 +390,12 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
 	
 	# METRICS
-	
+
 	# Pearson
 	with Timer(f"Pearson") as _:
 		Data["Metrics.Pearson.WT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Wt", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Wt", "Pred")], Chrom)["balanced"])
 		Data["Metrics.Pearson.MUT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Mut", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Mut", "Pred")], Chrom)["balanced"])
-		
+
 	# SCC
 	with Timer(f"SCC") as _:
 		Data["Metrics.SCC.WT"] = SCC(SampleTypeAligned[("Wt", "Exp")], SampleTypeAligned[("Wt", "Pred")], MaxDist = C_SCC_MAXDIST, h = C_SCC_H)
@@ -401,11 +404,11 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 	# Insulation
 	with Timer(f"Insulation Dataset") as _:
 		InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, capture_start=CaptureStart, capture_end=CaptureEnd)
-	
+
 	with Timer(f"Insulation Score Pearson") as _:
 		Data["Metrics.InsulationScorePearson.WT"] = PearsonCorr(InsDataset["sum_balanced_Wt-Exp"], InsDataset["sum_balanced_Wt-Pred"])
 		Data["Metrics.InsulationScorePearson.MUT"] = PearsonCorr(InsDataset["sum_balanced_Mut-Exp"], InsDataset["sum_balanced_Mut-Pred"])
-	
+
 	with Timer(f"Insulation Score (Mut/Wt) Pearson") as _:
 		Data["Metrics.InsulationScoreMutVsWtPearson"] = PearsonCorr(InsDataset["sum_balanced_Mut/Wt-Exp"], InsDataset["sum_balanced_Mut/Wt-Pred"])
 
@@ -429,7 +432,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		Data["Metrics.EctopicInsulation.Precision"] = EctopicInsulationPR["Precision"]
 		Data["Metrics.EctopicInsulation.Recall"] = EctopicInsulationPR["Recall"]
 		Data["Metrics.EctopicInsulation.Thresholds"] = EctopicInsulationPR["Thresholds"]
-		
+
 		# DRAFT
 		VisualizePR(PRData = EctopicInsulationPR, Name = "Ectopic Insulation", FN = os.path.join(CoolDirID, f".{UnitID}-EctopicInsulationPRCurve.png"))
 
@@ -437,48 +440,48 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 	with Timer(f"Ectopic Array") as _:
 		EctopicArrayExp = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Exp")], SampleTypeAligned[("Mut", "Exp")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=False)
 		EctopicArrayPred = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Pred")], SampleTypeAligned[("Mut", "Pred")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=True)
-	
+
 	with Timer(f"Ectopic Array Graph") as _:
 		Data["Metrics.EctopicArrayGraph.EXP"] = EctopicGraphArray(EctopicArrayExp)
 		Data["Metrics.EctopicArrayGraph.PRED"] = EctopicGraphArray(EctopicArrayPred)
-		
+
 		# DRAFT
 		for Key in ["Metrics.EctopicArrayGraph.EXP", "Metrics.EctopicArrayGraph.PRED"]: VisualizeEctopicArray(EctopicArray = Data[Key], FN = os.path.join(CoolDirID, f".{UnitID}-{Key}EctopicArray.png"))
-	
+
 	with Timer(f"Ectopic Interactions PR Curve") as _:
 		EctopicInteractions = PRCurve(
 			YTrue = [(i == i) and ((i > 2) or (i < -2)) for i in EctopicArrayExp.flatten()],
 			Probas = EctopicArrayPred.flatten()
 			)
-		
+
 		Data["Metrics.EctopicInteractions.AUC"] = EctopicInteractions["AUC"]
 		Data["Metrics.EctopicInteractions.Precision"] = EctopicInteractions["Precision"]
 		Data["Metrics.EctopicInteractions.Recall"] = EctopicInteractions["Recall"]
 		Data["Metrics.EctopicInteractions.Thresholds"] = EctopicInteractions["Thresholds"]
-		
+
 		# DRAFT
 		VisualizePR(PRData = EctopicInteractions, Name = "Ectopic Interactions", FN = os.path.join(CoolDirID, f".{UnitID}-EctopicInteractionsPRCurve.png"))
-	
+
 	# Random
 	with Timer(f"Random Interactions") as _:
 		RandomInteractions = RandomEctopicIntersections(EctopicArrayExp, EctopicArrayPred)
-		
+
 		Data["Metrics.RandomInteractions.Random"] = RandomInteractions["Random"]
 		Data["Metrics.RandomInteractions.Real"] = RandomInteractions["Real"]
-		
+
 		# DRAFT
 		VisualizeRandom(RandomData = RandomInteractions, FN = os.path.join(CoolDirID, f".{UnitID}-RealVsRandomEctopicInteractions.png"))
-	
+
 	with Timer(f"Save MCOOLs") as _:
 		for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, DockerTmp = "/home/fairwind/tmp")
-	
+
 	# SAVE
 	with Timer(f"SQL") as _:
 		try:
 			sqlite_connection = sqlite3.connect(SqlDB)
 			cursor = sqlite_connection.cursor()
 			logging.info("DB Connected")
-			
+
 			AllMetricsSQL = ', '.join([f"'{key}'='{value}'" for key, value in Data.items()])
 			sqlite_select_query = f"update bm_metrics set Status='0', {AllMetricsSQL} where ID='{UnitID}';"
 			cursor.execute(sqlite_select_query)
@@ -512,9 +515,9 @@ def Main():
 		raise ValueError(f"Unknown Sample Name: '{Namespace.sample}'")
 	
 	FileNamesInput = {
-		("Wt", "Exp"): os.path.join(SampleData["capture_WT_data"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
+		("Wt", "Exp"): os.path.join(SampleData["capture_WT_data_AlenaServer"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
 		("Wt", "Pred"): Namespace.wildtype,
-		("Mut", "Exp"): os.path.join(SampleData["capture_Mut_data"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
+		("Mut", "Exp"): os.path.join(SampleData["capture_Mut_data_AlenaServer"], f"inter_{int(Namespace.resolution / 1000)}kb.cool"),
 		("Mut", "Pred"): Namespace.mutation
 		}
 	
