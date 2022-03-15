@@ -1,7 +1,5 @@
 <?php
 
-echo (basename(__DIR__) == '3DGenBench_sandbox' ? '<font color="red">TEST BRANCH</font><br>' : ''); // KOSTYL!
-
 // CONST
 
 $GLOBALS['bmRearrTable'] = __DIR__.'/rearrangements_table.tsv';
@@ -15,13 +13,88 @@ $GLOBALS['bmUploads'] = __DIR__.'/upload';
 $GLOBALS['bmMetrics'] = __DIR__.'/benchmark_db.sqlite3';
 $GLOBALS['bmLogs'] = __DIR__.'/logs';
 $GLOBALS['bmCool'] = __DIR__.'/cool';
-$GLOBALS['bmSubmission'] = '/'.(basename(__DIR__) == '3DGenBench_sandbox' ? 'datasets_sandbox' : 'datasets').'/submission.php';  // KOSTYL!
-$GLOBALS['bmHiGlass'] = '../../../'.(basename(__DIR__) == '3DGenBench_sandbox' ? 'datasets_sandbox' : 'datasets').'/higlass.php';  // KOSTYL!
-$GLOBALS['bmMetricsPage'] = (basename(__DIR__) == '3DGenBench_sandbox' ? '__test__/submissions_list_test' : 'metrics');  // KOSTYL!
+$GLOBALS['bmSubmission'] = 'submission.php';
+$GLOBALS['bmHiGlass'] = 'higlass.php';
+$GLOBALS['bmMetricsPage'] = 'metrics_view.php';
 
 // GET CONST FUNC
+function GetHeader($Header) { return '
+<html>
+<head>
+<link rel="stylesheet" href="https://purecss.io/css/main.css">
+<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+</head>
+<body>
+<div id="cookieconsent"></div>
+<script>window.cookieconsent.initialise({
+    container: document.getElementById("cookieconsent"),
+    palette:{
+     popup: {background: "#42b8dd"},
+     button: {background: "#e0e0e0"},
+    },
+    revokable: true,
+    onStatusChange: function(status) {
+     console.log(this.hasConsented() ?
+      \'enable cookies\' : \'disable cookies\');
+    },
+    type:"opt-out",
+    "position": "bottom-right",
+    "theme": "classic",
+    "domain": "http://alena-spn.cytogen.ru/",
+    "content": {
+      "header": \'Cookies used on the website!\',
+      "message": \'This website uses cookies to improve your experience.\',
+      "dismiss": \'Got it!\',
+      "allow": \'Allow cookies\',
+      "deny": \'Decline\',
+      "link": \'Learn more\',
+      "href": \'https://www.cookiesandyou.com\',
+      "close": \'&#x274c;\',
+      "policy": \'Cookie Policy\',
+      "target": \'_blank\',
+      }
+   });</script>
+<div id="layout" style="width: 100%; height: 100%;">
+<div id="menu"><div class="pure-menu"><a class="pure-menu-heading" href="index.php">About</a><ul class="pure-menu-list"><li class=""><a class="pure-menu-link" href="tutorial.php">Tutorial</a></li><li class=""><a class="pure-menu-link" href="datasets.php">Datasets</a></li><li class=""><a class="pure-menu-link" href="submission_form.php">Compute Metrics</a></li><li class=""><a class="pure-menu-link" href="metrics.php">Submissions List</a></li></ul></div></div>
+<div><div id="main">'.((basename(__DIR__) == '3DGenBench_sandbox' ? '<div><aside style="background: rgb(202, 60, 60);"><p style="text-align: center;"><b>TEST BRANCH</b></p></aside></div>' : '')).'<div class="header"><h1><span style="display: inline-block; color: rgb(223, 117, 20); font-weight: bold; font-size:118%;">3D</span>GenBench</h1><h2>'.$Header.'</h2></div><div style="max-width: 1200px; min-height: 550px;" class="content">
+<style scoped="">
+        .button-success,
+        .button-error,
+        .button-warning,
+        .button-secondary {
+            color: white;
+            border-radius: 4px;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+        }
 
-function GetWPUser() { $User = esc_html(wp_get_current_user()->user_login); return ($User == "") ? 'guest' : $User; }
+        .button-success {
+            background: rgb(28, 184, 65);
+            /* this is a green */
+        }
+
+        .button-error {
+            background: rgb(202, 60, 60);
+            /* this is a maroon */
+        }
+
+        .button-warning {
+            background: rgb(223, 117, 20);
+            /* this is an orange */
+        }
+
+        .button-secondary {
+            background: rgb(66, 184, 221);
+            /* this is a light blue */
+        }
+    </style>
+    
+'; }
+
+function GetFooter() { return '</div><div class="footer"><div class="legal pure-g"><div class="pure-u-1 u-sm-1-2"><p class="legal-license">This site is built with ❤️ using Pure v<!-- -->2.0.6<br>Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p></div><div class="pure-u-1 u-sm-1-2"><ul class="legal-links"><li><a href="https://github.com/regnveig/3DGenBench">GitHub Project</a></li></ul><p class="legal-copyright">2022 - Present INC COST</p></div></div></div></div></div></div></body></html>'; }
+function GetWPUser() { return 'guest'; }
 function GetCondaActivate() { return $GLOBALS['bmCondaEnv'].'/bin/activate base'; }
 function GetBenchmarkPipeline() { return $GLOBALS['bmPipelineScript']; }
 function GetBenchmarkPipelineWG() { return $GLOBALS['bmPipelineScriptWG']; }
@@ -39,8 +112,8 @@ function GetMetricsPage() {  return $GLOBALS['bmMetricsPage']; }
 // Error/Success Message
 
 function Message($Message, $IsError) {
-	if ($IsError) { return '<p style="font-family: Roboto,sans-serif; color: red;">'.$Message.'</p>'; }
-	else { return '<p style="font-family: Roboto,sans-serif; color: green;">'.$Message.'</p>'; }
+	if ($IsError) { return '<html><head><link rel="stylesheet" href="https://purecss.io/css/main.css"></head><body><aside style="background: rgb(202, 60, 60);"><p>'.$Message.'</p></aside></body><html>'; }
+	else { return '<html><head><link rel="stylesheet" href="https://purecss.io/css/main.css"></head><body><aside style="background: rgb(28, 184, 65);"><p>'.$Message.'</p></aside></body><html>'; }
 }
 
 // Data load func

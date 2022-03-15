@@ -1,12 +1,11 @@
 <?php
 
-require_once(__DIR__.'/shared.php');
+require_once('shared.php');
 
 // Get ID
 $UnitID = htmlspecialchars($_GET['id']);
 
 // GET DATA FROM DB
-
 
 $DBPairedData = DBSelect('SELECT * FROM bm_metrics WHERE ID="'.$UnitID.'";');
 $DBSingleData = DBSelect('SELECT * FROM bm_metrics_wg WHERE ID="'.$UnitID.'";');
@@ -35,10 +34,12 @@ if ($DataType == 's') {
 // print_r($DataArray);
 
 // LOAD metrics_list.php IF THERE ARE NO RESULTS
-if ((!$RecordExists) or ($RecordStatus != 0) or (!in_array($DataType, array('p', 's')))) { include(__DIR__.'/metrics_list.php'); }
+if ((!$RecordExists) or ($RecordStatus != 0) or (!in_array($DataType, array('p', 's')))) { include(__DIR__.'/metrics.php'); }
 
 // RENDER RESULTS
 else {
+	
+	echo GetHeader('ID: '.$UnitID);
 	
 	$Record = $TableArray[0];
 	
@@ -62,8 +63,8 @@ else {
 				data.addColumn("number", "Real");
 				data.addRows('.$NewRandom.');
 				var options = {
-					width: 1000,
-					height: 500,
+					width: 550,
+					height: 550,
 					title: "'.$Caption.'",
 					histogram: { minNumBuckets: '.$Buckets.', maxNumBuckets: '.$Buckets.' },
 					vAxis: { title: "Count" },
@@ -102,8 +103,8 @@ else {
 				data.addColumn("number", "Precision");
 				data.addRows('.json_encode($DataArray).');
 				var options = {
-					width: 500,
-					height: 500,
+					width: 550,
+					height: 550,
 					title: "'.$Caption.'\\nAUC: '.number_format($AUC, 7, '.', '').'",
 					vAxis: { title: "Precision", minValue: 0, maxValue: 1 },
 					hAxis: { title: "Recall", minValue: 0, maxValue: 1 },
@@ -112,7 +113,7 @@ else {
 					pointSize: 0
 					};
 				var chart = new google.visualization.ScatterChart(document.getElementById("obj'.$Name.'"));
-				chart.draw(data, google.charts.Scatter.convertOptions(options));
+				chart.draw(data, google.charts.Scatter.convertOptions(options));med.json
 				}
 			
 			google.charts.setOnLoadCallback(draw'.$Name.');
@@ -131,40 +132,34 @@ else {
 		google.charts.load("current", { packages: ["corechart", "scatter"]});
 		</script>
 		
-		<div style="display: inline-block; width: 50%;">
-		
 		<h2>Unit Data</h2>
 		
-		<table>
-		<tr><td><b>Author ID:</b></td><td>'.$Record['Metadata.Author'].'</td></tr>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Author ID:</b></td><td style="width: 800px;">'.$Record['Metadata.Author'].'</td></tr>
 		<tr><td><b>Model Name:</b></td><td>'.$Record['Metadata.ModelName'].'</td></tr>
 		<tr><td><b>Resolution:</b></td><td>'.strval(intval($Record['Metadata.Resolution'] / 1000)).' kb</td></tr>
 		<tr><td><b>Submission Date:</b></td><td>'.date('d M Y, H:i:s', strtotime($Record['Metadata.SubmissionDate'])).'</td></tr>
 		</table>
 		
-		</div>
-		
-		<div style="display: inline-block; width: 50%;">
 		<h2>Sample Data</h2>
-		<table>
-		<tr><td><b>Sample Name:</b></td><td>'.$Record['Metadata.SampleName'].'</td></tr>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Sample Name:</b></td><td style="width: 800px;">'.$Record['Metadata.SampleName'].'</td></tr>
 		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
 		</table>
-		</div>
 		
 		<h2>Metrics</h2>
 		
-		<table>
-		<tr><th>&nbsp;</th><th>WT</th><th>Mut</th></tr>
-		<tr><td><b>Pearson:</b></td><td>'.$Record['Metrics.Pearson.WT'].'</td><td>'.$Record['Metrics.Pearson.MUT'].'</td></tr>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<thead>
+		<tr><th>&nbsp;</th><th>WT</th><th>Mut</th></tr></thead><tbody>
+		<tr><td style="width: 400px;"><b>Pearson:</b></td><td style="width: 400px;">'.$Record['Metrics.Pearson.WT'].'</td><td style="width: 400px;">'.$Record['Metrics.Pearson.MUT'].'</td></tr>
 		<tr><td><b>SCC:</b></td><td>'.$Record['Metrics.SCC.WT'].'</td><td>'.$Record['Metrics.SCC.MUT'].'</td></tr>
 		<tr><td><b>Insulation Score Pearson:</b></td><td>'.$Record['Metrics.InsulationScorePearson.WT'].'</td><td>'.$Record['Metrics.InsulationScorePearson.MUT'].'</td></tr>
+		<tr><td style="width: 400px;"><b>Insulation Score Mut/Wt Pearson:</b></td><td style="width: 800px;" colspan="2">'.$Record['Metrics.InsulationScoreMutVsWtPearson'].'</td></tr></tbody>
 		</table>
+
+		<table class="pure-table pure-table-bordered pure-table-striped">
 		
-		<h2>Metrics</h2>
-		
-		<table>
-		<tr><td><b>Insulation Score Mut/Wt Pearson:</b></td><td>'.$Record['Metrics.InsulationScoreMutVsWtPearson'].'</td></tr>
 		</table>';
 
 		DrawPR(array(
@@ -172,18 +167,12 @@ else {
 			'Precision' => $Record['Metrics.EctopicInteractions.Precision'],
 			'Recall' => $Record['Metrics.EctopicInteractions.Recall']
 			), 'EctopicInteractions', 'Ectopic Interactions');
-		
-		DrawPR(array(
-			'AUC' => $Record['Metrics.EctopicInsulation.AUC'],
-			'Precision' => $Record['Metrics.EctopicInsulation.Precision'],
-			'Recall' => $Record['Metrics.EctopicInsulation.Recall']
-			), 'EctopicInsulationPR', 'Ectopic Insulation PR');
 		DrawRandom(array(
 			'Random' => $Record['Metrics.RandomInteractions.Random'],
 			'Real' => $Record['Metrics.RandomInteractions.Real']
 			), 'RandomInteractions', 'Random Interactions'); 
 		
-		echo '<iframe width="1200" height="600" src="'.GetHiGlass().'?id='.$UnitID.'&type=p"></iframe>';
+		echo '<h2>HiGlass View</h2><iframe width="1200" frameBorder="0" scrolling="no" margin="0" height="600" src="'.GetHiGlass().'?id='.$UnitID.'&type=p"></iframe>';
 	}
 	
 	if ($Record['Metadata.Type'] == 's') {
@@ -196,40 +185,34 @@ else {
 		google.charts.load("current", { packages: ["corechart", "scatter"]});
 		</script>
 		
-		<div style="display: inline-block; width: 50%;">
-		
 		<h2>Unit Data</h2>
 		
-		<table>
-		<tr><td><b>Author ID:</b></td><td>'.$Record['Metadata.Author'].'</td></tr>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Author ID:</b></td><td style="width: 800px;">'.$Record['Metadata.Author'].'</td></tr>
 		<tr><td><b>Model Name:</b></td><td>'.$Record['Metadata.ModelName'].'</td></tr>
 		<tr><td><b>Resolution:</b></td><td>'.strval(intval($Record['Metadata.Resolution'] / 1000)).' kb</td></tr>
 		<tr><td><b>Submission Date:</b></td><td>'.date('d M Y, H:i:s', strtotime($Record['Metadata.SubmissionDate'])).'</td></tr>
 		</table>
 		
-		</div>
-		
-		<div style="display: inline-block; width: 50%;">
 		<h2>Sample Data</h2>
-		<table>
-		<tr><td><b>Sample Name:</b></td><td>'.$Record['Metadata.SampleName'].'</td></tr>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Sample Name:</b></td><td style="width: 800px;">'.$Record['Metadata.SampleName'].'</td></tr>
 		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
 		</table>
-		</div>
 		
 		<h2>Metrics</h2>
 		
-		<table>
-		<tr><td><b>Pearson:</b></td><td>'.$MetricsData['Metrics.Pearson'].'</td></tr>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Pearson:</b></td><td style="width: 800px;">'.$MetricsData['Metrics.Pearson'].'</td></tr>
 		<tr><td><b>SCC:</b></td><td>'.$MetricsData['Metrics.SCC'].'</td></tr>
 		<tr><td><b>Insulation Score Pearson:</b></td><td>'.$MetricsData['Metrics.InsulationScorePearson'].'</td></tr>
 		<tr><td><b>Compartment Strength Pearson:</b></td><td>'.$MetricsData['Metrics.CompartmentStrengthPearson'].'</td></tr>
 		<tr><td><b>Ps Pearson:</b></td><td>'.$MetricsData['Metrics.PsPearson'].'</td></tr>
-		</table>';
+		</table> <h2>HiGlass View</h2>';
 	
-	echo '<iframe width="1200" height="600" src="'.GetHiGlass().'?id='.$UnitID.'&type=s"></iframe>';
+	echo '<iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=s"></iframe>';
 	}
-
+echo GetFooter();
 }
 ?> 
  

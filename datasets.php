@@ -1,7 +1,7 @@
 <?php
 
-require(__DIR__.'/shared.php');
-
+require('shared.php');
+echo GetHeader('Datasets');
 // Get Data
 $DataArray = TsvToArray(GetRearrTable());
 $DataArrayWG = TsvToArray(GetWGTable());
@@ -19,16 +19,15 @@ echo '
 <div id="tabs">
 <h2>Rearrangements Dataset (Paired)</h2>
   <div id="fragment-1">
-    <div>
+    <div style="padding: 0 0 10px 0;">
 Download:
 <a href="#" id="download-csv">CSV</a> | <a href="#" id="download-json">JSON</a> | <a href="#" id="download-xlsx">XLSX</a>
 </div>
 <div id="rearr-table"></div>
   </div>
-  <br><br>
   <h2>Genome Regions Dataset (Single)</h2>
   <div id="fragment-2">
-    <div>
+    <div style="padding: 0 0 10px 0;">
 Download:
 <a href="#" id="download-csv-wg">CSV</a> | <a href="#" id="download-json-wg">JSON</a> | <a href="#" id="download-xlsx-wg">XLSX</a>
 </div>
@@ -117,5 +116,5 @@ document.getElementById("download-json-wg").addEventListener("click", function()
 document.getElementById("download-xlsx-wg").addEventListener("click", function() { wgtable.download("xlsx", "wg_table.xlsx", {sheetName:"My Data"}); });
 </script>
 ';
-
+echo GetFooter();
 ?>

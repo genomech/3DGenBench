@@ -11,14 +11,7 @@ $UploadedFilesList = GetUploadedFiles($User);
 
 $ModelsList = ''; foreach (GetModelsUser() as $Model) $ModelsList .= '<option value="'.htmlspecialchars($Model).'"></option>';
 
-// CSS
-echo '
-<style>
-
-	.default_cont { display: inline-block; padding: 10px; width: 20%; }
-	.button_cont { display: inline-block; padding: 10px; width: 20%; }
-
-</style>';
+echo GetHeader('Compute Metrics');
 
 // JS Func
 echo '
@@ -27,7 +20,7 @@ echo '
 	function addSelect(ts, container, entries_list, tag, label) {
 		var stag = tag + "_" + ts;
 		var div = document.createElement("div");
-		div.setAttribute("class", "default_cont");
+		div.setAttribute("class", "pure-u-1-5");
 		container.appendChild(div);
 		var lbl_select = document.createElement("label");
 		lbl_select.setAttribute("for", stag);
@@ -36,6 +29,7 @@ echo '
 		var obj_select = document.createElement("select");
 		obj_select.setAttribute("name", stag);
 		obj_select.setAttribute("id", stag);
+		obj_select.setAttribute("class", "pure-u-23-24");
 		div.appendChild(obj_select);
 		for (const [key, value] of Object.entries(entries_list)) {
 			var obj_option = document.createElement("option");
@@ -49,11 +43,15 @@ echo '
 	function addDeleteButton(TS, container) {
 		var stag = "block_" + TS;
 		var div = document.createElement("div");
-		div.setAttribute("class", "button_cont");
+		div.setAttribute("class", "pure-u-1-8");
 		container.appendChild(div);
-		var obj_button = document.createElement("a");
-		obj_button.setAttribute("href", "#");
+		var lbl_select = document.createElement("label");
+		lbl_select.setAttribute("for", stag);
+		lbl_select.innerHTML = "&nbsp";
+		div.appendChild(lbl_select);
+		var obj_button = document.createElement("button");
 		obj_button.setAttribute("onclick", "var elem = document.getElementById(\'" + stag + "\'); elem.remove();");
+		obj_button.setAttribute("class", "pure-button pure-u-23-24");
 		obj_button.innerHTML = "Remove";
 		div.appendChild(obj_button);
 		return 0;
@@ -70,6 +68,7 @@ echo '
 		var block_id = "block_" + TS;
 		var obj_block = document.createElement("div");
 		obj_block.setAttribute("id", block_id);
+		obj_block.setAttribute("style", "padding: 0 0 10px 0;");
 		container.appendChild(obj_block);
 		addSelect(TS, obj_block, SamplesList, "sample", "Sample Name");
 		addSelect(TS, obj_block, ResolutionsList, "resolution", "Resolution");
@@ -82,6 +81,7 @@ echo '
 	
 	function SubmitOnClick() {
 		var iframe = document.getElementById("formresponse");
+		iframe.hidden = false;
 		iframe.contentWindow.document.open();
 		iframe.contentWindow.document.write("");
 		iframe.contentWindow.document.close();
@@ -115,46 +115,51 @@ echo '
 // HTML
 
 echo '
-<form id="submission_form" action="'.GetSubmissionScript().'" target="formresponse" method="POST">
+<form id="submission_form" class="pure-form pure-form-stacked" action="'.GetSubmissionScript().'" target="formresponse" method="POST">
 	
 	<input type="hidden" name="submission_secret" value="'.$Secret.'">
-	
-	<h3>General Submission Info</h3>
-	<div>
-		<div class="default_cont">
-			<label for="submission_user">Username:</label>
-			<input type="text" value="'.$User.'" disabled>
-			<input type="hidden" name="submission_user" value="'.$User.'">
+	<input type="hidden" name="submission_user" value="'.$User.'">
+	<h2>General Submission Info</h2>
+	<div class="pure-g">
+
+		<div class="pure-u-1-5">
+			<label for="submission_user1">Username:</label>
+			<input id="submission_user1" class="pure-u-23-24" type="text" value="'.$User.'" disabled>
 		</div>
 		
-		<div class="default_cont">
-			<label for="submission_model">Model Name:</label>
-			<input type="text" name="submission_model" id="models_list" list="models_list">
+		<div class="pure-u-1-5">
+			<label for="models_list">Model Name:</label>
+			<input type="text" class="pure-u-23-24" name="submission_model" id="models_list" list="models_list">
 			<datalist id="models_list">'.$ModelsList.'</datalist>
 		</div>
 		
-		<div class="default_cont">
+		<div class="pure-u-1-5">
 			<label for="data_type">Type:</label>
-			<select name="data_type" id="data_type" onchange="for (elem of document.querySelectorAll(\'[id^=block_]\')) elem.remove(); addSampleBlock();"><option value="p">Paired [WT/MUT]</option><option value="s">Single</option></select>
+			<select name="data_type" class="pure-u-23-24" id="data_type" onchange="for (elem of document.querySelectorAll(\'[id^=block_]\')) elem.remove(); addSampleBlock();"><option value="p">Paired [WT/MUT]</option><option value="s">Single</option></select>
 		</div>
 		
-		<div class="default_cont">
-			<input type="submit" value="Submit" onclick="SubmitOnClick()">
+		<div class="pure-u-1-8">
+		<label for="_">&nbsp;</label>
+			<input type="submit" class="pure-button pure-u-23-24 button-success" value="Submit" onclick="SubmitOnClick()">
+			</div>
+		<div class="pure-u-1-5">
+		<label for="_">&nbsp;</label>
+			<button type="button" class="pure-button pure-u-23-24 button-secondary" onclick="window.open(\'tutorial.php#uploading\', \'blank\');">Datasets Upload Howto</button>
 		</div>
 	</div>
-	<iframe name="formresponse" id="formresponse" height="50" width="100%"></iframe>
-	<br>
-	<h3>Datasets &nbsp; &nbsp; &nbsp;<button type="button" class="button btn-default color2" onclick="window.open(\'index.php/tutorial#uploading\', \'_blank\');">Datasets Upload Howto</button> </h3>
-</form>
-
+	<iframe hidden name="formresponse" class="pure-u-3-5" id="formresponse" frameBorder="0" scrolling="no" margin="0" height="90" width="100%"></iframe>
+	<h2>Datasets</h2>
 <script>addSampleBlock();</script>
-
-<div class="button_cont">
-	<a id="add_sample" href="#" onclick="addSampleBlock();">Add Unit</a>
-</div><br>
-<div class="button_cont">
-	<a id="add_tetsaaa" href="#" onclick="addTest();">Add Test Unit</a>
+</form>
+<div class="pure-u-1-8">
+	<button id="add_sample" class="pure-button pure-u-23-24" onclick="addSampleBlock();">Add Unit</button></div>
+	<div class="pure-u-1-8">
+	<button id="add_tetsaaa" class="pure-button pure-u-23-24" onclick="addTest();">Add Test Unit</button>
 </div>
+
+
 ';
+
+echo GetFooter();
 
 ?> 
