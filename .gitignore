@@ -6,7 +6,7 @@ __pycache__/
 cool/
 logs/
 upload/
-
+sandbox/
 
 # C extensions
 *.so
