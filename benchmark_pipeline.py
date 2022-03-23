@@ -255,7 +255,7 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp):
 
 # ------======| METRICS |======------
 
-def PearsonCorr(SeriesA, SeriesB): return SeriesA.corr(SeriesB, method="pearson")
+def PearsonCorr(SeriesA, SeriesB, method="pearson"): return SeriesA.corr(SeriesB, method=method)
 
 def SCC(CoolA, CoolB, MaxDist, h): return hicrep.genome_scc(CoolA, CoolB, max_dist=MaxDist, h=h)
 
@@ -415,8 +415,8 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
 	# Pearson
 	with Timer(f"Pearson") as _:
-		Data["Metrics.Pearson.WT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Wt", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Wt", "Pred")], Chrom)["balanced"])
-		Data["Metrics.Pearson.MUT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Mut", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Mut", "Pred")], Chrom)["balanced"])
+		Data["Metrics.Pearson.WT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Wt", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Wt", "Pred")], Chrom)["balanced"], method='spearman')
+		Data["Metrics.Pearson.MUT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Mut", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Mut", "Pred")], Chrom)["balanced"], method='spearman')
 
 	# SCC
 	with Timer(f"SCC") as _:
