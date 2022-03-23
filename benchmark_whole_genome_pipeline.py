@@ -268,7 +268,7 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp, tes
 
 # ------======| METRICS |======------
 
-def PearsonCorr(SeriesA, SeriesB): return SeriesA.corr(SeriesB, method="pearson")
+def PearsonCorr(SeriesA, SeriesB, method="pearson"): return SeriesA.corr(SeriesB, method=method)
 
 
 def SCC(CoolA, CoolB, region_start, region_end, h):
@@ -304,6 +304,7 @@ def VisualizeRandom(RandomData, FN):
     ax.axvline(x=Real, color="red")
     fig.savefig(FN)
     plt.clf()
+
 
 
 def VisualizeEctopicArray(EctopicArray, FN):
@@ -407,7 +408,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
     # Pearson
     with Timer(f"Pearson") as _:
         Data["Metrics.Pearson"] = PearsonCorr(GetMatrix(SampleTypeAligned["Exp"], Chrom)["balanced"],
-                                                 GetMatrix(SampleTypeAligned["Pred"], Chrom)["balanced"])
+                                                 GetMatrix(SampleTypeAligned["Pred"], Chrom)["balanced"], method="spearman")
     # SCC
     with Timer(f"SCC") as _:
         Data["Metrics.SCC"] = SCC(SampleTypeAligned["Exp"], SampleTypeAligned["Pred"],

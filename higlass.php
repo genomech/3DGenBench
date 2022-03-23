@@ -55,7 +55,7 @@ if ($DataType == 'p') {
 			
 			function GenerateInsulationTrack(Label, TileSetID, SessionID, Position, Color) { return {
 			"filetype": "hitile",
-			"server": "http://alena-spn.cytogen.ru:8231/api/v1",
+			"server": "https://inc-cost.cytogen.ru:8231/api/v1",
 			"tilesetUid": TileSetID,
 			"uid": Label + "_" + SessionID,
 			"type": Position + "-bar",
@@ -85,7 +85,7 @@ if ($DataType == 'p') {
 			
 			function GenerateHeatmapTrack(Label, TileSetID, SessionID, Name, Position) { return {
 				"filetype": "cooler",
-				"server": "http://alena-spn.cytogen.ru:8231/api/v1",
+				"server": "https://inc-cost.cytogen.ru:8231/api/v1",
 				"tilesetUid": TileSetID,
 				"uid": Label + "_" + SessionID,
 				"type": "heatmap",
@@ -257,7 +257,7 @@ elseif ($DataType == 's') {
 				
 			function GenerateInsulationTrack(Label, TileSetID, SessionID, Position, Color) { return {
 			"filetype": "hitile",
-			"server": "http://alena-spn.cytogen.ru:8231/api/v1",
+			"server": "https://inc-cost.cytogen.ru:8231/api/v1",
 			"tilesetUid": TileSetID,
 			"uid": Label + "_" + SessionID,
 			"type": Position + "-bar",
@@ -287,7 +287,7 @@ elseif ($DataType == 's') {
 			
 			function GenerateHeatmapTrack(Label, TileSetID, SessionID, Name, Position) { return {
 				"filetype": "cooler",
-				"server": "http://alena-spn.cytogen.ru:8231/api/v1",
+				"server": "https://inc-cost.cytogen.ru:8231/api/v1",
 				"tilesetUid": TileSetID,
 				"uid": Label + "_" + SessionID,
 				"type": "heatmap",
