@@ -134,7 +134,7 @@ def AlignCools(InputFNA, InputFNB, OutputFNA, OutputFNB, Chrom, testing=False):
 	BinsA, BinsB = InputA.bins().fetch(Chrom), InputB.bins().fetch(Chrom)
 	PixelsA, PixelsB = InputA.matrix(as_pixels=True, balance=True).fetch(Chrom), InputB.matrix(as_pixels=True,balance=True).fetch(Chrom)
 	PixelsA.dropna(inplace=True)
-	MergePixels = pandas.merge(PixelsA, PixelsB, how="left", on=["bin1_id", "bin2_id"])
+	MergePixels = pandas.merge(PixelsA, PixelsB, how="inner", on=["bin1_id", "bin2_id"])
 	PixelsA, PixelsB = MergePixels[["bin1_id", "bin2_id", "count_x", 'balanced_x']].rename(columns={"count_x": "count","balanced_x": "balanced"}), \
 					   MergePixels[["bin1_id", "bin2_id", "count_y", "balanced_y"]].rename(columns={"count_y": "count", "balanced_y": "balanced"})
 	cooler.create_cooler(OutputFNA, BinsA, PixelsA)
@@ -159,23 +159,28 @@ def InsulationData(Datasets, Window, capture_start, capture_end):
 	Result["Y-True"] = Result["sum_balanced_sigma_Mut/Wt-Exp"].apply(lambda x: (x == x) and ((x > 2) or (x < -2)))
 	return Result
 
-def EctopicInteractionsArray(CoolWT, CoolMut, Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Rearr_type):
-	Capture = f"{Chrom}:{CaptureStart}-{CaptureEnd}"
-	Rearr = f"{Chrom}:{RearrStart}-{RearrEnd}"
-	for Line in [f"WT COOL: {CoolWT.store}", f"Mut COOL: {CoolMut.store}", f"Capture: {Capture}", f"Rearrangement: {Rearr}"]: logging.info(Line)
+def EctopicInteractionsArray(CoolWT, CoolMut, Chrom, PredictionStart, PredictionEnd, SampleData):
+	Prediction = f"{Chrom}:{PredictionStart}-{PredictionEnd}"
+	for Line in [f"WT COOL: {CoolWT.store}", f"Mut COOL: {CoolMut.store}", f"Prediction region: {Prediction}"]: logging.info(Line)
 	
 	def PrepareData(Cool):
-		Data = numpy.nan_to_num(Cool.matrix(balance=True).fetch(Capture))
-		RearrStartBin = (RearrStart - CaptureStart) // Cool.binsize
-		RearrEndBin = (RearrEnd - CaptureStart) // Cool.binsize
+		Data = numpy.nan_to_num(Cool.matrix(balance=True).fetch(Prediction))
 		#fill all interactions of bins inside deletion by zeroes, don't do it with inversion or duplication
-		if Rearr_type=="deletion":
-			Data[RearrStartBin:RearrEndBin+1, :] = numpy.zeros(Data[RearrStartBin:RearrEndBin+1, :].shape)
-			Data[:, RearrStartBin:RearrEndBin+1] = numpy.zeros(Data[:, RearrStartBin:RearrEndBin+1].shape)
+		for i,rearr_type in enumerate(SampleData["rearrangement_type"].split("_")):
+			if rearr_type=="deletion":
+				RearrStartBin = (int(SampleData["start"+str(i)]) - PredictionStart) // Cool.binsize
+				RearrEndBin = (int(SampleData["end"+str(i)]) - PredictionStart) // Cool.binsize
+				Data[RearrStartBin:RearrEndBin+1, :] = numpy.zeros(Data[RearrStartBin:RearrEndBin+1, :].shape)
+				Data[:, RearrStartBin:RearrEndBin+1] = numpy.zeros(Data[:, RearrStartBin:RearrEndBin+1].shape)
 		return Data
 	
 	SumData = lambda Data: sum(list(map(sum, Data)))
 	DataWT, DataMut = PrepareData(CoolWT), PrepareData(CoolMut)
+	# # use only non zero contacts in WT and Mut
+	# print("nonzero", numpy.count_nonzero(DataWT), numpy.count_nonzero(DataMut))
+	# DataWT[DataMut==0] = 0
+	# DataMut[DataWT == 0] = 0
+	# print("nonzero", numpy.count_nonzero(DataWT), numpy.count_nonzero(DataMut))
 	SumWT, SumMut = SumData(DataWT), SumData(DataMut)
 	# normalize mut and WT data by coverage
 	DataMut = DataMut * (SumWT / SumMut)
@@ -258,7 +263,6 @@ def PRCurve(YTrue, Probas):
 	YTrueNumpy = numpy.nan_to_num(YTrue)
 	ProbasNumpy = numpy.nan_to_num(Probas)
 	Precision, Recall, Thresholds = precision_recall_curve(YTrueNumpy, ProbasNumpy)
-
 	return {
 		"AUC": auc(Recall, Precision),
 		"Precision": json.dumps(Precision.tolist()),
@@ -352,7 +356,7 @@ def CreateParser():
 
 # ------======| FILE CREATOR |======------
 
-def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, CoolDir, Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, BinSize, Assembly, SqlDB, testing=False):
+def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, CoolDir, Chrom, PredictionStart, PredictionEnd, BinSize, Assembly, SampleData, SqlDB, testing=False):
 	if testing:
 		CoolDirID = os.path.join(CoolDir, UnitID, SampleName)
 		if not os.path.exists(os.path.join(CoolDir, UnitID)):
@@ -407,40 +411,41 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		
 
 	
-	# # METRICS
-	#
-	# # Pearson
-	# with Timer(f"Pearson") as _:
-	# 	Data["Metrics.Pearson.WT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Wt", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Wt", "Pred")], Chrom)["balanced"])
-	# 	Data["Metrics.Pearson.MUT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Mut", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Mut", "Pred")], Chrom)["balanced"])
-	#
-	# # SCC
-	# with Timer(f"SCC") as _:
-	# 	Data["Metrics.SCC.WT"] = SCC(SampleTypeAligned[("Wt", "Exp")], SampleTypeAligned[("Wt", "Pred")], MaxDist = C_SCC_MAXDIST, h = C_SCC_H)
-	# 	Data["Metrics.SCC.MUT"] = SCC(SampleTypeAligned[("Mut", "Exp")], SampleTypeAligned[("Mut", "Pred")], MaxDist = C_SCC_MAXDIST, h = C_SCC_H)
-	#
-	# # Insulation
-	# with Timer(f"Insulation Dataset") as _:
-	# 	InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, capture_start=CaptureStart, capture_end=CaptureEnd)
-	#
-	# with Timer(f"Insulation Score Pearson") as _:
-	# 	Data["Metrics.InsulationScorePearson.WT"] = PearsonCorr(InsDataset["sum_balanced_Wt-Exp"], InsDataset["sum_balanced_Wt-Pred"])
-	# 	Data["Metrics.InsulationScorePearson.MUT"] = PearsonCorr(InsDataset["sum_balanced_Mut-Exp"], InsDataset["sum_balanced_Mut-Pred"])
-	#
-	# with Timer(f"Insulation Score (Mut/Wt) Pearson") as _:
-	# 	Data["Metrics.InsulationScoreMutVsWtPearson"] = PearsonCorr(InsDataset["sum_balanced_Mut/Wt-Exp"], InsDataset["sum_balanced_Mut/Wt-Pred"])
-	#
-	# # save insulatory score bedgraphs
-	# with Timer(f"Save Bedgraphs") as _:
-	# 	for Key in FileNamesBedgraphOutput.keys(): MakeBedgraph(
-	# 		ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
-	# 		InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key[0] + '-' + Key[1]]],
-	# 		OutputBedgraph=FileNamesBedgraphOutput[Key],
-	# 		Assembly=Assembly,
-	# 		Chrom=Chrom,
-	# 		DockerTmp="/home/fairwind/tmp")
-	#
-	# # Insulatory AUC
+	# METRICS
+
+	# Pearson
+	with Timer(f"Pearson") as _:
+		Data["Metrics.Pearson.WT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Wt", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Wt", "Pred")], Chrom)["balanced"])
+		Data["Metrics.Pearson.MUT"] = PearsonCorr(GetMatrix(SampleTypeAligned[("Mut", "Exp")], Chrom)["balanced"], GetMatrix(SampleTypeAligned[("Mut", "Pred")], Chrom)["balanced"])
+
+	# SCC
+	with Timer(f"SCC") as _:
+		Data["Metrics.SCC.WT"] = SCC(SampleTypeAligned[("Wt", "Exp")], SampleTypeAligned[("Wt", "Pred")], MaxDist = C_SCC_MAXDIST, h = C_SCC_H)
+		Data["Metrics.SCC.MUT"] = SCC(SampleTypeAligned[("Mut", "Exp")], SampleTypeAligned[("Mut", "Pred")], MaxDist = C_SCC_MAXDIST, h = C_SCC_H)
+
+	# Insulation
+	with Timer(f"Insulation Dataset") as _:
+		InsDataset = InsulationData(SampleTypeAligned, Window=BinSize * 5, capture_start=PredictionStart, capture_end=PredictionEnd)
+
+	with Timer(f"Insulation Score Pearson") as _:
+		Data["Metrics.InsulationScorePearson.WT"] = PearsonCorr(InsDataset["sum_balanced_Wt-Exp"], InsDataset["sum_balanced_Wt-Pred"])
+		Data["Metrics.InsulationScorePearson.MUT"] = PearsonCorr(InsDataset["sum_balanced_Mut-Exp"], InsDataset["sum_balanced_Mut-Pred"])
+
+	with Timer(f"Insulation Score (Mut/Wt) Pearson") as _:
+		Data["Metrics.InsulationScoreMutVsWtPearson"] = PearsonCorr(InsDataset["sum_balanced_Mut/Wt-Exp"], InsDataset["sum_balanced_Mut/Wt-Pred"])
+
+	# save insulatory score bedgraphs
+	with Timer(f"Save Bedgraphs") as _:
+		for Key in FileNamesBedgraphOutput.keys(): MakeBedgraph(
+			ID=os.path.splitext(os.path.basename(FileNamesBedgraphOutput[Key]))[0],
+			InsDataset=InsDataset[["chrom", "start", "end", "sum_balanced_" + Key[0] + '-' + Key[1]]],
+			OutputBedgraph=FileNamesBedgraphOutput[Key],
+			Assembly=Assembly,
+			Chrom=Chrom,
+			DockerTmp="/home/fairwind/tmp")
+
+	# Insulatory AUC
+	#deprecated metric
 	# with Timer(f"Ectopic Insulation PR Curve") as _:
 	# 	EctopicInsulationPR = PRCurve(
 	# 		YTrue = InsDataset["Y-True"],
@@ -450,68 +455,69 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 	# 	Data["Metrics.EctopicInsulation.Precision"] = EctopicInsulationPR["Precision"]
 	# 	Data["Metrics.EctopicInsulation.Recall"] = EctopicInsulationPR["Recall"]
 	# 	Data["Metrics.EctopicInsulation.Thresholds"] = EctopicInsulationPR["Thresholds"]
-	#
-	# 	# DRAFT
-	# 	VisualizePR(PRData = EctopicInsulationPR, Name = "Ectopic Insulation", FN = os.path.join(CoolDirID, f".{UnitID}-EctopicInsulationPRCurve.png"))
-	#
-	# # Ectopic
-	# with Timer(f"Ectopic Array") as _:
-	# 	EctopicArrayExp = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Exp")], SampleTypeAligned[("Mut", "Exp")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=False)
-	# 	EctopicArrayPred = EctopicInteractionsArray(SampleTypeAligned[("Wt", "Pred")], SampleTypeAligned[("Mut", "Pred")], Chrom, CaptureStart, CaptureEnd, RearrStart, RearrEnd, Normalized=True)
-	#
-	# with Timer(f"Ectopic Array Graph") as _:
-	# 	Data["Metrics.EctopicArrayGraph.EXP"] = EctopicGraphArray(EctopicArrayExp)
-	# 	Data["Metrics.EctopicArrayGraph.PRED"] = EctopicGraphArray(EctopicArrayPred)
-	#
-	# 	# DRAFT
-	# 	for Key in ["Metrics.EctopicArrayGraph.EXP", "Metrics.EctopicArrayGraph.PRED"]: VisualizeEctopicArray(EctopicArray = Data[Key], FN = os.path.join(CoolDirID, f".{UnitID}-{Key}EctopicArray.png"))
-	#
-	# with Timer(f"Ectopic Interactions PR Curve") as _:
-	# 	EctopicInteractions = PRCurve(
-	# 		YTrue = [(i == i) and ((i > 2) or (i < -2)) for i in EctopicArrayExp.flatten()],
-	# 		Probas = EctopicArrayPred.flatten()
-	# 		)
-	#
-	# 	Data["Metrics.EctopicInteractions.AUC"] = EctopicInteractions["AUC"]
-	# 	Data["Metrics.EctopicInteractions.Precision"] = EctopicInteractions["Precision"]
-	# 	Data["Metrics.EctopicInteractions.Recall"] = EctopicInteractions["Recall"]
-	# 	Data["Metrics.EctopicInteractions.Thresholds"] = EctopicInteractions["Thresholds"]
-	#
-	# 	# DRAFT
-	# 	VisualizePR(PRData = EctopicInteractions, Name = "Ectopic Interactions", FN = os.path.join(CoolDirID, f".{UnitID}-EctopicInteractionsPRCurve.png"))
-	#
-	# # Random
-	# with Timer(f"Random Interactions") as _:
-	# 	RandomInteractions = RandomEctopicIntersections(EctopicArrayExp, EctopicArrayPred)
-	#
-	# 	Data["Metrics.RandomInteractions.Random"] = RandomInteractions["Random"]
-	# 	Data["Metrics.RandomInteractions.Real"] = RandomInteractions["Real"]
-	#
-	# 	# DRAFT
-	# 	VisualizeRandom(RandomData = RandomInteractions, FN = os.path.join(CoolDirID, f".{UnitID}-RealVsRandomEctopicInteractions.png"))
-	#
-	# with Timer(f"Save MCOOLs") as _:
-	# 	for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, DockerTmp = "/home/fairwind/tmp")
-	#
-	# # SAVE
-	# with Timer(f"SQL") as _:
-	# 	try:
-	# 		sqlite_connection = sqlite3.connect(SqlDB)
-	# 		cursor = sqlite_connection.cursor()
-	# 		logging.info("DB Connected")
-	#
-	# 		AllMetricsSQL = ', '.join([f"'{key}'='{value}'" for key, value in Data.items()])
-	# 		sqlite_select_query = f"update bm_metrics set Status='0', {AllMetricsSQL} where ID='{UnitID}';"
-	# 		cursor.execute(sqlite_select_query)
-	# 		sqlite_connection.commit()
-	# 		cursor.close()
-	# 	except sqlite3.Error as error:
-	# 		logging.info("SQLite3 Error")
-	# 		raise error
-	# 	finally:
-	# 		if (sqlite_connection):
-	# 			sqlite_connection.close()
-	# 			logging.info("DB Closed")
+
+		# DRAFT
+		# VisualizePR(PRData = EctopicInsulationPR, Name = "Ectopic Insulation", FN = os.path.join(CoolDirID, f".{UnitID}-EctopicInsulationPRCurve.png"))
+
+	# Ectopic
+	CoolFilesOpened = {Type: cooler.Cooler(FN) for Type, FN in TempFiles.items()}
+	with Timer(f"Ectopic Array") as _:
+		EctopicArrayExp = EctopicInteractionsArray(CoolFilesOpened[("Wt", "Exp")], CoolFilesOpened[("Mut", "Exp")], Chrom, PredictionStart, PredictionEnd, SampleData)
+		EctopicArrayPred = EctopicInteractionsArray(CoolFilesOpened[("Wt", "Pred")], CoolFilesOpened[("Mut", "Pred")], Chrom, PredictionStart, PredictionEnd, SampleData)
+
+	with Timer(f"Ectopic Array Graph") as _:
+		Data["Metrics.EctopicArrayGraph.EXP"] = EctopicGraphArray(EctopicArrayExp)
+		Data["Metrics.EctopicArrayGraph.PRED"] = EctopicGraphArray(EctopicArrayPred)
+
+		# DRAFT
+		for Key in ["Metrics.EctopicArrayGraph.EXP", "Metrics.EctopicArrayGraph.PRED"]: VisualizeEctopicArray(EctopicArray = Data[Key], FN = os.path.join(CoolDirID, f".{UnitID}-{Key}EctopicArray.png"))
+
+	with Timer(f"Ectopic Interactions PR Curve") as _:
+		EctopicInteractions = PRCurve(
+			YTrue = [(i == i) and ((i > 2) or (i < -2)) for i in numpy.abs(EctopicArrayExp.flatten())],
+			Probas = numpy.abs(EctopicArrayPred.flatten())
+			)
+
+		Data["Metrics.EctopicInteractions.AUC"] = EctopicInteractions["AUC"]
+		Data["Metrics.EctopicInteractions.Precision"] = EctopicInteractions["Precision"]
+		Data["Metrics.EctopicInteractions.Recall"] = EctopicInteractions["Recall"]
+		Data["Metrics.EctopicInteractions.Thresholds"] = EctopicInteractions["Thresholds"]
+
+		# DRAFT
+		VisualizePR(PRData = EctopicInteractions, Name = "Ectopic Interactions", FN = os.path.join(CoolDirID, f".{UnitID}-EctopicInteractionsPRCurve.png"))
+
+	# Random
+	with Timer(f"Random Interactions") as _:
+		RandomInteractions = RandomEctopicIntersections(EctopicArrayExp, EctopicArrayPred)
+
+		Data["Metrics.RandomInteractions.Random"] = RandomInteractions["Random"]
+		Data["Metrics.RandomInteractions.Real"] = RandomInteractions["Real"]
+
+		# DRAFT
+		VisualizeRandom(RandomData = RandomInteractions, FN = os.path.join(CoolDirID, f".{UnitID}-RealVsRandomEctopicInteractions.png"))
+
+	with Timer(f"Save MCOOLs") as _:
+		for Key in SampleTypeAligned.keys(): MakeMcool(ID = os.path.splitext(os.path.basename(FileNamesOutput[Key]))[0], InputCool = SampleTypeAligned[Key].store, OutputMcool = FileNamesOutput[Key], Resolution = BinSize, DockerTmp = "/home/fairwind/tmp")
+
+	# SAVE
+	with Timer(f"SQL") as _:
+		try:
+			sqlite_connection = sqlite3.connect(SqlDB)
+			cursor = sqlite_connection.cursor()
+			logging.info("DB Connected")
+
+			AllMetricsSQL = ', '.join([f"'{key}'='{value}'" for key, value in Data.items()])
+			sqlite_select_query = f"update bm_metrics set Status='0', {AllMetricsSQL} where ID='{UnitID}';"
+			cursor.execute(sqlite_select_query)
+			sqlite_connection.commit()
+			cursor.close()
+		except sqlite3.Error as error:
+			logging.info("SQLite3 Error")
+			raise error
+		finally:
+			if (sqlite_connection):
+				sqlite_connection.close()
+				logging.info("DB Closed")
 		
 	
 	
@@ -547,12 +553,11 @@ def Main():
 		FileNamesInput = FileNamesInput, 
 		CoolDir = Namespace.cooldir,
 		Chrom = SampleData["chr"],
-		CaptureStart = int(SampleData["start_prediction"]),
-		CaptureEnd = int(SampleData["end_prediction"]),
-		RearrStart = int(SampleData["start1"]),
-		RearrEnd = int(SampleData["end1"]),
+		PredictionStart = int(SampleData["start_prediction"]),
+		PredictionEnd = int(SampleData["end_prediction"]),
 		BinSize = Namespace.resolution,
 		Assembly = SampleData["genome_assembly"],
+		SampleData = SampleData,
 		SqlDB = Namespace.db)
 
 if __name__ == "__main__": Main()
