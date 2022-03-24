@@ -210,7 +210,7 @@ else {
 		<tr><td><b>Ps Pearson:</b></td><td>'.$MetricsData['Metrics.PsPearson'].'</td></tr>
 		</table> <h2>HiGlass View</h2>';
 	
-	echo '<iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=s"></iframe>';
+	echo '<iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=s&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
 	}
 echo GetFooter();
 }
