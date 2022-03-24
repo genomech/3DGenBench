@@ -163,27 +163,45 @@ def EctopicInteractionsArray(CoolWT, CoolMut, Chrom, PredictionStart, Prediction
 	Prediction = f"{Chrom}:{PredictionStart}-{PredictionEnd}"
 	for Line in [f"WT COOL: {CoolWT.store}", f"Mut COOL: {CoolMut.store}", f"Prediction region: {Prediction}"]: logging.info(Line)
 	
-	def PrepareData(Cool):
+	def PrepareData(Cool, for_coef=True):
 		Data = numpy.nan_to_num(Cool.matrix(balance=True).fetch(Prediction))
 		#fill all interactions of bins inside deletion by zeroes, don't do it with inversion or duplication
 		for i,rearr_type in enumerate(SampleData["rearrangement_type"].split("_")):
-			if rearr_type=="deletion":
-				RearrStartBin = (int(SampleData["start"+str(i)]) - PredictionStart) // Cool.binsize
-				RearrEndBin = (int(SampleData["end"+str(i)]) - PredictionStart) // Cool.binsize
-				Data[RearrStartBin:RearrEndBin+1, :] = numpy.zeros(Data[RearrStartBin:RearrEndBin+1, :].shape)
-				Data[:, RearrStartBin:RearrEndBin+1] = numpy.zeros(Data[:, RearrStartBin:RearrEndBin+1].shape)
+			if for_coef:
+				if rearr_type=="deletion" or rearr_type=="duplication":
+					RearrStartBin = (int(SampleData["start"+str(i+1)]) - PredictionStart) // Cool.binsize
+					RearrEndBin = (int(SampleData["end"+str(i+1)]) - PredictionStart) // Cool.binsize
+					Data[RearrStartBin:RearrEndBin+1, :] = numpy.zeros(Data[RearrStartBin:RearrEndBin+1, :].shape)
+					Data[:, RearrStartBin:RearrEndBin+1] = numpy.zeros(Data[:, RearrStartBin:RearrEndBin+1].shape)
+			else:
+				if rearr_type=="deletion":
+					RearrStartBin = (int(SampleData["start"+str(i+1)]) - PredictionStart) // Cool.binsize
+					RearrEndBin = (int(SampleData["end"+str(i+1)]) - PredictionStart) // Cool.binsize
+					Data[RearrStartBin:RearrEndBin+1, :] = numpy.zeros(Data[RearrStartBin:RearrEndBin+1, :].shape)
+					Data[:, RearrStartBin:RearrEndBin+1] = numpy.zeros(Data[:, RearrStartBin:RearrEndBin+1].shape)
 		return Data
 	
-	SumData = lambda Data: sum(list(map(sum, Data)))
-	DataWT, DataMut = PrepareData(CoolWT), PrepareData(CoolMut)
+	#SumData = lambda Data: sum(list(map(sum, Data)))
+	DataWT_for_coef, DataMut_for_coef = PrepareData(CoolWT, for_coef=True), PrepareData(CoolMut, for_coef=True)
+	DataWT, DataMut = PrepareData(CoolWT, for_coef=False), PrepareData(CoolMut, for_coef=False)
 	# # use only non zero contacts in WT and Mut
 	# print("nonzero", numpy.count_nonzero(DataWT), numpy.count_nonzero(DataMut))
 	# DataWT[DataMut==0] = 0
 	# DataMut[DataWT == 0] = 0
 	# print("nonzero", numpy.count_nonzero(DataWT), numpy.count_nonzero(DataMut))
-	SumWT, SumMut = SumData(DataWT), SumData(DataMut)
+	SumWT, SumMut = numpy.sum(DataWT_for_coef),  numpy.sum(DataMut_for_coef)
 	# normalize mut and WT data by coverage
 	DataMut = DataMut * (SumWT / SumMut)
+	#normalize duplication region by coverage in te case of duplication
+	for i, rearr_type in enumerate(SampleData["rearrangement_type"].split("_")):
+		if rearr_type=="duplication":
+			RearrStartBin = (int(SampleData["start" + str(i+1)]) - PredictionStart) // CoolWT.binsize
+			RearrEndBin = (int(SampleData["end" + str(i+1)]) - PredictionStart) // CoolWT.binsize
+			WT_Sum_dup_conacts =  numpy.sum(DataWT[RearrStartBin:RearrEndBin + 1, :RearrStartBin])+ numpy.sum(DataWT[RearrEndBin:, RearrStartBin:RearrEndBin + 1])
+			Mut_Sum_dup_conacts =numpy.sum(DataMut[RearrStartBin:RearrEndBin + 1, :RearrStartBin])+ numpy.sum(DataMut[RearrEndBin:, RearrStartBin:RearrEndBin + 1])
+			norm_coef = WT_Sum_dup_conacts/ Mut_Sum_dup_conacts
+			DataMut[RearrStartBin:RearrEndBin + 1, :] *= norm_coef
+			DataMut[:, RearrStartBin:RearrEndBin + 1] *= norm_coef
 	# get dif array of normalized contacts
 	DiffArray = DataMut - DataWT
 	
@@ -407,7 +425,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		
 		# DRAFT
 		for Type, Cool in SampleTypeAligned.items():
-			VisualizeCool(InputCool = Cool.store, OutputPng = os.path.join(CoolDirID, f".{UnitID}-{Type[0]}{Type[1]}SampleTypeAligned.png"), Region = f"{Chrom}:{CaptureStart}-{CaptureEnd}")
+			VisualizeCool(InputCool = Cool.store, OutputPng = os.path.join(CoolDirID, f".{UnitID}-{Type[0]}{Type[1]}SampleTypeAligned.png"), Region = f"{Chrom}:{PredictionStart}-{PredictionEnd}")
 		
 
 	
