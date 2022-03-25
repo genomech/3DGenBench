@@ -172,7 +172,7 @@ else {
 			'Real' => $Record['Metrics.RandomInteractions.Real']
 			), 'RandomInteractions', 'Random Interactions'); 
 		
-		echo '<h2>HiGlass View</h2><iframe width="1200" frameBorder="0" scrolling="no" margin="0" height="600" src="'.GetHiGlass().'?id='.$UnitID.'&type=p"></iframe>';
+		echo '<iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=p&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
 	}
 	
 	if ($Record['Metadata.Type'] == 's') {
