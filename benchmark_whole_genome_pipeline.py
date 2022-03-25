@@ -251,7 +251,6 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp, tes
             InsDataset.to_csv(TempFile, sep="\t", index=False, header=False)
         else:
             InsDataset.to_csv(OutputBedgraph, sep="\t", index=False, header=False)
-        #TODO check that this script is working for HiGlass
         if not testing:
             SimpleSubprocess(Name="Copy2DockerTmp",
                         Command=f"cp \"{TempFile}\" \"{os.path.join(DockerTmp, 'bm_temp.bedgraph')}\"")

@@ -1,6 +1,12 @@
 genome_locus_name	path_to_processed_hic_data	cell_type	locus_chr	locus_start	locus_end	organism	genome_assembly	path_to_processed_hic_data_AlenaServer
+K562_chr1_22to42Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/K562/	K562	chr1	22000000	42000000	human	hg19	/storage/hic_data_for_3DBench/K562/
+K562_chr19_36to56Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/K562/	K562	chr19	36000000	56000000	human	hg19	/storage/hic_data_for_3DBench/K562/
+K562_chr10_90to110Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/K562/	K562	chr19	90000000	110000000	human	hg19	/storage/hic_data_for_3DBench/K562/
+K562_chr21_22to42Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/K562/	K562	chr19	22000000	42000000	human	hg19	/storage/hic_data_for_3DBench/K562/
 K562_chr11_0to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/K562/	K562	chr11	0	20000000	human	hg19	/storage/hic_data_for_3DBench/K562/
 GM12878_chr1_22to42Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/GM12878/	GM12878	chr1	22000000	42000000	human	hg19	/storage/hic_data_for_3DBench/GM12878/
 GM12878_chr19_36to56Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/GM12878/	GM12878	chr19	36000000	56000000	human	hg19	/storage/hic_data_for_3DBench/GM12878/
 Gm12878_chr10_90to110Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/GM12878/	GM12878	chr19	90000000	110000000	human	hg19	/storage/hic_data_for_3DBench/GM12878/
 Gm12878_chr21_22to42Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/GM12878/	GM12878	chr19	22000000	42000000	human	hg19	/storage/hic_data_for_3DBench/GM12878/
+Gm12878_chr11_0to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/GM12878/	GM12878	chr11	0	20000000	human	hg19	/storage/hic_data_for_3DBench/GM12878/
+
