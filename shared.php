@@ -19,8 +19,13 @@ $GLOBALS['bmMetricsPage'] = 'metrics_view.php';
 
 // GET CONST FUNC
 function GetHeader($Header) { return '
-<html>
+<html lang="en">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>3DGenBench | Benchmarking Predictive Models of 3D Genome Organization</title>
+<meta name="description" content="Compare the performance of predictive models of chromatin organization and understand which chromatin features define 3D-genome architecture in normal and mutated genomes" /> 
+<meta name="keywords" content="Hi-C, chromatin, genetics, DNA, 3D, benchmarking, ML, prediction" /> 
+<meta name="copyright" lang="en" content="International Nucleome Consortium, European Cooperation in Science and Technology (INC COST)" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
