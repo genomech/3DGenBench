@@ -1,8 +1,11 @@
 <?php
+
 require('shared.php');
+
 echo GetHeader('Tutorial');
 
-echo'
+?>
+
 <p>
 3DGenBench is a web server for scoring performance of 3D genomic models.
 3DGenBench provides two challenges.
@@ -188,7 +191,6 @@ Then, we design the values falling above 3 standard deviations of the distributi
 <ul>
 <li>Pearson\'s correlation between experimental and predicted decay of contact frequency with genomic distance P(s).</li>
 <li>Pearson\'s correlation between experimental and predicted compartment strength computetd as in <a href="https://doi.org/10.1038/s41586-019-1275-3">Martin Falk et al. (2019)</a>.</li>
-</ul>';
+</ul>
 
-echo GetFooter();
-?>
+<?php echo GetFooter(); ?>

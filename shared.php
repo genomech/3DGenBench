@@ -20,12 +20,19 @@ $GLOBALS['bmMetricsPage'] = 'metrics_view.php';
 // GET CONST FUNC
 function GetHeader($Header) { return '
 <html lang="en">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+<!--- meta --->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="description" content="Compare the performance of predictive models of chromatin organization and understand which chromatin features define 3D-genome architecture in normal and mutated genomes"> 
+<meta name="keywords" content="Hi-C, chromatin, genetics, DNA, 3D, benchmarking, ML, prediction"> 
+<meta name="copyright" lang="en" content="International Nucleome Consortium, European Cooperation in Science and Technology (INC COST)">
+<!--- meta --->
+
 <title>3DGenBench | Benchmarking Predictive Models of 3D Genome Organization</title>
-<meta name="description" content="Compare the performance of predictive models of chromatin organization and understand which chromatin features define 3D-genome architecture in normal and mutated genomes" /> 
-<meta name="keywords" content="Hi-C, chromatin, genetics, DNA, 3D, benchmarking, ML, prediction" /> 
-<meta name="copyright" lang="en" content="International Nucleome Consortium, European Cooperation in Science and Technology (INC COST)" />
+
+<!--- favicon --->
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -33,79 +40,138 @@ function GetHeader($Header) { return '
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="https://purecss.io/css/main.css">
-<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css" integrity="sha384-Uu6IeWbM+gzNVXJcM9XV3SohHtmWE+3VGi496jvgX1jyvDTXfdK+rfZc8C1Aehk5" crossorigin="anonymous">
+<!--- favicon --->
+
+<!--- purecss --->
+<link rel="stylesheet" href="css/pure-main.css">
+<link rel="stylesheet" href="css/pure-min.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300">
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
+<!--- purecss --->
+
+<!--- cookie consent --->
+<link rel="stylesheet" type="text/css" href="css/cookieconsent.min.css">
+<script src="js/cookieconsent.min.js"></script>
+<!--- cookie consent --->
+
+<!--- tabulator and xlsx --->
+<link href="css/tabulator.min.css" rel="stylesheet">
+<script type="text/javascript" src="js/tabulator.min.js"></script>
+<script type="text/javascript" src="js/xlsx.full.min.js"></script>
+<!--- tabulator and xlsx --->
+
+<style>
+	.button-success,
+	.button-error,
+	.button-warning,
+	.button-secondary {
+		color: white;
+		border-radius: 4px;
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	}
+
+	.button-success { background: rgb(28, 184, 65); }
+	.button-error { background: rgb(202, 60, 60); }
+	.button-warning { background: rgb(223, 117, 20); }
+	.button-secondary { background: rgb(66, 184, 221); }
+</style>
+
 </head>
+
 <body>
+
+<!--- cookie consent --->
 <div id="cookieconsent"></div>
-<script>window.cookieconsent.initialise({
-    container: document.getElementById("cookieconsent"),
-    palette:{
-     popup: {background: "#42b8dd"},
-     button: {background: "#e0e0e0"},
-    },
-    revokable: true,
-    onStatusChange: function(status) {
-     console.log(this.hasConsented() ?
-      \'enable cookies\' : \'disable cookies\');
-    },
-    type:"opt-out",
-    "position": "bottom-right",
-    "theme": "classic",
-    "domain": "http://alena-spn.cytogen.ru/",
-    "content": {
-      "header": \'Cookies used on the website!\',
-      "message": \'This website uses cookies to improve your experience.\',
-      "dismiss": \'Got it!\',
-      "allow": \'Allow cookies\',
-      "deny": \'Decline\',
-      "link": \'Learn more\',
-      "href": \'https://www.cookiesandyou.com\',
-      "close": \'&#x274c;\',
-      "policy": \'Cookie Policy\',
-      "target": \'_blank\',
-      }
-   });</script>
+<script>
+window.cookieconsent.initialise({
+	container: document.getElementById("cookieconsent"),
+	palette: {
+		popup: { background: "#42b8dd" },
+		button: { background: "#e0e0e0" },
+	},
+	revokable: true,
+	onStatusChange: function(status) { console.log(this.hasConsented() ? \'enable cookies\' : \'disable cookies\'); },
+	type:"opt-out",
+	"position": "bottom-right",
+	"theme": "classic",
+	"domain": "http://alena-spn.cytogen.ru/",
+	"content": {
+		"header": \'Cookies used on the website!\',
+		"message": \'This website uses cookies to improve your experience.\',
+		"dismiss": \'Got it!\',
+		"allow": \'Allow cookies\',
+		"deny": \'Decline\',
+		"link": \'Learn more\',
+		"href": \'https://www.cookiesandyou.com\',
+		"close": \'&#x274c;\',
+		"policy": \'Cookie Policy\',
+		"target": \'_blank\',
+		}
+	});
+</script>
+<!--- cookie consent --->
+
 <div id="layout" style="width: 100%; height: 100%;">
-<div id="menu"><div class="pure-menu"><a class="pure-menu-heading" href="index.php">About</a><ul class="pure-menu-list"><li class=""><a class="pure-menu-link" href="tutorial.php">Tutorial</a></li><li class=""><a class="pure-menu-link" href="datasets.php">Datasets</a></li><li class=""><a class="pure-menu-link" href="submission_form.php">Compute Metrics</a></li><li class=""><a class="pure-menu-link" href="metrics.php">Submissions List</a></li></ul></div></div>
-<div><div id="main">'.((basename(__DIR__) == '3DGenBench_sandbox' ? '<div><aside style="background: rgb(202, 60, 60);"><p style="text-align: center;"><b>TEST BRANCH</b></p></aside></div>' : '')).'<div class="header"><h1><span style="display: inline-block; color: rgb(223, 117, 20); font-weight: bold; font-size:118%;">3D</span>GenBench</h1><h2>'.$Header.'</h2></div><div style="max-width: 1200px; min-height: 550px;" class="content">
-<style scoped="">
-        .button-success,
-        .button-error,
-        .button-warning,
-        .button-secondary {
-            color: white;
-            border-radius: 4px;
-            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-        }
-
-        .button-success {
-            background: rgb(28, 184, 65);
-            /* this is a green */
-        }
-
-        .button-error {
-            background: rgb(202, 60, 60);
-            /* this is a maroon */
-        }
-
-        .button-warning {
-            background: rgb(223, 117, 20);
-            /* this is an orange */
-        }
-
-        .button-secondary {
-            background: rgb(66, 184, 221);
-            /* this is a light blue */
-        }
-    </style>
-    
+	
+	<!--- menu --->
+	<div id="menu">
+		<div class="pure-menu">
+			<a class="pure-menu-heading" href="index.php">About</a>
+			<ul class="pure-menu-list">
+				<li class=""><a class="pure-menu-link" href="tutorial.php">Tutorial</a></li>
+				<li class=""><a class="pure-menu-link" href="datasets.php">Datasets</a></li>
+				<li class=""><a class="pure-menu-link" href="submission_form.php">Compute Metrics</a></li>
+				<li class=""><a class="pure-menu-link" href="metrics.php">Submissions List</a></li>
+			</ul>
+		</div>
+	</div>
+	<!--- menu --->
+	
+	<div>
+		<div id="main">
+			'.((basename(__DIR__) == '3DGenBench_sandbox' ? '<div><aside style="background: rgb(202, 60, 60);"><p style="text-align: center;"><b>TEST BRANCH</b></p></aside></div>' : '')).'
+			
+			<!--- header --->
+			<div class="header">
+				<h1><span style="display: inline-block; color: rgb(223, 117, 20); font-weight: bold; font-size:118%;">3D</span>GenBench</h1>
+				<h2>'.$Header.'</h2>
+			</div>
+			<!--- header --->
+			
+			<!--- content --->
+			<div style="max-width: 1200px; min-height: 550px;" class="content">
+			
+<!--- CONTENT BLOCK START --->
 '; }
 
-function GetFooter() { return '</div><div class="footer"><div class="legal pure-g"><div class="pure-u-1 u-sm-1-2"><p class="legal-license">This site is built with ❤️ using Pure v<!-- -->2.0.6<br>Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.</p></div><div class="pure-u-1 u-sm-1-2"><ul class="legal-links"><li><a href="https://github.com/regnveig/3DGenBench">GitHub Project</a></li></ul><p class="legal-copyright">2022 - Present INC COST</p></div></div></div></div></div></div></body></html>'; }
+function GetFooter() { return '
+<!--- CONTENT BLOCK END --->
+			
+			</div>
+			<!--- content --->
+			</div>
+			<div class="footer">
+				<div class="legal pure-g">
+					<div class="pure-u-1 u-sm-1-2">
+						<p class="legal-license">
+							This site is built with <3 using Pure v2.0.6<br>
+							Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+						</p>
+					</div>
+					<div class="pure-u-1 u-sm-1-2">
+						<ul class="legal-links">
+							<li><a href="https://github.com/regnveig/3DGenBench">GitHub Project</a></li>
+						</ul>
+						<p class="legal-copyright">2022 - Present INC COST</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>'; }
+
 function GetWPUser() { return 'guest'; }
 function GetCondaActivate() { return $GLOBALS['bmCondaEnv'].'/bin/activate base'; }
 function GetBenchmarkPipeline() { return $GLOBALS['bmPipelineScript']; }

@@ -13,8 +13,8 @@ $ModelsList = ''; foreach (GetModelsUser() as $Model) $ModelsList .= '<option va
 
 echo GetHeader('Compute Metrics');
 
-// JS Func
-echo '
+?>
+
 <script>
 	
 	function addSelect(ts, container, entries_list, tag, label) {
@@ -50,7 +50,7 @@ echo '
 		lbl_select.innerHTML = "&nbsp";
 		div.appendChild(lbl_select);
 		var obj_button = document.createElement("button");
-		obj_button.setAttribute("onclick", "var elem = document.getElementById(\'" + stag + "\'); elem.remove();");
+		obj_button.setAttribute("onclick", "var elem = document.getElementById('" + stag + "'); elem.remove();");
 		obj_button.setAttribute("class", "pure-button pure-u-23-24");
 		obj_button.innerHTML = "Remove";
 		div.appendChild(obj_button);
@@ -58,13 +58,12 @@ echo '
 	}
 
 	function addBlock(TS, DataType) {
-		
 		var container = document.getElementById("submission_form");
 		if (container.children.length > 13) { alert("Too many datasets!"); return 0; }
-		if (DataType == "p") var SamplesList = '.json_encode($SamplesList).';
-		if (DataType == "s") var SamplesList = '.json_encode($WGSamplesList).';
-		var ResolutionsList = '.json_encode($ResolutionsList).';
-		var FilesList = '.json_encode($UploadedFilesList).';
+		if (DataType == "p") var SamplesList = <?php echo json_encode($SamplesList); ?>;
+		if (DataType == "s") var SamplesList = <?php echo json_encode($WGSamplesList); ?>;
+		var ResolutionsList = <?php echo json_encode($ResolutionsList); ?>;
+		var FilesList = <?php echo json_encode($UploadedFilesList); ?>;
 		var block_id = "block_" + TS;
 		var obj_block = document.createElement("div");
 		obj_block.setAttribute("id", block_id);
@@ -94,7 +93,7 @@ echo '
 	}
 	
 	function addTest() {
-		for (elem of document.querySelectorAll(\'[id^=block_]\')) elem.remove();
+		for (elem of document.querySelectorAll('[id^=block_]')) elem.remove();
 		var tp = document.getElementById("data_type").value;
 		var ts = new Date().getTime();
 		addBlock(ts, tp);
@@ -110,56 +109,57 @@ echo '
 			document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/chr19_22to42_10kb_GM12878_model30_smarterprediction.txt";
 		}
 	}
-</script>';
-
-// HTML
-
-echo '
-<form id="submission_form" class="pure-form pure-form-stacked" action="'.GetSubmissionScript().'" target="formresponse" method="POST">
 	
-	<input type="hidden" name="submission_secret" value="'.$Secret.'">
-	<input type="hidden" name="submission_user" value="'.$User.'">
-	<h2>General Submission Info</h2>
-	<div class="pure-g">
+</script>
 
+<form id="submission_form" class="pure-form pure-form-stacked" action="<?php echo GetSubmissionScript(); ?>" target="formresponse" method="POST">
+	
+	<input type="hidden" name="submission_secret" value="<?php echo $Secret; ?>">
+	<input type="hidden" name="submission_user" value="<?php echo $User; ?>">
+	
+	<h2>General Submission Info</h2>
+	
+	<div class="pure-g">
+	
 		<div class="pure-u-1-5">
 			<label for="submission_user1">Username:</label>
-			<input id="submission_user1" class="pure-u-23-24" type="text" value="'.$User.'" disabled>
+			<input id="submission_user1" class="pure-u-23-24" type="text" value="<?php echo $User; ?>" disabled>
 		</div>
 		
 		<div class="pure-u-1-5">
 			<label for="models_list">Model Name:</label>
 			<input type="text" class="pure-u-23-24" name="submission_model" id="models_list" list="models_list">
-			<datalist id="models_list">'.$ModelsList.'</datalist>
+			<datalist id="models_list"><?php echo $ModelsList; ?></datalist>
 		</div>
 		
 		<div class="pure-u-1-5">
 			<label for="data_type">Type:</label>
-			<select name="data_type" class="pure-u-23-24" id="data_type" onchange="for (elem of document.querySelectorAll(\'[id^=block_]\')) elem.remove(); addSampleBlock();"><option value="p">Paired [WT/MUT]</option><option value="s">Single</option></select>
+			<select name="data_type" class="pure-u-23-24" id="data_type" onchange="for (elem of document.querySelectorAll('[id^=block_]')) elem.remove(); addSampleBlock();">
+				<option value="p">Paired [WT/MUT]</option>
+				<option value="s">Single</option>
+			</select>
 		</div>
 		
 		<div class="pure-u-1-8">
-		<label for="_">&nbsp;</label>
+			<label for="_">&nbsp;</label>
 			<input type="submit" class="pure-button pure-u-23-24 button-success" value="Submit" onclick="SubmitOnClick()">
-			</div>
-		<div class="pure-u-1-5">
-		<label for="_">&nbsp;</label>
-			<button type="button" class="pure-button pure-u-23-24 button-secondary" onclick="window.open(\'tutorial.php#uploading\', \'blank\');">Datasets Upload Howto</button>
 		</div>
+		
+		<div class="pure-u-1-5">
+			<label for="_">&nbsp;</label>
+			<button type="button" class="pure-button pure-u-23-24 button-secondary" onclick="window.open('tutorial.php#uploading', 'blank');">Datasets Upload Howto</button>
+		</div>
+	
 	</div>
+	
 	<iframe hidden name="formresponse" class="pure-u-3-5" id="formresponse" frameBorder="0" scrolling="no" margin="0" height="90" width="100%"></iframe>
+	
 	<h2>Datasets</h2>
-<script>addSampleBlock();</script>
+	
+	<script>addSampleBlock();</script>
 </form>
-<div class="pure-u-1-8">
-	<button id="add_sample" class="pure-button pure-u-23-24" onclick="addSampleBlock();">Add Unit</button></div>
-	<div class="pure-u-1-8">
-	<button id="add_tetsaaa" class="pure-button pure-u-23-24" onclick="addTest();">Add Test Unit</button>
-</div>
 
+<div class="pure-u-1-8"><button id="add_sample" class="pure-button pure-u-23-24" onclick="addSampleBlock();">Add Unit</button></div>
+<div class="pure-u-1-8"><button id="add_tetsaaa" class="pure-button pure-u-23-24" onclick="addTest();">Add Test Unit</button>
 
-';
-
-echo GetFooter();
-
-?> 
+<?php echo GetFooter(); ?> 
