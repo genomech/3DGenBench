@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>https://inc-cost.cytogen.ru/</loc>
+  <lastmod>2022-03-28T09:49:25+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://inc-cost.cytogen.ru/index.php</loc>
+  <lastmod>2022-03-28T09:49:25+00:00</lastmod>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://inc-cost.cytogen.ru/tutorial.php</loc>
+  <lastmod>2022-03-28T09:49:25+00:00</lastmod>
+  <priority>0.9</priority>
+</url>
+<url>
+  <loc>https://inc-cost.cytogen.ru/datasets.php</loc>
+  <lastmod>2022-03-28T09:49:25+00:00</lastmod>
+  <priority>0.8</priority>
+</url>
+<url>
+  <loc>https://inc-cost.cytogen.ru/submission_form.php</loc>
+  <lastmod>2022-03-28T09:49:25+00:00</lastmod>
+  <priority>0.1</priority>
+</url>
+<url>
+  <loc>https://inc-cost.cytogen.ru/metrics.php</loc>
+  <lastmod>2022-03-28T09:49:25+00:00</lastmod>
+  <priority>0.1</priority>
+</url>
+</urlset>
