@@ -38,9 +38,9 @@ Samples metadata include the following information:
 <p>
 <strong>chr</strong>, <strong>start prediction</strong> and <strong>end prediction</strong> columns describe the genomic region for which Hi-C interactions expected to be predicted.
 <strong>Rearr #n Start</strong>, <strong>Rearr #n end</strong> columns describe the rearrangement coordinates.
-Each sample has several columns for rearrangement coordinates if several simultaneous mutations have been introduced.
+Each sample has several columns for rearrangement coordinates if multiple simultaneous mutations have been introduced.
 The type of rearrangement can be found in the <strong>Rearrangement Type</strong> column.
-Also pay attention to the assembly, cell type and available resolutions (5kb, 10kb, 20kb, 50kb).
+Also pay attention to the assembly, cell type, and available resolutions (5kb, 10kb, 20kb, 50kb).
 </p>
 
 <p>
@@ -78,7 +78,7 @@ These files have 2 additional columns with information about CTCF binding site o
 </p>
 
 <p>
-If you want to download the whole CTCF data dataset:
+If you want to download the whole CTCF data dataset use:
 </p>
 
 <div class="code"><pre style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(0, 0, 0); background: rgb(248, 248, 255) none repeat scroll 0% 0%;">
@@ -98,7 +98,7 @@ chr	contact_start	contact_end	contact_count
 
 <p>
 Please do not add header to the file.
-An example file could be downloaded <a href="https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/predicted_examples/" target="_blank" rel="noopener">here</a>.
+An example file can be downloaded <a href="https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/predicted_examples/" target="_blank" rel="noopener">here</a>.
 </p>
 
 <h2 id="uploading" ><strong>Step 3.</strong> Upload your predicted data to 3DGenBench</h2>
@@ -108,9 +108,10 @@ Please upload your data via FTP using any FTP client, such as <a href="https://f
 </p>
 
 <div class="code"><pre style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(0, 0, 0); background: rgb(248, 248, 255) none repeat scroll 0% 0%;">
-Host name:     ftp.alena-spn.cytogen.ru
-Port number:   8232
-Username:      ftpguest
+Protocol:      SFTP
+Host name:     gate1.cytogen.ru
+Port number:   8046
+Username:      sftp_user
 Password:      3DGenBench
 </pre></div>
 
@@ -125,7 +126,7 @@ The uploaded files will appear in drop-down list at the next (submission) step.
 <h2 id="compute_metrics"><strong>Step 4.</strong> Provide samples metadata and compute metrics</h2>
 
 <p>
-Once the data is uploaded, click the <button disabled>COMPUTE METRICS</button> button at home menu, chose the type of prediction (single or paired) and fill all the fields related to the predicted sample.
+Once the data is uploaded, click the <button disabled>COMPUTE METRICS</button> button at home menu, choose the type of prediction (single or paired) and fill all the fields related to the predicted sample.
 You can use <button disabled>Add test unit</button> button to load example of predicted contacts file.
 Alternatively, example samples can be loaded as shown in the figure below.
 </p>
@@ -172,7 +173,7 @@ These outliers are designed as ectopic interactions.</li>
 </ul>
 
 <p>
-To provide quantitative measurement of ectopic interactions overlap, we use visualization of precision-recall curves, output area under the curve metrics and show the overlap of the predicted and experimentally measured ectopic interactions as compared to randomized controls:</p>
+To provide quantitative measurement of ectopic interactions overlap, we use visualization of precision-recall curves, output area under the curve metrics, and show the overlap of the predicted and experimentally measured ectopic interactions as compared to randomized controls:</p>
 
 <ul>
 <li>Changes in TAD-separation score.
