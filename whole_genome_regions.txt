@@ -15,7 +15,7 @@ mESC_chr10_59to79Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DB
 mESC_chr6_84to104Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/mESC/	mESC	chr6	84000000	104000000	mouse	mm10	/storage/hic_data_for_3DBench/mESC/
 mESC_chr8_23to43Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/mESC/	mESC	chr8	23000000	43000000	mouse	mm10	/storage/hic_data_for_3DBench/mESC/
 mESC_chr11_7to27Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/mESC/	mESC	chr11	7000000	27000000	mouse	mm10	/storage/hic_data_for_3DBench/mESC/
-Kc167_chr2L_5to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/Kc167/	Kc167	chr2L	500000	20000000	drosophila	dm6	/storage/hic_data_for_3DBench/Kc167/
-Kc167_chr2R_5to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/Kc167/	Kc167	chr2R	500000	20000000	drosophila	dm6	/storage/hic_data_for_3DBench/Kc167/
-Kc167_chr3L_5to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/Kc167/	Kc167	chr3L	500000	20000000	drosophila	dm6	/storage/hic_data_for_3DBench/Kc167/
-Kc167_chr3R_5to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/Kc167/	Kc167	chr3R	500000	20000000	drosophila	dm6	/storage/hic_data_for_3DBench/Kc167/
+Kc167_chr2L_5to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/Kc167/	Kc167	chr2L	5000000	20000000	drosophila	dm6	/storage/hic_data_for_3DBench/Kc167/
+Kc167_chr2R_5to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/Kc167/	Kc167	chr2R	5000000	20000000	drosophila	dm6	/storage/hic_data_for_3DBench/Kc167/
+Kc167_chr3L_5to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/Kc167/	Kc167	chr3L	5000000	20000000	drosophila	dm6	/storage/hic_data_for_3DBench/Kc167/
+Kc167_chr3R_5to20Mb	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/Kc167/	Kc167	chr3R	5000000	20000000	drosophila	dm6	/storage/hic_data_for_3DBench/Kc167/
