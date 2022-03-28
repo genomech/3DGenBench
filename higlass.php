@@ -2,6 +2,8 @@
 
 $UID = htmlspecialchars($_GET['id']);
 $DataType = htmlspecialchars($_GET['type']);
+$Pos = htmlspecialchars($_GET['pos']);
+$End = htmlspecialchars($_GET['end']);
 
 if ($DataType == 'p') {
 
@@ -156,6 +158,9 @@ if ($DataType == 'p') {
 					"whole": [],
 					"gallery": []
 				},
+
+				"initialXDomain": [ '.$Pos.', '.$End.' ],
+				"initialYDomain": [ '.$Pos.', '.$End.' ],
 				
 				"layout": {
 					"w": 6,
@@ -355,6 +360,8 @@ elseif ($DataType == 's') {
 					"whole": [],
 					"gallery": []
 				},
+				"initialXDomain": [ '.$Pos.', '.$End.' ],
+				"initialYDomain": [ '.$Pos.', '.$End.' ],
 				"layout": {
 					"w": 6,
 					"h": 6,
