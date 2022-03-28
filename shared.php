@@ -40,6 +40,7 @@ function GetHeader($Header) { return '
 <script src="https://cdn.jsdelivr.net/npm/cookieconsent@3/build/cookieconsent.min.js"></script>
 </head>
 <body>
+
 <div id="cookieconsent"></div>
 <script>window.cookieconsent.initialise({
     container: document.getElementById("cookieconsent"),

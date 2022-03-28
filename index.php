@@ -13,7 +13,7 @@ echo '
 
 <p>We <a href="datasets.php" target="blank">collected</a> the dataset containing capture Hi-C and epigenetics data for wild-type and mutated mouse and human cell types.</p>
 
-<img src="images/infographics.jpg" width="80%">
+<img src="images/infographics.png" width="80%">
 
 <p>The current dataset contains samples from several dozen mouse lines harboring genomic mutations with the known effect on chromatin organization, including data from the groups of Stefan Mundlas, Denis Duboule, Douglas Higgs, Laura Lettice, John Rinn and Narimann Battulin groups.
 If you have generated 3C-data describing changes of chromatin architecture caused by genetic mutations in human and/or mouse cells, which is not currently in the dataset, please <a href="minja@bionet.nsc.ru" target="blank">let us know</a> or <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9JaEds4OTjdR_awMPVrQK5SwmIluRzuAvZTOZ2zuFlv0AXg/viewform" target="blank">submit</a> it directly to the dataset.</p>
