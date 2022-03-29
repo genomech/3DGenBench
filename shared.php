@@ -20,8 +20,14 @@ $GLOBALS['bmMetricsPage'] = 'metrics_view.php';
 // GET CONST FUNC
 function GetHeader($Header) { 
 $Pride = 'ua-flag';
-if (date('F') == "June") { $Pride = 'lgbtq-flag'; }
-if ((date('F') == "March") and (date('d') == "31")) { $Pride = 'trans-flag'; }
+$Phrase = 'Science needs peace now, not tomorrow.';
+if (date('F') == "June") {
+	$Pride = 'lgbtq-flag';
+	$Phrase = 'Path of science is not always straight.'; }
+if ((date('F') == "March") and (date('d') == "31")) {
+	$Pride = 'trans-flag';
+	$Phrase = 'Encourage cis-trans interactions!';
+	}
 return '
 <html lang="en">
 
@@ -104,6 +110,14 @@ return '
 		-webkit-text-fill-color: transparent;
 		font-weight: bold;
 	}
+	
+	.casual {
+		background: black;
+		-webkit-text-stroke: 1px rgba(0,0,0,0.7);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: bold;
+	}
 </style>
 
 </head>
@@ -163,10 +177,10 @@ window.cookieconsent.initialise({
 			
 			<!--- header --->
 			<div class="header">
-				
+				<span style="color: rgba(0,0,0,0.2);">'.$Phrase.'</span>
 				<h1><span class="'.$Pride.' pride">3DGenBench</span></h1>
-				
 				<h2>'.$Header.'</h2>
+				
 			</div>
 			<!--- header --->
 			
