@@ -45,7 +45,6 @@ function GetHeader($Header) { return '
 <!--- purecss --->
 <link rel="stylesheet" href="css/pure-main.css">
 <link rel="stylesheet" href="css/pure-min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300">
 <!--- purecss --->
 
 <!--- cookie consent --->
@@ -77,6 +76,14 @@ function GetHeader($Header) { return '
 	.button-error { background: rgb(202, 60, 60); }
 	.button-warning { background: rgb(223, 117, 20); }
 	.button-secondary { background: rgb(66, 184, 221); }
+	
+	.ua-flag {
+		background: linear-gradient(to bottom, #0057B8 50%, #FFD700 50%);
+		-webkit-text-stroke: 1px rgba(0,0,0,0.3);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: bold;
+	}
 </style>
 
 </head>
@@ -136,7 +143,9 @@ window.cookieconsent.initialise({
 			
 			<!--- header --->
 			<div class="header">
-				<h1><span style="display: inline-block; color: rgb(223, 117, 20); font-weight: bold; font-size:118%;">3D</span>GenBench</h1>
+				
+				<h1><span class="ua-flag">3DGenBench</span></h1>
+				
 				<h2>'.$Header.'</h2>
 			</div>
 			<!--- header --->
