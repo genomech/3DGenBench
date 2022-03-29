@@ -44,7 +44,6 @@ else {
 	$Record = $TableArray[0];
 	
 	if ($Record['Metadata.Type'] == 'p') {
-	
 		// draw random
 		
 		function DrawRandom($Data, $Name, $Caption) {
@@ -126,7 +125,7 @@ else {
 		
 		// draw page
 		
-		echo '<script src="https://www.gstatic.com/charts/loader.js"></script>
+		echo '
 		
 		<script type="text/javascript">
 		google.charts.load("current", { packages: ["corechart", "scatter"]});
@@ -156,10 +155,6 @@ else {
 		<tr><td><b>SCC:</b></td><td>'.$Record['Metrics.SCC.WT'].'</td><td>'.$Record['Metrics.SCC.MUT'].'</td></tr>
 		<tr><td><b>Insulation Score Spearman:</b></td><td>'.$Record['Metrics.InsulationScorePearson.WT'].'</td><td>'.$Record['Metrics.InsulationScorePearson.MUT'].'</td></tr>
 		<tr><td style="width: 400px;"><b>Insulation Score Mut/Wt Spearman:</b></td><td style="width: 800px;" colspan="2">'.$Record['Metrics.InsulationScoreMutVsWtPearson'].'</td></tr></tbody>
-		</table>
-
-		<table class="pure-table pure-table-bordered pure-table-striped">
-		
 		</table>';
 
 		DrawPR(array(

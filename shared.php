@@ -59,6 +59,10 @@ function GetHeader($Header) { return '
 <script type="text/javascript" src="js/xlsx.full.min.js"></script>
 <!--- tabulator and xlsx --->
 
+<!--- gcharts --->
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<!--- gcharts --->
+
 <style>
 	.button-success,
 	.button-error,
