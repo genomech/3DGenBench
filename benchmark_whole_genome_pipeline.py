@@ -115,7 +115,7 @@ def Tsv2Cool(TsvFN, OutputCoolFN, TemplateCoolFN, Chrom, PredictionStart, Predic
     Pixels = Pixels[["bin1_id", "bin2_id", "count"]]
     # check that all values are more than 1 and cooler won't delete it in new cool file
     if len(Pixels) - len(Pixels[Pixels["count"] > 1]) >=100:
-        logging.warning(f"more than 100 contacts in cool file {OutputCoolFN}", "are equal to zero after normalization")
+        logging.warning(f"more than 100 contacts in cool file {OutputCoolFN} are equal to zero after normalization")
         assert len(Pixels) - len(Pixels[Pixels["count"] > 1]) >=100
     cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
@@ -421,7 +421,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
     with Timer(f"Insulation Score Pearson") as _:
         Data["Metrics.InsulationScorePearson"] = PearsonCorr(InsDataset["sum_balanced_Exp"],
-                                                                InsDataset["sum_balanced_Pred"])
+                                                                InsDataset["sum_balanced_Pred"], method='spearman')
 
     # save insulatory score bedgraphs
     with Timer(f"Save Bedgraphs") as _:
