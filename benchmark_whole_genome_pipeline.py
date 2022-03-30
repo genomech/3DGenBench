@@ -421,7 +421,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 
     with Timer(f"Insulation Score Pearson") as _:
         Data["Metrics.InsulationScorePearson"] = PearsonCorr(InsDataset["sum_balanced_Exp"],
-                                                                InsDataset["sum_balanced_Pred"])
+                                                                InsDataset["sum_balanced_Pred"], method='spearman')
 
     # save insulatory score bedgraphs
     with Timer(f"Save Bedgraphs") as _:
