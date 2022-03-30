@@ -151,10 +151,10 @@ else {
 		<table class="pure-table pure-table-bordered pure-table-striped">
 		<thead>
 		<tr><th>&nbsp;</th><th>WT</th><th>Mut</th></tr></thead><tbody>
-		<tr><td style="width: 400px;"><b>Spearman:</b></td><td style="width: 400px;">'.$Record['Metrics.Pearson.WT'].'</td><td style="width: 400px;">'.$Record['Metrics.Pearson.MUT'].'</td></tr>
+		<tr><td style="width: 400px;"><b>All contacts Spearman:</b></td><td style="width: 400px;">'.$Record['Metrics.Pearson.WT'].'</td><td style="width: 400px;">'.$Record['Metrics.Pearson.MUT'].'</td></tr>
 		<tr><td><b>SCC:</b></td><td>'.$Record['Metrics.SCC.WT'].'</td><td>'.$Record['Metrics.SCC.MUT'].'</td></tr>
-		<tr><td><b>Insulation Score Spearman:</b></td><td>'.$Record['Metrics.InsulationScorePearson.WT'].'</td><td>'.$Record['Metrics.InsulationScorePearson.MUT'].'</td></tr>
-		<tr><td style="width: 400px;"><b>Insulation Score Mut/Wt Spearman:</b></td><td style="width: 800px;" colspan="2">'.$Record['Metrics.InsulationScoreMutVsWtPearson'].'</td></tr></tbody>
+		<tr><td><b>Insulation Score Pearson:</b></td><td>'.$Record['Metrics.InsulationScorePearson.WT'].'</td><td>'.$Record['Metrics.InsulationScorePearson.MUT'].'</td></tr>
+		<tr><td style="width: 400px;"><b>Insulation Score Mut/Wt Pearson:</b></td><td style="width: 800px;" colspan="2">'.$Record['Metrics.InsulationScoreMutVsWtPearson'].'</td></tr></tbody>
 		</table>';
 
 		DrawPR(array(
@@ -198,11 +198,11 @@ else {
 		<h2>Metrics</h2>
 		
 		<table class="pure-table pure-table-bordered pure-table-striped">
-		<tr><td style="width: 400px;"><b>Spearman:</b></td><td style="width: 800px;">'.$MetricsData['Metrics.Pearson'].'</td></tr>
+		<tr><td style="width: 400px;"><b>All contacts Spearman:</b></td><td style="width: 800px;">'.$MetricsData['Metrics.Pearson'].'</td></tr>
 		<tr><td><b>SCC:</b></td><td>'.$MetricsData['Metrics.SCC'].'</td></tr>
-		<tr><td><b>Insulation Score Spearman:</b></td><td>'.$MetricsData['Metrics.InsulationScorePearson'].'</td></tr>
-		<tr><td><b>Compartment Strength Spearman:</b></td><td>'.$MetricsData['Metrics.CompartmentStrengthPearson'].'</td></tr>
-		<tr><td><b>Ps Spearman:</b></td><td>'.$MetricsData['Metrics.PsPearson'].'</td></tr>
+		<tr><td><b>Insulation Score Pearson:</b></td><td>'.$MetricsData['Metrics.InsulationScorePearson'].'</td></tr>
+		<tr><td><b>Compartment Strength Pearson:</b></td><td>'.$MetricsData['Metrics.CompartmentStrengthPearson'].'</td></tr>
+		<tr><td><b>P(s) Pearson:</b></td><td>'.$MetricsData['Metrics.PsPearson'].'</td></tr>
 		</table> <h2>HiGlass View</h2>';
 	
 	echo '<iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=s&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
