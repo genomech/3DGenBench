@@ -1,0 +1,957 @@
+cell_type	target	filetype	download_link	source	assembly
+GM12878	H3K4me3	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF538GUG/@@download/ENCFF538GUG.bigBed	ENCODE	hg19
+GM12878	H3K4me3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF674QZB/@@download/ENCFF674QZB.bigWig	ENCODE	hg19
+GM12878	JUNB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF671XIQ/@@download/ENCFF671XIQ.bigBed	ENCODE	hg19
+GM12878	JUNB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF278JRW/@@download/ENCFF278JRW.bigWig	ENCODE	hg19
+GM12878	SIN3A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF580QAA/@@download/ENCFF580QAA.bigBed	ENCODE	hg19
+GM12878	SIN3A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF747GCR/@@download/ENCFF747GCR.bigWig	ENCODE	hg19
+GM12878	MTA2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF361YNB/@@download/ENCFF361YNB.bigBed	ENCODE	hg19
+GM12878	MTA2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF021OHP/@@download/ENCFF021OHP.bigWig	ENCODE	hg19
+GM12878	H4K20me1	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF031EHW/@@download/ENCFF031EHW.bigBed	ENCODE	hg19
+GM12878	H4K20me1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF831WYD/@@download/ENCFF831WYD.bigWig	ENCODE	hg19
+GM12878	IRF5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF681WHN/@@download/ENCFF681WHN.bigBed	ENCODE	hg19
+GM12878	IRF5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF975GNN/@@download/ENCFF975GNN.bigWig	ENCODE	hg19
+GM12878	H2AFZ	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF379SHI/@@download/ENCFF379SHI.bigBed	ENCODE	hg19
+GM12878	H2AFZ	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF885XEM/@@download/ENCFF885XEM.bigWig	ENCODE	hg19
+GM12878	RCOR1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF876SYJ/@@download/ENCFF876SYJ.bigBed	ENCODE	hg19
+GM12878	RCOR1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF483ELN/@@download/ENCFF483ELN.bigWig	ENCODE	hg19
+GM12878	TAF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF476ZNS/@@download/ENCFF476ZNS.bigBed	ENCODE	hg19
+GM12878	TAF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF411THR/@@download/ENCFF411THR.bigWig	ENCODE	hg19
+GM12878	ZBTB33	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF681RVL/@@download/ENCFF681RVL.bigBed	ENCODE	hg19
+GM12878	ZBTB33	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF759UFB/@@download/ENCFF759UFB.bigWig	ENCODE	hg19
+GM12878	MEF2B	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF779NGV/@@download/ENCFF779NGV.bigBed	ENCODE	hg19
+GM12878	MEF2B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF637YIA/@@download/ENCFF637YIA.bigWig	ENCODE	hg19
+GM12878	E2F8	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF298JWO/@@download/ENCFF298JWO.bigBed	ENCODE	hg19
+GM12878	E2F8	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF284FKX/@@download/ENCFF284FKX.bigWig	ENCODE	hg19
+GM12878	E2F4	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF683PLX/@@download/ENCFF683PLX.bigBed	ENCODE	hg19
+GM12878	E2F4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF926RPL/@@download/ENCFF926RPL.bigWig	ENCODE	hg19
+GM12878	POLR3G	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF430FNU/@@download/ENCFF430FNU.bigBed	ENCODE	hg19
+GM12878	TARDBP	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF468SZX/@@download/ENCFF468SZX.bigBed	ENCODE	hg19
+GM12878	TARDBP	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF362SVS/@@download/ENCFF362SVS.bigWig	ENCODE	hg19
+GM12878	TCF12	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF603BBW/@@download/ENCFF603BBW.bigBed	ENCODE	hg19
+GM12878	TCF12	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF527WDJ/@@download/ENCFF527WDJ.bigWig	ENCODE	hg19
+GM12878	TBP	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF875GEQ/@@download/ENCFF875GEQ.bigBed	ENCODE	hg19
+GM12878	TBP	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF595HYD/@@download/ENCFF595HYD.bigWig	ENCODE	hg19
+GM12878	H3K27me3	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF176SQS/@@download/ENCFF176SQS.bigBed	ENCODE	hg19
+GM12878	H3K27me3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF167NBF/@@download/ENCFF167NBF.bigWig	ENCODE	hg19
+GM12878	NFIC	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF598MIG/@@download/ENCFF598MIG.bigBed	ENCODE	hg19
+GM12878	NFIC	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF996TKN/@@download/ENCFF996TKN.bigWig	ENCODE	hg19
+GM12878	MTA3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF457WBH/@@download/ENCFF457WBH.bigBed	ENCODE	hg19
+GM12878	MTA3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF906VFS/@@download/ENCFF906VFS.bigWig	ENCODE	hg19
+GM12878	ZFP36	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF998TXK/@@download/ENCFF998TXK.bigBed	ENCODE	hg19
+GM12878	ZFP36	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF508ATZ/@@download/ENCFF508ATZ.bigWig	ENCODE	hg19
+GM12878	SPI1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF255HPH/@@download/ENCFF255HPH.bigBed	ENCODE	hg19
+GM12878	SPI1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF793RKX/@@download/ENCFF793RKX.bigWig	ENCODE	hg19
+GM12878	RAD21	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF891UAP/@@download/ENCFF891UAP.bigBed	ENCODE	hg19
+GM12878	RAD21	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF567EGK/@@download/ENCFF567EGK.bigWig	ENCODE	hg19
+GM12878	CBX3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF732LWT/@@download/ENCFF732LWT.bigBed	ENCODE	hg19
+GM12878	CBX3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF560MPE/@@download/ENCFF560MPE.bigWig	ENCODE	hg19
+GM12878	MYC	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF453AHV/@@download/ENCFF453AHV.bigBed	ENCODE	hg19
+GM12878	NFYA	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF800ZEJ/@@download/ENCFF800ZEJ.bigBed	ENCODE	hg19
+GM12878	NFYA	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF169EJC/@@download/ENCFF169EJC.bigWig	ENCODE	hg19
+GM12878	ATF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF776TIB/@@download/ENCFF776TIB.bigBed	ENCODE	hg19
+GM12878	ATF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF214DHW/@@download/ENCFF214DHW.bigWig	ENCODE	hg19
+GM12878	MXI1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF651XZU/@@download/ENCFF651XZU.bigBed	ENCODE	hg19
+GM12878	MXI1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF840ZJM/@@download/ENCFF840ZJM.bigWig	ENCODE	hg19
+GM12878	BCL11A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF441FOB/@@download/ENCFF441FOB.bigBed	ENCODE	hg19
+GM12878	BCL11A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF049DFX/@@download/ENCFF049DFX.bigWig	ENCODE	hg19
+GM12878	YY1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF338GRE/@@download/ENCFF338GRE.bigBed	ENCODE	hg19
+GM12878	YY1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF631VCL/@@download/ENCFF631VCL.bigWig	ENCODE	hg19
+GM12878	BHLHE40	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF944MMI/@@download/ENCFF944MMI.bigBed	ENCODE	hg19
+GM12878	BHLHE40	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF522MRN/@@download/ENCFF522MRN.bigWig	ENCODE	hg19
+GM12878	MEF2A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF402EQI/@@download/ENCFF402EQI.bigBed	ENCODE	hg19
+GM12878	MEF2A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF975FYL/@@download/ENCFF975FYL.bigWig	ENCODE	hg19
+GM12878	CTCF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF034SYS/@@download/ENCFF034SYS.bigBed	ENCODE	hg19
+GM12878	CTCF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF312KXX/@@download/ENCFF312KXX.bigWig	ENCODE	hg19
+GM12878	EP300	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF332HKJ/@@download/ENCFF332HKJ.bigBed	ENCODE	hg19
+GM12878	EP300	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF508TEV/@@download/ENCFF508TEV.bigWig	ENCODE	hg19
+GM12878	H3K79me2	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF741YFD/@@download/ENCFF741YFD.bigBed	ENCODE	hg19
+GM12878	H3K79me2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF396JIR/@@download/ENCFF396JIR.bigWig	ENCODE	hg19
+GM12878	TRIM22	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF618ORZ/@@download/ENCFF618ORZ.bigBed	ENCODE	hg19
+GM12878	TRIM22	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF896KWL/@@download/ENCFF896KWL.bigWig	ENCODE	hg19
+GM12878	ZZZ3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF050KOG/@@download/ENCFF050KOG.bigBed	ENCODE	hg19
+GM12878	ZZZ3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF971DNG/@@download/ENCFF971DNG.bigWig	ENCODE	hg19
+GM12878	CREM	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF531NIE/@@download/ENCFF531NIE.bigBed	ENCODE	hg19
+GM12878	CREM	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF403JWE/@@download/ENCFF403JWE.bigWig	ENCODE	hg19
+GM12878	RFX5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF130WGW/@@download/ENCFF130WGW.bigBed	ENCODE	hg19
+GM12878	RFX5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF972UXB/@@download/ENCFF972UXB.bigWig	ENCODE	hg19
+GM12878	PAX8	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF811HKX/@@download/ENCFF811HKX.bigBed	ENCODE	hg19
+GM12878	PAX8	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF463YMM/@@download/ENCFF463YMM.bigWig	ENCODE	hg19
+GM12878	UBTF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF802EUE/@@download/ENCFF802EUE.bigBed	ENCODE	hg19
+GM12878	UBTF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF127MEU/@@download/ENCFF127MEU.bigWig	ENCODE	hg19
+GM12878	ZNF143	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF564ZYC/@@download/ENCFF564ZYC.bigBed	ENCODE	hg19
+GM12878	ZNF143	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF639ZAX/@@download/ENCFF639ZAX.bigWig	ENCODE	hg19
+GM12878	SRF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF059TGS/@@download/ENCFF059TGS.bigBed	ENCODE	hg19
+GM12878	SRF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF158HLI/@@download/ENCFF158HLI.bigWig	ENCODE	hg19
+GM12878	SUPT20H	peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF000WDQ/@@download/ENCFF000WDQ.bigBed	ENCODE	hg19
+GM12878	SIX5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF808EYW/@@download/ENCFF808EYW.bigBed	ENCODE	hg19
+GM12878	SIX5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF371AOB/@@download/ENCFF371AOB.bigWig	ENCODE	hg19
+GM12878	STAT5A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF421TDT/@@download/ENCFF421TDT.bigBed	ENCODE	hg19
+GM12878	STAT5A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF113XQT/@@download/ENCFF113XQT.bigWig	ENCODE	hg19
+GM12878	HDAC6	pseudoreplicated IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF017NYS/@@download/ENCFF017NYS.bigBed	ENCODE	hg19
+GM12878	HDAC6	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF449ZFX/@@download/ENCFF449ZFX.bigWig	ENCODE	hg19
+GM12878	STAT1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF249OMS/@@download/ENCFF249OMS.bigBed	ENCODE	hg19
+GM12878	STAT1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF281ULQ/@@download/ENCFF281ULQ.bigWig	ENCODE	hg19
+GM12878	POLR2A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF719TKY/@@download/ENCFF719TKY.bigBed	ENCODE	hg19
+GM12878	POLR2A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF368HBX/@@download/ENCFF368HBX.bigWig	ENCODE	hg19
+GM12878	EGR1	pseudoreplicated IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF656NCQ/@@download/ENCFF656NCQ.bigBed	ENCODE	hg19
+GM12878	EGR1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF624CPW/@@download/ENCFF624CPW.bigWig	ENCODE	hg19
+GM12878	TCF7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF448TPQ/@@download/ENCFF448TPQ.bigBed	ENCODE	hg19
+GM12878	TCF7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF758RBF/@@download/ENCFF758RBF.bigWig	ENCODE	hg19
+GM12878	SMC3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF470DIG/@@download/ENCFF470DIG.bigBed	ENCODE	hg19
+GM12878	SMC3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF235BXX/@@download/ENCFF235BXX.bigWig	ENCODE	hg19
+GM12878	ZNF384	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF099BRN/@@download/ENCFF099BRN.bigBed	ENCODE	hg19
+GM12878	ZNF384	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF957MTQ/@@download/ENCFF957MTQ.bigWig	ENCODE	hg19
+GM12878	NR2C2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF588OWL/@@download/ENCFF588OWL.bigBed	ENCODE	hg19
+GM12878	NR2C2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF861LRM/@@download/ENCFF861LRM.bigWig	ENCODE	hg19
+GM12878	BCLAF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF167BQX/@@download/ENCFF167BQX.bigBed	ENCODE	hg19
+GM12878	BCLAF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF534OEO/@@download/ENCFF534OEO.bigWig	ENCODE	hg19
+GM12878	NBN	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF243AQY/@@download/ENCFF243AQY.bigBed	ENCODE	hg19
+GM12878	NBN	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF601VCM/@@download/ENCFF601VCM.bigWig	ENCODE	hg19
+GM12878	MAFK	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF219PET/@@download/ENCFF219PET.bigBed	ENCODE	hg19
+GM12878	MAFK	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF600DHH/@@download/ENCFF600DHH.bigWig	ENCODE	hg19
+GM12878	TBL1XR1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF798BTY/@@download/ENCFF798BTY.bigBed	ENCODE	hg19
+GM12878	TBL1XR1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF816KEF/@@download/ENCFF816KEF.bigWig	ENCODE	hg19
+GM12878	REST	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF116OSK/@@download/ENCFF116OSK.bigBed	ENCODE	hg19
+GM12878	REST	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF320YSB/@@download/ENCFF320YSB.bigWig	ENCODE	hg19
+GM12878	HSF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF718CMI/@@download/ENCFF718CMI.bigBed	ENCODE	hg19
+GM12878	HSF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF455ZPQ/@@download/ENCFF455ZPQ.bigWig	ENCODE	hg19
+GM12878	IKZF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF591MWQ/@@download/ENCFF591MWQ.bigBed	ENCODE	hg19
+GM12878	IKZF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF405CHV/@@download/ENCFF405CHV.bigWig	ENCODE	hg19
+GM12878	MLLT1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF251PIF/@@download/ENCFF251PIF.bigBed	ENCODE	hg19
+GM12878	MLLT1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF319DUB/@@download/ENCFF319DUB.bigWig	ENCODE	hg19
+GM12878	RUNX3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF458CFK/@@download/ENCFF458CFK.bigBed	ENCODE	hg19
+GM12878	RUNX3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF238SAO/@@download/ENCFF238SAO.bigWig	ENCODE	hg19
+GM12878	E4F1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF074KEB/@@download/ENCFF074KEB.bigBed	ENCODE	hg19
+GM12878	E4F1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF167WPQ/@@download/ENCFF167WPQ.bigWig	ENCODE	hg19
+GM12878	H3K9ac	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF159APG/@@download/ENCFF159APG.bigBed	ENCODE	hg19
+GM12878	H3K9ac	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF465KNK/@@download/ENCFF465KNK.bigWig	ENCODE	hg19
+GM12878	PAX5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF226YNH/@@download/ENCFF226YNH.bigBed	ENCODE	hg19
+GM12878	PAX5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF267GFQ/@@download/ENCFF267GFQ.bigWig	ENCODE	hg19
+GM12878	BCL3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF963QXH/@@download/ENCFF963QXH.bigBed	ENCODE	hg19
+GM12878	BCL3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF366FDQ/@@download/ENCFF366FDQ.bigWig	ENCODE	hg19
+GM12878	H3K4me1	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF220EYY/@@download/ENCFF220EYY.bigBed	ENCODE	hg19
+GM12878	H3K4me1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF682WPF/@@download/ENCFF682WPF.bigWig	ENCODE	hg19
+GM12878	STAT3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF970MDY/@@download/ENCFF970MDY.bigBed	ENCODE	hg19
+GM12878	STAT3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF133SDO/@@download/ENCFF133SDO.bigWig	ENCODE	hg19
+GM12878	SMAD5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF388FCW/@@download/ENCFF388FCW.bigBed	ENCODE	hg19
+GM12878	SMAD5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF865SUF/@@download/ENCFF865SUF.bigWig	ENCODE	hg19
+GM12878	RXRA	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF587XVH/@@download/ENCFF587XVH.bigBed	ENCODE	hg19
+GM12878	RXRA	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF899EVQ/@@download/ENCFF899EVQ.bigWig	ENCODE	hg19
+GM12878	RBBP5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF259XKL/@@download/ENCFF259XKL.bigBed	ENCODE	hg19
+GM12878	RBBP5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF042FRR/@@download/ENCFF042FRR.bigWig	ENCODE	hg19
+GM12878	CHD1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF058AIB/@@download/ENCFF058AIB.bigBed	ENCODE	hg19
+GM12878	CHD1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF405ZKS/@@download/ENCFF405ZKS.bigWig	ENCODE	hg19
+GM12878	ZEB1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF807LKR/@@download/ENCFF807LKR.bigBed	ENCODE	hg19
+GM12878	ZEB1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF167NPM/@@download/ENCFF167NPM.bigWig	ENCODE	hg19
+GM12878	CEBPB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF776SJV/@@download/ENCFF776SJV.bigBed	ENCODE	hg19
+GM12878	CEBPB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF481MMI/@@download/ENCFF481MMI.bigWig	ENCODE	hg19
+GM12878	ETV6	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF862YUS/@@download/ENCFF862YUS.bigBed	ENCODE	hg19
+GM12878	ETV6	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF486PYA/@@download/ENCFF486PYA.bigWig	ENCODE	hg19
+GM12878	POLR2AphosphoS2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF158UFB/@@download/ENCFF158UFB.bigBed	ENCODE	hg19
+GM12878	POLR2AphosphoS2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF031RUV/@@download/ENCFF031RUV.bigWig	ENCODE	hg19
+GM12878	BRCA1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF301RKI/@@download/ENCFF301RKI.bigBed	ENCODE	hg19
+GM12878	BRCA1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF314JBH/@@download/ENCFF314JBH.bigWig	ENCODE	hg19
+GM12878	PBX3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF154ZCV/@@download/ENCFF154ZCV.bigBed	ENCODE	hg19
+GM12878	PBX3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF022SDG/@@download/ENCFF022SDG.bigWig	ENCODE	hg19
+GM12878	NFYB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF617QWH/@@download/ENCFF617QWH.bigBed	ENCODE	hg19
+GM12878	NFYB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF112JWF/@@download/ENCFF112JWF.bigWig	ENCODE	hg19
+GM12878	H3K36me3	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF425TVP/@@download/ENCFF425TVP.bigBed	ENCODE	hg19
+GM12878	H3K36me3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF662QFK/@@download/ENCFF662QFK.bigWig	ENCODE	hg19
+GM12878	EZH2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF134RHC/@@download/ENCFF134RHC.bigBed	ENCODE	hg19
+GM12878	EZH2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF410SZR/@@download/ENCFF410SZR.bigWig	ENCODE	hg19
+GM12878	FOS	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF083XJS/@@download/ENCFF083XJS.bigBed	ENCODE	hg19
+GM12878	IRF4	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF620GIC/@@download/ENCFF620GIC.bigBed	ENCODE	hg19
+GM12878	IRF4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF291ILI/@@download/ENCFF291ILI.bigWig	ENCODE	hg19
+GM12878	ELK1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF229LMM/@@download/ENCFF229LMM.bigBed	ENCODE	hg19
+GM12878	ELK1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF979FNK/@@download/ENCFF979FNK.bigWig	ENCODE	hg19
+GM12878	ZNF274	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF821VIC/@@download/ENCFF821VIC.bigBed	ENCODE	hg19
+GM12878	NFATC1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF742OFT/@@download/ENCFF742OFT.bigBed	ENCODE	hg19
+GM12878	NFATC1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF963CDS/@@download/ENCFF963CDS.bigWig	ENCODE	hg19
+GM12878	ZNF207	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF471CVE/@@download/ENCFF471CVE.bigBed	ENCODE	hg19
+GM12878	ZNF207	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF484ZSZ/@@download/ENCFF484ZSZ.bigWig	ENCODE	hg19
+GM12878	BMI1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF792OHO/@@download/ENCFF792OHO.bigBed	ENCODE	hg19
+GM12878	BMI1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF407PLR/@@download/ENCFF407PLR.bigWig	ENCODE	hg19
+GM12878	SREBF2	peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF000WEE/@@download/ENCFF000WEE.bigBed	ENCODE	hg19
+GM12878	SUZ12	pseudoreplicated IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF093MSD/@@download/ENCFF093MSD.bigBed	ENCODE	hg19
+GM12878	SUZ12	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF876VVJ/@@download/ENCFF876VVJ.bigWig	ENCODE	hg19
+GM12878	EBF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF702YUA/@@download/ENCFF702YUA.bigBed	ENCODE	hg19
+GM12878	EBF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF499QLO/@@download/ENCFF499QLO.bigWig	ENCODE	hg19
+GM12878	POLR2AphosphoS5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF475UZP/@@download/ENCFF475UZP.bigBed	ENCODE	hg19
+GM12878	POLR2AphosphoS5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF002UPS/@@download/ENCFF002UPS.bigWig	ENCODE	hg19
+GM12878	CHD2	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF848RCO/@@download/ENCFF848RCO.bigBed	ENCODE	hg19
+GM12878	CHD2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF963XEI/@@download/ENCFF963XEI.bigWig	ENCODE	hg19
+GM12878	CUX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF968FGD/@@download/ENCFF968FGD.bigBed	ENCODE	hg19
+GM12878	CUX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF086OCM/@@download/ENCFF086OCM.bigWig	ENCODE	hg19
+GM12878	MAZ	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF084RZM/@@download/ENCFF084RZM.bigBed	ENCODE	hg19
+GM12878	MAZ	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF197TNR/@@download/ENCFF197TNR.bigWig	ENCODE	hg19
+GM12878	WRNIP1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF354MYM/@@download/ENCFF354MYM.bigBed	ENCODE	hg19
+GM12878	WRNIP1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF526WWD/@@download/ENCFF526WWD.bigWig	ENCODE	hg19
+GM12878	ELF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF686WUZ/@@download/ENCFF686WUZ.bigBed	ENCODE	hg19
+GM12878	ELF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF937HON/@@download/ENCFF937HON.bigWig	ENCODE	hg19
+GM12878	EED	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF841AWG/@@download/ENCFF841AWG.bigBed	ENCODE	hg19
+GM12878	EED	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF758PJS/@@download/ENCFF758PJS.bigWig	ENCODE	hg19
+GM12878	JUND	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF017BUS/@@download/ENCFF017BUS.bigBed	ENCODE	hg19
+GM12878	JUND	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF505IBJ/@@download/ENCFF505IBJ.bigWig	ENCODE	hg19
+GM12878	NRF1	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF944FSS/@@download/ENCFF944FSS.bigBed	ENCODE	hg19
+GM12878	NRF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF323SMV/@@download/ENCFF323SMV.bigWig	ENCODE	hg19
+GM12878	USF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF615SEL/@@download/ENCFF615SEL.bigBed	ENCODE	hg19
+GM12878	USF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF427RYH/@@download/ENCFF427RYH.bigWig	ENCODE	hg19
+GM12878	SREBF1	peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF000WDV/@@download/ENCFF000WDV.bigBed	ENCODE	hg19
+GM12878	ESRRA	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF264IQF/@@download/ENCFF264IQF.bigBed	ENCODE	hg19
+GM12878	ESRRA	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF774MPS/@@download/ENCFF774MPS.bigWig	ENCODE	hg19
+GM12878	USF2	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF867VZN/@@download/ENCFF867VZN.bigBed	ENCODE	hg19
+GM12878	USF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF830RBU/@@download/ENCFF830RBU.bigWig	ENCODE	hg19
+GM12878	IRF3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF512ITG/@@download/ENCFF512ITG.bigBed	ENCODE	hg19
+GM12878	IRF3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF785IFK/@@download/ENCFF785IFK.bigWig	ENCODE	hg19
+GM12878	H3K4me2	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF996EPO/@@download/ENCFF996EPO.bigBed	ENCODE	hg19
+GM12878	H3K4me2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF828CQV/@@download/ENCFF828CQV.bigWig	ENCODE	hg19
+GM12878	H3K9me3	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF182RDH/@@download/ENCFF182RDH.bigBed	ENCODE	hg19
+GM12878	H3K9me3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF776OVW/@@download/ENCFF776OVW.bigWig	ENCODE	hg19
+GM12878	ETS1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF116FMX/@@download/ENCFF116FMX.bigBed	ENCODE	hg19
+GM12878	ETS1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF292DYY/@@download/ENCFF292DYY.bigWig	ENCODE	hg19
+GM12878	MAX	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF580WAR/@@download/ENCFF580WAR.bigBed	ENCODE	hg19
+GM12878	MAX	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF129MWP/@@download/ENCFF129MWP.bigWig	ENCODE	hg19
+GM12878	H3K27ac	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF266DUJ/@@download/ENCFF266DUJ.bigBed	ENCODE	hg19
+GM12878	H3K27ac	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF180LKW/@@download/ENCFF180LKW.bigWig	ENCODE	hg19
+GM12878	CBX5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF061RWI/@@download/ENCFF061RWI.bigBed	ENCODE	hg19
+GM12878	CBX5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF442AII/@@download/ENCFF442AII.bigWig	ENCODE	hg19
+GM12878	MEF2C	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF106GZB/@@download/ENCFF106GZB.bigBed	ENCODE	hg19
+GM12878	MEF2C	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF845FPS/@@download/ENCFF845FPS.bigWig	ENCODE	hg19
+GM12878	HCFC1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF937AQB/@@download/ENCFF937AQB.bigBed	ENCODE	hg19
+GM12878	HCFC1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF686ASL/@@download/ENCFF686ASL.bigWig	ENCODE	hg19
+GM12878	MYB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF157SEX/@@download/ENCFF157SEX.bigBed	ENCODE	hg19
+GM12878	MYB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF784YSY/@@download/ENCFF784YSY.bigWig	ENCODE	hg19
+GM12878	GABPA	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF340PXK/@@download/ENCFF340PXK.bigBed	ENCODE	hg19
+GM12878	GABPA	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF529FLT/@@download/ENCFF529FLT.bigWig	ENCODE	hg19
+GM12878	KLF5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF496ARE/@@download/ENCFF496ARE.bigBed	ENCODE	hg19
+GM12878	KLF5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF279FLZ/@@download/ENCFF279FLZ.bigWig	ENCODE	hg19
+GM12878	ATF7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF088INN/@@download/ENCFF088INN.bigBed	ENCODE	hg19
+GM12878	ATF7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF998ZHO/@@download/ENCFF998ZHO.bigWig	ENCODE	hg19
+GM12878	CEBPZ	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF438QAQ/@@download/ENCFF438QAQ.bigBed	ENCODE	hg19
+GM12878	CEBPZ	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF183UMP/@@download/ENCFF183UMP.bigWig	ENCODE	hg19
+GM12878	SKIL	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF506YUZ/@@download/ENCFF506YUZ.bigBed	ENCODE	hg19
+GM12878	SKIL	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF261BLY/@@download/ENCFF261BLY.bigWig	ENCODE	hg19
+GM12878	HDAC2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF974QXE/@@download/ENCFF974QXE.bigBed	ENCODE	hg19
+GM12878	HDAC2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF675TUL/@@download/ENCFF675TUL.bigWig	ENCODE	hg19
+GM12878	KDM1A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF960KLA/@@download/ENCFF960KLA.bigBed	ENCODE	hg19
+GM12878	KDM1A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF777QJK/@@download/ENCFF777QJK.bigWig	ENCODE	hg19
+GM12878	TBX21	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF362HQV/@@download/ENCFF362HQV.bigBed	ENCODE	hg19
+GM12878	TBX21	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF193RDB/@@download/ENCFF193RDB.bigWig	ENCODE	hg19
+GM12878	FOXK2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF266WRI/@@download/ENCFF266WRI.bigBed	ENCODE	hg19
+GM12878	FOXK2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF285JUZ/@@download/ENCFF285JUZ.bigWig	ENCODE	hg19
+GM12878	ZBED1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF613ZJY/@@download/ENCFF613ZJY.bigBed	ENCODE	hg19
+GM12878	ZBED1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF546BYE/@@download/ENCFF546BYE.bigWig	ENCODE	hg19
+GM12878	KAT2A	peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF000VVN/@@download/ENCFF000VVN.bigBed	ENCODE	hg19
+GM12878	BATF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF243MVH/@@download/ENCFF243MVH.bigBed	ENCODE	hg19
+GM12878	BATF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF413PZT/@@download/ENCFF413PZT.bigWig	ENCODE	hg19
+GM12878	PKNOX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF161FIT/@@download/ENCFF161FIT.bigBed	ENCODE	hg19
+GM12878	PKNOX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF837DPP/@@download/ENCFF837DPP.bigWig	ENCODE	hg19
+GM12878	CBFB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF741OJZ/@@download/ENCFF741OJZ.bigBed	ENCODE	hg19
+GM12878	CBFB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF327KPH/@@download/ENCFF327KPH.bigWig	ENCODE	hg19
+GM12878	ASH2L	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF132JCL/@@download/ENCFF132JCL.bigBed	ENCODE	hg19
+GM12878	ASH2L	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF664LBN/@@download/ENCFF664LBN.bigWig	ENCODE	hg19
+GM12878	IKZF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF205UJI/@@download/ENCFF205UJI.bigBed	ENCODE	hg19
+GM12878	IKZF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF045XLJ/@@download/ENCFF045XLJ.bigWig	ENCODE	hg19
+GM12878	ZNF592	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF726EJL/@@download/ENCFF726EJL.bigBed	ENCODE	hg19
+GM12878	ZNF592	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF636MWX/@@download/ENCFF636MWX.bigWig	ENCODE	hg19
+GM12878	HDGF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF247RBA/@@download/ENCFF247RBA.bigBed	ENCODE	hg19
+GM12878	HDGF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF303UTJ/@@download/ENCFF303UTJ.bigWig	ENCODE	hg19
+GM12878	YBX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF377OUN/@@download/ENCFF377OUN.bigBed	ENCODE	hg19
+GM12878	YBX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF026GPY/@@download/ENCFF026GPY.bigWig	ENCODE	hg19
+GM12878	ZNF217	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF918SNN/@@download/ENCFF918SNN.bigBed	ENCODE	hg19
+GM12878	ZNF217	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF998OVR/@@download/ENCFF998OVR.bigWig	ENCODE	hg19
+GM12878	ZNF24	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF110BUK/@@download/ENCFF110BUK.bigBed	ENCODE	hg19
+GM12878	ZNF24	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF133LHQ/@@download/ENCFF133LHQ.bigWig	ENCODE	hg19
+GM12878	LARP7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF812RAY/@@download/ENCFF812RAY.bigBed	ENCODE	hg19
+GM12878	LARP7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF488DHD/@@download/ENCFF488DHD.bigWig	ENCODE	hg19
+GM12878	NR2F1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF377VLA/@@download/ENCFF377VLA.bigBed	ENCODE	hg19
+GM12878	NR2F1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF653AWK/@@download/ENCFF653AWK.bigWig	ENCODE	hg19
+GM12878	RELB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF493CKV/@@download/ENCFF493CKV.bigBed	ENCODE	hg19
+GM12878	RELB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF389ZFU/@@download/ENCFF389ZFU.bigWig	ENCODE	hg19
+GM12878	ZNF622	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF335PYJ/@@download/ENCFF335PYJ.bigBed	ENCODE	hg19
+GM12878	ZNF622	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF085HIP/@@download/ENCFF085HIP.bigWig	ENCODE	hg19
+GM12878	RB1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF942SCN/@@download/ENCFF942SCN.bigBed	ENCODE	hg19
+GM12878	RB1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF487HQU/@@download/ENCFF487HQU.bigWig	ENCODE	hg19
+GM12878	BACH1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF613NTN/@@download/ENCFF613NTN.bigBed	ENCODE	hg19
+GM12878	BACH1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF184PLB/@@download/ENCFF184PLB.bigWig	ENCODE	hg19
+GM12878	NKRF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF083JTY/@@download/ENCFF083JTY.bigBed	ENCODE	hg19
+GM12878	NKRF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF410LVR/@@download/ENCFF410LVR.bigWig	ENCODE	hg19
+GM12878	NFATC3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF450FQN/@@download/ENCFF450FQN.bigBed	ENCODE	hg19
+GM12878	NFATC3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF799JAS/@@download/ENCFF799JAS.bigWig	ENCODE	hg19
+GM12878	ZNF687	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF680WTT/@@download/ENCFF680WTT.bigBed	ENCODE	hg19
+GM12878	ZNF687	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF082CZO/@@download/ENCFF082CZO.bigWig	ENCODE	hg19
+GM12878	NR2C1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF767ZHD/@@download/ENCFF767ZHD.bigBed	ENCODE	hg19
+GM12878	NR2C1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF165WVA/@@download/ENCFF165WVA.bigWig	ENCODE	hg19
+GM12878	SMAD1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF644PRE/@@download/ENCFF644PRE.bigBed	ENCODE	hg19
+GM12878	SMAD1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF202VQL/@@download/ENCFF202VQL.bigWig	ENCODE	hg19
+GM12878	SMARCA5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF826XOP/@@download/ENCFF826XOP.bigBed	ENCODE	hg19
+GM12878	SMARCA5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF943WFE/@@download/ENCFF943WFE.bigWig	ENCODE	hg19
+GM12878	DPF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF196BMD/@@download/ENCFF196BMD.bigBed	ENCODE	hg19
+GM12878	DPF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF682POX/@@download/ENCFF682POX.bigWig	ENCODE	hg19
+GM12878	GATAD2B	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF874DBO/@@download/ENCFF874DBO.bigBed	ENCODE	hg19
+GM12878	GATAD2B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF914CTT/@@download/ENCFF914CTT.bigWig	ENCODE	hg19
+GM12878	RAD51	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF193UZT/@@download/ENCFF193UZT.bigBed	ENCODE	hg19
+GM12878	RAD51	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF017TFI/@@download/ENCFF017TFI.bigWig	ENCODE	hg19
+GM12878	CHD4	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF327MQY/@@download/ENCFF327MQY.bigBed	ENCODE	hg19
+GM12878	CHD4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF642RXD/@@download/ENCFF642RXD.bigWig	ENCODE	hg19
+GM12878	ZBTB40	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF933WSV/@@download/ENCFF933WSV.bigBed	ENCODE	hg19
+GM12878	ZBTB40	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF806TXV/@@download/ENCFF806TXV.bigWig	ENCODE	hg19
+GM12878	ARID3A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF791GSE/@@download/ENCFF791GSE.bigBed	ENCODE	hg19
+GM12878	ARID3A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF006RQH/@@download/ENCFF006RQH.bigWig	ENCODE	hg19
+GM12878	ARNT	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF091ZZL/@@download/ENCFF091ZZL.bigBed	ENCODE	hg19
+GM12878	ARNT	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF489AGF/@@download/ENCFF489AGF.bigWig	ENCODE	hg19
+GM12878	NFXL1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF042RTT/@@download/ENCFF042RTT.bigBed	ENCODE	hg19
+GM12878	NFXL1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF502QYQ/@@download/ENCFF502QYQ.bigWig	ENCODE	hg19
+GM12878	ZSCAN29	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF670DVM/@@download/ENCFF670DVM.bigBed	ENCODE	hg19
+GM12878	ZSCAN29	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF964JLQ/@@download/ENCFF964JLQ.bigWig	ENCODE	hg19
+K562	USF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF399ILC/@@download/ENCFF399ILC.bigBed	ENCODE	hg19
+K562	USF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF605DSA/@@download/ENCFF605DSA.bigWig	ENCODE	hg19
+K562	CEBPB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF446NGE/@@download/ENCFF446NGE.bigBed	ENCODE	hg19
+K562	CEBPB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF513ZML/@@download/ENCFF513ZML.bigWig	ENCODE	hg19
+K562	SMC3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF011ZYD/@@download/ENCFF011ZYD.bigBed	ENCODE	hg19
+K562	SMC3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF479BWQ/@@download/ENCFF479BWQ.bigWig	ENCODE	hg19
+K562	TEAD4	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF907BVK/@@download/ENCFF907BVK.bigBed	ENCODE	hg19
+K562	TEAD4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF920AQK/@@download/ENCFF920AQK.bigWig	ENCODE	hg19
+K562	EGR1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF223QPY/@@download/ENCFF223QPY.bigBed	ENCODE	hg19
+K562	EGR1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF933FEZ/@@download/ENCFF933FEZ.bigWig	ENCODE	hg19
+K562	ZNF143	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF718MRX/@@download/ENCFF718MRX.bigBed	ENCODE	hg19
+K562	ZNF143	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF178RYF/@@download/ENCFF178RYF.bigWig	ENCODE	hg19
+K562	MEF2A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF701ZYD/@@download/ENCFF701ZYD.bigBed	ENCODE	hg19
+K562	MEF2A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF479KSD/@@download/ENCFF479KSD.bigWig	ENCODE	hg19
+K562	TRIM28	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF959MYV/@@download/ENCFF959MYV.bigBed	ENCODE	hg19
+K562	TRIM28	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF910BQM/@@download/ENCFF910BQM.bigWig	ENCODE	hg19
+K562	RCOR1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF054TMM/@@download/ENCFF054TMM.bigBed	ENCODE	hg19
+K562	RCOR1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF550TDY/@@download/ENCFF550TDY.bigWig	ENCODE	hg19
+K562	BHLHE40	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF815ARN/@@download/ENCFF815ARN.bigBed	ENCODE	hg19
+K562	BHLHE40	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF765OJY/@@download/ENCFF765OJY.bigWig	ENCODE	hg19
+K562	NR2F2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF613RMS/@@download/ENCFF613RMS.bigBed	ENCODE	hg19
+K562	NR2F2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF335LTU/@@download/ENCFF335LTU.bigWig	ENCODE	hg19
+K562	GABPA	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF035OWM/@@download/ENCFF035OWM.bigBed	ENCODE	hg19
+K562	GABPA	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF869WSZ/@@download/ENCFF869WSZ.bigWig	ENCODE	hg19
+K562	JUND	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF941ZJD/@@download/ENCFF941ZJD.bigBed	ENCODE	hg19
+K562	JUND	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF709JGL/@@download/ENCFF709JGL.bigWig	ENCODE	hg19
+K562	MAX	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF579DYT/@@download/ENCFF579DYT.bigBed	ENCODE	hg19
+K562	MAX	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF626PTB/@@download/ENCFF626PTB.bigWig	ENCODE	hg19
+K562	CUX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF653HIF/@@download/ENCFF653HIF.bigBed	ENCODE	hg19
+K562	CUX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF950NCQ/@@download/ENCFF950NCQ.bigWig	ENCODE	hg19
+K562	ZNF384	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF587KYY/@@download/ENCFF587KYY.bigBed	ENCODE	hg19
+K562	ZNF384	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF657QMO/@@download/ENCFF657QMO.bigWig	ENCODE	hg19
+K562	BMI1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF811XCV/@@download/ENCFF811XCV.bigBed	ENCODE	hg19
+K562	BMI1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF514QBY/@@download/ENCFF514QBY.bigWig	ENCODE	hg19
+K562	CTCF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF442VVV/@@download/ENCFF442VVV.bigBed	ENCODE	hg19
+K562	CTCF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF933ZLL/@@download/ENCFF933ZLL.bigWig	ENCODE	hg19
+K562	BDP1	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF738LIL/@@download/ENCFF738LIL.bigBed	ENCODE	hg19
+K562	SIN3A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF124XAU/@@download/ENCFF124XAU.bigBed	ENCODE	hg19
+K562	SIN3A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF783JQV/@@download/ENCFF783JQV.bigWig	ENCODE	hg19
+K562	C11orf30	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF826NFI/@@download/ENCFF826NFI.bigBed	ENCODE	hg19
+K562	C11orf30	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF219HQE/@@download/ENCFF219HQE.bigWig	ENCODE	hg19
+K562	MNT	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF852NNM/@@download/ENCFF852NNM.bigBed	ENCODE	hg19
+K562	MNT	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF638KYE/@@download/ENCFF638KYE.bigWig	ENCODE	hg19
+K562	TRIM24	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF549QFS/@@download/ENCFF549QFS.bigBed	ENCODE	hg19
+K562	TRIM24	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF868YDK/@@download/ENCFF868YDK.bigWig	ENCODE	hg19
+K562	BRCA1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF352HZZ/@@download/ENCFF352HZZ.bigBed	ENCODE	hg19
+K562	BRCA1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF279WBA/@@download/ENCFF279WBA.bigWig	ENCODE	hg19
+K562	MCM3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF394PVD/@@download/ENCFF394PVD.bigBed	ENCODE	hg19
+K562	MCM3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF332WPW/@@download/ENCFF332WPW.bigWig	ENCODE	hg19
+K562	TOE1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF144HGF/@@download/ENCFF144HGF.bigBed	ENCODE	hg19
+K562	TOE1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF446MIL/@@download/ENCFF446MIL.bigWig	ENCODE	hg19
+K562	ZBTB8A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF272SYI/@@download/ENCFF272SYI.bigBed	ENCODE	hg19
+K562	ZBTB8A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF232LHF/@@download/ENCFF232LHF.bigWig	ENCODE	hg19
+K562	CSDE1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF216NZK/@@download/ENCFF216NZK.bigBed	ENCODE	hg19
+K562	CSDE1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF088LLN/@@download/ENCFF088LLN.bigWig	ENCODE	hg19
+K562	POLR2A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF742EGO/@@download/ENCFF742EGO.bigBed	ENCODE	hg19
+K562	POLR2A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF519VFR/@@download/ENCFF519VFR.bigWig	ENCODE	hg19
+K562	ZNF830	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF081IPO/@@download/ENCFF081IPO.bigBed	ENCODE	hg19
+K562	ZNF830	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF458WXS/@@download/ENCFF458WXS.bigWig	ENCODE	hg19
+K562	YBX3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF803RBG/@@download/ENCFF803RBG.bigBed	ENCODE	hg19
+K562	YBX3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF889PGD/@@download/ENCFF889PGD.bigWig	ENCODE	hg19
+K562	ZNF184	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF554LHL/@@download/ENCFF554LHL.bigBed	ENCODE	hg19
+K562	ZNF184	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF806QJB/@@download/ENCFF806QJB.bigWig	ENCODE	hg19
+K562	ZSCAN29	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF053QEX/@@download/ENCFF053QEX.bigBed	ENCODE	hg19
+K562	ZSCAN29	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF935GAH/@@download/ENCFF935GAH.bigWig	ENCODE	hg19
+K562	CHAMP1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF448WLP/@@download/ENCFF448WLP.bigBed	ENCODE	hg19
+K562	CHAMP1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF775ZMD/@@download/ENCFF775ZMD.bigWig	ENCODE	hg19
+K562	XRCC3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF265SHZ/@@download/ENCFF265SHZ.bigBed	ENCODE	hg19
+K562	XRCC3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF660YEV/@@download/ENCFF660YEV.bigWig	ENCODE	hg19
+K562	ARNT	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF038XDZ/@@download/ENCFF038XDZ.bigBed	ENCODE	hg19
+K562	ARNT	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF738ADF/@@download/ENCFF738ADF.bigWig	ENCODE	hg19
+K562	NCOA4	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF437DMQ/@@download/ENCFF437DMQ.bigBed	ENCODE	hg19
+K562	NCOA4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF452BMC/@@download/ENCFF452BMC.bigWig	ENCODE	hg19
+K562	RNF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF227XXB/@@download/ENCFF227XXB.bigBed	ENCODE	hg19
+K562	RNF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF071CIY/@@download/ENCFF071CIY.bigWig	ENCODE	hg19
+K562	HNRNPH1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF968BHS/@@download/ENCFF968BHS.bigBed	ENCODE	hg19
+K562	HNRNPH1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF424LYB/@@download/ENCFF424LYB.bigWig	ENCODE	hg19
+K562	NR3C1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF920ZAF/@@download/ENCFF920ZAF.bigBed	ENCODE	hg19
+K562	NR3C1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF720NCF/@@download/ENCFF720NCF.bigWig	ENCODE	hg19
+K562	ZBTB7A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF695ASQ/@@download/ENCFF695ASQ.bigBed	ENCODE	hg19
+K562	ZBTB7A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF457PSO/@@download/ENCFF457PSO.bigWig	ENCODE	hg19
+K562	TBP	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF942JYP/@@download/ENCFF942JYP.bigBed	ENCODE	hg19
+K562	TBP	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF752GLM/@@download/ENCFF752GLM.bigWig	ENCODE	hg19
+K562	H3K4me3	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF527CMN/@@download/ENCFF527CMN.bigBed	ENCODE	hg19
+K562	H3K4me3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF291SWG/@@download/ENCFF291SWG.bigWig	ENCODE	hg19
+K562	GATA1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF097EXZ/@@download/ENCFF097EXZ.bigBed	ENCODE	hg19
+K562	GATA1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF833CBY/@@download/ENCFF833CBY.bigWig	ENCODE	hg19
+K562	SRSF9	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF265WRU/@@download/ENCFF265WRU.bigBed	ENCODE	hg19
+K562	SRSF9	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF878SUX/@@download/ENCFF878SUX.bigWig	ENCODE	hg19
+K562	MLLT1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF449HIT/@@download/ENCFF449HIT.bigBed	ENCODE	hg19
+K562	MLLT1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF024YIP/@@download/ENCFF024YIP.bigWig	ENCODE	hg19
+K562	ZBTB33	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF885VCM/@@download/ENCFF885VCM.bigBed	ENCODE	hg19
+K562	ZBTB33	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF563KAU/@@download/ENCFF563KAU.bigWig	ENCODE	hg19
+K562	DPF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF547VWB/@@download/ENCFF547VWB.bigBed	ENCODE	hg19
+K562	DPF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF950HQL/@@download/ENCFF950HQL.bigWig	ENCODE	hg19
+K562	YY1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF853DHJ/@@download/ENCFF853DHJ.bigBed	ENCODE	hg19
+K562	YY1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF480ZET/@@download/ENCFF480ZET.bigWig	ENCODE	hg19
+K562	E2F8	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF809XKT/@@download/ENCFF809XKT.bigBed	ENCODE	hg19
+K562	E2F8	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF092WDH/@@download/ENCFF092WDH.bigWig	ENCODE	hg19
+K562	NBN	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF671VCR/@@download/ENCFF671VCR.bigBed	ENCODE	hg19
+K562	NBN	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF676AOK/@@download/ENCFF676AOK.bigWig	ENCODE	hg19
+K562	MITF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF272SYB/@@download/ENCFF272SYB.bigBed	ENCODE	hg19
+K562	MITF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF427TQP/@@download/ENCFF427TQP.bigWig	ENCODE	hg19
+K562	SIX5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF221LXI/@@download/ENCFF221LXI.bigBed	ENCODE	hg19
+K562	SIX5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF925ZXV/@@download/ENCFF925ZXV.bigWig	ENCODE	hg19
+K562	CBX3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF518DVK/@@download/ENCFF518DVK.bigBed	ENCODE	hg19
+K562	CBX3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF630YDI/@@download/ENCFF630YDI.bigWig	ENCODE	hg19
+K562	SIRT6	pseudoreplicated IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF584VGN/@@download/ENCFF584VGN.bigBed	ENCODE	hg19
+K562	SIRT6	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF430LQG/@@download/ENCFF430LQG.bigWig	ENCODE	hg19
+K562	MYBL2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF633DAY/@@download/ENCFF633DAY.bigBed	ENCODE	hg19
+K562	MYBL2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF487KQK/@@download/ENCFF487KQK.bigWig	ENCODE	hg19
+K562	BCLAF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF087GYK/@@download/ENCFF087GYK.bigBed	ENCODE	hg19
+K562	BCLAF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF136RAF/@@download/ENCFF136RAF.bigWig	ENCODE	hg19
+K562	TCF12	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF330ZKU/@@download/ENCFF330ZKU.bigBed	ENCODE	hg19
+K562	TCF12	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF471XQM/@@download/ENCFF471XQM.bigWig	ENCODE	hg19
+K562	ZNF318	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF030GAR/@@download/ENCFF030GAR.bigBed	ENCODE	hg19
+K562	ZNF318	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF609CBO/@@download/ENCFF609CBO.bigWig	ENCODE	hg19
+K562	CHD2	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF144HFE/@@download/ENCFF144HFE.bigBed	ENCODE	hg19
+K562	H3K9ac	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF465MBP/@@download/ENCFF465MBP.bigBed	ENCODE	hg19
+K562	H3K9ac	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF866KTJ/@@download/ENCFF866KTJ.bigWig	ENCODE	hg19
+K562	HDAC1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF869LLT/@@download/ENCFF869LLT.bigBed	ENCODE	hg19
+K562	HDAC1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF330MTO/@@download/ENCFF330MTO.bigWig	ENCODE	hg19
+K562	BACH1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF556NSX/@@download/ENCFF556NSX.bigBed	ENCODE	hg19
+K562	BACH1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF183XFF/@@download/ENCFF183XFF.bigWig	ENCODE	hg19
+K562	RBM15	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF479OSE/@@download/ENCFF479OSE.bigBed	ENCODE	hg19
+K562	RBM15	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF948XVB/@@download/ENCFF948XVB.bigWig	ENCODE	hg19
+K562	HDAC2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF473DOH/@@download/ENCFF473DOH.bigBed	ENCODE	hg19
+K562	HDAC2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF532SIS/@@download/ENCFF532SIS.bigWig	ENCODE	hg19
+K562	XRCC4	peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF000ZDF/@@download/ENCFF000ZDF.bigBed	ENCODE	hg19
+K562	SMARCB1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF252ARH/@@download/ENCFF252ARH.bigBed	ENCODE	hg19
+K562	SMARCB1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF800FII/@@download/ENCFF800FII.bigWig	ENCODE	hg19
+K562	POLR2AphosphoS2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF070WZH/@@download/ENCFF070WZH.bigBed	ENCODE	hg19
+K562	POLR2AphosphoS2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF354XDX/@@download/ENCFF354XDX.bigWig	ENCODE	hg19
+K562	ZMIZ1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF615IQF/@@download/ENCFF615IQF.bigBed	ENCODE	hg19
+K562	ZMIZ1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF257YKB/@@download/ENCFF257YKB.bigWig	ENCODE	hg19
+K562	THAP1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF901TDN/@@download/ENCFF901TDN.bigBed	ENCODE	hg19
+K562	THAP1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF993AHY/@@download/ENCFF993AHY.bigWig	ENCODE	hg19
+K562	MAFK	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF437JHE/@@download/ENCFF437JHE.bigBed	ENCODE	hg19
+K562	MAFK	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF964KPV/@@download/ENCFF964KPV.bigWig	ENCODE	hg19
+K562	NCOR1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF306SLO/@@download/ENCFF306SLO.bigBed	ENCODE	hg19
+K562	NCOR1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF415WNK/@@download/ENCFF415WNK.bigWig	ENCODE	hg19
+K562	MIER1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF937CUB/@@download/ENCFF937CUB.bigBed	ENCODE	hg19
+K562	MIER1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF332DMO/@@download/ENCFF332DMO.bigWig	ENCODE	hg19
+K562	PHF21A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF484KHM/@@download/ENCFF484KHM.bigBed	ENCODE	hg19
+K562	PHF21A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF224PYH/@@download/ENCFF224PYH.bigWig	ENCODE	hg19
+K562	CBFA2T2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF022ETM/@@download/ENCFF022ETM.bigBed	ENCODE	hg19
+K562	CBFA2T2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF398DKE/@@download/ENCFF398DKE.bigWig	ENCODE	hg19
+K562	CBFA2T3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF469ATT/@@download/ENCFF469ATT.bigBed	ENCODE	hg19
+K562	CBFA2T3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF321EPM/@@download/ENCFF321EPM.bigWig	ENCODE	hg19
+K562	ATF3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF836ZXF/@@download/ENCFF836ZXF.bigBed	ENCODE	hg19
+K562	ATF3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF813RAT/@@download/ENCFF813RAT.bigWig	ENCODE	hg19
+K562	UBTF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF152VQZ/@@download/ENCFF152VQZ.bigBed	ENCODE	hg19
+K562	UBTF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF937HVX/@@download/ENCFF937HVX.bigWig	ENCODE	hg19
+K562	SP1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF134ZBV/@@download/ENCFF134ZBV.bigBed	ENCODE	hg19
+K562	SP1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF858NSY/@@download/ENCFF858NSY.bigWig	ENCODE	hg19
+K562	GTF2B	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF827MSM/@@download/ENCFF827MSM.bigBed	ENCODE	hg19
+K562	ZNF274	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF377DZZ/@@download/ENCFF377DZZ.bigBed	ENCODE	hg19
+K562	ZNF274	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF296ZAW/@@download/ENCFF296ZAW.bigWig	ENCODE	hg19
+K562	TAL1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF186YFH/@@download/ENCFF186YFH.bigBed	ENCODE	hg19
+K562	TAL1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF822ERD/@@download/ENCFF822ERD.bigWig	ENCODE	hg19
+K562	HCFC1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF402XBZ/@@download/ENCFF402XBZ.bigBed	ENCODE	hg19
+K562	HCFC1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF633TLX/@@download/ENCFF633TLX.bigWig	ENCODE	hg19
+K562	EP300	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF812KSD/@@download/ENCFF812KSD.bigBed	ENCODE	hg19
+K562	EP300	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF152DJG/@@download/ENCFF152DJG.bigWig	ENCODE	hg19
+K562	H3K9me1	pseudoreplicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF322CRR/@@download/ENCFF322CRR.bigBed	ENCODE	hg19
+K562	H3K9me1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF526UWC/@@download/ENCFF526UWC.bigWig	ENCODE	hg19
+K562	NRF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF824PFM/@@download/ENCFF824PFM.bigBed	ENCODE	hg19
+K562	NRF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF027MWG/@@download/ENCFF027MWG.bigWig	ENCODE	hg19
+K562	GATAD2A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF548QSU/@@download/ENCFF548QSU.bigBed	ENCODE	hg19
+K562	GATAD2A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF269YNO/@@download/ENCFF269YNO.bigWig	ENCODE	hg19
+K562	H3K4me1	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF320NKZ/@@download/ENCFF320NKZ.bigBed	ENCODE	hg19
+K562	H3K4me1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF444SGK/@@download/ENCFF444SGK.bigWig	ENCODE	hg19
+K562	ELK1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF096VSI/@@download/ENCFF096VSI.bigBed	ENCODE	hg19
+K562	ELK1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF996CPV/@@download/ENCFF996CPV.bigWig	ENCODE	hg19
+K562	SREBF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF653VOQ/@@download/ENCFF653VOQ.bigBed	ENCODE	hg19
+K562	SREBF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF111BSU/@@download/ENCFF111BSU.bigWig	ENCODE	hg19
+K562	SUZ12	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF276MCV/@@download/ENCFF276MCV.bigBed	ENCODE	hg19
+K562	SUZ12	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF363DWX/@@download/ENCFF363DWX.bigWig	ENCODE	hg19
+K562	CBX5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF961NDZ/@@download/ENCFF961NDZ.bigBed	ENCODE	hg19
+K562	CBX5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF014XHT/@@download/ENCFF014XHT.bigWig	ENCODE	hg19
+K562	CREB3L1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF540XNJ/@@download/ENCFF540XNJ.bigBed	ENCODE	hg19
+K562	CREB3L1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF274RCD/@@download/ENCFF274RCD.bigWig	ENCODE	hg19
+K562	POU5F1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF059TVQ/@@download/ENCFF059TVQ.bigBed	ENCODE	hg19
+K562	POU5F1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF579RNC/@@download/ENCFF579RNC.bigWig	ENCODE	hg19
+K562	TCF7L2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF394FGG/@@download/ENCFF394FGG.bigBed	ENCODE	hg19
+K562	TCF7L2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF899DYD/@@download/ENCFF899DYD.bigWig	ENCODE	hg19
+K562	TCF7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF948XAQ/@@download/ENCFF948XAQ.bigBed	ENCODE	hg19
+K562	TCF7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF005PNR/@@download/ENCFF005PNR.bigWig	ENCODE	hg19
+K562	ATF7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF107YHW/@@download/ENCFF107YHW.bigBed	ENCODE	hg19
+K562	ATF7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF249KVC/@@download/ENCFF249KVC.bigWig	ENCODE	hg19
+K562	ATF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF413RJJ/@@download/ENCFF413RJJ.bigBed	ENCODE	hg19
+K562	ATF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF454KQY/@@download/ENCFF454KQY.bigWig	ENCODE	hg19
+K562	DDX20	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF584LRJ/@@download/ENCFF584LRJ.bigBed	ENCODE	hg19
+K562	DDX20	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF038EVN/@@download/ENCFF038EVN.bigWig	ENCODE	hg19
+K562	NR2C1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF493MEL/@@download/ENCFF493MEL.bigBed	ENCODE	hg19
+K562	NR2C1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF490IPR/@@download/ENCFF490IPR.bigWig	ENCODE	hg19
+K562	ZBTB5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF946KIR/@@download/ENCFF946KIR.bigBed	ENCODE	hg19
+K562	ZBTB5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF915YAW/@@download/ENCFF915YAW.bigWig	ENCODE	hg19
+K562	GTF3C2	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF943SAN/@@download/ENCFF943SAN.bigBed	ENCODE	hg19
+K562	NEUROD1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF872LIG/@@download/ENCFF872LIG.bigBed	ENCODE	hg19
+K562	NEUROD1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF733OEF/@@download/ENCFF733OEF.bigWig	ENCODE	hg19
+K562	NR2C2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF230UMV/@@download/ENCFF230UMV.bigBed	ENCODE	hg19
+K562	NR2C2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF573HAI/@@download/ENCFF573HAI.bigWig	ENCODE	hg19
+K562	SMARCA4	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF066UWW/@@download/ENCFF066UWW.bigBed	ENCODE	hg19
+K562	SMARCA4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF131WXL/@@download/ENCFF131WXL.bigWig	ENCODE	hg19
+K562	SMARCE1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF005HYP/@@download/ENCFF005HYP.bigBed	ENCODE	hg19
+K562	SMARCE1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF348YUO/@@download/ENCFF348YUO.bigWig	ENCODE	hg19
+K562	ZNF24	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF687PGE/@@download/ENCFF687PGE.bigBed	ENCODE	hg19
+K562	ZNF24	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF595RNS/@@download/ENCFF595RNS.bigWig	ENCODE	hg19
+K562	ATF4	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF335HBO/@@download/ENCFF335HBO.bigBed	ENCODE	hg19
+K562	ATF4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF703NOB/@@download/ENCFF703NOB.bigWig	ENCODE	hg19
+K562	TARDBP	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF967VHN/@@download/ENCFF967VHN.bigBed	ENCODE	hg19
+K562	TARDBP	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF580OUE/@@download/ENCFF580OUE.bigWig	ENCODE	hg19
+K562	SNIP1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF500HSN/@@download/ENCFF500HSN.bigBed	ENCODE	hg19
+K562	SNIP1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF673WUS/@@download/ENCFF673WUS.bigWig	ENCODE	hg19
+K562	MTA2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF772AAB/@@download/ENCFF772AAB.bigBed	ENCODE	hg19
+K562	MTA2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF749MZJ/@@download/ENCFF749MZJ.bigWig	ENCODE	hg19
+K562	H3K9me3	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF837EVY/@@download/ENCFF837EVY.bigBed	ENCODE	hg19
+K562	H3K9me3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF834YLI/@@download/ENCFF834YLI.bigWig	ENCODE	hg19
+K562	SETDB1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF438XQT/@@download/ENCFF438XQT.bigBed	ENCODE	hg19
+K562	SETDB1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF417WRG/@@download/ENCFF417WRG.bigWig	ENCODE	hg19
+K562	MYC	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF388BVD/@@download/ENCFF388BVD.bigBed	ENCODE	hg19
+K562	MYC	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF790FHL/@@download/ENCFF790FHL.bigWig	ENCODE	hg19
+K562	SAFB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF792LFJ/@@download/ENCFF792LFJ.bigBed	ENCODE	hg19
+K562	SAFB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF163TQK/@@download/ENCFF163TQK.bigWig	ENCODE	hg19
+K562	NFRKB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF986ACD/@@download/ENCFF986ACD.bigBed	ENCODE	hg19
+K562	NFRKB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF231QPU/@@download/ENCFF231QPU.bigWig	ENCODE	hg19
+K562	TAF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF327XLK/@@download/ENCFF327XLK.bigBed	ENCODE	hg19
+K562	TAF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF488POX/@@download/ENCFF488POX.bigWig	ENCODE	hg19
+K562	PHB2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF470LCU/@@download/ENCFF470LCU.bigBed	ENCODE	hg19
+K562	PHB2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF776ZKG/@@download/ENCFF776ZKG.bigWig	ENCODE	hg19
+K562	REST	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF750YVW/@@download/ENCFF750YVW.bigBed	ENCODE	hg19
+K562	REST	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF571ECM/@@download/ENCFF571ECM.bigWig	ENCODE	hg19
+K562	BRD9	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF619FWQ/@@download/ENCFF619FWQ.bigBed	ENCODE	hg19
+K562	BRD9	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF036WGZ/@@download/ENCFF036WGZ.bigWig	ENCODE	hg19
+K562	POLR3G	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF151YVA/@@download/ENCFF151YVA.bigBed	ENCODE	hg19
+K562	ETV6	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF055AYE/@@download/ENCFF055AYE.bigBed	ENCODE	hg19
+K562	ETV6	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF884NXM/@@download/ENCFF884NXM.bigWig	ENCODE	hg19
+K562	POLR2AphosphoS5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF845FTJ/@@download/ENCFF845FTJ.bigBed	ENCODE	hg19
+K562	POLR2AphosphoS5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF827GEM/@@download/ENCFF827GEM.bigWig	ENCODE	hg19
+K562	CBX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF135ALT/@@download/ENCFF135ALT.bigBed	ENCODE	hg19
+K562	CBX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF762MAM/@@download/ENCFF762MAM.bigWig	ENCODE	hg19
+K562	GMEB1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF714EKC/@@download/ENCFF714EKC.bigBed	ENCODE	hg19
+K562	GMEB1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF306QAA/@@download/ENCFF306QAA.bigWig	ENCODE	hg19
+K562	ZNF280A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF050ODE/@@download/ENCFF050ODE.bigBed	ENCODE	hg19
+K562	ZNF280A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF951RIW/@@download/ENCFF951RIW.bigWig	ENCODE	hg19
+K562	PCBP1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF395QCV/@@download/ENCFF395QCV.bigBed	ENCODE	hg19
+K562	PCBP1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF340HZR/@@download/ENCFF340HZR.bigWig	ENCODE	hg19
+K562	HNRNPK	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF382ULC/@@download/ENCFF382ULC.bigBed	ENCODE	hg19
+K562	HNRNPK	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF754BMR/@@download/ENCFF754BMR.bigWig	ENCODE	hg19
+K562	FOXK2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF548MLJ/@@download/ENCFF548MLJ.bigBed	ENCODE	hg19
+K562	FOXK2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF688YSP/@@download/ENCFF688YSP.bigWig	ENCODE	hg19
+K562	ZNF282	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF397VXH/@@download/ENCFF397VXH.bigBed	ENCODE	hg19
+K562	ZNF282	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF290UIT/@@download/ENCFF290UIT.bigWig	ENCODE	hg19
+K562	JUNB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF687TKV/@@download/ENCFF687TKV.bigBed	ENCODE	hg19
+K562	JUNB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF511DBK/@@download/ENCFF511DBK.bigWig	ENCODE	hg19
+K562	U2AF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF007RRZ/@@download/ENCFF007RRZ.bigBed	ENCODE	hg19
+K562	U2AF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF084VEW/@@download/ENCFF084VEW.bigWig	ENCODE	hg19
+K562	RUNX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF768XDX/@@download/ENCFF768XDX.bigBed	ENCODE	hg19
+K562	RUNX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF962DIA/@@download/ENCFF962DIA.bigWig	ENCODE	hg19
+K562	SMARCA5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF679NWH/@@download/ENCFF679NWH.bigBed	ENCODE	hg19
+K562	SMARCA5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF847GKQ/@@download/ENCFF847GKQ.bigWig	ENCODE	hg19
+K562	IKZF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF802SZP/@@download/ENCFF802SZP.bigBed	ENCODE	hg19
+K562	IKZF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF012KOC/@@download/ENCFF012KOC.bigWig	ENCODE	hg19
+K562	DEAF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF862ZWG/@@download/ENCFF862ZWG.bigBed	ENCODE	hg19
+K562	DEAF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF187GTP/@@download/ENCFF187GTP.bigWig	ENCODE	hg19
+K562	NCOA1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF590BAZ/@@download/ENCFF590BAZ.bigBed	ENCODE	hg19
+K562	NCOA1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF646IRR/@@download/ENCFF646IRR.bigWig	ENCODE	hg19
+K562	EWSR1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF791DYM/@@download/ENCFF791DYM.bigBed	ENCODE	hg19
+K562	EWSR1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF875OWQ/@@download/ENCFF875OWQ.bigWig	ENCODE	hg19
+K562	NR2F6	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF744AIV/@@download/ENCFF744AIV.bigBed	ENCODE	hg19
+K562	NR2F6	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF142EXA/@@download/ENCFF142EXA.bigWig	ENCODE	hg19
+K562	MCM5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF413XXU/@@download/ENCFF413XXU.bigBed	ENCODE	hg19
+K562	MCM5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF325IJT/@@download/ENCFF325IJT.bigWig	ENCODE	hg19
+K562	ZMYM3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF491JPM/@@download/ENCFF491JPM.bigBed	ENCODE	hg19
+K562	ZMYM3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF711IOY/@@download/ENCFF711IOY.bigWig	ENCODE	hg19
+K562	PKNOX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF401RVR/@@download/ENCFF401RVR.bigBed	ENCODE	hg19
+K562	PKNOX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF258LRW/@@download/ENCFF258LRW.bigWig	ENCODE	hg19
+K562	HMBOX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF732WDZ/@@download/ENCFF732WDZ.bigBed	ENCODE	hg19
+K562	HMBOX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF614EKZ/@@download/ENCFF614EKZ.bigWig	ENCODE	hg19
+K562	YBX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF876GPT/@@download/ENCFF876GPT.bigBed	ENCODE	hg19
+K562	YBX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF424GQF/@@download/ENCFF424GQF.bigWig	ENCODE	hg19
+K562	XRCC5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF829CSZ/@@download/ENCFF829CSZ.bigBed	ENCODE	hg19
+K562	XRCC5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF753TWJ/@@download/ENCFF753TWJ.bigWig	ENCODE	hg19
+K562	THRAP3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF100TAA/@@download/ENCFF100TAA.bigBed	ENCODE	hg19
+K562	THRAP3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF341OHT/@@download/ENCFF341OHT.bigWig	ENCODE	hg19
+K562	E4F1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF640CID/@@download/ENCFF640CID.bigBed	ENCODE	hg19
+K562	E4F1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF093MRW/@@download/ENCFF093MRW.bigWig	ENCODE	hg19
+K562	NCOA2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF689TVN/@@download/ENCFF689TVN.bigBed	ENCODE	hg19
+K562	NCOA2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF645ZBF/@@download/ENCFF645ZBF.bigWig	ENCODE	hg19
+K562	SUPT5H	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF795AYV/@@download/ENCFF795AYV.bigBed	ENCODE	hg19
+K562	SUPT5H	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF754ZCQ/@@download/ENCFF754ZCQ.bigWig	ENCODE	hg19
+K562	USF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF931KGU/@@download/ENCFF931KGU.bigBed	ENCODE	hg19
+K562	USF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF455JRF/@@download/ENCFF455JRF.bigWig	ENCODE	hg19
+K562	BCOR	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF954LVJ/@@download/ENCFF954LVJ.bigBed	ENCODE	hg19
+K562	BCOR	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF243LGY/@@download/ENCFF243LGY.bigWig	ENCODE	hg19
+K562	CREBBP	pseudoreplicated IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF232YJG/@@download/ENCFF232YJG.bigBed	ENCODE	hg19
+K562	CREBBP	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF813TKO/@@download/ENCFF813TKO.bigWig	ENCODE	hg19
+K562	ZC3H8	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF722QEX/@@download/ENCFF722QEX.bigBed	ENCODE	hg19
+K562	ZC3H8	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF915DTE/@@download/ENCFF915DTE.bigWig	ENCODE	hg19
+K562	EP400	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF663BON/@@download/ENCFF663BON.bigBed	ENCODE	hg19
+K562	EP400	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF226XAW/@@download/ENCFF226XAW.bigWig	ENCODE	hg19
+K562	KDM1A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF104XMQ/@@download/ENCFF104XMQ.bigBed	ENCODE	hg19
+K562	KDM1A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF734YKJ/@@download/ENCFF734YKJ.bigWig	ENCODE	hg19
+K562	MCM7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF470QGF/@@download/ENCFF470QGF.bigBed	ENCODE	hg19
+K562	MCM7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF087DFZ/@@download/ENCFF087DFZ.bigWig	ENCODE	hg19
+K562	KAT2B	pseudoreplicated IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF395UJA/@@download/ENCFF395UJA.bigBed	ENCODE	hg19
+K562	KAT2B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF164NLF/@@download/ENCFF164NLF.bigWig	ENCODE	hg19
+K562	RFX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF164HUB/@@download/ENCFF164HUB.bigBed	ENCODE	hg19
+K562	RFX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF362QFP/@@download/ENCFF362QFP.bigWig	ENCODE	hg19
+K562	ZZZ3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF078MCN/@@download/ENCFF078MCN.bigBed	ENCODE	hg19
+K562	ZZZ3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF716WJE/@@download/ENCFF716WJE.bigWig	ENCODE	hg19
+K562	NFE2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF600LLW/@@download/ENCFF600LLW.bigBed	ENCODE	hg19
+K562	NFE2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF557POT/@@download/ENCFF557POT.bigWig	ENCODE	hg19
+K562	H2AFZ	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF010VYR/@@download/ENCFF010VYR.bigBed	ENCODE	hg19
+K562	H2AFZ	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF191EXE/@@download/ENCFF191EXE.bigWig	ENCODE	hg19
+K562	GABPB1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF409LJY/@@download/ENCFF409LJY.bigBed	ENCODE	hg19
+K562	GABPB1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF389ZEM/@@download/ENCFF389ZEM.bigWig	ENCODE	hg19
+K562	SMAD5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF163TFW/@@download/ENCFF163TFW.bigBed	ENCODE	hg19
+K562	SMAD5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF235RTU/@@download/ENCFF235RTU.bigWig	ENCODE	hg19
+K562	PHF8	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF860HRF/@@download/ENCFF860HRF.bigBed	ENCODE	hg19
+K562	PHF8	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF427QTV/@@download/ENCFF427QTV.bigWig	ENCODE	hg19
+K562	H3K36me3	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF496YRP/@@download/ENCFF496YRP.bigBed	ENCODE	hg19
+K562	H3K36me3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF745HXR/@@download/ENCFF745HXR.bigWig	ENCODE	hg19
+K562	GTF2F1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF190ADI/@@download/ENCFF190ADI.bigBed	ENCODE	hg19
+K562	GTF2F1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF951FOV/@@download/ENCFF951FOV.bigWig	ENCODE	hg19
+K562	H3K27ac	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF770UZZ/@@download/ENCFF770UZZ.bigBed	ENCODE	hg19
+K562	H3K27ac	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF010PHG/@@download/ENCFF010PHG.bigWig	ENCODE	hg19
+K562	RBBP5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF493SST/@@download/ENCFF493SST.bigBed	ENCODE	hg19
+K562	RBBP5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF058KTS/@@download/ENCFF058KTS.bigWig	ENCODE	hg19
+K562	POLR3A	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF596FCL/@@download/ENCFF596FCL.bigBed	ENCODE	hg19
+K562	GATA2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF342ILG/@@download/ENCFF342ILG.bigBed	ENCODE	hg19
+K562	GATA2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF407RUQ/@@download/ENCFF407RUQ.bigWig	ENCODE	hg19
+K562	ESRRA	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF949CDR/@@download/ENCFF949CDR.bigBed	ENCODE	hg19
+K562	ESRRA	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF827COK/@@download/ENCFF827COK.bigWig	ENCODE	hg19
+K562	WHSC1	pseudoreplicated IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF308YXQ/@@download/ENCFF308YXQ.bigBed	ENCODE	hg19
+K562	WHSC1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF864WOR/@@download/ENCFF864WOR.bigWig	ENCODE	hg19
+K562	E2F6	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF574SLM/@@download/ENCFF574SLM.bigBed	ENCODE	hg19
+K562	E2F6	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF123OID/@@download/ENCFF123OID.bigWig	ENCODE	hg19
+K562	NELFE	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF759AXP/@@download/ENCFF759AXP.bigBed	ENCODE	hg19
+K562	CHD1	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF830UWV/@@download/ENCFF830UWV.bigBed	ENCODE	hg19
+K562	H3K79me2	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF520XBR/@@download/ENCFF520XBR.bigBed	ENCODE	hg19
+K562	H3K79me2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF003CLZ/@@download/ENCFF003CLZ.bigWig	ENCODE	hg19
+K562	NFYB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF413KEY/@@download/ENCFF413KEY.bigBed	ENCODE	hg19
+K562	NFYB	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF547XEW/@@download/ENCFF547XEW.bigWig	ENCODE	hg19
+K562	BRF2	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF228PQV/@@download/ENCFF228PQV.bigBed	ENCODE	hg19
+K562	L3MBTL2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF686TUG/@@download/ENCFF686TUG.bigBed	ENCODE	hg19
+K562	L3MBTL2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF890UUN/@@download/ENCFF890UUN.bigWig	ENCODE	hg19
+K562	ZNF263	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF213OFN/@@download/ENCFF213OFN.bigBed	ENCODE	hg19
+K562	ZNF263	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF318FFG/@@download/ENCFF318FFG.bigWig	ENCODE	hg19
+K562	ZEB2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF953GAI/@@download/ENCFF953GAI.bigBed	ENCODE	hg19
+K562	ZEB2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF080AFW/@@download/ENCFF080AFW.bigWig	ENCODE	hg19
+K562	SKIL	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF760FQS/@@download/ENCFF760FQS.bigBed	ENCODE	hg19
+K562	SKIL	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF770SFT/@@download/ENCFF770SFT.bigWig	ENCODE	hg19
+K562	HMGN3	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF510MIH/@@download/ENCFF510MIH.bigBed	ENCODE	hg19
+K562	PRPF4	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF902BIO/@@download/ENCFF902BIO.bigBed	ENCODE	hg19
+K562	PRPF4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF472ISV/@@download/ENCFF472ISV.bigWig	ENCODE	hg19
+K562	NFATC3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF894LUM/@@download/ENCFF894LUM.bigBed	ENCODE	hg19
+K562	NFATC3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF368HBP/@@download/ENCFF368HBP.bigWig	ENCODE	hg19
+K562	CEBPZ	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF609DVV/@@download/ENCFF609DVV.bigBed	ENCODE	hg19
+K562	CEBPZ	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF324NIB/@@download/ENCFF324NIB.bigWig	ENCODE	hg19
+K562	U2AF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF205VNR/@@download/ENCFF205VNR.bigBed	ENCODE	hg19
+K562	U2AF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF757MVK/@@download/ENCFF757MVK.bigWig	ENCODE	hg19
+K562	ZHX1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF546ACT/@@download/ENCFF546ACT.bigBed	ENCODE	hg19
+K562	ZHX1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF963SBX/@@download/ENCFF963SBX.bigWig	ENCODE	hg19
+K562	FIP1L1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF201OXE/@@download/ENCFF201OXE.bigBed	ENCODE	hg19
+K562	FIP1L1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF377LTD/@@download/ENCFF377LTD.bigWig	ENCODE	hg19
+K562	H4K20me1	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF298QOP/@@download/ENCFF298QOP.bigBed	ENCODE	hg19
+K562	H4K20me1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF143CUR/@@download/ENCFF143CUR.bigWig	ENCODE	hg19
+K562	H3K27me3	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF369ZKL/@@download/ENCFF369ZKL.bigBed	ENCODE	hg19
+K562	H3K27me3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF445UCR/@@download/ENCFF445UCR.bigWig	ENCODE	hg19
+K562	ETS1	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF656ADQ/@@download/ENCFF656ADQ.bigBed	ENCODE	hg19
+K562	ETS1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF771GEW/@@download/ENCFF771GEW.bigWig	ENCODE	hg19
+K562	ARID3A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF342NKD/@@download/ENCFF342NKD.bigBed	ENCODE	hg19
+K562	ARID3A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF107YJY/@@download/ENCFF107YJY.bigWig	ENCODE	hg19
+K562	BRF1	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF822AYT/@@download/ENCFF822AYT.bigBed	ENCODE	hg19
+K562	ATF1	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF254UOG/@@download/ENCFF254UOG.bigBed	ENCODE	hg19
+K562	ZC3H11A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF855VYY/@@download/ENCFF855VYY.bigBed	ENCODE	hg19
+K562	ZC3H11A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF029VKA/@@download/ENCFF029VKA.bigWig	ENCODE	hg19
+K562	KDM4B	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF402WGE/@@download/ENCFF402WGE.bigBed	ENCODE	hg19
+K562	KDM4B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF609EAA/@@download/ENCFF609EAA.bigWig	ENCODE	hg19
+K562	HDAC6	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF955AXH/@@download/ENCFF955AXH.bigBed	ENCODE	hg19
+K562	HDAC6	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF177KCK/@@download/ENCFF177KCK.bigWig	ENCODE	hg19
+K562	ZBED1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF476IRG/@@download/ENCFF476IRG.bigBed	ENCODE	hg19
+K562	ZBED1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF876HAD/@@download/ENCFF876HAD.bigWig	ENCODE	hg19
+K562	TBL1XR1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF957DJB/@@download/ENCFF957DJB.bigBed	ENCODE	hg19
+K562	TBL1XR1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF350TPD/@@download/ENCFF350TPD.bigWig	ENCODE	hg19
+K562	MXI1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF628ZYM/@@download/ENCFF628ZYM.bigBed	ENCODE	hg19
+K562	MXI1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF120GUN/@@download/ENCFF120GUN.bigWig	ENCODE	hg19
+K562	JUN	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF088VCF/@@download/ENCFF088VCF.bigBed	ENCODE	hg19
+K562	JUN	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF780KHA/@@download/ENCFF780KHA.bigWig	ENCODE	hg19
+K562	FOSL1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF636LOB/@@download/ENCFF636LOB.bigBed	ENCODE	hg19
+K562	FOSL1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF857ARL/@@download/ENCFF857ARL.bigWig	ENCODE	hg19
+K562	TAF7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF211EWN/@@download/ENCFF211EWN.bigBed	ENCODE	hg19
+K562	TAF7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF495ETG/@@download/ENCFF495ETG.bigWig	ENCODE	hg19
+K562	CTCFL	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF472SHK/@@download/ENCFF472SHK.bigBed	ENCODE	hg19
+K562	CTCFL	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF648ABV/@@download/ENCFF648ABV.bigWig	ENCODE	hg19
+K562	RFX5	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF058VMS/@@download/ENCFF058VMS.bigBed	ENCODE	hg19
+K562	RFX5	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF759LQL/@@download/ENCFF759LQL.bigWig	ENCODE	hg19
+K562	NONO	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF264HYE/@@download/ENCFF264HYE.bigBed	ENCODE	hg19
+K562	NONO	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF753KMF/@@download/ENCFF753KMF.bigWig	ENCODE	hg19
+K562	PCBP2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF257JFV/@@download/ENCFF257JFV.bigBed	ENCODE	hg19
+K562	PCBP2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF175XYE/@@download/ENCFF175XYE.bigWig	ENCODE	hg19
+K562	EZH2	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF464QCZ/@@download/ENCFF464QCZ.bigBed	ENCODE	hg19
+K562	NFYA	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF746IDJ/@@download/ENCFF746IDJ.bigBed	ENCODE	hg19
+K562	NFYA	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF802NVY/@@download/ENCFF802NVY.bigWig	ENCODE	hg19
+K562	MEIS2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF706BPD/@@download/ENCFF706BPD.bigBed	ENCODE	hg19
+K562	MEIS2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF447BCK/@@download/ENCFF447BCK.bigWig	ENCODE	hg19
+K562	PYGO2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF523HKB/@@download/ENCFF523HKB.bigBed	ENCODE	hg19
+K562	PYGO2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF957LKR/@@download/ENCFF957LKR.bigWig	ENCODE	hg19
+K562	RBM14	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF207MZH/@@download/ENCFF207MZH.bigBed	ENCODE	hg19
+K562	RBM14	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF707TKH/@@download/ENCFF707TKH.bigWig	ENCODE	hg19
+K562	ELF4	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF315KJE/@@download/ENCFF315KJE.bigBed	ENCODE	hg19
+K562	ELF4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF121DYK/@@download/ENCFF121DYK.bigWig	ENCODE	hg19
+K562	HES1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF839NZU/@@download/ENCFF839NZU.bigBed	ENCODE	hg19
+K562	HES1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF071USV/@@download/ENCFF071USV.bigWig	ENCODE	hg19
+K562	E2F4	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF581DMX/@@download/ENCFF581DMX.bigBed	ENCODE	hg19
+K562	HDGF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF942DKZ/@@download/ENCFF942DKZ.bigBed	ENCODE	hg19
+K562	HDGF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF606AWH/@@download/ENCFF606AWH.bigWig	ENCODE	hg19
+K562	H3K4me2	replicated peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF042AIK/@@download/ENCFF042AIK.bigBed	ENCODE	hg19
+K562	H3K4me2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF118MMT/@@download/ENCFF118MMT.bigWig	ENCODE	hg19
+K562	CBX8	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF712QIM/@@download/ENCFF712QIM.bigBed	ENCODE	hg19
+K562	CBX8	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF206WVX/@@download/ENCFF206WVX.bigWig	ENCODE	hg19
+K562	KDM5B	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF618SCF/@@download/ENCFF618SCF.bigBed	ENCODE	hg19
+K562	KDM5B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF293III/@@download/ENCFF293III.bigWig	ENCODE	hg19
+K562	SRSF3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF018DPB/@@download/ENCFF018DPB.bigBed	ENCODE	hg19
+K562	SRSF3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF890RUD/@@download/ENCFF890RUD.bigWig	ENCODE	hg19
+K562	ZFP36	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF142MPO/@@download/ENCFF142MPO.bigBed	ENCODE	hg19
+K562	ZFP36	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF926GDZ/@@download/ENCFF926GDZ.bigWig	ENCODE	hg19
+K562	CTBP1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF870SFC/@@download/ENCFF870SFC.bigBed	ENCODE	hg19
+K562	CTBP1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF112LWM/@@download/ENCFF112LWM.bigWig	ENCODE	hg19
+K562	ZKSCAN1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF799FES/@@download/ENCFF799FES.bigBed	ENCODE	hg19
+K562	ZKSCAN1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF181YKE/@@download/ENCFF181YKE.bigWig	ENCODE	hg19
+K562	IRF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF576LYW/@@download/ENCFF576LYW.bigBed	ENCODE	hg19
+K562	IRF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF319KZQ/@@download/ENCFF319KZQ.bigWig	ENCODE	hg19
+K562	MBD2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF459ESZ/@@download/ENCFF459ESZ.bigBed	ENCODE	hg19
+K562	MBD2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF371KUO/@@download/ENCFF371KUO.bigWig	ENCODE	hg19
+K562	SMAD1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF394ROW/@@download/ENCFF394ROW.bigBed	ENCODE	hg19
+K562	SMAD1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF434JPE/@@download/ENCFF434JPE.bigWig	ENCODE	hg19
+K562	SMAD2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF471QHB/@@download/ENCFF471QHB.bigBed	ENCODE	hg19
+K562	SMAD2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF217SDS/@@download/ENCFF217SDS.bigWig	ENCODE	hg19
+K562	ELF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF621HYF/@@download/ENCFF621HYF.bigBed	ENCODE	hg19
+K562	ELF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF469QYZ/@@download/ENCFF469QYZ.bigWig	ENCODE	hg19
+K562	MAZ	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF065TOG/@@download/ENCFF065TOG.bigBed	ENCODE	hg19
+K562	LEF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF561MCO/@@download/ENCFF561MCO.bigBed	ENCODE	hg19
+K562	LEF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF772YTJ/@@download/ENCFF772YTJ.bigWig	ENCODE	hg19
+K562	PML	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF232ALQ/@@download/ENCFF232ALQ.bigBed	ENCODE	hg19
+K562	PML	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF746UXC/@@download/ENCFF746UXC.bigWig	ENCODE	hg19
+K562	MAFF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF849GPV/@@download/ENCFF849GPV.bigBed	ENCODE	hg19
+K562	MAFF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF931BLV/@@download/ENCFF931BLV.bigWig	ENCODE	hg19
+K562	SRSF7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF797YXH/@@download/ENCFF797YXH.bigBed	ENCODE	hg19
+K562	SRSF7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF130UBB/@@download/ENCFF130UBB.bigWig	ENCODE	hg19
+K562	STAT5A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF087XZN/@@download/ENCFF087XZN.bigBed	ENCODE	hg19
+K562	STAT5A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF832FFP/@@download/ENCFF832FFP.bigWig	ENCODE	hg19
+K562	CCNT2	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF608OGE/@@download/ENCFF608OGE.bigBed	ENCODE	hg19
+K562	SAFB2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF520GWJ/@@download/ENCFF520GWJ.bigBed	ENCODE	hg19
+K562	SAFB2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF408SHD/@@download/ENCFF408SHD.bigWig	ENCODE	hg19
+K562	E2F1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF135FEB/@@download/ENCFF135FEB.bigBed	ENCODE	hg19
+K562	E2F1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF723ILY/@@download/ENCFF723ILY.bigWig	ENCODE	hg19
+K562	POLR2B	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF954DTY/@@download/ENCFF954DTY.bigBed	ENCODE	hg19
+K562	POLR2B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF685ZXF/@@download/ENCFF685ZXF.bigWig	ENCODE	hg19
+K562	MYNN	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF500GQE/@@download/ENCFF500GQE.bigBed	ENCODE	hg19
+K562	MYNN	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF145XHA/@@download/ENCFF145XHA.bigWig	ENCODE	hg19
+K562	RAD51	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF311KUF/@@download/ENCFF311KUF.bigBed	ENCODE	hg19
+K562	RAD51	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF532QDR/@@download/ENCFF532QDR.bigWig	ENCODE	hg19
+K562	NR2F1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF418RBD/@@download/ENCFF418RBD.bigBed	ENCODE	hg19
+K562	NR2F1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF928QBF/@@download/ENCFF928QBF.bigWig	ENCODE	hg19
+K562	ASH1L	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF205TTE/@@download/ENCFF205TTE.bigBed	ENCODE	hg19
+K562	ASH1L	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF016YLI/@@download/ENCFF016YLI.bigWig	ENCODE	hg19
+K562	FOXM1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF681FCM/@@download/ENCFF681FCM.bigBed	ENCODE	hg19
+K562	FOXM1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF581TEU/@@download/ENCFF581TEU.bigWig	ENCODE	hg19
+K562	SOX6	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF252KMY/@@download/ENCFF252KMY.bigBed	ENCODE	hg19
+K562	SOX6	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF757HAQ/@@download/ENCFF757HAQ.bigWig	ENCODE	hg19
+K562	CREM	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF490TSP/@@download/ENCFF490TSP.bigBed	ENCODE	hg19
+K562	CREM	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF026KYB/@@download/ENCFF026KYB.bigWig	ENCODE	hg19
+K562	NFXL1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF382EED/@@download/ENCFF382EED.bigBed	ENCODE	hg19
+K562	NFXL1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF906FIL/@@download/ENCFF906FIL.bigWig	ENCODE	hg19
+K562	MCM2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF370NUY/@@download/ENCFF370NUY.bigBed	ENCODE	hg19
+K562	MCM2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF498CGA/@@download/ENCFF498CGA.bigWig	ENCODE	hg19
+K562	HDAC3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF685PMX/@@download/ENCFF685PMX.bigBed	ENCODE	hg19
+K562	HDAC3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF137LOO/@@download/ENCFF137LOO.bigWig	ENCODE	hg19
+K562	RBM39	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF205BFQ/@@download/ENCFF205BFQ.bigBed	ENCODE	hg19
+K562	RBM39	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF046WHP/@@download/ENCFF046WHP.bigWig	ENCODE	hg19
+K562	CDC5L	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF709OCN/@@download/ENCFF709OCN.bigBed	ENCODE	hg19
+K562	CDC5L	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF739MHD/@@download/ENCFF739MHD.bigWig	ENCODE	hg19
+K562	NCOA6	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF962VRS/@@download/ENCFF962VRS.bigBed	ENCODE	hg19
+K562	NCOA6	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF547KCR/@@download/ENCFF547KCR.bigWig	ENCODE	hg19
+K562	RBM22	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF982EHX/@@download/ENCFF982EHX.bigBed	ENCODE	hg19
+K562	RBM22	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF411ILS/@@download/ENCFF411ILS.bigWig	ENCODE	hg19
+K562	POLR2G	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF693PVI/@@download/ENCFF693PVI.bigBed	ENCODE	hg19
+K562	POLR2G	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF540CYY/@@download/ENCFF540CYY.bigWig	ENCODE	hg19
+K562	ZBTB11	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF944TTQ/@@download/ENCFF944TTQ.bigBed	ENCODE	hg19
+K562	ZBTB11	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF693GNL/@@download/ENCFF693GNL.bigWig	ENCODE	hg19
+K562	AGO1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF242XOG/@@download/ENCFF242XOG.bigBed	ENCODE	hg19
+K562	AGO1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF054VBS/@@download/ENCFF054VBS.bigWig	ENCODE	hg19
+K562	LARP7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF165PST/@@download/ENCFF165PST.bigBed	ENCODE	hg19
+K562	LARP7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF685CPY/@@download/ENCFF685CPY.bigWig	ENCODE	hg19
+K562	FOXA1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF261LDJ/@@download/ENCFF261LDJ.bigBed	ENCODE	hg19
+K562	FOXA1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF147BRO/@@download/ENCFF147BRO.bigWig	ENCODE	hg19
+K562	HNRNPUL1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF553KXA/@@download/ENCFF553KXA.bigBed	ENCODE	hg19
+K562	HNRNPUL1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF195XFH/@@download/ENCFF195XFH.bigWig	ENCODE	hg19
+K562	COPS2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF070WPA/@@download/ENCFF070WPA.bigBed	ENCODE	hg19
+K562	COPS2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF684JZK/@@download/ENCFF684JZK.bigWig	ENCODE	hg19
+K562	SPI1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF564GXB/@@download/ENCFF564GXB.bigBed	ENCODE	hg19
+K562	SPI1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF922QGE/@@download/ENCFF922QGE.bigWig	ENCODE	hg19
+K562	ZNF407	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF853HAR/@@download/ENCFF853HAR.bigBed	ENCODE	hg19
+K562	ZNF407	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF972MUU/@@download/ENCFF972MUU.bigWig	ENCODE	hg19
+K562	SAP30	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF845NPC/@@download/ENCFF845NPC.bigBed	ENCODE	hg19
+K562	SAP30	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF816KCQ/@@download/ENCFF816KCQ.bigWig	ENCODE	hg19
+K562	TAF9B	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF489AZN/@@download/ENCFF489AZN.bigBed	ENCODE	hg19
+K562	TAF9B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF830MKJ/@@download/ENCFF830MKJ.bigWig	ENCODE	hg19
+K562	SMARCC2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF572NYX/@@download/ENCFF572NYX.bigBed	ENCODE	hg19
+K562	SMARCC2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF810GGD/@@download/ENCFF810GGD.bigWig	ENCODE	hg19
+K562	RB1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF132EQK/@@download/ENCFF132EQK.bigBed	ENCODE	hg19
+K562	RB1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF989VKY/@@download/ENCFF989VKY.bigWig	ENCODE	hg19
+K562	HLTF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF102DJI/@@download/ENCFF102DJI.bigBed	ENCODE	hg19
+K562	HLTF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF285ZBA/@@download/ENCFF285ZBA.bigWig	ENCODE	hg19
+K562	SIN3B	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF658OPS/@@download/ENCFF658OPS.bigBed	ENCODE	hg19
+K562	SIN3B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF036PQP/@@download/ENCFF036PQP.bigWig	ENCODE	hg19
+K562	NR0B1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF146NUZ/@@download/ENCFF146NUZ.bigBed	ENCODE	hg19
+K562	NR0B1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF259JBX/@@download/ENCFF259JBX.bigWig	ENCODE	hg19
+K562	PTBP1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF895WYA/@@download/ENCFF895WYA.bigBed	ENCODE	hg19
+K562	PTBP1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF913LYD/@@download/ENCFF913LYD.bigWig	ENCODE	hg19
+K562	RBFOX2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF677XMK/@@download/ENCFF677XMK.bigBed	ENCODE	hg19
+K562	RBFOX2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF600MKI/@@download/ENCFF600MKI.bigWig	ENCODE	hg19
+K562	EHMT2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF665VQR/@@download/ENCFF665VQR.bigBed	ENCODE	hg19
+K562	EHMT2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF982RMW/@@download/ENCFF982RMW.bigWig	ENCODE	hg19
+K562	PHF20	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF455LRK/@@download/ENCFF455LRK.bigBed	ENCODE	hg19
+K562	PHF20	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF905ZIF/@@download/ENCFF905ZIF.bigWig	ENCODE	hg19
+K562	HNRNPL	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF283DWT/@@download/ENCFF283DWT.bigBed	ENCODE	hg19
+K562	HNRNPL	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF174JFC/@@download/ENCFF174JFC.bigWig	ENCODE	hg19
+K562	RBM34	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF605NTJ/@@download/ENCFF605NTJ.bigBed	ENCODE	hg19
+K562	RBM34	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF319QUS/@@download/ENCFF319QUS.bigWig	ENCODE	hg19
+K562	RBM17	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF346GSJ/@@download/ENCFF346GSJ.bigBed	ENCODE	hg19
+K562	RBM17	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF130KQG/@@download/ENCFF130KQG.bigWig	ENCODE	hg19
+K562	ILF3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF167LPU/@@download/ENCFF167LPU.bigBed	ENCODE	hg19
+K562	ILF3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF120KHN/@@download/ENCFF120KHN.bigWig	ENCODE	hg19
+K562	ZBTB2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF422VFY/@@download/ENCFF422VFY.bigBed	ENCODE	hg19
+K562	ZBTB2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF715FKT/@@download/ENCFF715FKT.bigWig	ENCODE	hg19
+K562	SRSF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF339BDM/@@download/ENCFF339BDM.bigBed	ENCODE	hg19
+K562	SRSF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF061FXU/@@download/ENCFF061FXU.bigWig	ENCODE	hg19
+K562	SFPQ	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF231IWC/@@download/ENCFF231IWC.bigBed	ENCODE	hg19
+K562	SFPQ	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF177THB/@@download/ENCFF177THB.bigWig	ENCODE	hg19
+K562	CCAR2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF829PUD/@@download/ENCFF829PUD.bigBed	ENCODE	hg19
+K562	CCAR2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF761YMH/@@download/ENCFF761YMH.bigWig	ENCODE	hg19
+K562	FOS	optimal IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF238YBL/@@download/ENCFF238YBL.bigBed	ENCODE	hg19
+K562	KHSRP	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF506BAX/@@download/ENCFF506BAX.bigBed	ENCODE	hg19
+K562	KHSRP	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF767OEV/@@download/ENCFF767OEV.bigWig	ENCODE	hg19
+K562	ZFP91	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF194BBM/@@download/ENCFF194BBM.bigBed	ENCODE	hg19
+K562	ZFP91	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF285MPA/@@download/ENCFF285MPA.bigWig	ENCODE	hg19
+K562	ARID2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF423SVK/@@download/ENCFF423SVK.bigBed	ENCODE	hg19
+K562	ARID2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF232MAF/@@download/ENCFF232MAF.bigWig	ENCODE	hg19
+K562	DNMT1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF712YDU/@@download/ENCFF712YDU.bigBed	ENCODE	hg19
+K562	DNMT1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF820AVX/@@download/ENCFF820AVX.bigWig	ENCODE	hg19
+K562	ARID1B	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF238CLX/@@download/ENCFF238CLX.bigBed	ENCODE	hg19
+K562	ARID1B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF750FNO/@@download/ENCFF750FNO.bigWig	ENCODE	hg19
+K562	TRIM25	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF985CNU/@@download/ENCFF985CNU.bigBed	ENCODE	hg19
+K562	TRIM25	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF949WGE/@@download/ENCFF949WGE.bigWig	ENCODE	hg19
+K562	CC2D1A	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF599CPT/@@download/ENCFF599CPT.bigBed	ENCODE	hg19
+K562	CC2D1A	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF856RTE/@@download/ENCFF856RTE.bigWig	ENCODE	hg19
+K562	AFF1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF748JSB/@@download/ENCFF748JSB.bigBed	ENCODE	hg19
+K562	AFF1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF813XDC/@@download/ENCFF813XDC.bigWig	ENCODE	hg19
+K562	BRD4	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF932ZPG/@@download/ENCFF932ZPG.bigBed	ENCODE	hg19
+K562	BRD4	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF260JHC/@@download/ENCFF260JHC.bigWig	ENCODE	hg19
+K562	ZNF592	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF806RFJ/@@download/ENCFF806RFJ.bigBed	ENCODE	hg19
+K562	ZNF592	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF280MOK/@@download/ENCFF280MOK.bigWig	ENCODE	hg19
+K562	RBM25	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF765PXM/@@download/ENCFF765PXM.bigBed	ENCODE	hg19
+K562	RBM25	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF821RCB/@@download/ENCFF821RCB.bigWig	ENCODE	hg19
+K562	TAF15	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF713VPX/@@download/ENCFF713VPX.bigBed	ENCODE	hg19
+K562	TAF15	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF405IFO/@@download/ENCFF405IFO.bigWig	ENCODE	hg19
+K562	MTA1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF180XEU/@@download/ENCFF180XEU.bigBed	ENCODE	hg19
+K562	MTA1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF194ZGF/@@download/ENCFF194ZGF.bigWig	ENCODE	hg19
+K562	ZBTB40	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF198FDZ/@@download/ENCFF198FDZ.bigBed	ENCODE	hg19
+K562	ZBTB40	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF882ZUY/@@download/ENCFF882ZUY.bigWig	ENCODE	hg19
+K562	MTA3	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF469FIA/@@download/ENCFF469FIA.bigBed	ENCODE	hg19
+K562	MTA3	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF230NBV/@@download/ENCFF230NBV.bigWig	ENCODE	hg19
+K562	ZNF639	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF944TSJ/@@download/ENCFF944TSJ.bigBed	ENCODE	hg19
+K562	ZNF639	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF365YDY/@@download/ENCFF365YDY.bigWig	ENCODE	hg19
+K562	ZNF316	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF778NEV/@@download/ENCFF778NEV.bigBed	ENCODE	hg19
+K562	ZNF316	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF617XZE/@@download/ENCFF617XZE.bigWig	ENCODE	hg19
+K562	RLF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF224SUU/@@download/ENCFF224SUU.bigBed	ENCODE	hg19
+K562	RLF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF373XUB/@@download/ENCFF373XUB.bigWig	ENCODE	hg19
+K562	NKRF	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF596XXG/@@download/ENCFF596XXG.bigBed	ENCODE	hg19
+K562	NKRF	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF932XGZ/@@download/ENCFF932XGZ.bigWig	ENCODE	hg19
+K562	ARHGAP35	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF205KOI/@@download/ENCFF205KOI.bigBed	ENCODE	hg19
+K562	ARHGAP35	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF694WYQ/@@download/ENCFF694WYQ.bigWig	ENCODE	hg19
+K562	THRA	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF498DMN/@@download/ENCFF498DMN.bigBed	ENCODE	hg19
+K562	THRA	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF635LIW/@@download/ENCFF635LIW.bigWig	ENCODE	hg19
+K562	FUS	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF516VRQ/@@download/ENCFF516VRQ.bigBed	ENCODE	hg19
+K562	FUS	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF380ABG/@@download/ENCFF380ABG.bigWig	ENCODE	hg19
+K562	E2F7	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF683VLI/@@download/ENCFF683VLI.bigBed	ENCODE	hg19
+K562	E2F7	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF103XPY/@@download/ENCFF103XPY.bigWig	ENCODE	hg19
+K562	PRDM10	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF560NYE/@@download/ENCFF560NYE.bigBed	ENCODE	hg19
+K562	PRDM10	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF251XOX/@@download/ENCFF251XOX.bigWig	ENCODE	hg19
+K562	NUFIP1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF462ZTE/@@download/ENCFF462ZTE.bigBed	ENCODE	hg19
+K562	NUFIP1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF645UPN/@@download/ENCFF645UPN.bigWig	ENCODE	hg19
+K562	TRIP13	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF142YMQ/@@download/ENCFF142YMQ.bigBed	ENCODE	hg19
+K562	TRIP13	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF317QLL/@@download/ENCFF317QLL.bigWig	ENCODE	hg19
+K562	MGA	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF186UJB/@@download/ENCFF186UJB.bigBed	ENCODE	hg19
+K562	MGA	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF932XMO/@@download/ENCFF932XMO.bigWig	ENCODE	hg19
+K562	GATAD2B	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF222KAL/@@download/ENCFF222KAL.bigBed	ENCODE	hg19
+K562	GATAD2B	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF755NBK/@@download/ENCFF755NBK.bigWig	ENCODE	hg19
+K562	KLF16	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF986JLG/@@download/ENCFF986JLG.bigBed	ENCODE	hg19
+K562	KLF16	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF161TZI/@@download/ENCFF161TZI.bigWig	ENCODE	hg19
+K562	NFIC	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF292MFU/@@download/ENCFF292MFU.bigBed	ENCODE	hg19
+K562	NFIC	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF474SAL/@@download/ENCFF474SAL.bigWig	ENCODE	hg19
+K562	KAT8	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF062WWV/@@download/ENCFF062WWV.bigBed	ENCODE	hg19
+K562	KAT8	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF068JOG/@@download/ENCFF068JOG.bigWig	ENCODE	hg19
+K562	HNRNPLL	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF236YAX/@@download/ENCFF236YAX.bigBed	ENCODE	hg19
+K562	HNRNPLL	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF973NPC/@@download/ENCFF973NPC.bigWig	ENCODE	hg19
+K562	SNRNP70	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF190QFS/@@download/ENCFF190QFS.bigBed	ENCODE	hg19
+K562	SNRNP70	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF989OXX/@@download/ENCFF989OXX.bigWig	ENCODE	hg19
+K562	DACH1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF709HXG/@@download/ENCFF709HXG.bigBed	ENCODE	hg19
+K562	DACH1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF620DCM/@@download/ENCFF620DCM.bigWig	ENCODE	hg19
+kc167	mRNA	(wig)	http://data.modencode.org/cgi-bin/findFiles.cgi?download=2761	modENCODE	
+Kc167	H3K4me3	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM890119&format=file&file=GSM890119%5FH3K4me3%5FKc%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	H3K4me1	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM890120&format=file&file=GSM890120%5FH3K4me1%5FKc%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	H3K27ac	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM890121&format=file&file=GSM890121%5FH3K27ac%5FKc%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	JIL-1	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM890122&format=file&file=GSM890122%5FJIL1%5FKc%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	H3K9acS10ph	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM890123&format=file&file=GSM890123%5FH3K9acS10ph%5FKc%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	H3K27acS28ph	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM890124&format=file&file=GSM890124%5FH3S28K27%5FKc%2Ebed%2Egz	NCBI-GEO	dm3
+Kc167	GAF	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM2133762&format=file&file=GSM2133762%5FKc%5FGAF%2Ewig%2Egz	NCBI-GEO	dm6
+Kc167	H3K27me3	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM2133764&format=file&file=GSM2133764%5FKc%5FH3K27me3%2Ewig%2Egz	NCBI-GEO	dm6
+Kc167	Ibf1	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM2133766&format=file&file=GSM2133766%5FKc%5FIbf1%2Ewig%2Egz	NCBI-GEO	dm6
+Kc167	Ibf2	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM2133767&format=file&file=GSM2133767%5FKc%5FIbf2%2Ewig%2Egz	NCBI-GEO	dm6
+Kc167	Pita	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM2133768&format=file&file=GSM2133768%5FKc%5FPita%2Ewig%2Egz	NCBI-GEO	dm6
+Kc167	ZIPIC	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM2133769&format=file&file=GSM2133769%5FKc%5FZIPIC%2Ewig%2Egz	NCBI-GEO	dm6
+Kc167	Nup98	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM2133770&format=file&file=GSM2133770%5FKc%5FNup98%2Ewig%2Egz	NCBI-GEO	dm6
+Kc167	dCTCF	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM807543&format=file&file=GSM807543%5FCTCF%2Dint%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	CTCF	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM1535983&format=file&file=GSM1535983%5FCTCF%5FNT%5FRep2%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	Rad21	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM1536009&format=file&file=GSM1536009%5FRad21%5FNT%5FRep1%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	H3K9me2	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM1535996&format=file&file=GSM1535996%5FH3K9me2%5FNT%5FRep1%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	BEAF	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM1535963&format=file&file=GSM1535963%5FBEAF%5FNT%5FRep2%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	CapH2	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM1535966&format=file&file=GSM1535966%5FCapH2%5FNT%5FRep1%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	CBP	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM1535970&format=file&file=GSM1535970%5FCBP%5FNT%5FRep1%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	CP190	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM1535980&format=file&file=GSM1535980%5FCP190%5FNT%5FRep2%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	RNAPII	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM1536014&format=file&file=GSM1536014%5FRNAPII%5FNT%5FRep1%2Ewig%2Egz	NCBI-GEO	dm3
+Kc167	TFIIIC	(wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM1536019&format=file&file=GSM1536019%5FTFIIIC%5FNT%5FRep1%2Ewig%2Egz	NCBI-GEO	dm3
+ES-E14	H3K4me3	(BigWig)	https://www.encodeproject.org/files/ENCFF806NDV/@@download/ENCFF806NDV.bigWig	ENCODE	mm10
+ES-E14	H3K4me1	(BigWig)	https://www.encodeproject.org/files/ENCFF531JKE/@@download/ENCFF531JKE.bigWig	ENCODE	mm10
+ES-E14	H3K27ac	(BigWig)	https://www.encodeproject.org/files/ENCFF163SBS/@@download/ENCFF163SBS.bigWig	ENCODE	mm10
+ES-E14	H3K36me3	(BigWig)	https://www.encodeproject.org/files/ENCFF097KTK/@@download/ENCFF097KTK.bigWig	ENCODE	mm10
+ES-E14	H3K9me3	(BigWig)	https://www.encodeproject.org/files/ENCFF519ZAT/@@download/ENCFF519ZAT.bigWig	ENCODE	mm10
+ES-E14	H3K9ac	(BigWig)	https://www.encodeproject.org/files/ENCFF705OWT/@@download/ENCFF705OWT.bigWig	ENCODE	mm10
+ES-V6.5	Smc1	(Wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM560341&format=file&file=GSM560341%5F03112009%5F313D2AAXX%5FB6%2Ewig%2Egz	NCBI-GEO	mm8
+ES-V6.5	Smc3	(Wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM560344&format=file&file=GSM560344%5F03112009%5F313D2AAXX%5FB7%2Ewig%2Egz	NCBI-GEO	mm8
+ES-V6.5	CTCF	(Wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM560352&format=file&file=GSM560352%5F09112009%5Ffolder42TUFAAXX%5FB1%2Ewig%2Egz	NCBI-GEO	mm8
+ES-V6.5	Med12	(Wig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM560346&format=file&file=GSM560346%5F05272009%5F303V0AAXX%5FB3%2Ewig%2Egz	NCBI-GEO	mm8
+ES-Oct4-GFP	RNA	(TXT)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSM2533843&format=file&file=GSM2533843%5FES%5Frep1%2Etxt%2Egz	NCBI-GEO	mm10
+ES-Oct4-GFP	CTCF	(BigWig)	https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE96107&format=file&file=GSE96107%5FES%5FCTCF%2Ebw	NCBI-GEO	mm10
