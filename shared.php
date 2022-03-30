@@ -18,7 +18,17 @@ $GLOBALS['bmHiGlass'] = 'higlass.php';
 $GLOBALS['bmMetricsPage'] = 'metrics_view.php';
 
 // GET CONST FUNC
-function GetHeader($Header) { return '
+function GetHeader($Header) { 
+$Pride = 'ua-flag';
+$Phrase = 'Science needs peace now, not tomorrow.';
+if (date('F') == "June") {
+	$Pride = 'lgbtq-flag';
+	$Phrase = 'Path of science is not always straight.'; }
+if ((date('F') == "March") and (date('d') == "31")) {
+	$Pride = 'trans-flag';
+	$Phrase = 'Encourage cis-trans interactions!';
+	}
+return '
 <html lang="en">
 
 <head>
@@ -45,7 +55,6 @@ function GetHeader($Header) { return '
 <!--- purecss --->
 <link rel="stylesheet" href="css/pure-main.css">
 <link rel="stylesheet" href="css/pure-min.css">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300">
 <!--- purecss --->
 
 <!--- cookie consent --->
@@ -58,6 +67,10 @@ function GetHeader($Header) { return '
 <script type="text/javascript" src="js/tabulator.min.js"></script>
 <script type="text/javascript" src="js/xlsx.full.min.js"></script>
 <!--- tabulator and xlsx --->
+
+<!--- gcharts --->
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+<!--- gcharts --->
 
 <style>
 	.button-success,
@@ -73,6 +86,38 @@ function GetHeader($Header) { return '
 	.button-error { background: rgb(202, 60, 60); }
 	.button-warning { background: rgb(223, 117, 20); }
 	.button-secondary { background: rgb(66, 184, 221); }
+
+	.ua-flag {
+		background: linear-gradient(to right, rgba(0, 87, 184, 0.7) 50%, rgba(254, 221, 0, 0.7) 50%);
+		-webkit-text-stroke: 1px rgba(0, 0, 0, 0.7);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: bold;
+	}
+	
+	.lgbtq-flag {
+		background: linear-gradient(to right, rgba(255, 0, 24, 0.8) 16%, rgba(255, 165, 44, 0.8) 16% 33%, rgba(255, 255, 65, 0.8) 33% 50%, rgba(0, 128, 24, 0.8) 50% 66%, rgba(0, 0, 249, 0.8) 66% 83%, rgba(134, 0, 125, 0.8) 83%);
+		-webkit-text-stroke: 1px rgba(0, 0, 0, 0.7);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: bold;
+	}
+
+	.trans-flag {
+		background: linear-gradient(to right, rgba(85, 205, 252, 0.8) 20%, rgba(247, 168, 184, 0.8) 20% 40%, rgba(255, 255, 255, 0.8) 40% 60%, rgba(247, 168, 184, 0.8) 60% 80%, rgba(85, 205, 252, 0.8) 80%);
+		-webkit-text-stroke: 1px rgba(0,0,0,0.7);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: bold;
+	}
+	
+	.casual {
+		background: black;
+		-webkit-text-stroke: 1px rgba(0,0,0,0.7);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		font-weight: bold;
+	}
 </style>
 
 </head>
@@ -132,8 +177,10 @@ window.cookieconsent.initialise({
 			
 			<!--- header --->
 			<div class="header">
-				<h1><span style="display: inline-block; color: rgb(223, 117, 20); font-weight: bold; font-size:118%;">3D</span>GenBench</h1>
+				<span style="color: rgba(0,0,0,0.2);">'.$Phrase.'</span>
+				<h1><span class="'.$Pride.' pride">3DGenBench</span></h1>
 				<h2>'.$Header.'</h2>
+				
 			</div>
 			<!--- header --->
 			

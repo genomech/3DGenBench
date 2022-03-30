@@ -40,7 +40,7 @@ C_RANDOM_INTER_SIGMA = 2
 
 def ExceptionHook(Type, Value, Traceback): logging.exception(f"{Type.__name__}: {Value}", exc_info=(Type, Value, Traceback))
 
-def ConfigureLogger(LogFileName: str = os.devnull, Level: int = logging.DEBUG) -> None:
+def ConfigureLogger(LogFileName: str = os.devnull, Level: int = logging.INFO) -> None:
 	Formatter = "%(asctime)-30s%(levelname)-13s%(funcName)-35s%(message)s"
 	logger = logging.getLogger()
 	while logger.hasHandlers(): logger.removeHandler(logger.handlers[0])
@@ -278,13 +278,17 @@ def PearsonCorr(SeriesA, SeriesB, method="pearson"): return SeriesA.corr(SeriesB
 def SCC(CoolA, CoolB, MaxDist, h): return hicrep.genome_scc(CoolA, CoolB, max_dist=MaxDist, h=h)
 
 def PRCurve(YTrue, Probas):
+	ReduceVector = lambda vector, maxnum: [vector[0]] + [vector[int(index * (len(vector) / maxnum))] for index in range(1, maxnum - 1)] + [vector[-1]]
 	YTrueNumpy = numpy.nan_to_num(YTrue)
 	ProbasNumpy = numpy.nan_to_num(Probas)
 	Precision, Recall, Thresholds = precision_recall_curve(YTrueNumpy, ProbasNumpy)
+	if len(Precision) > 100: 
+		Precision = ReduceVector(Precision, 100)
+		Recall = ReduceVector(Recall, 100)
 	return {
 		"AUC": auc(Recall, Precision),
-		"Precision": json.dumps(Precision.tolist()),
-		"Recall": json.dumps(Recall.tolist()),
+		"Precision": json.dumps(list(Precision)),
+		"Recall": json.dumps(list(Recall)),
 		"Thresholds": json.dumps(Thresholds.tolist())
 		}
 
@@ -500,7 +504,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		Data["Metrics.EctopicInteractions.Precision"] = EctopicInteractions["Precision"]
 		Data["Metrics.EctopicInteractions.Recall"] = EctopicInteractions["Recall"]
 		Data["Metrics.EctopicInteractions.Thresholds"] = EctopicInteractions["Thresholds"]
-
+		
 		# DRAFT
 		VisualizePR(PRData = EctopicInteractions, Name = "Ectopic Interactions", FN = os.path.join(CoolDirID, f".{UnitID}-EctopicInteractionsPRCurve.png"))
 
@@ -523,7 +527,6 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 			sqlite_connection = sqlite3.connect(SqlDB)
 			cursor = sqlite_connection.cursor()
 			logging.info("DB Connected")
-
 			AllMetricsSQL = ', '.join([f"'{key}'='{value}'" for key, value in Data.items()])
 			sqlite_select_query = f"update bm_metrics set Status='0', {AllMetricsSQL} where ID='{UnitID}';"
 			cursor.execute(sqlite_select_query)
