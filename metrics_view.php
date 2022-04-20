@@ -34,7 +34,58 @@ if ($DataType == 's') {
 // print_r($DataArray);
 
 // LOAD metrics_list.php IF THERE ARE NO RESULTS
-if ((!$RecordExists) or ($RecordStatus != 0) or (!in_array($DataType, array('p', 's')))) { include(__DIR__.'/metrics.php'); }
+if ((!$RecordExists) or (!in_array($DataType, array('p', 's')))) { include(__DIR__.'/metrics.php'); }
+if ($RecordStatus != 0) { 
+	echo GetHeader('ID: '.$UnitID);
+	$Record = $TableArray[0];
+	$Logs = file_get_contents(GetLogs().'/'.$UnitID.'.log');
+	echo '<h2>Unit Data</h2>
+		
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Author ID:</b></td><td style="width: 800px;">'.$Record['Metadata.Author'].'</td></tr>
+		<tr><td><b>Model Name:</b></td><td>'.$Record['Metadata.ModelName'].'</td></tr>
+		<tr><td><b>Resolution:</b></td><td>'.strval(intval($Record['Metadata.Resolution'] / 1000)).' kb</td></tr>
+		<tr><td><b>Submission Date:</b></td><td>'.date('d M Y, H:i:s', strtotime($Record['Metadata.SubmissionDate'])).'</td></tr>
+		</table>
+		
+		<h2>Sample Data</h2>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Sample Name:</b></td><td style="width: 800px;">'.$Record['Metadata.SampleName'].'</td></tr>
+		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
+		</table><h2>Processing Info</h2>';
+		
+		if ($RecordStatus == 2) { echo '<aside class="button-error"><p>Job failed. See logs below and contact us</p></aside><details><summary>Click here to see logs</summary><div class="code code-wrap"><pre id="logpre" style="display: block; height: 500px; overflow-x: auto; padding: 0.5em; color: rgb(0, 0, 0); background: rgb(248, 248, 255) none repeat scroll 0% 0%;"><code class="language-html" style="white-space: pre;">'.$Logs.'</code></pre></div></details>
+		'; }
+		
+		if (($RecordStatus == 1) or ($RecordStatus == 3)) { 
+		if ($RecordStatus == 1) { echo '<aside class="button-warning"><p>Job is processing now. This page will reload in <span id="cnt">10</span> sec</p></aside>'; }
+		if ($RecordStatus == 3) { echo '<aside class="button-secondary"><p>Job is queued. This page will reload in <span id="cnt">10</span> sec</p></aside>'; }
+		echo '<script>
+    var counter = 10;
+
+    // The countdown method.
+    window.setInterval(function () {
+        counter--;
+        if (counter >= 0) {
+            var span;
+            span = document.getElementById("cnt");
+            span.innerHTML = counter;
+        }
+        if (counter === 0) {
+            clearInterval(counter);
+        }
+
+    }, 1000);
+
+    window.setInterval("refresh()", 10000);
+
+    // Refresh or reload page.
+    function refresh() {
+        window  .location.reload();
+    }
+</script>'; }
+	echo GetFooter();
+}
 
 // RENDER RESULTS
 else {
@@ -82,6 +133,7 @@ else {
 			
 			<div style="display: inline-block;" id="obj'.$Name.'"></div>
 			';
+			
 		}
 		
 		// draw PR curve
