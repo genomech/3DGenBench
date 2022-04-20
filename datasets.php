@@ -26,6 +26,13 @@ $DataArrayWG = TsvToArray(GetWGTable());
 	<div id="wg-table"></div>
 </div>
  
+ <div id="fragment-3">
+	<h2>Epigenetic Data</h2>
+    <div style="padding: 0 0 10px 0;">
+		Download: <a href="epigenetics_data.txt" download="epigenetics_data.txt">CSV</a>
+	</div>
+</div>
+ 
 <script>
 	
 	function DownloadFormatter() { return { "formatter": function(cell, formatterParams) { return (cell.getValue() != "_") ? "<a href='" + cell.getValue() + "' target='blank'>Download</a>" : "—"; } } }
