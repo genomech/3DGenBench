@@ -106,6 +106,7 @@ $cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; \'; ';
 	$cmd .= 'tsp bash -c "${CMD}";';
 $units_list .= '[<a href="'.GetMetricsPage().'?id='.$meta['ID'].'" target="blank">'.$meta['ID'].'</a>] ';
 }
+
 // echo $cmd;
 shell_exec($cmd);
 

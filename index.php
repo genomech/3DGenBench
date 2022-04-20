@@ -27,7 +27,7 @@ If you have generated 3C-data describing changes of chromatin architecture cause
 
 <ul>
 	<li>Join: <a href="https://join.slack.com/t/inc-cost/shared_invite/zt-10brfgiqv-csCRDbvTc0B4EC5iy1u2xQ" target="blank">INC-COST Slack</a> (channel #benchmarking): discussing data formats and benchmark metrics</li>
-	<li>Contribute: <a href="https://docs.google.com/forms/d/e/1FAIpQLSf9JaEds4OTjdR_awMPVrQK5SwmIluRzuAvZTOZ2zuFlv0AXg/viewform" target="blank">submit</a> your predictions for benchmarking and work with the code at our <a href="https://github.com/regnveig/3DGenBench" target="blank">GitHub repository</a>.</li>
+	<li>Contact us if you have experimental Hi-C (or capture Hi-C) data and/or work with the code at <a href="https://github.com/regnveig/3DGenBench" target="blank">GitHub repository</a>.</li>
 	<li>Test: <a href="submission_form.php" target="blank">upload</a> your predictions to our web server to benchmark your method against experimental data.</li>
 	<li><a href="datasets.php" target="blank">View</a> current experimental datasets.</li>
 </ul>
