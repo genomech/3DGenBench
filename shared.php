@@ -160,6 +160,7 @@ window.cookieconsent.initialise({
 				<li class=""><a class="pure-menu-link" href="datasets.php">Datasets</a></li>
 				<li class=""><a class="pure-menu-link" href="submission_form.php">Compute Metrics</a></li>
 				<li class=""><a class="pure-menu-link" href="metrics.php">Submissions List</a></li>
+				<li class=""><a class="pure-menu-link" href="upload.php">Upload</a></li>
 			</ul>
 		</div>
 	</div>
