@@ -22,8 +22,12 @@ awk '{if(NF==2){e[$1]=$2+1}else{d=sqrt(($1-$2)*($1-$2)); print $1,$2,$3/e[d]}}' 
 # Add the chromatin state per bin to the ObsOverExp matrix. NOTE: MASKED bins will be excluded!
 awk '{if(NF==2){cs[$1]=$2}else{print $1,cs[$1],$2,cs[$2],$3}}' ${compartment_partition_file} ${outfile} | awk '{if(NF==5) print $0}' > $WORK_DIR/_tmp ; mv $WORK_DIR/_tmp ${outfile}
 
+echo "I am here"
+
 # Compute CS per bin. We have to define a numerator and a denominator per bin, and get their average. The ratio numerator/denominator is the compartment strength per bin
-awk '{if($2==$4){num[$1]+=$5; num[$3]+=$5; cnum[$1]++; cnum[$3]++}; if($2!=$4){den[$1]+=$5; den[$3]+=$5; cden[$1]++; cden[$3]++}; cs[$1]=$2; cs[$3]=$4}END{for(i in num){print i,cs[i],(num[i]/cnum[i])/(den[i]/cden[i])}}' ${outfile} | sort -k 1n > ${CSoutfile}
+awk -f scripts_for_comp_strength/comp_strength.awk ${outfile} | sort -k 1n > ${CSoutfile}
+
+echo "I am there"
 
 #awk '{print $2,$3}' ${CSoutfile} > _tmp.txt
 #Rscript compartmentScore_calculation.R

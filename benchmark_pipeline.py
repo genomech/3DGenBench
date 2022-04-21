@@ -7,6 +7,7 @@ from cooltools.api import insulation
 from hicreppy import hicrep
 from multiprocessing import cpu_count
 from sklearn.metrics import precision_recall_curve, auc
+import scipy.stats as stats
 import argparse
 import cooler
 import datetime
@@ -123,7 +124,7 @@ def Cool2Cool(InputCoolFN, OutputCoolFN, Chrom):
 		Pixels["count"] = Pixels["balanced"] * pow(C_CONTACT_COEF, 2)
 		Pixels.dropna(inplace=True)
 		# check that all values are more than 1 and cooler won't delete it in new cool file
-		assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
+		# assert len(Pixels[Pixels["count"] > 1]) == len(Pixels)
 		Bins["weight"] = 1 / C_CONTACT_COEF
 		cooler.create_cooler(OutputCoolFN, Bins, Pixels)
 
@@ -334,6 +335,8 @@ def VisualizeRandom(RandomData, FN):
 	ax.set(title=f"Real vs Random Ectopic Intersections")
 	ax.hist(Random, bins=200, histtype='step')
 	ax.axvline(x=Real, color="red")
+	p_value = stats.ttest_1samp(Random, Real)
+	plt.title("p-value "+str(p_value))
 	fig.savefig(FN)
 	plt.clf()
 
@@ -539,9 +542,9 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 			if (sqlite_connection):
 				sqlite_connection.close()
 				logging.info("DB Closed")
-		
-	
-	
+
+
+
 
 # ------======| MAIN |======------
 

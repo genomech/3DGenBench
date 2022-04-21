@@ -221,9 +221,12 @@ def Calculate_compartment_strength_and_Ps(Datasets, Chrom, Resolution, OutFolder
 def Comp_score_corr(control_data_file, predicted_data_file):
     control_comp_strength = pd.read_csv(control_data_file, sep=" ", names=["bin", "comp_type", "comp_strength"])
     predicted_comp_strength = pd.read_csv(predicted_data_file, sep=" ", names=["bin", "comp_type", "comp_strength"])
+    assert len(control_comp_strength) == len(predicted_comp_strength)
+    #delete comp strength == -1 (if sum of obs exp values in compartments for bin equals to 0 )
+    control_comp_strength = control_comp_strength[control_comp_strength["comp_strength"]>0]
+    predicted_comp_strength = predicted_comp_strength[predicted_comp_strength["comp_strength"] > 0]
     merge_data = pd.merge(control_comp_strength, predicted_comp_strength, how="inner", on=["bin", "comp_type"])
-    assert len(merge_data)==len(control_comp_strength)==len(predicted_comp_strength)
-    pearson_corr = merge_data["comp_strength_x"].corr(merge_data["comp_strength_y"], method="pearson")
+    pearson_corr = merge_data["comp_strength_x"].corr(merge_data["comp_strength_y"], method="spearman")
     return pearson_corr
 
 def Ps_corr(control_data_file, predicted_data_file):
@@ -231,7 +234,7 @@ def Ps_corr(control_data_file, predicted_data_file):
     predicted_Ps = pd.read_csv(predicted_data_file, sep=" ", names=["bin", "average_contact"])
     merge_data = pd.merge(control_Ps, predicted_Ps, how="inner", on=["bin"])
     assert len(merge_data)==len(control_Ps)==len(predicted_Ps)
-    pearson_corr = merge_data["average_contact_x"].corr(merge_data["average_contact_y"], method="pearson")
+    pearson_corr = merge_data["average_contact_x"].corr(merge_data["average_contact_y"], method="spearman")
     return pearson_corr
 
 def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
