@@ -1,0 +1,1471 @@
+resolution	metric	sample	model_0.001_sd	model_0.01_sd	model_0.1_sd	model_0.5_sd	model_1_sd	model_2_sd	model_10_sd	model_20_sd	model_50_sd	diag_shuffle
+5000	Wt Spearman	Bor										
+5000	Wt Spearman	BorC1										
+5000	Wt Spearman	BorC1-2										
+5000	Wt Spearman	BorC1-4										
+5000	Wt Spearman	D3839										
+5000	Wt Spearman	del1-13d9lac_1										
+5000	Wt Spearman	del1-13d9lac_2										
+5000	Wt Spearman	delattP-Rel5d9lac_1										
+5000	Wt Spearman	delattP-Rel5d9lac_2										
+5000	Wt Spearman	DelB										
+5000	Wt Spearman	DelBs										
+5000	Wt Spearman	DelL-Mm										
+5000	Wt Spearman	dup-C										
+5000	Wt Spearman	dup-L										
+5000	Wt Spearman	Dup-LBor										
+5000	Wt Spearman	dup-S										
+5000	Wt Spearman	FirreKO_1										
+5000	Wt Spearman	FirreKO_2										
+5000	Wt Spearman	FirreKO_3										
+5000	Wt Spearman	i4i5										
+5000	Wt Spearman	i4i5ZRS_1										
+5000	Wt Spearman	i4i5ZRS_2										
+5000	Wt Spearman	i4i5ZRSreg										
+5000	Wt Spearman	Inv1										
+5000	Wt Spearman	Inv1-Mm_1										
+5000	Wt Spearman	Inv1-Mm_2										
+5000	Wt Spearman	Inv1d										
+5000	Wt Spearman	Inv2										
+5000	Wt Spearman	Inv3										
+5000	Wt Spearman	Inv4										
+5000	Wt Spearman	InvC										
+5000	Wt Spearman	InvF										
+5000	Wt Spearman	InvIntra										
+5000	Wt Spearman	kit30_mast										
+5000	Wt Spearman	kit30_mel										
+5000	Wt Spearman	kit30plus										
+5000	Wt Spearman	MusDelB										
+5000	Wt Spearman	Neur1-Mm										
+5000	Wt Spearman	Pdgfra_KO_fibr										
+5000	Wt Spearman	Pdgfra_KO_mast										
+5000	Wt Spearman	Pdgfra_left										
+5000	Wt Spearman	ZRSreg										
+5000	Mut Spearman	Bor										
+5000	Mut Spearman	BorC1										
+5000	Mut Spearman	BorC1-2										
+5000	Mut Spearman	BorC1-4										
+5000	Mut Spearman	D3839										
+5000	Mut Spearman	del1-13d9lac_1										
+5000	Mut Spearman	del1-13d9lac_2										
+5000	Mut Spearman	delattP-Rel5d9lac_1										
+5000	Mut Spearman	delattP-Rel5d9lac_2										
+5000	Mut Spearman	DelB										
+5000	Mut Spearman	DelBs										
+5000	Mut Spearman	DelL-Mm										
+5000	Mut Spearman	dup-C										
+5000	Mut Spearman	dup-L										
+5000	Mut Spearman	Dup-LBor										
+5000	Mut Spearman	dup-S										
+5000	Mut Spearman	FirreKO_1										
+5000	Mut Spearman	FirreKO_2										
+5000	Mut Spearman	FirreKO_3										
+5000	Mut Spearman	i4i5										
+5000	Mut Spearman	i4i5ZRS_1										
+5000	Mut Spearman	i4i5ZRS_2										
+5000	Mut Spearman	i4i5ZRSreg										
+5000	Mut Spearman	Inv1										
+5000	Mut Spearman	Inv1-Mm_1										
+5000	Mut Spearman	Inv1-Mm_2										
+5000	Mut Spearman	Inv1d										
+5000	Mut Spearman	Inv2										
+5000	Mut Spearman	Inv3										
+5000	Mut Spearman	Inv4										
+5000	Mut Spearman	InvC										
+5000	Mut Spearman	InvF										
+5000	Mut Spearman	InvIntra										
+5000	Mut Spearman	kit30_mast										
+5000	Mut Spearman	kit30_mel										
+5000	Mut Spearman	kit30plus										
+5000	Mut Spearman	MusDelB										
+5000	Mut Spearman	Neur1-Mm										
+5000	Mut Spearman	Pdgfra_KO_fibr										
+5000	Mut Spearman	Pdgfra_KO_mast										
+5000	Mut Spearman	Pdgfra_left										
+5000	Mut Spearman	ZRSreg										
+5000	Wt SCC	Bor										
+5000	Wt SCC	BorC1										
+5000	Wt SCC	BorC1-2										
+5000	Wt SCC	BorC1-4										
+5000	Wt SCC	D3839										
+5000	Wt SCC	del1-13d9lac_1										
+5000	Wt SCC	del1-13d9lac_2										
+5000	Wt SCC	delattP-Rel5d9lac_1										
+5000	Wt SCC	delattP-Rel5d9lac_2										
+5000	Wt SCC	DelB										
+5000	Wt SCC	DelBs										
+5000	Wt SCC	DelL-Mm										
+5000	Wt SCC	dup-C										
+5000	Wt SCC	dup-L										
+5000	Wt SCC	Dup-LBor										
+5000	Wt SCC	dup-S										
+5000	Wt SCC	FirreKO_1										
+5000	Wt SCC	FirreKO_2										
+5000	Wt SCC	FirreKO_3										
+5000	Wt SCC	i4i5										
+5000	Wt SCC	i4i5ZRS_1										
+5000	Wt SCC	i4i5ZRS_2										
+5000	Wt SCC	i4i5ZRSreg										
+5000	Wt SCC	Inv1										
+5000	Wt SCC	Inv1-Mm_1										
+5000	Wt SCC	Inv1-Mm_2										
+5000	Wt SCC	Inv1d										
+5000	Wt SCC	Inv2										
+5000	Wt SCC	Inv3										
+5000	Wt SCC	Inv4										
+5000	Wt SCC	InvC										
+5000	Wt SCC	InvF										
+5000	Wt SCC	InvIntra										
+5000	Wt SCC	kit30_mast										
+5000	Wt SCC	kit30_mel										
+5000	Wt SCC	kit30plus										
+5000	Wt SCC	MusDelB										
+5000	Wt SCC	Neur1-Mm										
+5000	Wt SCC	Pdgfra_KO_fibr										
+5000	Wt SCC	Pdgfra_KO_mast										
+5000	Wt SCC	Pdgfra_left										
+5000	Wt SCC	ZRSreg										
+5000	Mut SCC	Bor										
+5000	Mut SCC	BorC1										
+5000	Mut SCC	BorC1-2										
+5000	Mut SCC	BorC1-4										
+5000	Mut SCC	D3839										
+5000	Mut SCC	del1-13d9lac_1										
+5000	Mut SCC	del1-13d9lac_2										
+5000	Mut SCC	delattP-Rel5d9lac_1										
+5000	Mut SCC	delattP-Rel5d9lac_2										
+5000	Mut SCC	DelB										
+5000	Mut SCC	DelBs										
+5000	Mut SCC	DelL-Mm										
+5000	Mut SCC	dup-C										
+5000	Mut SCC	dup-L										
+5000	Mut SCC	Dup-LBor										
+5000	Mut SCC	dup-S										
+5000	Mut SCC	FirreKO_1										
+5000	Mut SCC	FirreKO_2										
+5000	Mut SCC	FirreKO_3										
+5000	Mut SCC	i4i5										
+5000	Mut SCC	i4i5ZRS_1										
+5000	Mut SCC	i4i5ZRS_2										
+5000	Mut SCC	i4i5ZRSreg										
+5000	Mut SCC	Inv1										
+5000	Mut SCC	Inv1-Mm_1										
+5000	Mut SCC	Inv1-Mm_2										
+5000	Mut SCC	Inv1d										
+5000	Mut SCC	Inv2										
+5000	Mut SCC	Inv3										
+5000	Mut SCC	Inv4										
+5000	Mut SCC	InvC										
+5000	Mut SCC	InvF										
+5000	Mut SCC	InvIntra										
+5000	Mut SCC	kit30_mast										
+5000	Mut SCC	kit30_mel										
+5000	Mut SCC	kit30plus										
+5000	Mut SCC	MusDelB										
+5000	Mut SCC	Neur1-Mm										
+5000	Mut SCC	Pdgfra_KO_fibr										
+5000	Mut SCC	Pdgfra_KO_mast										
+5000	Mut SCC	Pdgfra_left										
+5000	Mut SCC	ZRSreg										
+5000	Wt Insulation Score Spearman	Bor										
+5000	Wt Insulation Score Spearman	BorC1										
+5000	Wt Insulation Score Spearman	BorC1-2										
+5000	Wt Insulation Score Spearman	BorC1-4										
+5000	Wt Insulation Score Spearman	D3839										
+5000	Wt Insulation Score Spearman	del1-13d9lac_1										
+5000	Wt Insulation Score Spearman	del1-13d9lac_2										
+5000	Wt Insulation Score Spearman	delattP-Rel5d9lac_1										
+5000	Wt Insulation Score Spearman	delattP-Rel5d9lac_2										
+5000	Wt Insulation Score Spearman	DelB										
+5000	Wt Insulation Score Spearman	DelBs										
+5000	Wt Insulation Score Spearman	DelL-Mm										
+5000	Wt Insulation Score Spearman	dup-C										
+5000	Wt Insulation Score Spearman	dup-L										
+5000	Wt Insulation Score Spearman	Dup-LBor										
+5000	Wt Insulation Score Spearman	dup-S										
+5000	Wt Insulation Score Spearman	FirreKO_1										
+5000	Wt Insulation Score Spearman	FirreKO_2										
+5000	Wt Insulation Score Spearman	FirreKO_3										
+5000	Wt Insulation Score Spearman	i4i5										
+5000	Wt Insulation Score Spearman	i4i5ZRS_1										
+5000	Wt Insulation Score Spearman	i4i5ZRS_2										
+5000	Wt Insulation Score Spearman	i4i5ZRSreg										
+5000	Wt Insulation Score Spearman	Inv1										
+5000	Wt Insulation Score Spearman	Inv1-Mm_1										
+5000	Wt Insulation Score Spearman	Inv1-Mm_2										
+5000	Wt Insulation Score Spearman	Inv1d										
+5000	Wt Insulation Score Spearman	Inv2										
+5000	Wt Insulation Score Spearman	Inv3										
+5000	Wt Insulation Score Spearman	Inv4										
+5000	Wt Insulation Score Spearman	InvC										
+5000	Wt Insulation Score Spearman	InvF										
+5000	Wt Insulation Score Spearman	InvIntra										
+5000	Wt Insulation Score Spearman	kit30_mast										
+5000	Wt Insulation Score Spearman	kit30_mel										
+5000	Wt Insulation Score Spearman	kit30plus										
+5000	Wt Insulation Score Spearman	MusDelB										
+5000	Wt Insulation Score Spearman	Neur1-Mm										
+5000	Wt Insulation Score Spearman	Pdgfra_KO_fibr										
+5000	Wt Insulation Score Spearman	Pdgfra_KO_mast										
+5000	Wt Insulation Score Spearman	Pdgfra_left										
+5000	Wt Insulation Score Spearman	ZRSreg										
+5000	Mut Insulation Score Spearman	Bor										
+5000	Mut Insulation Score Spearman	BorC1										
+5000	Mut Insulation Score Spearman	BorC1-2										
+5000	Mut Insulation Score Spearman	BorC1-4										
+5000	Mut Insulation Score Spearman	D3839										
+5000	Mut Insulation Score Spearman	del1-13d9lac_1										
+5000	Mut Insulation Score Spearman	del1-13d9lac_2										
+5000	Mut Insulation Score Spearman	delattP-Rel5d9lac_1										
+5000	Mut Insulation Score Spearman	delattP-Rel5d9lac_2										
+5000	Mut Insulation Score Spearman	DelB										
+5000	Mut Insulation Score Spearman	DelBs										
+5000	Mut Insulation Score Spearman	DelL-Mm										
+5000	Mut Insulation Score Spearman	dup-C										
+5000	Mut Insulation Score Spearman	dup-L										
+5000	Mut Insulation Score Spearman	Dup-LBor										
+5000	Mut Insulation Score Spearman	dup-S										
+5000	Mut Insulation Score Spearman	FirreKO_1										
+5000	Mut Insulation Score Spearman	FirreKO_2										
+5000	Mut Insulation Score Spearman	FirreKO_3										
+5000	Mut Insulation Score Spearman	i4i5										
+5000	Mut Insulation Score Spearman	i4i5ZRS_1										
+5000	Mut Insulation Score Spearman	i4i5ZRS_2										
+5000	Mut Insulation Score Spearman	i4i5ZRSreg										
+5000	Mut Insulation Score Spearman	Inv1										
+5000	Mut Insulation Score Spearman	Inv1-Mm_1										
+5000	Mut Insulation Score Spearman	Inv1-Mm_2										
+5000	Mut Insulation Score Spearman	Inv1d										
+5000	Mut Insulation Score Spearman	Inv2										
+5000	Mut Insulation Score Spearman	Inv3										
+5000	Mut Insulation Score Spearman	Inv4										
+5000	Mut Insulation Score Spearman	InvC										
+5000	Mut Insulation Score Spearman	InvF										
+5000	Mut Insulation Score Spearman	InvIntra										
+5000	Mut Insulation Score Spearman	kit30_mast										
+5000	Mut Insulation Score Spearman	kit30_mel										
+5000	Mut Insulation Score Spearman	kit30plus										
+5000	Mut Insulation Score Spearman	MusDelB										
+5000	Mut Insulation Score Spearman	Neur1-Mm										
+5000	Mut Insulation Score Spearman	Pdgfra_KO_fibr										
+5000	Mut Insulation Score Spearman	Pdgfra_KO_mast										
+5000	Mut Insulation Score Spearman	Pdgfra_left										
+5000	Mut Insulation Score Spearman	ZRSreg										
+5000	Insulation Score Mut/Wt Spearman	Bor	0.9999781615878709	0.9992607697494315	0.9329287767486425	0.5143735878964241	0.2535585237597374	0.1576094582162931	0.04762866691962827	0.10029745737187448	0.1144127150514886	0.14766133354443797
+5000	Insulation Score Mut/Wt Spearman	BorC1	0.9999829966789116	0.9996113040799129	0.9689152085185281	0.6644183741968482	0.3547681733196129	0.1504246409408686	0.06502750117152883	0.23327196267975067	0.2996141606378559	0.26573368310298373
+5000	Insulation Score Mut/Wt Spearman	BorC1-2	0.9999855824682815	0.9996166925187925	0.9698773018335124	0.6733046971324027	0.4876004255657639	0.3367358708189158	0.309370401304538	0.44169947898023315	0.39503390605735195	0.32542606292009707
+5000	Insulation Score Mut/Wt Spearman	BorC1-4	0.999986723690744	0.9995562044254653	0.9667369059124556	0.6700088610629868	0.5560057175473939	0.45791754975231375	0.3562781439195595	0.24097662976522327	0.18164262009710044	0.19076195970552792
+5000	Insulation Score Mut/Wt Spearman	D3839	0.9999753584164994	0.9999746793242509	0.9999626494392968	0.9998017982356355	0.999140930684767	0.9979383302501568	0.9966800430900329	0.9961553848817096	0.997979173451495	0.6719983655417403
+5000	Insulation Score Mut/Wt Spearman	del1-13d9lac_1	0.9999982182590543	0.9999625834401433	0.9978142897891503	0.929684565442292	0.8194396683888543	0.6635985627505674	0.46651744316286875	0.4127334870273871	0.5031978200561508	0.5666652142778353
+5000	Insulation Score Mut/Wt Spearman	del1-13d9lac_2	0.9999964227712078	0.9999564228492563	0.9979465080718543	0.9559069153035799	0.8546726412891552	0.732182473790295	0.6854274430684038	0.6376626582192035	0.6335015281270996	0.6616317171413649
+5000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_1	0.9999974098444562	0.9999672345323681	0.9981229142772482	0.9530156144936817	0.8545274105800603	0.7313836455506827	0.6252121337390554	0.6137690855611262	0.7003459411744596	0.7119653789449366
+5000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_2	0.6158835494353404	0.6158829312815415	0.6158829312815415	0.6158829312815415	0.6158829312815415	0.6158829312815415	0.6158829312815415	0.6158829312815415	0.6158829312815415	0.6158829312815415
+5000	Insulation Score Mut/Wt Spearman	DelB	0.9999990211883361	0.9999837056646538	0.9991939773833473	0.9850707614619277	0.9313807825530159	0.8240144417327523	0.6604171269240631	0.6311337017004665	0.5698259482856949	0.45959096957571216
+5000	Insulation Score Mut/Wt Spearman	DelBs	0.9999985247551233	0.9999892462412944	0.9995158867470814	0.9873437965593834	0.9472156218493937	0.9137767509210719	0.8892455638464531	0.8916283560777594	0.8655316236112244	0.8218630941308527
+5000	Insulation Score Mut/Wt Spearman	DelL-Mm	0.9947947604195099	0.943156561341045	0.7078724105617736	0.5414244512136352	0.5404259730666837	0.5497697782176582	0.5332788522360873	0.5199257458821281	0.5175429403108014	0.5092441031231599
+5000	Insulation Score Mut/Wt Spearman	dup-C	0.9999956949004154	0.9998570848088739	0.9874547986598436	0.8794759846900779	0.6613578319377342	0.3850884406841086	0.327444074727354	0.39443671741802716	0.3232545070775661	0.28520702500504175
+5000	Insulation Score Mut/Wt Spearman	dup-L	0.9999939903966538	0.9998458202874861	0.9889319131972892	0.8742720534080127	0.6289663549017998	0.3467658985725857	0.25811720462632626	0.2801556554040023	0.2640016746761325	0.26019515852999764
+5000	Insulation Score Mut/Wt Spearman	Dup-LBor	0.9999918925631204	0.999852321497844	0.990536055516444	0.9116124152567595	0.7607533348248282	0.5552736311259897	0.38116632150194896	0.30987290822997215	0.2423303647115087	0.13926585619664744
+5000	Insulation Score Mut/Wt Spearman	dup-S	0.9999874051216702	0.999545631826305	0.9630358313704548	0.6891256984733207	0.43654165808927226	0.1696006206417355	0.11723344501144915	0.1767949421508771	0.2824256465591374	0.17954327160960956
+5000	Insulation Score Mut/Wt Spearman	FirreKO_1	0.9512915264169909	0.7704143580662445	0.5672132010475269	0.4558869438526877	0.441965907900007	0.4286114649867296	0.437640864357684	0.4304641858859491	0.39659239037297705	0.21005336185432696
+5000	Insulation Score Mut/Wt Spearman	FirreKO_2	0.9831367454816858	0.8974321135953266	0.7054026090486378	0.5606176702437429	0.5168231826899248	0.5136723643942134	0.5096824709473587	0.5078106821461508	0.507714559668487	0.3052935477185388
+5000	Insulation Score Mut/Wt Spearman	FirreKO_3	0.9996260748473593	0.9996516616125175	0.9987282877650002	0.9763453689893511	0.9170364141757825	0.8096701803463293	0.7068010496908396	0.7684119189496551	0.7287133417300298	0.49060873123228604
+5000	Insulation Score Mut/Wt Spearman	i4i5	0.9999929841177967	0.9997546195199384	0.9587990563638437	0.6346200461294256	0.3651568488165084	0.27306883457426756	0.11528339779175108	0.08417690546975717	0.06622361370552589	-0.005204206021380901
+5000	Insulation Score Mut/Wt Spearman	i4i5ZRS_1	0.9999932664681489	0.9558183857267324	0.8182468703863364	0.5081746441578648	0.2729428946452498	0.24774838429358198	0.2118175303861999	0.21203682513973218	0.2097041113216604	0.23322506602728446
+5000	Insulation Score Mut/Wt Spearman	i4i5ZRS_2	0.9999921745440647	0.99688000891738	0.8481998039086331	0.4923299157626066	0.2624740724901101	0.20536353110050024	0.12992577191070792	0.1388047525995755	0.1472167537551952	0.17147293734403116
+5000	Insulation Score Mut/Wt Spearman	i4i5ZRSreg	0.9997154873511999	0.8289956143504205	0.3882701667081543	-0.0700679687169762	-0.1409038506212853	-0.19716455597420562	-0.20221298454310516	-0.19956259115694944	-0.20492768682003734	-0.07842053751394112
+5000	Insulation Score Mut/Wt Spearman	Inv1	0.994891993712092	0.9745777794195188	0.9613106987053628	0.891210189186846	0.7522260110776278	0.671203520410821	0.6516888778390154	0.6383009378874075	0.6247747450098718	0.560574640844989
+5000	Insulation Score Mut/Wt Spearman	Inv1-Mm_1	0.9999887430452631	0.9997076362741573	0.9838684667647132	0.7504249104041532	0.47681400276382024	0.33952418279265073	0.33897417749712544	0.4457443320440156	0.3924925941921723	0.46964522518031737
+5000	Insulation Score Mut/Wt Spearman	Inv1-Mm_2	0.99999175546977	0.999789764479139	0.9882285548670315	0.8446128019797019	0.5677857348064406	0.3335939873275228	0.18954587224910152	0.32450550258973376	0.28032496767192855	0.3196374245863307
+5000	Insulation Score Mut/Wt Spearman	Inv1d	0.9999946028618233	0.9998861017736486	0.9900471188773655	0.8669949739616	0.7113076372482934	0.5447655390121898	0.4599511875378963	0.3128199898087143	0.23448704296010323	0.29643818657646126
+5000	Insulation Score Mut/Wt Spearman	Inv2	0.9986734759768869	0.9875876975434399	0.9763450977720727	0.9162175970571518	0.7776531012661372	0.7129640864944187	0.6803644783348839	0.6637558923311527	0.6545798571861428	0.6047215285893814
+5000	Insulation Score Mut/Wt Spearman	Inv3	0.9977641709030305	0.9877310992300974	0.9764251412800052	0.904734338421093	0.7339369395051178	0.6593865894422357	0.6359744469324998	0.6322135843734862	0.6399498015291876	0.619391404703648
+5000	Insulation Score Mut/Wt Spearman	Inv4	0.9976873769617629	0.9861083659251099	0.977043909977397	0.8864368363216497	0.6466230512825996	0.5101603390717325	0.44218396457998077	0.40915744051751257	0.3966888167158751	0.3680863998592963
+5000	Insulation Score Mut/Wt Spearman	InvC	0.999993200544201	0.9997761560450648	0.9852216518641943	0.8184122170078114	0.6483749484079062	0.4873420670467921	0.3791848846630081	0.18784301328400876	-0.0453632541999786	-0.13254103367626152
+5000	Insulation Score Mut/Wt Spearman	InvF	0.999992555879292	0.9997582645868787	0.9797020168108096	0.7860381545925509	0.5601003070451654	0.39681957386875416	0.26966495997792567	0.3344720852917575	0.2854378110711941	0.17926256555168626
+5000	Insulation Score Mut/Wt Spearman	InvIntra	0.9999853890372049	0.9993389661337578	0.9351041371439819	0.504201512005262	0.19265998087958539	0.15767335726589088	0.12297541236762147	0.16166763545328677	0.03642899492209202	0.02992866234815475
+5000	Insulation Score Mut/Wt Spearman	kit30_mast	0.9999858789872125	0.9999653473937735	0.9995215422080844	0.9900252767833108	0.9582756218887974	0.8829446130207991	0.6430021129087641	0.4741298795930228	0.41373210936903154	0.39717865425012433
+5000	Insulation Score Mut/Wt Spearman	kit30_mel	0.9999960551674241	0.999770482467387	0.9832200269826707	0.7840911536053385	0.6338341836240776	0.5930125180296876	0.552978931900522	0.541989674479014	0.5339626096629015	0.5439198833190332
+5000	Insulation Score Mut/Wt Spearman	kit30plus	0.9999911465018742	0.9999741994211852	0.9994070421871841	0.9871155449514777	0.9169553845461768	0.6910900599272953	0.5259853333348544	0.4774610979579808	0.4700488020011827	0.4176829943773121
+5000	Insulation Score Mut/Wt Spearman	MusDelB	0.9999983917235951	0.9999904173530878	0.9996315706802633	0.9925594432361521	0.9651487173191532	0.9398712360301088	0.9296250410780598	0.9157864927297864	0.9196218298861714	0.9135168796650066
+5000	Insulation Score Mut/Wt Spearman	Neur1-Mm	0.9999943873434595	0.9998182902445012	0.9904586592766689	0.8260786824288772	0.6318983056793068	0.4299352790542673	0.414599045848388	0.3557701617146666	0.3459711649770232	0.3113037148770477
+5000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_fibr	0.999997940919136	0.9999704865076152	0.9988637305431872	0.9817232550705296	0.8851901123623269	0.7267646022722302	0.5402098169082454	0.45801285312593354	0.42860677612626147	0.2365314233756812
+5000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_mast	0.999996053428344	0.9999003061681654	0.9957809433095574	0.8925949103296023	0.6454358842542602	0.3600145027928858	0.276083106562754	0.23253543377884406	0.3873910124208906	0.38016707038950776
+5000	Insulation Score Mut/Wt Spearman	Pdgfra_left	0.9999981249882812	0.999975812348827	0.9988881180507377	0.9756437852736578	0.8964311026943917	0.6671666697916862	0.4990334314589466	0.3822475765473534	0.36120225751410945	0.3006744417152607
+5000	Insulation Score Mut/Wt Spearman	ZRSreg	0.9999912531646795	0.9984532989712978	0.8759868105167481	0.5262762377144184	0.16867192518962024	0.03464453977874601	-0.027890494088255943	-0.027751475237523103	-0.039693324787489125	-0.022352258507320914
+10000	Wt Spearman	Bor										
+10000	Wt Spearman	BorC1										
+10000	Wt Spearman	BorC1-2										
+10000	Wt Spearman	BorC1-4										
+10000	Wt Spearman	D3839										
+10000	Wt Spearman	del1-13d9lac_1										
+10000	Wt Spearman	del1-13d9lac_2										
+10000	Wt Spearman	delattP-Rel5d9lac_1										
+10000	Wt Spearman	delattP-Rel5d9lac_2										
+10000	Wt Spearman	DelB										
+10000	Wt Spearman	DelBs										
+10000	Wt Spearman	DelL-Mm										
+10000	Wt Spearman	dup-C										
+10000	Wt Spearman	dup-L										
+10000	Wt Spearman	Dup-LBor										
+10000	Wt Spearman	dup-S										
+10000	Wt Spearman	FirreKO_1										
+10000	Wt Spearman	FirreKO_2										
+10000	Wt Spearman	FirreKO_3										
+10000	Wt Spearman	i4i5										
+10000	Wt Spearman	i4i5ZRS_1										
+10000	Wt Spearman	i4i5ZRS_2										
+10000	Wt Spearman	i4i5ZRSreg										
+10000	Wt Spearman	Inv1										
+10000	Wt Spearman	Inv1-Mm_1										
+10000	Wt Spearman	Inv1-Mm_2										
+10000	Wt Spearman	Inv1d										
+10000	Wt Spearman	Inv2										
+10000	Wt Spearman	Inv3										
+10000	Wt Spearman	Inv4										
+10000	Wt Spearman	InvC										
+10000	Wt Spearman	InvF										
+10000	Wt Spearman	InvIntra										
+10000	Wt Spearman	kit30_mast										
+10000	Wt Spearman	kit30_mel										
+10000	Wt Spearman	kit30plus										
+10000	Wt Spearman	MusDelB										
+10000	Wt Spearman	Neur1-Mm										
+10000	Wt Spearman	Pdgfra_KO_fibr										
+10000	Wt Spearman	Pdgfra_KO_mast										
+10000	Wt Spearman	Pdgfra_left										
+10000	Wt Spearman	ZRSreg										
+10000	Mut Spearman	Bor										
+10000	Mut Spearman	BorC1										
+10000	Mut Spearman	BorC1-2										
+10000	Mut Spearman	BorC1-4										
+10000	Mut Spearman	D3839										
+10000	Mut Spearman	del1-13d9lac_1										
+10000	Mut Spearman	del1-13d9lac_2										
+10000	Mut Spearman	delattP-Rel5d9lac_1										
+10000	Mut Spearman	delattP-Rel5d9lac_2										
+10000	Mut Spearman	DelB										
+10000	Mut Spearman	DelBs										
+10000	Mut Spearman	DelL-Mm										
+10000	Mut Spearman	dup-C										
+10000	Mut Spearman	dup-L										
+10000	Mut Spearman	Dup-LBor										
+10000	Mut Spearman	dup-S										
+10000	Mut Spearman	FirreKO_1										
+10000	Mut Spearman	FirreKO_2										
+10000	Mut Spearman	FirreKO_3										
+10000	Mut Spearman	i4i5										
+10000	Mut Spearman	i4i5ZRS_1										
+10000	Mut Spearman	i4i5ZRS_2										
+10000	Mut Spearman	i4i5ZRSreg										
+10000	Mut Spearman	Inv1										
+10000	Mut Spearman	Inv1-Mm_1										
+10000	Mut Spearman	Inv1-Mm_2										
+10000	Mut Spearman	Inv1d										
+10000	Mut Spearman	Inv2										
+10000	Mut Spearman	Inv3										
+10000	Mut Spearman	Inv4										
+10000	Mut Spearman	InvC										
+10000	Mut Spearman	InvF										
+10000	Mut Spearman	InvIntra										
+10000	Mut Spearman	kit30_mast										
+10000	Mut Spearman	kit30_mel										
+10000	Mut Spearman	kit30plus										
+10000	Mut Spearman	MusDelB										
+10000	Mut Spearman	Neur1-Mm										
+10000	Mut Spearman	Pdgfra_KO_fibr										
+10000	Mut Spearman	Pdgfra_KO_mast										
+10000	Mut Spearman	Pdgfra_left										
+10000	Mut Spearman	ZRSreg										
+10000	Wt SCC	Bor										
+10000	Wt SCC	BorC1										
+10000	Wt SCC	BorC1-2										
+10000	Wt SCC	BorC1-4										
+10000	Wt SCC	D3839										
+10000	Wt SCC	del1-13d9lac_1										
+10000	Wt SCC	del1-13d9lac_2										
+10000	Wt SCC	delattP-Rel5d9lac_1										
+10000	Wt SCC	delattP-Rel5d9lac_2										
+10000	Wt SCC	DelB										
+10000	Wt SCC	DelBs										
+10000	Wt SCC	DelL-Mm										
+10000	Wt SCC	dup-C										
+10000	Wt SCC	dup-L										
+10000	Wt SCC	Dup-LBor										
+10000	Wt SCC	dup-S										
+10000	Wt SCC	FirreKO_1										
+10000	Wt SCC	FirreKO_2										
+10000	Wt SCC	FirreKO_3										
+10000	Wt SCC	i4i5										
+10000	Wt SCC	i4i5ZRS_1										
+10000	Wt SCC	i4i5ZRS_2										
+10000	Wt SCC	i4i5ZRSreg										
+10000	Wt SCC	Inv1										
+10000	Wt SCC	Inv1-Mm_1										
+10000	Wt SCC	Inv1-Mm_2										
+10000	Wt SCC	Inv1d										
+10000	Wt SCC	Inv2										
+10000	Wt SCC	Inv3										
+10000	Wt SCC	Inv4										
+10000	Wt SCC	InvC										
+10000	Wt SCC	InvF										
+10000	Wt SCC	InvIntra										
+10000	Wt SCC	kit30_mast										
+10000	Wt SCC	kit30_mel										
+10000	Wt SCC	kit30plus										
+10000	Wt SCC	MusDelB										
+10000	Wt SCC	Neur1-Mm										
+10000	Wt SCC	Pdgfra_KO_fibr										
+10000	Wt SCC	Pdgfra_KO_mast										
+10000	Wt SCC	Pdgfra_left										
+10000	Wt SCC	ZRSreg										
+10000	Mut SCC	Bor										
+10000	Mut SCC	BorC1										
+10000	Mut SCC	BorC1-2										
+10000	Mut SCC	BorC1-4										
+10000	Mut SCC	D3839										
+10000	Mut SCC	del1-13d9lac_1										
+10000	Mut SCC	del1-13d9lac_2										
+10000	Mut SCC	delattP-Rel5d9lac_1										
+10000	Mut SCC	delattP-Rel5d9lac_2										
+10000	Mut SCC	DelB										
+10000	Mut SCC	DelBs										
+10000	Mut SCC	DelL-Mm										
+10000	Mut SCC	dup-C										
+10000	Mut SCC	dup-L										
+10000	Mut SCC	Dup-LBor										
+10000	Mut SCC	dup-S										
+10000	Mut SCC	FirreKO_1										
+10000	Mut SCC	FirreKO_2										
+10000	Mut SCC	FirreKO_3										
+10000	Mut SCC	i4i5										
+10000	Mut SCC	i4i5ZRS_1										
+10000	Mut SCC	i4i5ZRS_2										
+10000	Mut SCC	i4i5ZRSreg										
+10000	Mut SCC	Inv1										
+10000	Mut SCC	Inv1-Mm_1										
+10000	Mut SCC	Inv1-Mm_2										
+10000	Mut SCC	Inv1d										
+10000	Mut SCC	Inv2										
+10000	Mut SCC	Inv3										
+10000	Mut SCC	Inv4										
+10000	Mut SCC	InvC										
+10000	Mut SCC	InvF										
+10000	Mut SCC	InvIntra										
+10000	Mut SCC	kit30_mast										
+10000	Mut SCC	kit30_mel										
+10000	Mut SCC	kit30plus										
+10000	Mut SCC	MusDelB										
+10000	Mut SCC	Neur1-Mm										
+10000	Mut SCC	Pdgfra_KO_fibr										
+10000	Mut SCC	Pdgfra_KO_mast										
+10000	Mut SCC	Pdgfra_left										
+10000	Mut SCC	ZRSreg										
+10000	Wt Insulation Score Spearman	Bor										
+10000	Wt Insulation Score Spearman	BorC1										
+10000	Wt Insulation Score Spearman	BorC1-2										
+10000	Wt Insulation Score Spearman	BorC1-4										
+10000	Wt Insulation Score Spearman	D3839										
+10000	Wt Insulation Score Spearman	del1-13d9lac_1										
+10000	Wt Insulation Score Spearman	del1-13d9lac_2										
+10000	Wt Insulation Score Spearman	delattP-Rel5d9lac_1										
+10000	Wt Insulation Score Spearman	delattP-Rel5d9lac_2										
+10000	Wt Insulation Score Spearman	DelB										
+10000	Wt Insulation Score Spearman	DelBs										
+10000	Wt Insulation Score Spearman	DelL-Mm										
+10000	Wt Insulation Score Spearman	dup-C										
+10000	Wt Insulation Score Spearman	dup-L										
+10000	Wt Insulation Score Spearman	Dup-LBor										
+10000	Wt Insulation Score Spearman	dup-S										
+10000	Wt Insulation Score Spearman	FirreKO_1										
+10000	Wt Insulation Score Spearman	FirreKO_2										
+10000	Wt Insulation Score Spearman	FirreKO_3										
+10000	Wt Insulation Score Spearman	i4i5										
+10000	Wt Insulation Score Spearman	i4i5ZRS_1										
+10000	Wt Insulation Score Spearman	i4i5ZRS_2										
+10000	Wt Insulation Score Spearman	i4i5ZRSreg										
+10000	Wt Insulation Score Spearman	Inv1										
+10000	Wt Insulation Score Spearman	Inv1-Mm_1										
+10000	Wt Insulation Score Spearman	Inv1-Mm_2										
+10000	Wt Insulation Score Spearman	Inv1d										
+10000	Wt Insulation Score Spearman	Inv2										
+10000	Wt Insulation Score Spearman	Inv3										
+10000	Wt Insulation Score Spearman	Inv4										
+10000	Wt Insulation Score Spearman	InvC										
+10000	Wt Insulation Score Spearman	InvF										
+10000	Wt Insulation Score Spearman	InvIntra										
+10000	Wt Insulation Score Spearman	kit30_mast										
+10000	Wt Insulation Score Spearman	kit30_mel										
+10000	Wt Insulation Score Spearman	kit30plus										
+10000	Wt Insulation Score Spearman	MusDelB										
+10000	Wt Insulation Score Spearman	Neur1-Mm										
+10000	Wt Insulation Score Spearman	Pdgfra_KO_fibr										
+10000	Wt Insulation Score Spearman	Pdgfra_KO_mast										
+10000	Wt Insulation Score Spearman	Pdgfra_left										
+10000	Wt Insulation Score Spearman	ZRSreg										
+10000	Mut Insulation Score Spearman	Bor										
+10000	Mut Insulation Score Spearman	BorC1										
+10000	Mut Insulation Score Spearman	BorC1-2										
+10000	Mut Insulation Score Spearman	BorC1-4										
+10000	Mut Insulation Score Spearman	D3839										
+10000	Mut Insulation Score Spearman	del1-13d9lac_1										
+10000	Mut Insulation Score Spearman	del1-13d9lac_2										
+10000	Mut Insulation Score Spearman	delattP-Rel5d9lac_1										
+10000	Mut Insulation Score Spearman	delattP-Rel5d9lac_2										
+10000	Mut Insulation Score Spearman	DelB										
+10000	Mut Insulation Score Spearman	DelBs										
+10000	Mut Insulation Score Spearman	DelL-Mm										
+10000	Mut Insulation Score Spearman	dup-C										
+10000	Mut Insulation Score Spearman	dup-L										
+10000	Mut Insulation Score Spearman	Dup-LBor										
+10000	Mut Insulation Score Spearman	dup-S										
+10000	Mut Insulation Score Spearman	FirreKO_1										
+10000	Mut Insulation Score Spearman	FirreKO_2										
+10000	Mut Insulation Score Spearman	FirreKO_3										
+10000	Mut Insulation Score Spearman	i4i5										
+10000	Mut Insulation Score Spearman	i4i5ZRS_1										
+10000	Mut Insulation Score Spearman	i4i5ZRS_2										
+10000	Mut Insulation Score Spearman	i4i5ZRSreg										
+10000	Mut Insulation Score Spearman	Inv1										
+10000	Mut Insulation Score Spearman	Inv1-Mm_1										
+10000	Mut Insulation Score Spearman	Inv1-Mm_2										
+10000	Mut Insulation Score Spearman	Inv1d										
+10000	Mut Insulation Score Spearman	Inv2										
+10000	Mut Insulation Score Spearman	Inv3										
+10000	Mut Insulation Score Spearman	Inv4										
+10000	Mut Insulation Score Spearman	InvC										
+10000	Mut Insulation Score Spearman	InvF										
+10000	Mut Insulation Score Spearman	InvIntra										
+10000	Mut Insulation Score Spearman	kit30_mast										
+10000	Mut Insulation Score Spearman	kit30_mel										
+10000	Mut Insulation Score Spearman	kit30plus										
+10000	Mut Insulation Score Spearman	MusDelB										
+10000	Mut Insulation Score Spearman	Neur1-Mm										
+10000	Mut Insulation Score Spearman	Pdgfra_KO_fibr										
+10000	Mut Insulation Score Spearman	Pdgfra_KO_mast										
+10000	Mut Insulation Score Spearman	Pdgfra_left										
+10000	Mut Insulation Score Spearman	ZRSreg										
+10000	Insulation Score Mut/Wt Spearman	Bor										
+10000	Insulation Score Mut/Wt Spearman	BorC1										
+10000	Insulation Score Mut/Wt Spearman	BorC1-2										
+10000	Insulation Score Mut/Wt Spearman	BorC1-4										
+10000	Insulation Score Mut/Wt Spearman	D3839										
+10000	Insulation Score Mut/Wt Spearman	del1-13d9lac_1										
+10000	Insulation Score Mut/Wt Spearman	del1-13d9lac_2										
+10000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_1										
+10000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_2										
+10000	Insulation Score Mut/Wt Spearman	DelB										
+10000	Insulation Score Mut/Wt Spearman	DelBs										
+10000	Insulation Score Mut/Wt Spearman	DelL-Mm										
+10000	Insulation Score Mut/Wt Spearman	dup-C										
+10000	Insulation Score Mut/Wt Spearman	dup-L										
+10000	Insulation Score Mut/Wt Spearman	Dup-LBor										
+10000	Insulation Score Mut/Wt Spearman	dup-S										
+10000	Insulation Score Mut/Wt Spearman	FirreKO_1										
+10000	Insulation Score Mut/Wt Spearman	FirreKO_2										
+10000	Insulation Score Mut/Wt Spearman	FirreKO_3										
+10000	Insulation Score Mut/Wt Spearman	i4i5										
+10000	Insulation Score Mut/Wt Spearman	i4i5ZRS_1										
+10000	Insulation Score Mut/Wt Spearman	i4i5ZRS_2										
+10000	Insulation Score Mut/Wt Spearman	i4i5ZRSreg										
+10000	Insulation Score Mut/Wt Spearman	Inv1										
+10000	Insulation Score Mut/Wt Spearman	Inv1-Mm_1										
+10000	Insulation Score Mut/Wt Spearman	Inv1-Mm_2										
+10000	Insulation Score Mut/Wt Spearman	Inv1d										
+10000	Insulation Score Mut/Wt Spearman	Inv2										
+10000	Insulation Score Mut/Wt Spearman	Inv3										
+10000	Insulation Score Mut/Wt Spearman	Inv4										
+10000	Insulation Score Mut/Wt Spearman	InvC										
+10000	Insulation Score Mut/Wt Spearman	InvF										
+10000	Insulation Score Mut/Wt Spearman	InvIntra										
+10000	Insulation Score Mut/Wt Spearman	kit30_mast										
+10000	Insulation Score Mut/Wt Spearman	kit30_mel										
+10000	Insulation Score Mut/Wt Spearman	kit30plus										
+10000	Insulation Score Mut/Wt Spearman	MusDelB										
+10000	Insulation Score Mut/Wt Spearman	Neur1-Mm										
+10000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_fibr										
+10000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_mast										
+10000	Insulation Score Mut/Wt Spearman	Pdgfra_left										
+10000	Insulation Score Mut/Wt Spearman	ZRSreg										
+20000	Wt Spearman	Bor										
+20000	Wt Spearman	BorC1										
+20000	Wt Spearman	BorC1-2										
+20000	Wt Spearman	BorC1-4										
+20000	Wt Spearman	D3839										
+20000	Wt Spearman	del1-13d9lac_1										
+20000	Wt Spearman	del1-13d9lac_2										
+20000	Wt Spearman	delattP-Rel5d9lac_1										
+20000	Wt Spearman	delattP-Rel5d9lac_2										
+20000	Wt Spearman	DelB										
+20000	Wt Spearman	DelBs										
+20000	Wt Spearman	DelL-Mm										
+20000	Wt Spearman	dup-C										
+20000	Wt Spearman	dup-L										
+20000	Wt Spearman	Dup-LBor										
+20000	Wt Spearman	dup-S										
+20000	Wt Spearman	FirreKO_1										
+20000	Wt Spearman	FirreKO_2										
+20000	Wt Spearman	FirreKO_3										
+20000	Wt Spearman	i4i5										
+20000	Wt Spearman	i4i5ZRS_1										
+20000	Wt Spearman	i4i5ZRS_2										
+20000	Wt Spearman	i4i5ZRSreg										
+20000	Wt Spearman	Inv1										
+20000	Wt Spearman	Inv1-Mm_1										
+20000	Wt Spearman	Inv1-Mm_2										
+20000	Wt Spearman	Inv1d										
+20000	Wt Spearman	Inv2										
+20000	Wt Spearman	Inv3										
+20000	Wt Spearman	Inv4										
+20000	Wt Spearman	InvC										
+20000	Wt Spearman	InvF										
+20000	Wt Spearman	InvIntra										
+20000	Wt Spearman	kit30_mast										
+20000	Wt Spearman	kit30_mel										
+20000	Wt Spearman	kit30plus										
+20000	Wt Spearman	MusDelB										
+20000	Wt Spearman	Neur1-Mm										
+20000	Wt Spearman	Pdgfra_KO_fibr										
+20000	Wt Spearman	Pdgfra_KO_mast										
+20000	Wt Spearman	Pdgfra_left										
+20000	Wt Spearman	ZRSreg										
+20000	Mut Spearman	Bor										
+20000	Mut Spearman	BorC1										
+20000	Mut Spearman	BorC1-2										
+20000	Mut Spearman	BorC1-4										
+20000	Mut Spearman	D3839										
+20000	Mut Spearman	del1-13d9lac_1										
+20000	Mut Spearman	del1-13d9lac_2										
+20000	Mut Spearman	delattP-Rel5d9lac_1										
+20000	Mut Spearman	delattP-Rel5d9lac_2										
+20000	Mut Spearman	DelB										
+20000	Mut Spearman	DelBs										
+20000	Mut Spearman	DelL-Mm										
+20000	Mut Spearman	dup-C										
+20000	Mut Spearman	dup-L										
+20000	Mut Spearman	Dup-LBor										
+20000	Mut Spearman	dup-S										
+20000	Mut Spearman	FirreKO_1										
+20000	Mut Spearman	FirreKO_2										
+20000	Mut Spearman	FirreKO_3										
+20000	Mut Spearman	i4i5										
+20000	Mut Spearman	i4i5ZRS_1										
+20000	Mut Spearman	i4i5ZRS_2										
+20000	Mut Spearman	i4i5ZRSreg										
+20000	Mut Spearman	Inv1										
+20000	Mut Spearman	Inv1-Mm_1										
+20000	Mut Spearman	Inv1-Mm_2										
+20000	Mut Spearman	Inv1d										
+20000	Mut Spearman	Inv2										
+20000	Mut Spearman	Inv3										
+20000	Mut Spearman	Inv4										
+20000	Mut Spearman	InvC										
+20000	Mut Spearman	InvF										
+20000	Mut Spearman	InvIntra										
+20000	Mut Spearman	kit30_mast										
+20000	Mut Spearman	kit30_mel										
+20000	Mut Spearman	kit30plus										
+20000	Mut Spearman	MusDelB										
+20000	Mut Spearman	Neur1-Mm										
+20000	Mut Spearman	Pdgfra_KO_fibr										
+20000	Mut Spearman	Pdgfra_KO_mast										
+20000	Mut Spearman	Pdgfra_left										
+20000	Mut Spearman	ZRSreg										
+20000	Wt SCC	Bor										
+20000	Wt SCC	BorC1										
+20000	Wt SCC	BorC1-2										
+20000	Wt SCC	BorC1-4										
+20000	Wt SCC	D3839										
+20000	Wt SCC	del1-13d9lac_1										
+20000	Wt SCC	del1-13d9lac_2										
+20000	Wt SCC	delattP-Rel5d9lac_1										
+20000	Wt SCC	delattP-Rel5d9lac_2										
+20000	Wt SCC	DelB										
+20000	Wt SCC	DelBs										
+20000	Wt SCC	DelL-Mm										
+20000	Wt SCC	dup-C										
+20000	Wt SCC	dup-L										
+20000	Wt SCC	Dup-LBor										
+20000	Wt SCC	dup-S										
+20000	Wt SCC	FirreKO_1										
+20000	Wt SCC	FirreKO_2										
+20000	Wt SCC	FirreKO_3										
+20000	Wt SCC	i4i5										
+20000	Wt SCC	i4i5ZRS_1										
+20000	Wt SCC	i4i5ZRS_2										
+20000	Wt SCC	i4i5ZRSreg										
+20000	Wt SCC	Inv1										
+20000	Wt SCC	Inv1-Mm_1										
+20000	Wt SCC	Inv1-Mm_2										
+20000	Wt SCC	Inv1d										
+20000	Wt SCC	Inv2										
+20000	Wt SCC	Inv3										
+20000	Wt SCC	Inv4										
+20000	Wt SCC	InvC										
+20000	Wt SCC	InvF										
+20000	Wt SCC	InvIntra										
+20000	Wt SCC	kit30_mast										
+20000	Wt SCC	kit30_mel										
+20000	Wt SCC	kit30plus										
+20000	Wt SCC	MusDelB										
+20000	Wt SCC	Neur1-Mm										
+20000	Wt SCC	Pdgfra_KO_fibr										
+20000	Wt SCC	Pdgfra_KO_mast										
+20000	Wt SCC	Pdgfra_left										
+20000	Wt SCC	ZRSreg										
+20000	Mut SCC	Bor										
+20000	Mut SCC	BorC1										
+20000	Mut SCC	BorC1-2										
+20000	Mut SCC	BorC1-4										
+20000	Mut SCC	D3839										
+20000	Mut SCC	del1-13d9lac_1										
+20000	Mut SCC	del1-13d9lac_2										
+20000	Mut SCC	delattP-Rel5d9lac_1										
+20000	Mut SCC	delattP-Rel5d9lac_2										
+20000	Mut SCC	DelB										
+20000	Mut SCC	DelBs										
+20000	Mut SCC	DelL-Mm										
+20000	Mut SCC	dup-C										
+20000	Mut SCC	dup-L										
+20000	Mut SCC	Dup-LBor										
+20000	Mut SCC	dup-S										
+20000	Mut SCC	FirreKO_1										
+20000	Mut SCC	FirreKO_2										
+20000	Mut SCC	FirreKO_3										
+20000	Mut SCC	i4i5										
+20000	Mut SCC	i4i5ZRS_1										
+20000	Mut SCC	i4i5ZRS_2										
+20000	Mut SCC	i4i5ZRSreg										
+20000	Mut SCC	Inv1										
+20000	Mut SCC	Inv1-Mm_1										
+20000	Mut SCC	Inv1-Mm_2										
+20000	Mut SCC	Inv1d										
+20000	Mut SCC	Inv2										
+20000	Mut SCC	Inv3										
+20000	Mut SCC	Inv4										
+20000	Mut SCC	InvC										
+20000	Mut SCC	InvF										
+20000	Mut SCC	InvIntra										
+20000	Mut SCC	kit30_mast										
+20000	Mut SCC	kit30_mel										
+20000	Mut SCC	kit30plus										
+20000	Mut SCC	MusDelB										
+20000	Mut SCC	Neur1-Mm										
+20000	Mut SCC	Pdgfra_KO_fibr										
+20000	Mut SCC	Pdgfra_KO_mast										
+20000	Mut SCC	Pdgfra_left										
+20000	Mut SCC	ZRSreg										
+20000	Wt Insulation Score Spearman	Bor										
+20000	Wt Insulation Score Spearman	BorC1										
+20000	Wt Insulation Score Spearman	BorC1-2										
+20000	Wt Insulation Score Spearman	BorC1-4										
+20000	Wt Insulation Score Spearman	D3839										
+20000	Wt Insulation Score Spearman	del1-13d9lac_1										
+20000	Wt Insulation Score Spearman	del1-13d9lac_2										
+20000	Wt Insulation Score Spearman	delattP-Rel5d9lac_1										
+20000	Wt Insulation Score Spearman	delattP-Rel5d9lac_2										
+20000	Wt Insulation Score Spearman	DelB										
+20000	Wt Insulation Score Spearman	DelBs										
+20000	Wt Insulation Score Spearman	DelL-Mm										
+20000	Wt Insulation Score Spearman	dup-C										
+20000	Wt Insulation Score Spearman	dup-L										
+20000	Wt Insulation Score Spearman	Dup-LBor										
+20000	Wt Insulation Score Spearman	dup-S										
+20000	Wt Insulation Score Spearman	FirreKO_1										
+20000	Wt Insulation Score Spearman	FirreKO_2										
+20000	Wt Insulation Score Spearman	FirreKO_3										
+20000	Wt Insulation Score Spearman	i4i5										
+20000	Wt Insulation Score Spearman	i4i5ZRS_1										
+20000	Wt Insulation Score Spearman	i4i5ZRS_2										
+20000	Wt Insulation Score Spearman	i4i5ZRSreg										
+20000	Wt Insulation Score Spearman	Inv1										
+20000	Wt Insulation Score Spearman	Inv1-Mm_1										
+20000	Wt Insulation Score Spearman	Inv1-Mm_2										
+20000	Wt Insulation Score Spearman	Inv1d										
+20000	Wt Insulation Score Spearman	Inv2										
+20000	Wt Insulation Score Spearman	Inv3										
+20000	Wt Insulation Score Spearman	Inv4										
+20000	Wt Insulation Score Spearman	InvC										
+20000	Wt Insulation Score Spearman	InvF										
+20000	Wt Insulation Score Spearman	InvIntra										
+20000	Wt Insulation Score Spearman	kit30_mast										
+20000	Wt Insulation Score Spearman	kit30_mel										
+20000	Wt Insulation Score Spearman	kit30plus										
+20000	Wt Insulation Score Spearman	MusDelB										
+20000	Wt Insulation Score Spearman	Neur1-Mm										
+20000	Wt Insulation Score Spearman	Pdgfra_KO_fibr										
+20000	Wt Insulation Score Spearman	Pdgfra_KO_mast										
+20000	Wt Insulation Score Spearman	Pdgfra_left										
+20000	Wt Insulation Score Spearman	ZRSreg										
+20000	Mut Insulation Score Spearman	Bor										
+20000	Mut Insulation Score Spearman	BorC1										
+20000	Mut Insulation Score Spearman	BorC1-2										
+20000	Mut Insulation Score Spearman	BorC1-4										
+20000	Mut Insulation Score Spearman	D3839										
+20000	Mut Insulation Score Spearman	del1-13d9lac_1										
+20000	Mut Insulation Score Spearman	del1-13d9lac_2										
+20000	Mut Insulation Score Spearman	delattP-Rel5d9lac_1										
+20000	Mut Insulation Score Spearman	delattP-Rel5d9lac_2										
+20000	Mut Insulation Score Spearman	DelB										
+20000	Mut Insulation Score Spearman	DelBs										
+20000	Mut Insulation Score Spearman	DelL-Mm										
+20000	Mut Insulation Score Spearman	dup-C										
+20000	Mut Insulation Score Spearman	dup-L										
+20000	Mut Insulation Score Spearman	Dup-LBor										
+20000	Mut Insulation Score Spearman	dup-S										
+20000	Mut Insulation Score Spearman	FirreKO_1										
+20000	Mut Insulation Score Spearman	FirreKO_2										
+20000	Mut Insulation Score Spearman	FirreKO_3										
+20000	Mut Insulation Score Spearman	i4i5										
+20000	Mut Insulation Score Spearman	i4i5ZRS_1										
+20000	Mut Insulation Score Spearman	i4i5ZRS_2										
+20000	Mut Insulation Score Spearman	i4i5ZRSreg										
+20000	Mut Insulation Score Spearman	Inv1										
+20000	Mut Insulation Score Spearman	Inv1-Mm_1										
+20000	Mut Insulation Score Spearman	Inv1-Mm_2										
+20000	Mut Insulation Score Spearman	Inv1d										
+20000	Mut Insulation Score Spearman	Inv2										
+20000	Mut Insulation Score Spearman	Inv3										
+20000	Mut Insulation Score Spearman	Inv4										
+20000	Mut Insulation Score Spearman	InvC										
+20000	Mut Insulation Score Spearman	InvF										
+20000	Mut Insulation Score Spearman	InvIntra										
+20000	Mut Insulation Score Spearman	kit30_mast										
+20000	Mut Insulation Score Spearman	kit30_mel										
+20000	Mut Insulation Score Spearman	kit30plus										
+20000	Mut Insulation Score Spearman	MusDelB										
+20000	Mut Insulation Score Spearman	Neur1-Mm										
+20000	Mut Insulation Score Spearman	Pdgfra_KO_fibr										
+20000	Mut Insulation Score Spearman	Pdgfra_KO_mast										
+20000	Mut Insulation Score Spearman	Pdgfra_left										
+20000	Mut Insulation Score Spearman	ZRSreg										
+20000	Insulation Score Mut/Wt Spearman	Bor										
+20000	Insulation Score Mut/Wt Spearman	BorC1										
+20000	Insulation Score Mut/Wt Spearman	BorC1-2										
+20000	Insulation Score Mut/Wt Spearman	BorC1-4										
+20000	Insulation Score Mut/Wt Spearman	D3839										
+20000	Insulation Score Mut/Wt Spearman	del1-13d9lac_1										
+20000	Insulation Score Mut/Wt Spearman	del1-13d9lac_2										
+20000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_1										
+20000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_2										
+20000	Insulation Score Mut/Wt Spearman	DelB										
+20000	Insulation Score Mut/Wt Spearman	DelBs										
+20000	Insulation Score Mut/Wt Spearman	DelL-Mm										
+20000	Insulation Score Mut/Wt Spearman	dup-C										
+20000	Insulation Score Mut/Wt Spearman	dup-L										
+20000	Insulation Score Mut/Wt Spearman	Dup-LBor										
+20000	Insulation Score Mut/Wt Spearman	dup-S										
+20000	Insulation Score Mut/Wt Spearman	FirreKO_1										
+20000	Insulation Score Mut/Wt Spearman	FirreKO_2										
+20000	Insulation Score Mut/Wt Spearman	FirreKO_3										
+20000	Insulation Score Mut/Wt Spearman	i4i5										
+20000	Insulation Score Mut/Wt Spearman	i4i5ZRS_1										
+20000	Insulation Score Mut/Wt Spearman	i4i5ZRS_2										
+20000	Insulation Score Mut/Wt Spearman	i4i5ZRSreg										
+20000	Insulation Score Mut/Wt Spearman	Inv1										
+20000	Insulation Score Mut/Wt Spearman	Inv1-Mm_1										
+20000	Insulation Score Mut/Wt Spearman	Inv1-Mm_2										
+20000	Insulation Score Mut/Wt Spearman	Inv1d										
+20000	Insulation Score Mut/Wt Spearman	Inv2										
+20000	Insulation Score Mut/Wt Spearman	Inv3										
+20000	Insulation Score Mut/Wt Spearman	Inv4										
+20000	Insulation Score Mut/Wt Spearman	InvC										
+20000	Insulation Score Mut/Wt Spearman	InvF										
+20000	Insulation Score Mut/Wt Spearman	InvIntra										
+20000	Insulation Score Mut/Wt Spearman	kit30_mast										
+20000	Insulation Score Mut/Wt Spearman	kit30_mel										
+20000	Insulation Score Mut/Wt Spearman	kit30plus										
+20000	Insulation Score Mut/Wt Spearman	MusDelB										
+20000	Insulation Score Mut/Wt Spearman	Neur1-Mm										
+20000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_fibr										
+20000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_mast										
+20000	Insulation Score Mut/Wt Spearman	Pdgfra_left										
+20000	Insulation Score Mut/Wt Spearman	ZRSreg										
+25000	Wt Spearman	Bor										
+25000	Wt Spearman	BorC1										
+25000	Wt Spearman	BorC1-2										
+25000	Wt Spearman	BorC1-4										
+25000	Wt Spearman	D3839										
+25000	Wt Spearman	del1-13d9lac_1										
+25000	Wt Spearman	del1-13d9lac_2										
+25000	Wt Spearman	delattP-Rel5d9lac_1										
+25000	Wt Spearman	delattP-Rel5d9lac_2										
+25000	Wt Spearman	DelB										
+25000	Wt Spearman	DelBs										
+25000	Wt Spearman	DelL-Mm										
+25000	Wt Spearman	dup-C										
+25000	Wt Spearman	dup-L										
+25000	Wt Spearman	Dup-LBor										
+25000	Wt Spearman	dup-S										
+25000	Wt Spearman	FirreKO_1										
+25000	Wt Spearman	FirreKO_2										
+25000	Wt Spearman	FirreKO_3										
+25000	Wt Spearman	i4i5										
+25000	Wt Spearman	i4i5ZRS_1										
+25000	Wt Spearman	i4i5ZRS_2										
+25000	Wt Spearman	i4i5ZRSreg										
+25000	Wt Spearman	Inv1										
+25000	Wt Spearman	Inv1-Mm_1										
+25000	Wt Spearman	Inv1-Mm_2										
+25000	Wt Spearman	Inv1d										
+25000	Wt Spearman	Inv2										
+25000	Wt Spearman	Inv3										
+25000	Wt Spearman	Inv4										
+25000	Wt Spearman	InvC										
+25000	Wt Spearman	InvF										
+25000	Wt Spearman	InvIntra										
+25000	Wt Spearman	kit30_mast										
+25000	Wt Spearman	kit30_mel										
+25000	Wt Spearman	kit30plus										
+25000	Wt Spearman	MusDelB										
+25000	Wt Spearman	Neur1-Mm										
+25000	Wt Spearman	Pdgfra_KO_fibr										
+25000	Wt Spearman	Pdgfra_KO_mast										
+25000	Wt Spearman	Pdgfra_left										
+25000	Wt Spearman	ZRSreg										
+25000	Mut Spearman	Bor										
+25000	Mut Spearman	BorC1										
+25000	Mut Spearman	BorC1-2										
+25000	Mut Spearman	BorC1-4										
+25000	Mut Spearman	D3839										
+25000	Mut Spearman	del1-13d9lac_1										
+25000	Mut Spearman	del1-13d9lac_2										
+25000	Mut Spearman	delattP-Rel5d9lac_1										
+25000	Mut Spearman	delattP-Rel5d9lac_2										
+25000	Mut Spearman	DelB										
+25000	Mut Spearman	DelBs										
+25000	Mut Spearman	DelL-Mm										
+25000	Mut Spearman	dup-C										
+25000	Mut Spearman	dup-L										
+25000	Mut Spearman	Dup-LBor										
+25000	Mut Spearman	dup-S										
+25000	Mut Spearman	FirreKO_1										
+25000	Mut Spearman	FirreKO_2										
+25000	Mut Spearman	FirreKO_3										
+25000	Mut Spearman	i4i5										
+25000	Mut Spearman	i4i5ZRS_1										
+25000	Mut Spearman	i4i5ZRS_2										
+25000	Mut Spearman	i4i5ZRSreg										
+25000	Mut Spearman	Inv1										
+25000	Mut Spearman	Inv1-Mm_1										
+25000	Mut Spearman	Inv1-Mm_2										
+25000	Mut Spearman	Inv1d										
+25000	Mut Spearman	Inv2										
+25000	Mut Spearman	Inv3										
+25000	Mut Spearman	Inv4										
+25000	Mut Spearman	InvC										
+25000	Mut Spearman	InvF										
+25000	Mut Spearman	InvIntra										
+25000	Mut Spearman	kit30_mast										
+25000	Mut Spearman	kit30_mel										
+25000	Mut Spearman	kit30plus										
+25000	Mut Spearman	MusDelB										
+25000	Mut Spearman	Neur1-Mm										
+25000	Mut Spearman	Pdgfra_KO_fibr										
+25000	Mut Spearman	Pdgfra_KO_mast										
+25000	Mut Spearman	Pdgfra_left										
+25000	Mut Spearman	ZRSreg										
+25000	Wt SCC	Bor										
+25000	Wt SCC	BorC1										
+25000	Wt SCC	BorC1-2										
+25000	Wt SCC	BorC1-4										
+25000	Wt SCC	D3839										
+25000	Wt SCC	del1-13d9lac_1										
+25000	Wt SCC	del1-13d9lac_2										
+25000	Wt SCC	delattP-Rel5d9lac_1										
+25000	Wt SCC	delattP-Rel5d9lac_2										
+25000	Wt SCC	DelB										
+25000	Wt SCC	DelBs										
+25000	Wt SCC	DelL-Mm										
+25000	Wt SCC	dup-C										
+25000	Wt SCC	dup-L										
+25000	Wt SCC	Dup-LBor										
+25000	Wt SCC	dup-S										
+25000	Wt SCC	FirreKO_1										
+25000	Wt SCC	FirreKO_2										
+25000	Wt SCC	FirreKO_3										
+25000	Wt SCC	i4i5										
+25000	Wt SCC	i4i5ZRS_1										
+25000	Wt SCC	i4i5ZRS_2										
+25000	Wt SCC	i4i5ZRSreg										
+25000	Wt SCC	Inv1										
+25000	Wt SCC	Inv1-Mm_1										
+25000	Wt SCC	Inv1-Mm_2										
+25000	Wt SCC	Inv1d										
+25000	Wt SCC	Inv2										
+25000	Wt SCC	Inv3										
+25000	Wt SCC	Inv4										
+25000	Wt SCC	InvC										
+25000	Wt SCC	InvF										
+25000	Wt SCC	InvIntra										
+25000	Wt SCC	kit30_mast										
+25000	Wt SCC	kit30_mel										
+25000	Wt SCC	kit30plus										
+25000	Wt SCC	MusDelB										
+25000	Wt SCC	Neur1-Mm										
+25000	Wt SCC	Pdgfra_KO_fibr										
+25000	Wt SCC	Pdgfra_KO_mast										
+25000	Wt SCC	Pdgfra_left										
+25000	Wt SCC	ZRSreg										
+25000	Mut SCC	Bor										
+25000	Mut SCC	BorC1										
+25000	Mut SCC	BorC1-2										
+25000	Mut SCC	BorC1-4										
+25000	Mut SCC	D3839										
+25000	Mut SCC	del1-13d9lac_1										
+25000	Mut SCC	del1-13d9lac_2										
+25000	Mut SCC	delattP-Rel5d9lac_1										
+25000	Mut SCC	delattP-Rel5d9lac_2										
+25000	Mut SCC	DelB										
+25000	Mut SCC	DelBs										
+25000	Mut SCC	DelL-Mm										
+25000	Mut SCC	dup-C										
+25000	Mut SCC	dup-L										
+25000	Mut SCC	Dup-LBor										
+25000	Mut SCC	dup-S										
+25000	Mut SCC	FirreKO_1										
+25000	Mut SCC	FirreKO_2										
+25000	Mut SCC	FirreKO_3										
+25000	Mut SCC	i4i5										
+25000	Mut SCC	i4i5ZRS_1										
+25000	Mut SCC	i4i5ZRS_2										
+25000	Mut SCC	i4i5ZRSreg										
+25000	Mut SCC	Inv1										
+25000	Mut SCC	Inv1-Mm_1										
+25000	Mut SCC	Inv1-Mm_2										
+25000	Mut SCC	Inv1d										
+25000	Mut SCC	Inv2										
+25000	Mut SCC	Inv3										
+25000	Mut SCC	Inv4										
+25000	Mut SCC	InvC										
+25000	Mut SCC	InvF										
+25000	Mut SCC	InvIntra										
+25000	Mut SCC	kit30_mast										
+25000	Mut SCC	kit30_mel										
+25000	Mut SCC	kit30plus										
+25000	Mut SCC	MusDelB										
+25000	Mut SCC	Neur1-Mm										
+25000	Mut SCC	Pdgfra_KO_fibr										
+25000	Mut SCC	Pdgfra_KO_mast										
+25000	Mut SCC	Pdgfra_left										
+25000	Mut SCC	ZRSreg										
+25000	Wt Insulation Score Spearman	Bor										
+25000	Wt Insulation Score Spearman	BorC1										
+25000	Wt Insulation Score Spearman	BorC1-2										
+25000	Wt Insulation Score Spearman	BorC1-4										
+25000	Wt Insulation Score Spearman	D3839										
+25000	Wt Insulation Score Spearman	del1-13d9lac_1										
+25000	Wt Insulation Score Spearman	del1-13d9lac_2										
+25000	Wt Insulation Score Spearman	delattP-Rel5d9lac_1										
+25000	Wt Insulation Score Spearman	delattP-Rel5d9lac_2										
+25000	Wt Insulation Score Spearman	DelB										
+25000	Wt Insulation Score Spearman	DelBs										
+25000	Wt Insulation Score Spearman	DelL-Mm										
+25000	Wt Insulation Score Spearman	dup-C										
+25000	Wt Insulation Score Spearman	dup-L										
+25000	Wt Insulation Score Spearman	Dup-LBor										
+25000	Wt Insulation Score Spearman	dup-S										
+25000	Wt Insulation Score Spearman	FirreKO_1										
+25000	Wt Insulation Score Spearman	FirreKO_2										
+25000	Wt Insulation Score Spearman	FirreKO_3										
+25000	Wt Insulation Score Spearman	i4i5										
+25000	Wt Insulation Score Spearman	i4i5ZRS_1										
+25000	Wt Insulation Score Spearman	i4i5ZRS_2										
+25000	Wt Insulation Score Spearman	i4i5ZRSreg										
+25000	Wt Insulation Score Spearman	Inv1										
+25000	Wt Insulation Score Spearman	Inv1-Mm_1										
+25000	Wt Insulation Score Spearman	Inv1-Mm_2										
+25000	Wt Insulation Score Spearman	Inv1d										
+25000	Wt Insulation Score Spearman	Inv2										
+25000	Wt Insulation Score Spearman	Inv3										
+25000	Wt Insulation Score Spearman	Inv4										
+25000	Wt Insulation Score Spearman	InvC										
+25000	Wt Insulation Score Spearman	InvF										
+25000	Wt Insulation Score Spearman	InvIntra										
+25000	Wt Insulation Score Spearman	kit30_mast										
+25000	Wt Insulation Score Spearman	kit30_mel										
+25000	Wt Insulation Score Spearman	kit30plus										
+25000	Wt Insulation Score Spearman	MusDelB										
+25000	Wt Insulation Score Spearman	Neur1-Mm										
+25000	Wt Insulation Score Spearman	Pdgfra_KO_fibr										
+25000	Wt Insulation Score Spearman	Pdgfra_KO_mast										
+25000	Wt Insulation Score Spearman	Pdgfra_left										
+25000	Wt Insulation Score Spearman	ZRSreg										
+25000	Mut Insulation Score Spearman	Bor										
+25000	Mut Insulation Score Spearman	BorC1										
+25000	Mut Insulation Score Spearman	BorC1-2										
+25000	Mut Insulation Score Spearman	BorC1-4										
+25000	Mut Insulation Score Spearman	D3839										
+25000	Mut Insulation Score Spearman	del1-13d9lac_1										
+25000	Mut Insulation Score Spearman	del1-13d9lac_2										
+25000	Mut Insulation Score Spearman	delattP-Rel5d9lac_1										
+25000	Mut Insulation Score Spearman	delattP-Rel5d9lac_2										
+25000	Mut Insulation Score Spearman	DelB										
+25000	Mut Insulation Score Spearman	DelBs										
+25000	Mut Insulation Score Spearman	DelL-Mm										
+25000	Mut Insulation Score Spearman	dup-C										
+25000	Mut Insulation Score Spearman	dup-L										
+25000	Mut Insulation Score Spearman	Dup-LBor										
+25000	Mut Insulation Score Spearman	dup-S										
+25000	Mut Insulation Score Spearman	FirreKO_1										
+25000	Mut Insulation Score Spearman	FirreKO_2										
+25000	Mut Insulation Score Spearman	FirreKO_3										
+25000	Mut Insulation Score Spearman	i4i5										
+25000	Mut Insulation Score Spearman	i4i5ZRS_1										
+25000	Mut Insulation Score Spearman	i4i5ZRS_2										
+25000	Mut Insulation Score Spearman	i4i5ZRSreg										
+25000	Mut Insulation Score Spearman	Inv1										
+25000	Mut Insulation Score Spearman	Inv1-Mm_1										
+25000	Mut Insulation Score Spearman	Inv1-Mm_2										
+25000	Mut Insulation Score Spearman	Inv1d										
+25000	Mut Insulation Score Spearman	Inv2										
+25000	Mut Insulation Score Spearman	Inv3										
+25000	Mut Insulation Score Spearman	Inv4										
+25000	Mut Insulation Score Spearman	InvC										
+25000	Mut Insulation Score Spearman	InvF										
+25000	Mut Insulation Score Spearman	InvIntra										
+25000	Mut Insulation Score Spearman	kit30_mast										
+25000	Mut Insulation Score Spearman	kit30_mel										
+25000	Mut Insulation Score Spearman	kit30plus										
+25000	Mut Insulation Score Spearman	MusDelB										
+25000	Mut Insulation Score Spearman	Neur1-Mm										
+25000	Mut Insulation Score Spearman	Pdgfra_KO_fibr										
+25000	Mut Insulation Score Spearman	Pdgfra_KO_mast										
+25000	Mut Insulation Score Spearman	Pdgfra_left										
+25000	Mut Insulation Score Spearman	ZRSreg										
+25000	Insulation Score Mut/Wt Spearman	Bor										
+25000	Insulation Score Mut/Wt Spearman	BorC1										
+25000	Insulation Score Mut/Wt Spearman	BorC1-2										
+25000	Insulation Score Mut/Wt Spearman	BorC1-4										
+25000	Insulation Score Mut/Wt Spearman	D3839										
+25000	Insulation Score Mut/Wt Spearman	del1-13d9lac_1										
+25000	Insulation Score Mut/Wt Spearman	del1-13d9lac_2										
+25000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_1										
+25000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_2										
+25000	Insulation Score Mut/Wt Spearman	DelB										
+25000	Insulation Score Mut/Wt Spearman	DelBs										
+25000	Insulation Score Mut/Wt Spearman	DelL-Mm										
+25000	Insulation Score Mut/Wt Spearman	dup-C										
+25000	Insulation Score Mut/Wt Spearman	dup-L										
+25000	Insulation Score Mut/Wt Spearman	Dup-LBor										
+25000	Insulation Score Mut/Wt Spearman	dup-S										
+25000	Insulation Score Mut/Wt Spearman	FirreKO_1										
+25000	Insulation Score Mut/Wt Spearman	FirreKO_2										
+25000	Insulation Score Mut/Wt Spearman	FirreKO_3										
+25000	Insulation Score Mut/Wt Spearman	i4i5										
+25000	Insulation Score Mut/Wt Spearman	i4i5ZRS_1										
+25000	Insulation Score Mut/Wt Spearman	i4i5ZRS_2										
+25000	Insulation Score Mut/Wt Spearman	i4i5ZRSreg										
+25000	Insulation Score Mut/Wt Spearman	Inv1										
+25000	Insulation Score Mut/Wt Spearman	Inv1-Mm_1										
+25000	Insulation Score Mut/Wt Spearman	Inv1-Mm_2										
+25000	Insulation Score Mut/Wt Spearman	Inv1d										
+25000	Insulation Score Mut/Wt Spearman	Inv2										
+25000	Insulation Score Mut/Wt Spearman	Inv3										
+25000	Insulation Score Mut/Wt Spearman	Inv4										
+25000	Insulation Score Mut/Wt Spearman	InvC										
+25000	Insulation Score Mut/Wt Spearman	InvF										
+25000	Insulation Score Mut/Wt Spearman	InvIntra										
+25000	Insulation Score Mut/Wt Spearman	kit30_mast										
+25000	Insulation Score Mut/Wt Spearman	kit30_mel										
+25000	Insulation Score Mut/Wt Spearman	kit30plus										
+25000	Insulation Score Mut/Wt Spearman	MusDelB										
+25000	Insulation Score Mut/Wt Spearman	Neur1-Mm										
+25000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_fibr										
+25000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_mast										
+25000	Insulation Score Mut/Wt Spearman	Pdgfra_left										
+25000	Insulation Score Mut/Wt Spearman	ZRSreg										
+50000	Wt Spearman	Bor										
+50000	Wt Spearman	BorC1										
+50000	Wt Spearman	BorC1-2										
+50000	Wt Spearman	BorC1-4										
+50000	Wt Spearman	D3839										
+50000	Wt Spearman	del1-13d9lac_1										
+50000	Wt Spearman	del1-13d9lac_2										
+50000	Wt Spearman	delattP-Rel5d9lac_1										
+50000	Wt Spearman	delattP-Rel5d9lac_2										
+50000	Wt Spearman	DelB										
+50000	Wt Spearman	DelBs										
+50000	Wt Spearman	DelL-Mm										
+50000	Wt Spearman	dup-C										
+50000	Wt Spearman	dup-L										
+50000	Wt Spearman	Dup-LBor										
+50000	Wt Spearman	dup-S										
+50000	Wt Spearman	FirreKO_1										
+50000	Wt Spearman	FirreKO_2										
+50000	Wt Spearman	FirreKO_3										
+50000	Wt Spearman	i4i5										
+50000	Wt Spearman	i4i5ZRS_1										
+50000	Wt Spearman	i4i5ZRS_2										
+50000	Wt Spearman	i4i5ZRSreg										
+50000	Wt Spearman	Inv1										
+50000	Wt Spearman	Inv1-Mm_1										
+50000	Wt Spearman	Inv1-Mm_2										
+50000	Wt Spearman	Inv1d										
+50000	Wt Spearman	Inv2										
+50000	Wt Spearman	Inv3										
+50000	Wt Spearman	Inv4										
+50000	Wt Spearman	InvC										
+50000	Wt Spearman	InvF										
+50000	Wt Spearman	InvIntra										
+50000	Wt Spearman	kit30_mast										
+50000	Wt Spearman	kit30_mel										
+50000	Wt Spearman	kit30plus										
+50000	Wt Spearman	MusDelB										
+50000	Wt Spearman	Neur1-Mm										
+50000	Wt Spearman	Pdgfra_KO_fibr										
+50000	Wt Spearman	Pdgfra_KO_mast										
+50000	Wt Spearman	Pdgfra_left										
+50000	Wt Spearman	ZRSreg										
+50000	Mut Spearman	Bor										
+50000	Mut Spearman	BorC1										
+50000	Mut Spearman	BorC1-2										
+50000	Mut Spearman	BorC1-4										
+50000	Mut Spearman	D3839										
+50000	Mut Spearman	del1-13d9lac_1										
+50000	Mut Spearman	del1-13d9lac_2										
+50000	Mut Spearman	delattP-Rel5d9lac_1										
+50000	Mut Spearman	delattP-Rel5d9lac_2										
+50000	Mut Spearman	DelB										
+50000	Mut Spearman	DelBs										
+50000	Mut Spearman	DelL-Mm										
+50000	Mut Spearman	dup-C										
+50000	Mut Spearman	dup-L										
+50000	Mut Spearman	Dup-LBor										
+50000	Mut Spearman	dup-S										
+50000	Mut Spearman	FirreKO_1										
+50000	Mut Spearman	FirreKO_2										
+50000	Mut Spearman	FirreKO_3										
+50000	Mut Spearman	i4i5										
+50000	Mut Spearman	i4i5ZRS_1										
+50000	Mut Spearman	i4i5ZRS_2										
+50000	Mut Spearman	i4i5ZRSreg										
+50000	Mut Spearman	Inv1										
+50000	Mut Spearman	Inv1-Mm_1										
+50000	Mut Spearman	Inv1-Mm_2										
+50000	Mut Spearman	Inv1d										
+50000	Mut Spearman	Inv2										
+50000	Mut Spearman	Inv3										
+50000	Mut Spearman	Inv4										
+50000	Mut Spearman	InvC										
+50000	Mut Spearman	InvF										
+50000	Mut Spearman	InvIntra										
+50000	Mut Spearman	kit30_mast										
+50000	Mut Spearman	kit30_mel										
+50000	Mut Spearman	kit30plus										
+50000	Mut Spearman	MusDelB										
+50000	Mut Spearman	Neur1-Mm										
+50000	Mut Spearman	Pdgfra_KO_fibr										
+50000	Mut Spearman	Pdgfra_KO_mast										
+50000	Mut Spearman	Pdgfra_left										
+50000	Mut Spearman	ZRSreg										
+50000	Wt SCC	Bor										
+50000	Wt SCC	BorC1										
+50000	Wt SCC	BorC1-2										
+50000	Wt SCC	BorC1-4										
+50000	Wt SCC	D3839										
+50000	Wt SCC	del1-13d9lac_1										
+50000	Wt SCC	del1-13d9lac_2										
+50000	Wt SCC	delattP-Rel5d9lac_1										
+50000	Wt SCC	delattP-Rel5d9lac_2										
+50000	Wt SCC	DelB										
+50000	Wt SCC	DelBs										
+50000	Wt SCC	DelL-Mm										
+50000	Wt SCC	dup-C										
+50000	Wt SCC	dup-L										
+50000	Wt SCC	Dup-LBor										
+50000	Wt SCC	dup-S										
+50000	Wt SCC	FirreKO_1										
+50000	Wt SCC	FirreKO_2										
+50000	Wt SCC	FirreKO_3										
+50000	Wt SCC	i4i5										
+50000	Wt SCC	i4i5ZRS_1										
+50000	Wt SCC	i4i5ZRS_2										
+50000	Wt SCC	i4i5ZRSreg										
+50000	Wt SCC	Inv1										
+50000	Wt SCC	Inv1-Mm_1										
+50000	Wt SCC	Inv1-Mm_2										
+50000	Wt SCC	Inv1d										
+50000	Wt SCC	Inv2										
+50000	Wt SCC	Inv3										
+50000	Wt SCC	Inv4										
+50000	Wt SCC	InvC										
+50000	Wt SCC	InvF										
+50000	Wt SCC	InvIntra										
+50000	Wt SCC	kit30_mast										
+50000	Wt SCC	kit30_mel										
+50000	Wt SCC	kit30plus										
+50000	Wt SCC	MusDelB										
+50000	Wt SCC	Neur1-Mm										
+50000	Wt SCC	Pdgfra_KO_fibr										
+50000	Wt SCC	Pdgfra_KO_mast										
+50000	Wt SCC	Pdgfra_left										
+50000	Wt SCC	ZRSreg										
+50000	Mut SCC	Bor										
+50000	Mut SCC	BorC1										
+50000	Mut SCC	BorC1-2										
+50000	Mut SCC	BorC1-4										
+50000	Mut SCC	D3839										
+50000	Mut SCC	del1-13d9lac_1										
+50000	Mut SCC	del1-13d9lac_2										
+50000	Mut SCC	delattP-Rel5d9lac_1										
+50000	Mut SCC	delattP-Rel5d9lac_2										
+50000	Mut SCC	DelB										
+50000	Mut SCC	DelBs										
+50000	Mut SCC	DelL-Mm										
+50000	Mut SCC	dup-C										
+50000	Mut SCC	dup-L										
+50000	Mut SCC	Dup-LBor										
+50000	Mut SCC	dup-S										
+50000	Mut SCC	FirreKO_1										
+50000	Mut SCC	FirreKO_2										
+50000	Mut SCC	FirreKO_3										
+50000	Mut SCC	i4i5										
+50000	Mut SCC	i4i5ZRS_1										
+50000	Mut SCC	i4i5ZRS_2										
+50000	Mut SCC	i4i5ZRSreg										
+50000	Mut SCC	Inv1										
+50000	Mut SCC	Inv1-Mm_1										
+50000	Mut SCC	Inv1-Mm_2										
+50000	Mut SCC	Inv1d										
+50000	Mut SCC	Inv2										
+50000	Mut SCC	Inv3										
+50000	Mut SCC	Inv4										
+50000	Mut SCC	InvC										
+50000	Mut SCC	InvF										
+50000	Mut SCC	InvIntra										
+50000	Mut SCC	kit30_mast										
+50000	Mut SCC	kit30_mel										
+50000	Mut SCC	kit30plus										
+50000	Mut SCC	MusDelB										
+50000	Mut SCC	Neur1-Mm										
+50000	Mut SCC	Pdgfra_KO_fibr										
+50000	Mut SCC	Pdgfra_KO_mast										
+50000	Mut SCC	Pdgfra_left										
+50000	Mut SCC	ZRSreg										
+50000	Wt Insulation Score Spearman	Bor										
+50000	Wt Insulation Score Spearman	BorC1										
+50000	Wt Insulation Score Spearman	BorC1-2										
+50000	Wt Insulation Score Spearman	BorC1-4										
+50000	Wt Insulation Score Spearman	D3839										
+50000	Wt Insulation Score Spearman	del1-13d9lac_1										
+50000	Wt Insulation Score Spearman	del1-13d9lac_2										
+50000	Wt Insulation Score Spearman	delattP-Rel5d9lac_1										
+50000	Wt Insulation Score Spearman	delattP-Rel5d9lac_2										
+50000	Wt Insulation Score Spearman	DelB										
+50000	Wt Insulation Score Spearman	DelBs										
+50000	Wt Insulation Score Spearman	DelL-Mm										
+50000	Wt Insulation Score Spearman	dup-C										
+50000	Wt Insulation Score Spearman	dup-L										
+50000	Wt Insulation Score Spearman	Dup-LBor										
+50000	Wt Insulation Score Spearman	dup-S										
+50000	Wt Insulation Score Spearman	FirreKO_1										
+50000	Wt Insulation Score Spearman	FirreKO_2										
+50000	Wt Insulation Score Spearman	FirreKO_3										
+50000	Wt Insulation Score Spearman	i4i5										
+50000	Wt Insulation Score Spearman	i4i5ZRS_1										
+50000	Wt Insulation Score Spearman	i4i5ZRS_2										
+50000	Wt Insulation Score Spearman	i4i5ZRSreg										
+50000	Wt Insulation Score Spearman	Inv1										
+50000	Wt Insulation Score Spearman	Inv1-Mm_1										
+50000	Wt Insulation Score Spearman	Inv1-Mm_2										
+50000	Wt Insulation Score Spearman	Inv1d										
+50000	Wt Insulation Score Spearman	Inv2										
+50000	Wt Insulation Score Spearman	Inv3										
+50000	Wt Insulation Score Spearman	Inv4										
+50000	Wt Insulation Score Spearman	InvC										
+50000	Wt Insulation Score Spearman	InvF										
+50000	Wt Insulation Score Spearman	InvIntra										
+50000	Wt Insulation Score Spearman	kit30_mast										
+50000	Wt Insulation Score Spearman	kit30_mel										
+50000	Wt Insulation Score Spearman	kit30plus										
+50000	Wt Insulation Score Spearman	MusDelB										
+50000	Wt Insulation Score Spearman	Neur1-Mm										
+50000	Wt Insulation Score Spearman	Pdgfra_KO_fibr										
+50000	Wt Insulation Score Spearman	Pdgfra_KO_mast										
+50000	Wt Insulation Score Spearman	Pdgfra_left										
+50000	Wt Insulation Score Spearman	ZRSreg										
+50000	Mut Insulation Score Spearman	Bor										
+50000	Mut Insulation Score Spearman	BorC1										
+50000	Mut Insulation Score Spearman	BorC1-2										
+50000	Mut Insulation Score Spearman	BorC1-4										
+50000	Mut Insulation Score Spearman	D3839										
+50000	Mut Insulation Score Spearman	del1-13d9lac_1										
+50000	Mut Insulation Score Spearman	del1-13d9lac_2										
+50000	Mut Insulation Score Spearman	delattP-Rel5d9lac_1										
+50000	Mut Insulation Score Spearman	delattP-Rel5d9lac_2										
+50000	Mut Insulation Score Spearman	DelB										
+50000	Mut Insulation Score Spearman	DelBs										
+50000	Mut Insulation Score Spearman	DelL-Mm										
+50000	Mut Insulation Score Spearman	dup-C										
+50000	Mut Insulation Score Spearman	dup-L										
+50000	Mut Insulation Score Spearman	Dup-LBor										
+50000	Mut Insulation Score Spearman	dup-S										
+50000	Mut Insulation Score Spearman	FirreKO_1										
+50000	Mut Insulation Score Spearman	FirreKO_2										
+50000	Mut Insulation Score Spearman	FirreKO_3										
+50000	Mut Insulation Score Spearman	i4i5										
+50000	Mut Insulation Score Spearman	i4i5ZRS_1										
+50000	Mut Insulation Score Spearman	i4i5ZRS_2										
+50000	Mut Insulation Score Spearman	i4i5ZRSreg										
+50000	Mut Insulation Score Spearman	Inv1										
+50000	Mut Insulation Score Spearman	Inv1-Mm_1										
+50000	Mut Insulation Score Spearman	Inv1-Mm_2										
+50000	Mut Insulation Score Spearman	Inv1d										
+50000	Mut Insulation Score Spearman	Inv2										
+50000	Mut Insulation Score Spearman	Inv3										
+50000	Mut Insulation Score Spearman	Inv4										
+50000	Mut Insulation Score Spearman	InvC										
+50000	Mut Insulation Score Spearman	InvF										
+50000	Mut Insulation Score Spearman	InvIntra										
+50000	Mut Insulation Score Spearman	kit30_mast										
+50000	Mut Insulation Score Spearman	kit30_mel										
+50000	Mut Insulation Score Spearman	kit30plus										
+50000	Mut Insulation Score Spearman	MusDelB										
+50000	Mut Insulation Score Spearman	Neur1-Mm										
+50000	Mut Insulation Score Spearman	Pdgfra_KO_fibr										
+50000	Mut Insulation Score Spearman	Pdgfra_KO_mast										
+50000	Mut Insulation Score Spearman	Pdgfra_left										
+50000	Mut Insulation Score Spearman	ZRSreg										
+50000	Insulation Score Mut/Wt Spearman	Bor										
+50000	Insulation Score Mut/Wt Spearman	BorC1										
+50000	Insulation Score Mut/Wt Spearman	BorC1-2										
+50000	Insulation Score Mut/Wt Spearman	BorC1-4										
+50000	Insulation Score Mut/Wt Spearman	D3839										
+50000	Insulation Score Mut/Wt Spearman	del1-13d9lac_1										
+50000	Insulation Score Mut/Wt Spearman	del1-13d9lac_2										
+50000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_1										
+50000	Insulation Score Mut/Wt Spearman	delattP-Rel5d9lac_2										
+50000	Insulation Score Mut/Wt Spearman	DelB										
+50000	Insulation Score Mut/Wt Spearman	DelBs										
+50000	Insulation Score Mut/Wt Spearman	DelL-Mm										
+50000	Insulation Score Mut/Wt Spearman	dup-C										
+50000	Insulation Score Mut/Wt Spearman	dup-L										
+50000	Insulation Score Mut/Wt Spearman	Dup-LBor										
+50000	Insulation Score Mut/Wt Spearman	dup-S										
+50000	Insulation Score Mut/Wt Spearman	FirreKO_1										
+50000	Insulation Score Mut/Wt Spearman	FirreKO_2										
+50000	Insulation Score Mut/Wt Spearman	FirreKO_3										
+50000	Insulation Score Mut/Wt Spearman	i4i5										
+50000	Insulation Score Mut/Wt Spearman	i4i5ZRS_1										
+50000	Insulation Score Mut/Wt Spearman	i4i5ZRS_2										
+50000	Insulation Score Mut/Wt Spearman	i4i5ZRSreg										
+50000	Insulation Score Mut/Wt Spearman	Inv1										
+50000	Insulation Score Mut/Wt Spearman	Inv1-Mm_1										
+50000	Insulation Score Mut/Wt Spearman	Inv1-Mm_2										
+50000	Insulation Score Mut/Wt Spearman	Inv1d										
+50000	Insulation Score Mut/Wt Spearman	Inv2										
+50000	Insulation Score Mut/Wt Spearman	Inv3										
+50000	Insulation Score Mut/Wt Spearman	Inv4										
+50000	Insulation Score Mut/Wt Spearman	InvC										
+50000	Insulation Score Mut/Wt Spearman	InvF										
+50000	Insulation Score Mut/Wt Spearman	InvIntra										
+50000	Insulation Score Mut/Wt Spearman	kit30_mast										
+50000	Insulation Score Mut/Wt Spearman	kit30_mel										
+50000	Insulation Score Mut/Wt Spearman	kit30plus										
+50000	Insulation Score Mut/Wt Spearman	MusDelB										
+50000	Insulation Score Mut/Wt Spearman	Neur1-Mm										
+50000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_fibr										
+50000	Insulation Score Mut/Wt Spearman	Pdgfra_KO_mast										
+50000	Insulation Score Mut/Wt Spearman	Pdgfra_left										
+50000	Insulation Score Mut/Wt Spearman	ZRSreg										
