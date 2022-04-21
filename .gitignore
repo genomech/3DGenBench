@@ -1,4 +1,5 @@
 # Byte-compiled / optimized / DLL files
+.idea
 benchmark_db.sqlite3
 __pycache__/
 *.py[cod]

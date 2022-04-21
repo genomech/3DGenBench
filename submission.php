@@ -77,17 +77,24 @@ $dbpath = 'sqlite:'.GetMetrics();
 try { $dbh  = new PDO($dbpath); } catch(Exception $e) { die(Message('Cannot open the database: '.$e, true)); }
 $query = 'INSERT INTO '.$TableName.' ( ID, Status, [Metadata.Author], [Metadata.ModelName], [Metadata.SampleName], [Metadata.Resolution], [Metadata.SubmissionDate]) VALUES ';
 $values = array();
-foreach ($ProcessingList as $index => $meta) array_push($values, '("'.$meta['ID'].'", 1, "'.$meta['Author'].'", "'.$meta['ModelName'].'", "'.$meta['SampleName'].'", '.$meta['Resolution'].', "'.date('Y-m-d H:i:s').'")');
+foreach ($ProcessingList as $index => $meta) array_push($values, '("'.$meta['ID'].'", 3, "'.$meta['Author'].'", "'.$meta['ModelName'].'", "'.$meta['SampleName'].'", '.$meta['Resolution'].', "'.date('Y-m-d H:i:s').'")');
 $query .= implode(', ', $values).';';
 $conn = $dbh->exec($query);
-if (!$conn) die(Message('Database error: '.$dbh->errorCode().' ('.$dbh->errorInfo()[2].')', true));
+if (!$conn) {
+	if ($dbh->errorCode() == 23000) die(Message('Units are already added to queue. Please reload the page', true)); 
+	die(Message('Database error: '.$dbh->errorCode().' ('.$dbh->errorInfo()[2].')', true)); 
+}
 $dbh = null;
 
 // MAKE SCRIPT
 
-$cmd = 'CMD="source '.GetCondaActivate().'; "; ';
+$units_list = '';
 
 foreach ($ProcessingList as $index => $meta) {
+$cmd = 'CMD="source '.GetCondaActivate().'; "; ';
+$cmd .= 'CMD=\'\'$CMD\' echo "\'; ';
+$cmd .= 'CMD=""$CMD"update '.$TableName.' set Status=\'1\' where ID=\''.$meta['ID'].'\';";';
+$cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; \'; ';
 	if ($DataType == 'p') {
 	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipeline().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetRearrTable().'" -W "'.$meta['WT'].'" -M "'.$meta['MUT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; '; 
 	} elseif ($DataType == 's') {
@@ -96,12 +103,13 @@ foreach ($ProcessingList as $index => $meta) {
 	$cmd .= 'CMD=\'\'$CMD\'if [ $? -ne 0 ]; then { echo "\'; ';
 	$cmd .= 'CMD=""$CMD"update '.$TableName.' set Status=\'2\' where ID=\''.$meta['ID'].'\';";';
 	$cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; } fi; \'; ';
+	$cmd .= 'tsp bash -c "${CMD}";';
+$units_list .= '[<a href="'.GetMetricsPage().'?id='.$meta['ID'].'" target="blank">'.$meta['ID'].'</a>] ';
 }
 
-$cmd .= 'screen -dm bash -c "${CMD}";';
-# echo $cmd;
+// echo $cmd;
 shell_exec($cmd);
 
-echo Message('Unit added to queue', false);
+echo Message('Unit(s) added to queue: '.$units_list, false);
 
 ?>

@@ -55,12 +55,8 @@ echo GetHeader('Submissions List');
 			{column: "SubmissionDate", dir: "desc"}
 		],
 		columns: [
-			{"title": "ID", "field": "ID", formatter:function(cell, formatterParams) {
-				var status = cell.getRow().getCell("Status").getValue();
-				return (status == 0) ? "<a href='<?php echo GetMetricsPage(); ?>?id=" + cell.getValue() + "'>" + cell.getValue() + "</a>" : cell.getValue(); 
-				} 
-			},
-			{"title": "Status", "field": "Status", formatter: "traffic", formatterParams: { min: 0, max: 2, color: ["green", "orange", "red"] } },
+			{"title": "ID", "field": "ID", formatter:function(cell, formatterParams) { return "<a href='<?php echo GetMetricsPage(); ?>?id=" + cell.getValue() + "'>" + cell.getValue() + "</a>"; } },
+			{"title": "Status", "field": "Status", formatter:function(cell, formatterParams) { return '<span class="' + { 0: 'button-success', 1: 'button-warning', 2: 'button-error', 3: "button-secondary" }[cell.getValue()] + '" style="display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span>'; } },
 			{"title": "Type", "field": "Type"},
 			{"title": "Author", "field": "Author"},
 			{"title": "Model Name", "field": "ModelName" },
@@ -72,9 +68,10 @@ echo GetHeader('Submissions List');
 </script>
 
 <div style="padding: 10px 0 0 0;">
-	<span style="background-color: red; display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span> Failed 
-	<span style="background-color: orange; display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span> Processing 
-	<span style="background-color: green; display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span> Success 
+	<span class="button-secondary" style="display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span><span style="padding: 0 10px 0 5px;">Queued</span>
+	<span class="button-success" style="display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span><span style="padding: 0 10px 0 5px;">Success</span>
+	<span class="button-warning" style="display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span><span style="padding: 0 10px 0 5px;">Processing</span>
+	<span class="button-error" style="display: inline-block; height: 14px; width: 14px; border-radius: 14px;"></span><span style="padding: 0 10px 0 5px;">Failed</span>
 </div>
 
 <?php echo GetFooter(); ?>
