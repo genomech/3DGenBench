@@ -1,8 +1,5 @@
  <?php
 
-@ini_set( 'upload_max_size' , '1G' );
-@ini_set( 'post_max_size', '1G');
-
 require_once('shared.php');
 
 echo GetHeader('Upload data.');
