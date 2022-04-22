@@ -245,7 +245,7 @@ def IntersectEctopicMatrices(MatrixA, MatrixB, SD):
 	return numpy.sum(numpy.logical_and(Condition(MatrixA), Condition(MatrixB)))
 
 def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
-	for Line in [f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}", f"Resolution: {int(Resolution / 1000)} kb"]: logging.info(Line)
+	for Line in [f"ID: {ID}", f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}", f"Resolution: {int(Resolution / 1000)} kb"]: logging.info(Line)
 	with tempfile.TemporaryDirectory() as TempDir:
 		TempFile = os.path.join(TempDir, "temp.cool")
 		SimpleSubprocess(Name = "CoolerZoomify", Command = f"cooler zoomify -n 8 -r {Resolution}N --balance -o \"{TempFile}\" \"{InputCool}\"")
@@ -274,7 +274,7 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp):
 
 # ------======| METRICS |======------
 
-def PearsonCorr(SeriesA, SeriesB, method="pearson"): return SeriesA.corr(SeriesB, method=method)
+def PearsonCorr(SeriesA, SeriesB, method="spearman"): return SeriesA.corr(SeriesB, method=method)
 
 def SCC(CoolA, CoolB, MaxDist, h): return hicrep.genome_scc(CoolA, CoolB, max_dist=MaxDist, h=h)
 
@@ -457,7 +457,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
 		Data["Metrics.InsulationScorePearson.MUT"] = PearsonCorr(InsDataset["sum_balanced_Mut-Exp"], InsDataset["sum_balanced_Mut-Pred"], method='spearman')
 
 	with Timer(f"Insulation Score (Mut/Wt) Pearson") as _:
-		Data["Metrics.InsulationScoreMutVsWtPearson"] = PearsonCorr(InsDataset["sum_balanced_Mut/Wt-Exp"], InsDataset["sum_balanced_Mut/Wt-Pred"])
+		Data["Metrics.InsulationScoreMutVsWtPearson"] = PearsonCorr(InsDataset["sum_balanced_Mut/Wt-Exp"], InsDataset["sum_balanced_Mut/Wt-Pred"], method='spearman')
 
 	# save insulatory score bedgraphs
 	with Timer(f"Save Bedgraphs") as _:

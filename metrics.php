@@ -7,7 +7,9 @@ $AuthorID = htmlspecialchars($_GET['bm_author']);
 
 // GET DB DATA
 $DBPairedMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics;'));
+$DBInsOnlyPairedMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics_insp WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics_insp;'));
 $DBSingleMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics_wg WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics_wg;'));
+$DBInsOnlySingleMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics_wg_inss WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics_wg_inss;'));
 
 // MAKE TABLE ARRAY
 $TableArray = array(); 
@@ -22,11 +24,33 @@ while ($Row = $DBPairedMetrics->fetch()) {
 		'Resolution' => intval($Row['Metadata.Resolution']),
 		'SubmissionDate' => $Row['Metadata.SubmissionDate']
 		)); }
+while ($Row = $DBInsOnlyPairedMetrics->fetch()) {
+	array_push($TableArray, array(
+		'ID' => $Row['ID'],
+		'Status' => intval($Row['Status']),
+		'Type' => 'Paired [Ins Score Only]',
+		'Author' => $Row['Metadata.Author'],
+		'ModelName' => $Row['Metadata.ModelName'],
+		'SampleName' => $Row['Metadata.SampleName'],
+		'Resolution' => intval($Row['Metadata.Resolution']),
+		'SubmissionDate' => $Row['Metadata.SubmissionDate']
+		)); }
 while ($Row = $DBSingleMetrics->fetch()) {
 	array_push($TableArray, array(
 		'ID' => $Row['ID'],
 		'Status' => intval($Row['Status']),
 		'Type' => 'Single',
+		'Author' => $Row['Metadata.Author'],
+		'ModelName' => $Row['Metadata.ModelName'],
+		'SampleName' => $Row['Metadata.SampleName'],
+		'Resolution' => intval($Row['Metadata.Resolution']),
+		'SubmissionDate' => $Row['Metadata.SubmissionDate']
+		)); }
+while ($Row = $DBInsOnlySingleMetrics->fetch()) {
+	array_push($TableArray, array(
+		'ID' => $Row['ID'],
+		'Status' => intval($Row['Status']),
+		'Type' => 'Single [Ins Score Only]',
 		'Author' => $Row['Metadata.Author'],
 		'ModelName' => $Row['Metadata.ModelName'],
 		'SampleName' => $Row['Metadata.SampleName'],
