@@ -270,7 +270,7 @@ def MakeBedgraph(ID, InsDataset, OutputBedgraph, Assembly, Chrom, DockerTmp, tes
 
 # ------======| METRICS |======------
 
-def PearsonCorr(SeriesA, SeriesB, method="pearson"): return SeriesA.corr(SeriesB, method=method)
+def PearsonCorr(SeriesA, SeriesB, method="spearman"): return SeriesA.corr(SeriesB, method=method)
 
 
 def SCC(CoolA, CoolB, region_start, region_end, h):
