@@ -16,6 +16,7 @@ if (!preg_match('/^[A-Za-z0-9_]{5,100}$/', $Model)) die(Message('Wrong model nam
 // Load Data
 switch ($DataType) {
 	case 'p': $SamplesList = GetSamples(); break;
+	case 'insp': $SamplesList = GetSamples(); break;
 	case 's': $SamplesList = GetSamplesWG(); break;
 	default: die(Message('Wrong data type', true)); 
 	}
@@ -60,7 +61,7 @@ foreach ($TssList as $index) {
 	else die(Message('Some files have been chosen more than 1 times', true));
 	$ProcessingList[$index]['WT'] = $wt_file;
 	
-	if ($DataType == 'p') {
+	if (($DataType == 'p') or ($DataType == 'insp')) {
 		$mut_file = htmlspecialchars_decode($_POST['file_MUT_'.$index]);
 		if ($mut_file == '0') die(Message('No MUT files were selected', true));
 		if (!file_exists($mut_file)) die(Message('Some MUT files were not found. Please reload the page', true));
@@ -72,7 +73,7 @@ foreach ($TssList as $index) {
 
 // SQL
 
-$TableName = array('p' => 'bm_metrics', 's' => 'bm_metrics_wg')[$DataType];
+$TableName = array('p' => 'bm_metrics', 'insp' => 'bm_metrics_insp', 's' => 'bm_metrics_wg')[$DataType];
 $dbpath = 'sqlite:'.GetMetrics();
 try { $dbh  = new PDO($dbpath); } catch(Exception $e) { die(Message('Cannot open the database: '.$e, true)); }
 $query = 'INSERT INTO '.$TableName.' ( ID, Status, [Metadata.Author], [Metadata.ModelName], [Metadata.SampleName], [Metadata.Resolution], [Metadata.SubmissionDate]) VALUES ';
@@ -98,7 +99,10 @@ $cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; \'; ';
 	if ($DataType == 'p') {
 	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipeline().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetRearrTable().'" -W "'.$meta['WT'].'" -M "'.$meta['MUT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; '; 
 	} elseif ($DataType == 's') {
-	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineWG().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetWGTable().'" -P "'.$meta['WT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; '; }
+	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineWG().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetWGTable().'" -P "'.$meta['WT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; ';
+	} elseif ($DataType == 'insp') { 
+		$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineInsOnlyPaired().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetRearrTable().'" -W "'.$meta['WT'].'" -M "'.$meta['MUT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; '; 
+	}
 	
 	$cmd .= 'CMD=\'\'$CMD\'if [ $? -ne 0 ]; then { echo "\'; ';
 	$cmd .= 'CMD=""$CMD"update '.$TableName.' set Status=\'2\' where ID=\''.$meta['ID'].'\';";';
@@ -107,7 +111,7 @@ $cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; \'; ';
 $units_list .= '[<a href="'.GetMetricsPage().'?id='.$meta['ID'].'" target="blank">'.$meta['ID'].'</a>] ';
 }
 
-// echo $cmd;
+echo $cmd;
 shell_exec($cmd);
 
 echo Message('Unit(s) added to queue: '.$units_list, false);

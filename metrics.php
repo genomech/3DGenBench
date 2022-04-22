@@ -7,6 +7,7 @@ $AuthorID = htmlspecialchars($_GET['bm_author']);
 
 // GET DB DATA
 $DBPairedMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics;'));
+$DBInsOnlyPairedMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics_insp WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics_insp;'));
 $DBSingleMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics_wg WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics_wg;'));
 
 // MAKE TABLE ARRAY
@@ -16,6 +17,17 @@ while ($Row = $DBPairedMetrics->fetch()) {
 		'ID' => $Row['ID'],
 		'Status' => intval($Row['Status']),
 		'Type' => 'Paired',
+		'Author' => $Row['Metadata.Author'],
+		'ModelName' => $Row['Metadata.ModelName'],
+		'SampleName' => $Row['Metadata.SampleName'],
+		'Resolution' => intval($Row['Metadata.Resolution']),
+		'SubmissionDate' => $Row['Metadata.SubmissionDate']
+		)); }
+while ($Row = $DBInsOnlyPairedMetrics->fetch()) {
+	array_push($TableArray, array(
+		'ID' => $Row['ID'],
+		'Status' => intval($Row['Status']),
+		'Type' => 'Paired [Ins Score Only]',
 		'Author' => $Row['Metadata.Author'],
 		'ModelName' => $Row['Metadata.ModelName'],
 		'SampleName' => $Row['Metadata.SampleName'],

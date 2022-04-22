@@ -8,11 +8,13 @@ $UnitID = htmlspecialchars($_GET['id']);
 // GET DATA FROM DB
 
 $DBPairedData = DBSelect('SELECT * FROM bm_metrics WHERE ID="'.$UnitID.'";');
+$DBInsOnlyPairedData = DBSelect('SELECT * FROM bm_metrics_insp WHERE ID="'.$UnitID.'";');
 $DBSingleData = DBSelect('SELECT * FROM bm_metrics_wg WHERE ID="'.$UnitID.'";');
 
 // PARSE DATA
 $TableArray = array();
 while ($Row = $DBPairedData->fetch()) { $Row['Metadata.Type'] = 'p'; array_push($TableArray, $Row); }
+while ($Row = $DBInsOnlyPairedData->fetch()) { $Row['Metadata.Type'] = 'insp'; array_push($TableArray, $Row); }
 while ($Row = $DBSingleData->fetch()) { $Row['Metadata.Type'] = 's'; array_push($TableArray, $Row); }
 
 // CHECK EXISTENCE AND UNIQUE
@@ -22,7 +24,7 @@ if (count($TableArray) > 1) die(Message('Database error: "'.$UnitID.'" is duplic
 // print_r($TableArray);
 $DataType = $TableArray[0]['Metadata.Type'];
 
-if ($DataType == 'p') { 
+if (($DataType == 'p') or ($DataType == 'insp')) { 
 	$DataArray = TsvToArray(GetRearrTable());
 	foreach ($DataArray as $DataRow) { if ($DataRow['rearrangement_ID'] == $TableArray[0]['Metadata.SampleName']) { $LocusAssembly = $DataRow['genome_assembly']; $LocusChr = $DataRow['chr']; $LocusStart = $DataRow['start_prediction']; $LocusEnd = $DataRow['end_prediction']; } }
 }
@@ -34,7 +36,7 @@ if ($DataType == 's') {
 // print_r($DataArray);
 
 // LOAD metrics_list.php IF THERE ARE NO RESULTS
-if ((!$RecordExists) or (!in_array($DataType, array('p', 's')))) { include(__DIR__.'/metrics.php'); }
+if ((!$RecordExists) or (!in_array($DataType, array('p', 's', 'insp')))) { include(__DIR__.'/metrics.php'); }
 if ($RecordStatus != 0) { 
 	echo GetHeader('ID: '.$UnitID);
 	$Record = $TableArray[0];
@@ -245,11 +247,7 @@ google.charts.setOnLoadCallback(draw'.$Name.');
 		
 	$Record = $TableArray[0];
 	
-	echo GetHeader('ID: '.$UnitID);
-	
-	if ($Record['Metadata.Type'] == 'p') {
-		
-		$PairedBaseline = TsvToArray(__DIR__.'/rearr_benchmark_baseline.txt');
+	$PairedBaseline = TsvToArray(__DIR__.'/rearr_benchmark_baseline.txt');
 	$FilteredPaired = array();
 	foreach ($PairedBaseline as $value) { 
 		if (($value['resolution'] == $Record['Metadata.Resolution']) and ($value['sample'] == $Record['Metadata.SampleName'])) {
@@ -258,6 +256,58 @@ google.charts.setOnLoadCallback(draw'.$Name.');
 			$FilteredPaired[$metric] = $value;
 		}
 	}
+	
+	$SingleBaseline = TsvToArray(__DIR__.'/wg_benchmark_baseline.txt');
+	$FilteredSingle = array();
+	foreach ($SingleBaseline as $value) { 
+		if (($value['resolution'] == $Record['Metadata.Resolution']) and ($value['sample'] == $Record['Metadata.SampleName'])) {
+			$metric = $value['metric'];
+			unset($value['resolution'], $value['sample'], $value['metric']);
+			$FilteredSingle[$metric] = $value;
+		}
+	}
+	
+	echo GetHeader('ID: '.$UnitID);
+	
+	if ($Record['Metadata.Type'] == 'insp') {
+		
+		
+		
+		// draw page
+		
+		echo '
+		
+		<script type="text/javascript">
+		google.charts.load("current", { packages: ["corechart", "scatter"]});
+		</script>
+		
+		<h2>Unit Data</h2>
+		
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Author ID:</b></td><td style="width: 800px;">'.$Record['Metadata.Author'].'</td></tr>
+		<tr><td><b>Model Name:</b></td><td>'.$Record['Metadata.ModelName'].'</td></tr>
+		<tr><td><b>Resolution:</b></td><td>'.strval(intval($Record['Metadata.Resolution'] / 1000)).' kb</td></tr>
+		<tr><td><b>Submission Date:</b></td><td>'.date('d M Y, H:i:s', strtotime($Record['Metadata.SubmissionDate'])).'</td></tr>
+		</table>
+		
+		<h2>Sample Data</h2>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Sample Name:</b></td><td style="width: 800px;">'.$Record['Metadata.SampleName'].'</td></tr>
+		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
+		</table>
+		
+		<h2>Metrics</h2>';
+		echo '<h3>Insulation Score Spearman</h3>';
+		DrawBaseline($FilteredPaired['Wt Insulation Score Spearman'], $Record['Metrics.InsulationScorePearson.WT'], "InsulationScorePearsonWT", "Insulation Score Spearman WT");
+		DrawBaseline($FilteredPaired['Mut Insulation Score Spearman'], $Record['Metrics.InsulationScorePearson.MUT'], "InsulationScorePearsonMUT", "Insulation Score Spearman MUT");
+		echo '<h3>Insulation Score Mut/Wt Spearman</h3>';
+		DrawBaseline($FilteredPaired['Insulation Score Mut/Wt Spearman'], $Record['Metrics.InsulationScoreMutVsWtPearson'], "InsulationScoreMutVsWtPearson", "Insulation Score Mut/Wt Spearman");
+		echo '<h2>HiGlass View</h2><iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=insp&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
+	}
+	
+	if ($Record['Metadata.Type'] == 'p') {
+		
+		
 		
 		// draw page
 		
@@ -311,15 +361,7 @@ google.charts.setOnLoadCallback(draw'.$Name.');
 	
 	if ($Record['Metadata.Type'] == 's') {
 		
-		$SingleBaseline = TsvToArray(__DIR__.'/wg_benchmark_baseline.txt');
-	$FilteredSingle = array();
-	foreach ($SingleBaseline as $value) { 
-		if (($value['resolution'] == $Record['Metadata.Resolution']) and ($value['sample'] == $Record['Metadata.SampleName'])) {
-			$metric = $value['metric'];
-			unset($value['resolution'], $value['sample'], $value['metric']);
-			$FilteredSingle[$metric] = $value;
-		}
-	}
+		
 		
 		$MetricsData = json_decode($Record['Data.JSON'], true);
 		

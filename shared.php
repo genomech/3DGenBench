@@ -2,17 +2,18 @@
 
 // CONST
 
-$GLOBALS['bmRearrTable'] = __DIR__.'/rearrangements_table.tsv';
-$GLOBALS['bmWGTable'] = __DIR__.'/whole_genome_regions.txt';
-$GLOBALS['bmPipelineScript'] = __DIR__.'/benchmark_pipeline.py';
-$GLOBALS['bmPipelineScriptWG'] = __DIR__.'/benchmark_whole_genome_pipeline.py';
-$GLOBALS['bmJsonConfig'] = __DIR__.'/config.json';
-$GLOBALS['bmCondaEnv'] = __DIR__.'/.pyenv';
-$GLOBALS['bmExpDatasets'] = __DIR__.'/exp_datasets';
-$GLOBALS['bmUploads'] = __DIR__.'/upload';
-$GLOBALS['bmMetrics'] = __DIR__.'/benchmark_db.sqlite3';
-$GLOBALS['bmLogs'] = __DIR__.'/logs';
-$GLOBALS['bmCool'] = __DIR__.'/cool';
+$GLOBALS['bmRearrTable'] = realpath(__DIR__.'/rearrangements_table.tsv');
+$GLOBALS['bmWGTable'] = realpath(__DIR__.'/whole_genome_regions.txt');
+$GLOBALS['bmPipelineScript'] = realpath(__DIR__.'/benchmark_pipeline.py');
+$GLOBALS['bmPipelineScriptWG'] = realpath(__DIR__.'/benchmark_whole_genome_pipeline.py');
+$GLOBALS['bmJsonConfig'] = realpath(__DIR__.'/config.json');
+$GLOBALS['bmCondaEnv'] = realpath(__DIR__.'/.pyenv');
+$GLOBALS['bmExpDatasets'] = realpath(__DIR__.'/exp_datasets');
+$GLOBALS['bmUploads'] = realpath(__DIR__.'/upload');
+$GLOBALS['bmMetrics'] = realpath(__DIR__.'/benchmark_db.sqlite3');
+$GLOBALS['bmLogs'] = realpath(__DIR__.'/logs');
+$GLOBALS['bmCool'] = realpath(__DIR__.'/cool');
+$GLOBALS['bmPipelineScriptInsOnlyPaired'] = realpath(__DIR__.'/insulatory_score_only_paired_benchmark.py');
 $GLOBALS['bmSubmission'] = 'submission.php';
 $GLOBALS['bmHiGlass'] = 'higlass.php';
 $GLOBALS['bmMetricsPage'] = 'metrics_view.php';
@@ -217,6 +218,7 @@ function GetWPUser() { return 'guest'; }
 function GetCondaActivate() { return $GLOBALS['bmCondaEnv'].'/bin/activate base'; }
 function GetBenchmarkPipeline() { return $GLOBALS['bmPipelineScript']; }
 function GetBenchmarkPipelineWG() { return $GLOBALS['bmPipelineScriptWG']; }
+function GetBenchmarkPipelineInsOnlyPaired() { return $GLOBALS['bmPipelineScriptInsOnlyPaired']; }
 function GetRearrTable() { return $GLOBALS['bmRearrTable']; }
 function GetWGTable() { return $GLOBALS['bmWGTable']; }
 function GetMetrics() { return $GLOBALS['bmMetrics']; }
@@ -280,7 +282,8 @@ function GetSamplesWG() {
 function GetUploadedFiles($Username) {
 	$UserDir = $GLOBALS['bmUploads'].'/'.$Username;
 	shell_exec('mkdir -p "'.$UserDir.'"');
-	$ScanDir = array_filter(scandir($UserDir), function($File) { return !is_dir($UserDir."/".$File); });
+	$ScanDir = array();
+	foreach (scandir($UserDir) as $File) { if (!is_dir(realpath($UserDir."/".$File))) array_push($ScanDir, $File); }
 	$UploadedFilesList = array('0' => '(none)');
 	foreach ($ScanDir as $FileName) $UploadedFilesList[$UserDir.'/'.htmlspecialchars($FileName)] = htmlspecialchars($FileName);
 	return $UploadedFilesList;

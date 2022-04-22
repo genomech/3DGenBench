@@ -61,6 +61,7 @@ echo GetHeader('Compute Metrics');
 		var container = document.getElementById("submission_form");
 		if (container.children.length > 13) { alert("Too many datasets!"); return 0; }
 		if (DataType == "p") var SamplesList = <?php echo json_encode($SamplesList); ?>;
+		if (DataType == "insp") var SamplesList = <?php echo json_encode($SamplesList); ?>;
 		if (DataType == "s") var SamplesList = <?php echo json_encode($WGSamplesList); ?>;
 		var ResolutionsList = <?php echo json_encode($ResolutionsList); ?>;
 		var FilesList = <?php echo json_encode($UploadedFilesList); ?>;
@@ -71,8 +72,12 @@ echo GetHeader('Compute Metrics');
 		container.appendChild(obj_block);
 		addSelect(TS, obj_block, SamplesList, "sample", "Sample Name");
 		addSelect(TS, obj_block, ResolutionsList, "resolution", "Resolution");
-		addSelect(TS, obj_block, FilesList, "file_WT", "WT Contacts File");
-		addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Contacts File");
+		if (DataType == "p") addSelect(TS, obj_block, FilesList, "file_WT", "WT Contacts File");
+		if (DataType == "s") addSelect(TS, obj_block, FilesList, "file_WT", "WT Contacts File");
+		if (DataType == "insp") addSelect(TS, obj_block, FilesList, "file_WT", "WT Insulatory Score File");
+		if (DataType == "p") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Contacts File");
+		if (DataType == "s") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Contacts File");
+		if (DataType == "insp") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Insulatory Score File");
 		if (DataType == "s") document.getElementById("file_MUT_" + TS).disabled = true;
 		addDeleteButton(TS, obj_block);
 		return 0;
@@ -136,7 +141,9 @@ echo GetHeader('Compute Metrics');
 			<label for="data_type">Type:</label>
 			<select name="data_type" class="pure-u-23-24" id="data_type" onchange="for (elem of document.querySelectorAll('[id^=block_]')) elem.remove(); addSampleBlock();">
 				<option value="p">Paired [WT/MUT]</option>
+				<option value="insp">Paired [Ins Score Only]</option>
 				<option value="s">Single</option>
+				
 			</select>
 		</div>
 		
