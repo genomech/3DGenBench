@@ -89,15 +89,8 @@ if ($RecordStatus != 0) {
 
 // RENDER RESULTS
 else {
-	
-	echo GetHeader('ID: '.$UnitID);
-	
-	$Record = $TableArray[0];
-	
-	if ($Record['Metadata.Type'] == 'p') {
-		// draw random
-		
-		function DrawRandom($Data, $Name, $Caption) {
+
+function DrawRandom($Data, $Name, $Caption) {
 			$Random = json_decode($Data['Random'], true);
 			$NewRandom = array();
 			foreach ($Random as $Index => $Value) array_push($NewRandom, array($Value, intval($Data['Real'])));
@@ -164,7 +157,7 @@ else {
 					pointSize: 0
 					};
 				var chart = new google.visualization.ScatterChart(document.getElementById("obj'.$Name.'"));
-				chart.draw(data, google.charts.Scatter.convertOptions(options));med.json
+				chart.draw(data, google.charts.Scatter.convertOptions(options));
 				}
 			
 			google.charts.setOnLoadCallback(draw'.$Name.');
@@ -174,6 +167,97 @@ else {
 			<div style="display: inline-block;" id="obj'.$Name.'"></div>
 			';
 		}
+		
+		function DrawBaseline($BaselineData, $ModelValue, $Name, $Caption) {
+			
+			echo '
+			
+			<script type="text/javascript">
+			function draw'.$Name.'() {
+  var data = google.visualization.arrayToDataTable([
+     ["Baseline", "Value", "Model"],';
+foreach ($BaselineData as $key => $value) { echo '["'.$key.'", '.($value ? $value : 0).', '.$ModelValue.'],'; }
+  echo ']);
+
+  var chartDiv = document.getElementById("obj'.$Name.'");
+  var chart = new google.visualization.ColumnChart(chartDiv);
+
+  // use colors to find chart elements
+  var colorMagenta = "#dc3912";
+  var colorLime = "#3366cc";
+
+  var xBeg;    // save first x coord
+  var xWidth;  // save width of column
+
+  var rowIndex = -1;  // find first column
+
+  google.visualization.events.addListener(chart, "ready", function () {
+    // columns
+    Array.prototype.forEach.call(chartDiv.getElementsByTagName("rect"), function(rect, index) {
+      if (rect.getAttribute("fill") === colorLime) {
+        rowIndex++;
+        xWidth = parseFloat(rect.getAttribute("width")) / 2;
+        if (rowIndex === 0) {
+          xBeg = parseFloat(rect.getAttribute("x"));
+        }
+      }
+    });
+
+    // reference line
+    Array.prototype.forEach.call(chartDiv.getElementsByTagName("path"), function(path, index) {
+      if (path.getAttribute("stroke") === colorMagenta) {
+        // change line coords
+        var refCoords = path.getAttribute("d").split(",");
+        refCoords[0] = "M" + xBeg;
+        var refWidth = refCoords[2].split("L");
+        refWidth[1] = parseFloat(refWidth[1]) + xWidth;
+        refCoords[2] = refWidth.join("L");
+        path.setAttribute("d", refCoords.join(","));
+      }
+    });
+  });
+
+  chart.draw(data, {
+    colors: [colorLime, colorMagenta],
+    width: 550,
+					height: 550,
+    legend: "none",
+    vAxis: { title: "Value", viewWindow: {
+        min: 0,
+        max: 1
+      } },
+    series: {
+      1: {
+        type: "line"
+      }
+    },
+    title: "'.$Caption.'\nModel Value: '.$ModelValue.'"
+  });
+}
+google.charts.setOnLoadCallback(draw'.$Name.');
+			
+			</script>
+
+<div style="display: inline-block;" id="obj'.$Name.'"></div>
+			
+			';
+		}
+		
+	$Record = $TableArray[0];
+	
+	echo GetHeader('ID: '.$UnitID);
+	
+	if ($Record['Metadata.Type'] == 'p') {
+		
+		$PairedBaseline = TsvToArray(__DIR__.'/rearr_benchmark_baseline.txt');
+	$FilteredPaired = array();
+	foreach ($PairedBaseline as $value) { 
+		if (($value['resolution'] == $Record['Metadata.Resolution']) and ($value['sample'] == $Record['Metadata.SampleName'])) {
+			$metric = $value['metric'];
+			unset($value['resolution'], $value['sample'], $value['metric']);
+			$FilteredPaired[$metric] = $value;
+		}
+	}
 		
 		// draw page
 		
@@ -198,31 +282,44 @@ else {
 		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
 		</table>
 		
-		<h2>Metrics</h2>
-		
-		<table class="pure-table pure-table-bordered pure-table-striped">
-		<thead>
-		<tr><th>&nbsp;</th><th>WT</th><th>Mut</th></tr></thead><tbody>
-		<tr><td style="width: 400px;"><b>All contacts Spearman:</b></td><td style="width: 400px;">'.$Record['Metrics.Pearson.WT'].'</td><td style="width: 400px;">'.$Record['Metrics.Pearson.MUT'].'</td></tr>
-		<tr><td><b>SCC:</b></td><td>'.$Record['Metrics.SCC.WT'].'</td><td>'.$Record['Metrics.SCC.MUT'].'</td></tr>
-		<tr><td><b>Insulation Score Pearson:</b></td><td>'.$Record['Metrics.InsulationScorePearson.WT'].'</td><td>'.$Record['Metrics.InsulationScorePearson.MUT'].'</td></tr>
-		<tr><td style="width: 400px;"><b>Insulation Score Mut/Wt Pearson:</b></td><td style="width: 800px;" colspan="2">'.$Record['Metrics.InsulationScoreMutVsWtPearson'].'</td></tr></tbody>
-		</table>';
-
+		<h2>Metrics</h2>';
+		echo '<h3>All contacts Spearman</h3>';
+		DrawBaseline($FilteredPaired['Wt Spearman'], $Record['Metrics.Pearson.WT'], "SpearmanWT", "All contacts Spearman WT");
+		DrawBaseline($FilteredPaired['Mut Spearman'], $Record['Metrics.Pearson.MUT'], "SpearmanMUT", "All contacts Spearman MUT");
+		echo '<h3>SCC</h3>';
+		DrawBaseline($FilteredPaired['Wt SCC'], $Record['Metrics.SCC.WT'], "SCCWT", "SCC WT");
+		DrawBaseline($FilteredPaired['Mut SCC'], $Record['Metrics.SCC.MUT'], "SCCMUT", "SCC MUT");
+		echo '<h3>Insulation Score Spearman</h3>';
+		DrawBaseline($FilteredPaired['Wt Insulation Score Spearman'], $Record['Metrics.InsulationScorePearson.WT'], "InsulationScorePearsonWT", "Insulation Score Spearman WT");
+		DrawBaseline($FilteredPaired['Mut Insulation Score Spearman'], $Record['Metrics.InsulationScorePearson.MUT'], "InsulationScorePearsonMUT", "Insulation Score Spearman MUT");
+		echo '<h3>Insulation Score Mut/Wt Spearman</h3>';
+		DrawBaseline($FilteredPaired['Insulation Score Mut/Wt Spearman'], $Record['Metrics.InsulationScoreMutVsWtPearson'], "InsulationScoreMutVsWtPearson", "Insulation Score Mut/Wt Spearman");
+		echo '<h3>Ectopic Interactions</h3>';
 		DrawPR(array(
 			'AUC' => $Record['Metrics.EctopicInteractions.AUC'],
 			'Precision' => $Record['Metrics.EctopicInteractions.Precision'],
 			'Recall' => $Record['Metrics.EctopicInteractions.Recall']
 			), 'EctopicInteractions', 'Ectopic Interactions');
+			echo '<h3>Random Interactions</h3>';
 		DrawRandom(array(
 			'Random' => $Record['Metrics.RandomInteractions.Random'],
 			'Real' => $Record['Metrics.RandomInteractions.Real']
 			), 'RandomInteractions', 'Random Interactions'); 
 		
-		echo '<iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=p&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
+		echo '<h2>HiGlass View</h2><iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=p&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
 	}
 	
 	if ($Record['Metadata.Type'] == 's') {
+		
+		$SingleBaseline = TsvToArray(__DIR__.'/wg_benchmark_baseline.txt');
+	$FilteredSingle = array();
+	foreach ($SingleBaseline as $value) { 
+		if (($value['resolution'] == $Record['Metadata.Resolution']) and ($value['sample'] == $Record['Metadata.SampleName'])) {
+			$metric = $value['metric'];
+			unset($value['resolution'], $value['sample'], $value['metric']);
+			$FilteredSingle[$metric] = $value;
+		}
+	}
 		
 		$MetricsData = json_decode($Record['Data.JSON'], true);
 		
@@ -247,15 +344,19 @@ else {
 		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
 		</table>
 		
-		<h2>Metrics</h2>
+		<h2>Metrics</h2>';
+		echo '<h3>All contacts Spearman</h3>';
+		DrawBaseline($FilteredSingle['Spearman'], $MetricsData['Metrics.Pearson'], "Spearman", "All contacts Spearman");
+		echo '<h3>SCC</h3>';
+		DrawBaseline($FilteredSingle['SCC'], $MetricsData['Metrics.SCC'], "SCC", "SCC");
+		echo '<h3>Insulation Score Spearman</h3>';
+		DrawBaseline($FilteredSingle['Ins_score_Spearman'], $MetricsData['Metrics.InsulationScorePearson'], "InsulationScorePearson", "Insulation Score Spearman");
+		echo '<h3>Compartment Strength Spearman</h3>';
+		DrawBaseline($FilteredSingle['Comp_strength Spearman'], $MetricsData['Metrics.CompartmentStrengthPearson'], "CompartmentStrengthPearson", "Compartment Strength Spearman");
+		echo '<h3>P(s) Spearman</h3>';
+		DrawBaseline($FilteredSingle['Ps Spearman'], $MetricsData['Metrics.PsPearson'], "PsPearson", "P(s) Spearman");
 		
-		<table class="pure-table pure-table-bordered pure-table-striped">
-		<tr><td style="width: 400px;"><b>All contacts Spearman:</b></td><td style="width: 800px;">'.$MetricsData['Metrics.Pearson'].'</td></tr>
-		<tr><td><b>SCC:</b></td><td>'.$MetricsData['Metrics.SCC'].'</td></tr>
-		<tr><td><b>Insulation Score Pearson:</b></td><td>'.$MetricsData['Metrics.InsulationScorePearson'].'</td></tr>
-		<tr><td><b>Compartment Strength Pearson:</b></td><td>'.$MetricsData['Metrics.CompartmentStrengthPearson'].'</td></tr>
-		<tr><td><b>P(s) Pearson:</b></td><td>'.$MetricsData['Metrics.PsPearson'].'</td></tr>
-		</table> <h2>HiGlass View</h2>';
+		echo '</table> <h2>HiGlass View</h2>';
 	
 	echo '<iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=s&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
 	}
