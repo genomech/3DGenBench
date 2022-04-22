@@ -10,12 +10,14 @@ $UnitID = htmlspecialchars($_GET['id']);
 $DBPairedData = DBSelect('SELECT * FROM bm_metrics WHERE ID="'.$UnitID.'";');
 $DBInsOnlyPairedData = DBSelect('SELECT * FROM bm_metrics_insp WHERE ID="'.$UnitID.'";');
 $DBSingleData = DBSelect('SELECT * FROM bm_metrics_wg WHERE ID="'.$UnitID.'";');
+$DBInsOnlySingleData = DBSelect('SELECT * FROM bm_metrics_wg_inss WHERE ID="'.$UnitID.'";');
 
 // PARSE DATA
 $TableArray = array();
 while ($Row = $DBPairedData->fetch()) { $Row['Metadata.Type'] = 'p'; array_push($TableArray, $Row); }
 while ($Row = $DBInsOnlyPairedData->fetch()) { $Row['Metadata.Type'] = 'insp'; array_push($TableArray, $Row); }
 while ($Row = $DBSingleData->fetch()) { $Row['Metadata.Type'] = 's'; array_push($TableArray, $Row); }
+while ($Row = $DBInsOnlySingleData->fetch()) { $Row['Metadata.Type'] = 'inss'; array_push($TableArray, $Row); }
 
 // CHECK EXISTENCE AND UNIQUE
 $RecordExists = count($TableArray);
@@ -28,7 +30,7 @@ if (($DataType == 'p') or ($DataType == 'insp')) {
 	$DataArray = TsvToArray(GetRearrTable());
 	foreach ($DataArray as $DataRow) { if ($DataRow['rearrangement_ID'] == $TableArray[0]['Metadata.SampleName']) { $LocusAssembly = $DataRow['genome_assembly']; $LocusChr = $DataRow['chr']; $LocusStart = $DataRow['start_prediction']; $LocusEnd = $DataRow['end_prediction']; } }
 }
-if ($DataType == 's') {
+if (($DataType == 's') or ($DataType == 'inss')) {
 	$DataArray = TsvToArray(GetWGTable());
 	foreach ($DataArray as $DataRow) { if ($DataRow['genome_locus_name'] == $TableArray[0]['Metadata.SampleName']) { $LocusAssembly = $DataRow['genome_assembly']; $LocusChr = $DataRow['locus_chr']; $LocusStart = $DataRow['locus_start']; $LocusEnd = $DataRow['locus_end']; } }
 }
@@ -36,11 +38,12 @@ if ($DataType == 's') {
 // print_r($DataArray);
 
 // LOAD metrics_list.php IF THERE ARE NO RESULTS
-if ((!$RecordExists) or (!in_array($DataType, array('p', 's', 'insp')))) { include(__DIR__.'/metrics.php'); }
+if ((!$RecordExists) or (!in_array($DataType, array('p', 's', 'insp', 'inss')))) { include(__DIR__.'/metrics.php'); }
+$Logs = file_get_contents(GetLogs().'/'.$UnitID.'.log');
 if ($RecordStatus != 0) { 
 	echo GetHeader('ID: '.$UnitID);
 	$Record = $TableArray[0];
-	$Logs = file_get_contents(GetLogs().'/'.$UnitID.'.log');
+	
 	echo '<h2>Unit Data</h2>
 		
 		<table class="pure-table pure-table-bordered pure-table-striped">
@@ -60,7 +63,7 @@ if ($RecordStatus != 0) {
 		'; }
 		
 		if (($RecordStatus == 1) or ($RecordStatus == 3)) { 
-		if ($RecordStatus == 1) { echo '<aside class="button-warning"><p>Job is processing now. This page will reload in <span id="cnt">10</span> sec</p></aside>'; }
+		if ($RecordStatus == 1) { echo '<aside class="button-warning"><p>Job is processing now. This page will reload in <span id="cnt">10</span> sec</p></aside><details><summary>Click here to see logs</summary><div class="code code-wrap"><pre id="logpre" style="display: block; height: 500px; overflow-x: auto; padding: 0.5em; color: rgb(0, 0, 0); background: rgb(248, 248, 255) none repeat scroll 0% 0%;"><code class="language-html" style="white-space: pre;">'.$Logs.'</code></pre></div></details>'; }
 		if ($RecordStatus == 3) { echo '<aside class="button-secondary"><p>Job is queued. This page will reload in <span id="cnt">10</span> sec</p></aside>'; }
 		echo '<script>
     var counter = 10;
@@ -302,7 +305,7 @@ google.charts.setOnLoadCallback(draw'.$Name.');
 		DrawBaseline($FilteredPaired['Mut Insulation Score Spearman'], $Record['Metrics.InsulationScorePearson.MUT'], "InsulationScorePearsonMUT", "Insulation Score Spearman MUT");
 		echo '<h3>Insulation Score Mut/Wt Spearman</h3>';
 		DrawBaseline($FilteredPaired['Insulation Score Mut/Wt Spearman'], $Record['Metrics.InsulationScoreMutVsWtPearson'], "InsulationScoreMutVsWtPearson", "Insulation Score Mut/Wt Spearman");
-		echo '<h2>HiGlass View</h2><iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=insp&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
+		echo '<h2>HiGlass View</h2><iframe width="1200" height="100" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=insp&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
 	}
 	
 	if ($Record['Metadata.Type'] == 'p') {
@@ -402,6 +405,43 @@ google.charts.setOnLoadCallback(draw'.$Name.');
 	
 	echo '<iframe width="1200" height="600" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=s&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
 	}
+	
+	if ($Record['Metadata.Type'] == 'inss') {
+		
+		
+		
+		$MetricsData = json_decode($Record['Data.JSON'], true);
+		
+		echo '<script src="https://www.gstatic.com/charts/loader.js"></script>
+		
+		<script type="text/javascript">
+		google.charts.load("current", { packages: ["corechart", "scatter"]});
+		</script>
+		
+		<h2>Unit Data</h2>
+		
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Author ID:</b></td><td style="width: 800px;">'.$Record['Metadata.Author'].'</td></tr>
+		<tr><td><b>Model Name:</b></td><td>'.$Record['Metadata.ModelName'].'</td></tr>
+		<tr><td><b>Resolution:</b></td><td>'.strval(intval($Record['Metadata.Resolution'] / 1000)).' kb</td></tr>
+		<tr><td><b>Submission Date:</b></td><td>'.date('d M Y, H:i:s', strtotime($Record['Metadata.SubmissionDate'])).'</td></tr>
+		</table>
+		
+		<h2>Sample Data</h2>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Sample Name:</b></td><td style="width: 800px;">'.$Record['Metadata.SampleName'].'</td></tr>
+		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
+		</table>
+		
+		<h2>Metrics</h2>';
+		echo '<h3>Insulation Score Spearman</h3>';
+		DrawBaseline($FilteredSingle['Ins_score_Spearman'], $MetricsData['Metrics.InsulationScorePearson'], "InsulationScorePearson", "Insulation Score Spearman");
+		
+		echo '</table> <h2>HiGlass View</h2>';
+	
+	echo '<iframe width="1200" height="100" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=inss&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
+	}
+echo '<details><summary>Click here to see logs</summary><div class="code code-wrap"><pre id="logpre" style="display: block; height: 500px; overflow-x: auto; padding: 0.5em; color: rgb(0, 0, 0); background: rgb(248, 248, 255) none repeat scroll 0% 0%;"><code class="language-html" style="white-space: pre;">'.$Logs.'</code></pre></div></details>';
 echo GetFooter();
 }
 ?> 

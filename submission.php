@@ -18,6 +18,7 @@ switch ($DataType) {
 	case 'p': $SamplesList = GetSamples(); break;
 	case 'insp': $SamplesList = GetSamples(); break;
 	case 's': $SamplesList = GetSamplesWG(); break;
+	case 'inss': $SamplesList = GetSamplesWG(); break;
 	default: die(Message('Wrong data type', true)); 
 	}
 $ResolutionsList = GetResolutions();
@@ -73,7 +74,7 @@ foreach ($TssList as $index) {
 
 // SQL
 
-$TableName = array('p' => 'bm_metrics', 'insp' => 'bm_metrics_insp', 's' => 'bm_metrics_wg')[$DataType];
+$TableName = array('p' => 'bm_metrics', 'insp' => 'bm_metrics_insp', 's' => 'bm_metrics_wg', 'inss' => 'bm_metrics_wg_inss')[$DataType];
 $dbpath = 'sqlite:'.GetMetrics();
 try { $dbh  = new PDO($dbpath); } catch(Exception $e) { die(Message('Cannot open the database: '.$e, true)); }
 $query = 'INSERT INTO '.$TableName.' ( ID, Status, [Metadata.Author], [Metadata.ModelName], [Metadata.SampleName], [Metadata.Resolution], [Metadata.SubmissionDate]) VALUES ';
@@ -102,6 +103,8 @@ $cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; \'; ';
 	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineWG().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetWGTable().'" -P "'.$meta['WT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; ';
 	} elseif ($DataType == 'insp') { 
 		$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineInsOnlyPaired().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetRearrTable().'" -W "'.$meta['WT'].'" -M "'.$meta['MUT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; '; 
+	} elseif ($DataType == 'inss') {
+	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineInsOnlySingle().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetWGTable().'" -P "'.$meta['WT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; ';
 	}
 	
 	$cmd .= 'CMD=\'\'$CMD\'if [ $? -ne 0 ]; then { echo "\'; ';

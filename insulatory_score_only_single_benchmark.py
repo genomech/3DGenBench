@@ -141,7 +141,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
             logging.info("DB Connected")
 
             AllMetricsSQL = json.dumps(Data, ensure_ascii=False)
-            sqlite_select_query = f"update bm_metrics_wg set Status='0', [Data.JSON]='{AllMetricsSQL}' where ID='{UnitID}';"
+            sqlite_select_query = f"update bm_metrics_wg_inss set Status='0', [Data.JSON]='{AllMetricsSQL}' where ID='{UnitID}';"
             cursor.execute(sqlite_select_query)
             sqlite_connection.commit()
             cursor.close()

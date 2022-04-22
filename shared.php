@@ -14,6 +14,7 @@ $GLOBALS['bmMetrics'] = realpath(__DIR__.'/benchmark_db.sqlite3');
 $GLOBALS['bmLogs'] = realpath(__DIR__.'/logs');
 $GLOBALS['bmCool'] = realpath(__DIR__.'/cool');
 $GLOBALS['bmPipelineScriptInsOnlyPaired'] = realpath(__DIR__.'/insulatory_score_only_paired_benchmark.py');
+$GLOBALS['bmPipelineScriptInsOnlySingle'] = realpath(__DIR__.'/insulatory_score_only_single_benchmark.py');
 $GLOBALS['bmSubmission'] = 'submission.php';
 $GLOBALS['bmHiGlass'] = 'higlass.php';
 $GLOBALS['bmMetricsPage'] = 'metrics_view.php';
@@ -219,6 +220,7 @@ function GetCondaActivate() { return $GLOBALS['bmCondaEnv'].'/bin/activate base'
 function GetBenchmarkPipeline() { return $GLOBALS['bmPipelineScript']; }
 function GetBenchmarkPipelineWG() { return $GLOBALS['bmPipelineScriptWG']; }
 function GetBenchmarkPipelineInsOnlyPaired() { return $GLOBALS['bmPipelineScriptInsOnlyPaired']; }
+function GetBenchmarkPipelineInsOnlySingle() { return $GLOBALS['bmPipelineScriptInsOnlySingle']; }
 function GetRearrTable() { return $GLOBALS['bmRearrTable']; }
 function GetWGTable() { return $GLOBALS['bmWGTable']; }
 function GetMetrics() { return $GLOBALS['bmMetrics']; }

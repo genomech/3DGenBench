@@ -63,6 +63,7 @@ echo GetHeader('Compute Metrics');
 		if (DataType == "p") var SamplesList = <?php echo json_encode($SamplesList); ?>;
 		if (DataType == "insp") var SamplesList = <?php echo json_encode($SamplesList); ?>;
 		if (DataType == "s") var SamplesList = <?php echo json_encode($WGSamplesList); ?>;
+		if (DataType == "inss") var SamplesList = <?php echo json_encode($WGSamplesList); ?>;
 		var ResolutionsList = <?php echo json_encode($ResolutionsList); ?>;
 		var FilesList = <?php echo json_encode($UploadedFilesList); ?>;
 		var block_id = "block_" + TS;
@@ -75,10 +76,13 @@ echo GetHeader('Compute Metrics');
 		if (DataType == "p") addSelect(TS, obj_block, FilesList, "file_WT", "WT Contacts File");
 		if (DataType == "s") addSelect(TS, obj_block, FilesList, "file_WT", "WT Contacts File");
 		if (DataType == "insp") addSelect(TS, obj_block, FilesList, "file_WT", "WT Insulatory Score File");
+		if (DataType == "inss") addSelect(TS, obj_block, FilesList, "file_WT", "WT Insulatory Score File");
 		if (DataType == "p") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Contacts File");
 		if (DataType == "s") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Contacts File");
 		if (DataType == "insp") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Insulatory Score File");
+		if (DataType == "inss") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Insulatory Score File");
 		if (DataType == "s") document.getElementById("file_MUT_" + TS).disabled = true;
+		if (DataType == "inss") document.getElementById("file_MUT_" + TS).disabled = true;
 		addDeleteButton(TS, obj_block);
 		return 0;
 	}
@@ -103,15 +107,30 @@ echo GetHeader('Compute Metrics');
 		var ts = new Date().getTime();
 		addBlock(ts, tp);
 		if (tp == "p") {
+			document.getElementById("models_list").value = "TestModel_Paired";
 			document.getElementById("sample_" + ts).value = "Bor";
 			document.getElementById("resolution_" + ts).value = "5000";
-			document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/Bor_5kb_WT_3DPredictor.txt";
-			document.getElementById("file_MUT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/Bor_5kb_MUT_3DPredictor";
+			document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench_upload/guest/Bor_5kb_WT_3DPredictor.txt";
+			document.getElementById("file_MUT_" + ts).value = "/storage/fairwind/3DGenBench_upload/guest/Bor_5kb_MUT_3DPredictor";
 		}
 		if (tp == "s") {
+			document.getElementById("models_list").value = "TestModel_Single";
 			document.getElementById("sample_" + ts).value = "GM12878_chr19_36to56Mb";
 			document.getElementById("resolution_" + ts).value = "10000";
-			document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench/upload/guest/chr19_22to42_10kb_GM12878_model30_smarterprediction.txt";
+			document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench_upload/guest/chr19_22to42_10kb_GM12878_model30_smarterprediction.txt";
+		}
+		if (tp == "inss") {
+			document.getElementById("models_list").value = "TestModel_SingleInsOnly";
+			document.getElementById("sample_" + ts).value = "GM12878_chr1_22to42Mb";
+			document.getElementById("resolution_" + ts).value = "10000";
+			document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench_upload/guest/GM12878_chr1_22to42Mb_10Kb.bedgraph";
+		}
+		if (tp == "insp") {
+			document.getElementById("models_list").value = "TestModel_PairedInsOnly";
+			document.getElementById("sample_" + ts).value = "Bor";
+			document.getElementById("resolution_" + ts).value = "5000";
+			document.getElementById("file_WT_" + ts).value = "/storage/fairwind/3DGenBench_upload/guest/wt_Bor_predicted_ins_score_5Kb.bedgraph";
+			document.getElementById("file_MUT_" + ts).value = "/storage/fairwind/3DGenBench_upload/guest/mut_Bor_predicted_ins_score_5Kb.bedgraph";
 		}
 	}
 	
@@ -143,6 +162,7 @@ echo GetHeader('Compute Metrics');
 				<option value="p">Paired [WT/MUT]</option>
 				<option value="insp">Paired [Ins Score Only]</option>
 				<option value="s">Single</option>
+				<option value="inss">Single [Ins Score Only]</option>
 				
 			</select>
 		</div>
