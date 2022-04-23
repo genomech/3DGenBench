@@ -92,8 +92,9 @@ $dbh = null;
 
 $units_list = '';
 
+$cmd = '';
 foreach ($ProcessingList as $index => $meta) {
-$cmd = 'CMD="source '.GetCondaActivate().'; "; ';
+$cmd .= 'CMD="source '.GetCondaActivate().'; "; ';
 $cmd .= 'CMD=\'\'$CMD\' echo "\'; ';
 $cmd .= 'CMD=""$CMD"update '.$TableName.' set Status=\'1\' where ID=\''.$meta['ID'].'\';";';
 $cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; \'; ';
@@ -110,11 +111,11 @@ $cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; \'; ';
 	$cmd .= 'CMD=\'\'$CMD\'if [ $? -ne 0 ]; then { echo "\'; ';
 	$cmd .= 'CMD=""$CMD"update '.$TableName.' set Status=\'2\' where ID=\''.$meta['ID'].'\';";';
 	$cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; } fi; \'; ';
-	$cmd .= 'tsp bash -c "${CMD}";';
+	$cmd .= 'tsp bash -c "${CMD}"; ';
 $units_list .= '[<a href="'.GetMetricsPage().'?id='.$meta['ID'].'" target="blank">'.$meta['ID'].'</a>] ';
 }
 
-// echo $cmd;
+echo $cmd;
 shell_exec($cmd);
 
 echo Message('Unit(s) added to queue: '.$units_list, false);
