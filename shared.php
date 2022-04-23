@@ -235,8 +235,8 @@ function GetMetricsPage() {  return $GLOBALS['bmMetricsPage']; }
 // Error/Success Message
 
 function Message($Message, $IsError) {
-	if ($IsError) { return '<html><head><link rel="stylesheet" href="https://purecss.io/css/main.css"></head><body><aside style="background: rgb(202, 60, 60);"><p>'.$Message.'</p></aside></body><html>'; }
-	else { return '<html><head><link rel="stylesheet" href="https://purecss.io/css/main.css"></head><body><aside style="background: rgb(28, 184, 65);"><p>'.$Message.'</p></aside></body><html>'; }
+	if ($IsError) { return '<html><head><link rel="stylesheet" href="css/pure-main.css"></head><body><aside style="background: rgb(202, 60, 60);"><p>'.$Message.'</p></aside><script src="js/clipboard.min.js"></script> <script>new ClipboardJS(".btn");</script></body><html>'; }
+	else { return '<html><head><link rel="stylesheet" href="css/pure-main.css"></head><body><aside style="background: rgb(28, 184, 65);"><p>'.$Message.'</p></aside><script src="js/clipboard.min.js"></script> <script>new ClipboardJS(".btn");</script></body><html>'; }
 }
 
 // Data load func

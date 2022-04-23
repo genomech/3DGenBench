@@ -115,9 +115,8 @@ $cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; \'; ';
 $units_list .= '[<a href="'.GetMetricsPage().'?id='.$meta['ID'].'" target="blank">'.$meta['ID'].'</a>] ';
 }
 
-echo $cmd;
 shell_exec($cmd);
 
-echo Message('Unit(s) added to queue: '.$units_list, false);
+echo Message('<a href="#" class="btn" data-clipboard-action="copy" data-clipboard-text="'.htmlspecialchars($cmd).'">[CMD]</a> Unit(s) added to queue: '.$units_list, false);
 
 ?>
