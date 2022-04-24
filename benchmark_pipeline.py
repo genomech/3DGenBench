@@ -245,7 +245,7 @@ def IntersectEctopicMatrices(MatrixA, MatrixB, SD):
 	return numpy.sum(numpy.logical_and(Condition(MatrixA), Condition(MatrixB)))
 
 def MakeMcool(ID, InputCool, OutputMcool, Resolution, DockerTmp):
-	for Line in [f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}", f"Resolution: {int(Resolution / 1000)} kb"]: logging.info(Line)
+	for Line in [f"ID: {ID}", f"Input COOL: {InputCool}", f"Output MCOOL: {OutputMcool}", f"Resolution: {int(Resolution / 1000)} kb"]: logging.info(Line)
 	with tempfile.TemporaryDirectory() as TempDir:
 		TempFile = os.path.join(TempDir, "temp.cool")
 		SimpleSubprocess(Name = "CoolerZoomify", Command = f"cooler zoomify -n 8 -r {Resolution}N --balance -o \"{TempFile}\" \"{InputCool}\"")

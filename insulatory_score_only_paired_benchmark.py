@@ -147,7 +147,7 @@ def CreateDataFiles(UnitID, AuthorName, ModelName, SampleName, FileNamesInput, C
             cursor = sqlite_connection.cursor()
             logging.info("DB Connected")
             AllMetricsSQL = ', '.join([f"'{key}'='{value}'" for key, value in Data.items()])
-            sqlite_select_query = f"update bm_metrics set Status='0', {AllMetricsSQL} where ID='{UnitID}';"
+            sqlite_select_query = f"update bm_metrics_insp set Status='0', {AllMetricsSQL} where ID='{UnitID}';"
             cursor.execute(sqlite_select_query)
             sqlite_connection.commit()
             cursor.close()
