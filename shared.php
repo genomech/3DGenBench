@@ -51,6 +51,7 @@ return '
 <!--- purecss --->
 <link rel="stylesheet" href="css/pure-main.css">
 <link rel="stylesheet" href="css/pure-min.css">
+<link rel="stylesheet" href="css/styles.213c7dc2.css">
 <!--- purecss --->
 
 <!--- cookie consent --->
@@ -174,6 +175,7 @@ window.cookieconsent.initialise({
 			
 			<!--- header --->
 			<div class="header">
+			
 				<h1><span class="'.$Pride.' pride">3DGenBench</span></h1>
 				<h2>'.$Header.'</h2>
 				
@@ -196,8 +198,9 @@ function GetFooter() { return '
 				<div class="legal pure-g">
 					<div class="pure-u-1 u-sm-1-2">
 						<p class="legal-license">
-							This site is built with <3 using Pure v2.0.6<br>
-							Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+							This site is built using Pure v2.0.6<br>
+							We ❤️ Tor as well! Out Onion V3 Address: <a href="http://3dgenbbmw2a4vpn7bprgmyd4hrkq2h63qpjvcav6wnnzygi6po3uzkqd.onion" target="_blank">3dgenbbmw2a4vpn7bprgmyd4hrkq2h63qpjvcav6wnnzygi6po3uzkqd.onion</a><br>
+							Licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.<br>
 						</p>
 					</div>
 					<div class="pure-u-1 u-sm-1-2">
