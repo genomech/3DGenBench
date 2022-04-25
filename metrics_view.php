@@ -353,7 +353,8 @@ google.charts.setOnLoadCallback(draw'.$Name.');
 			'Precision' => $Record['Metrics.EctopicInteractions.Precision'],
 			'Recall' => $Record['Metrics.EctopicInteractions.Recall']
 			), 'EctopicInteractions', 'Ectopic Interactions');
-			echo '<h3>Random Interactions</h3>';
+		DrawBaseline($FilteredPaired['Ectopic AUC'], $Record['Metrics.EctopicInteractions.AUC'], "EctopicInteractionsAUC", "Ectopic Interactions AUC");
+		echo '<h3>Random Interactions</h3>';
 		DrawRandom(array(
 			'Random' => $Record['Metrics.RandomInteractions.Random'],
 			'Real' => $Record['Metrics.RandomInteractions.Real']
