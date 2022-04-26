@@ -305,6 +305,7 @@ GM12878	NFXL1	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www
 GM12878	NFXL1	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF502QYQ/@@download/ENCFF502QYQ.bigWig	ENCODE	hg19
 GM12878	ZSCAN29	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF670DVM/@@download/ENCFF670DVM.bigBed	ENCODE	hg19
 GM12878	ZSCAN29	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF964JLQ/@@download/ENCFF964JLQ.bigWig	ENCODE	hg19
+GM12878	ChIA-PET	ChIA-PET pairs	https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/ChIA-PET_data/GSM1872886_GM12878_CTCF_PET_clusters.txt	NCBI	hg19
 K562	USF2	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF399ILC/@@download/ENCFF399ILC.bigBed	ENCODE	hg19
 K562	USF2	fold change over control (bigWig)	https://www.encodeproject.org/files/ENCFF605DSA/@@download/ENCFF605DSA.bigWig	ENCODE	hg19
 K562	CEBPB	conservative IDR thresholded peaks (bigBed narrowPeak)	https://www.encodeproject.org/files/ENCFF446NGE/@@download/ENCFF446NGE.bigBed	ENCODE	hg19
