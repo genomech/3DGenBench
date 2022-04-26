@@ -9,11 +9,7 @@ fileInput.onchange = ({target})=>{
   let file = target.files[0];
   if(file){
     let fileName = file.name;
-    if(fileName.length >= 12){
-      let splitName = fileName.split('.');
-      fileName = splitName[0].substring(0, 13) + "... ." + splitName[1];
-    }
-    uploadFile(fileName);
+    uploadFile(+Date.now()+"_"+fileName);
   }
 }
 
@@ -56,5 +52,15 @@ function uploadFile(name){
     }
   });
   let data = new FormData(form);
+
+  xhr.onload = function () {
+    if (xhr.readyState === xhr.DONE) {
+        if (xhr.status === 200) {
+            console.log(xhr.response);
+            console.log(xhr.responseText);
+        }
+    }
+  };
+
   xhr.send(data);
 }
