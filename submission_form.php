@@ -6,6 +6,7 @@ $User = GetWPUser();
 $Secret = GetSecret($User);
 $SamplesList = GetSamples();
 $WGSamplesList = GetSamplesWG();
+$PetSamples = GetSamplesPET();
 $ResolutionsList = GetResolutions();
 $UploadedFilesList = GetUploadedFiles($User);
 
@@ -64,6 +65,7 @@ echo GetHeader('Compute Metrics');
 		if (DataType == "insp") var SamplesList = <?php echo json_encode($SamplesList); ?>;
 		if (DataType == "s") var SamplesList = <?php echo json_encode($WGSamplesList); ?>;
 		if (DataType == "inss") var SamplesList = <?php echo json_encode($WGSamplesList); ?>;
+		if (DataType == "pet") var SamplesList = <?php echo json_encode($PetSamples); ?>;
 		var ResolutionsList = <?php echo json_encode($ResolutionsList); ?>;
 		var FilesList = <?php echo json_encode($UploadedFilesList); ?>;
 		var block_id = "block_" + TS;
@@ -72,17 +74,24 @@ echo GetHeader('Compute Metrics');
 		obj_block.setAttribute("style", "padding: 0 0 10px 0;");
 		container.appendChild(obj_block);
 		addSelect(TS, obj_block, SamplesList, "sample", "Sample Name");
-		addSelect(TS, obj_block, ResolutionsList, "resolution", "Resolution");
+		if (DataType == "pet") addSelect(TS, obj_block, ResolutionsList, "resolution", "&nbsp;");
+		else addSelect(TS, obj_block, ResolutionsList, "resolution", "Resolution");
 		if (DataType == "p") addSelect(TS, obj_block, FilesList, "file_WT", "WT Contacts File");
-		if (DataType == "s") addSelect(TS, obj_block, FilesList, "file_WT", "WT Contacts File");
+		if (DataType == "s") addSelect(TS, obj_block, FilesList, "file_WT", "Contacts File");
 		if (DataType == "insp") addSelect(TS, obj_block, FilesList, "file_WT", "WT Insulatory Score File");
-		if (DataType == "inss") addSelect(TS, obj_block, FilesList, "file_WT", "WT Insulatory Score File");
+		if (DataType == "inss") addSelect(TS, obj_block, FilesList, "file_WT", "Insulatory Score File");
+		if (DataType == "pet") addSelect(TS, obj_block, FilesList, "file_WT", "ChIA-PET File");
 		if (DataType == "p") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Contacts File");
-		if (DataType == "s") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Contacts File");
+		if (DataType == "s") addSelect(TS, obj_block, FilesList, "file_MUT", "&nbsp;");
 		if (DataType == "insp") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Insulatory Score File");
-		if (DataType == "inss") addSelect(TS, obj_block, FilesList, "file_MUT", "MUT Insulatory Score File");
+		if (DataType == "inss") addSelect(TS, obj_block, FilesList, "file_MUT", "&nbsp;");
+		if (DataType == "pet") addSelect(TS, obj_block, FilesList, "file_MUT", "&nbsp;");
 		if (DataType == "s") document.getElementById("file_MUT_" + TS).disabled = true;
 		if (DataType == "inss") document.getElementById("file_MUT_" + TS).disabled = true;
+		if (DataType == "pet") { 
+			document.getElementById("file_MUT_" + TS).disabled = true;
+			document.getElementById("resolution_" + TS).disabled = true;
+			}
 		addDeleteButton(TS, obj_block);
 		return 0;
 	}
@@ -163,6 +172,7 @@ echo GetHeader('Compute Metrics');
 				<option value="insp">Paired [Ins Score Only]</option>
 				<option value="s">Single</option>
 				<option value="inss">Single [Ins Score Only]</option>
+				<option value="pet">ChIA-PET</option>
 				
 			</select>
 		</div>

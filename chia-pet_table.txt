@@ -1,0 +1,2 @@
+genome_locus_name	path_to_processed_hic_data	cell_type	organism	genome_assembly	path_to_processed_hic_data_AlenaServer
+GM12878	https://genedev.bionet.nsc.ru/hic_out/Unordered/INC_COST_3DBenchmark_%5bremake%5d/GM12878/	GM12878	human	hg19	/storage/hic_data_for_3DBench/GM12878

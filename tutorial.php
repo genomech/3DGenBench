@@ -43,7 +43,7 @@ Sample metadata include the following information:
 </p>
 
 <p>
-<code>chr</code>, <code>start prediction</code> and <code>end prediction</code> columns describe the genomic region for which Hi-C interactions are expected to be predicted.
+<code>chr</code>, <code>start prediction</code> and <code>end prediction</code> columns describe the genomic region for which Hi-C interactions are expected to be predicted. Where <code>start prediction</code> bin corresponds to the interval (start_prediction-resolution)-start_prediction, the same rule is for <code>end prediction</code> bin.
 <code>Rearr #n Start</code>, <code>Rearr #n end</code> columns describe the rearrangement coordinates.
 For each sample there are several columns for rearrangement coordinates if multiple simultaneous mutations have been found in the region.
 The rearrangement type can be found in <code>Rearrangement Type</code> column.
@@ -959,11 +959,11 @@ Also you can explore dataset folder at our local FTP storage using hyperlinks in
 </figure>
 
 <p>
-The detailed description of files can be found <a href="tutorial.php" target="_blank">here</a>.
+The detailed description of files can be found <a href="https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/file_format_description.txt" target="_blank">here</a>.
 </p>
 
 <p>
-If you neet to download the entire Hi-C data set, use command:
+If you need to download the entire Hi-C data set, use command:
 </p>
 
 <div class="code"><pre>
@@ -1006,6 +1006,10 @@ chr	contact_start	contact_end	contact_count
 <aside><p>Note: No header is allowed in the TSV file.</p></aside>
 
 <p>
+Where contact_start corresponds to the interval (contact_start - resolution)-contact_start, the same is for the contact_end.
+</p>
+
+<p>
 An example file can be downloaded <a href="https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/predicted_examples/" target="_blank">here</a>.
 </p>
 
@@ -1030,6 +1034,22 @@ For Paired benchmark two predicted tracks should be provided, both for WT and Mu
 The data can be uploaded <a href="upload.php" target="_blank">here</a>.
 The uploaded files will be available in dropdown list <a href="submission_form.php" target="_blank">here</a> (see next Step).
 </p>
+
+<p>
+Also, if you have too many files to upload, you can upload your data via FTP using any FTP client, such as <a href="https://filezilla-project.org/">FileZilla</a> or <a href="https://winscp.net/eng/download.php">WinSCP</a>.
+</p>
+
+<div class="code"><pre style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(0, 0, 0); background: rgb(248, 248, 255) none repeat scroll 0% 0%;">
+Protocol:      SFTP
+Host name:     gate1.cytogen.ru
+Port number:   8046
+Username:      sftp_user
+Password:      3DGenBench
+</pre></div>
+
+<aside><p>
+Note: passive mode must be enabled in your FTP client.
+</p></aside>
 
 <h2 id="compute_metrics" class="content-subhead">Step 4. Provide Sample Metadata &amp; Compute Metrics<a href="#compute_metrics" class="content-link" title="Heading anchor"></a></h2>
 
@@ -1940,8 +1960,8 @@ Those metrics reflect how well the model predicts experimental Hi-C data:
 
 <ul>
 <li>Spearman’s correlation between experimental and predicted Hi-C matrices</li>
-<li>SCC (stratum adjusted correlation coefficient) from <a href="https://doi.org/10.1101/gr.220640.117" target="_blank">Yang et al. (2017)</a>, implemented by <a href="https://github.com/cmdoret/hicreppy" target="blank">hicreppy</a>, between experimental and predicted Hi-C matrices</li>
-<li>Spearman’s correlation of TAD-separation score at each bin (computed using <a href="https://github.com/deeptools/HiCExplorer" target="_blank">HiCExplorer</a> hicFindTADs)</li>
+<li>SCC (stratum adjusted correlation coefficient) from <a href="https://doi.org/10.1101/gr.220640.117" target="_blank">Yang et al. (2017)</a>, implemented by <a href="https://github.com/cmdoret/hicreppy" target="blank">hicreppy</a> with max_dist parameter equals to 1500000, between experimental and predicted Hi-C matrices</li>
+<li>Spearman’s correlation of insulation score at each bin (computed using <a href="https://cooltools.readthedocs.io/en/latest/notebooks/insulation_and_boundaries.html" target="_blank">Cooltools</a> calculate_insulation_score)</li>
 </ul>
 
 <p>
@@ -1958,12 +1978,9 @@ Those outliers are designed as ectopic interactions.</li>
 To provide quantitative measurement of ectopic interactions overlap, we use visualization of Precision-Recall (PR) curves, output Area Under the Curve (AUC) metrics, and show the overlap of the predicted and experimentally measured ectopic interactions as compared to randomized controls:</p>
 
 <ul>
-<li>Changes in TAD-separation score.
-For calculating ectopic insulation score, we divide the TAD-separation score (computed using <a href="https://github.com/deeptools/HiCExplorer" target="_blank">HiCExplorer</a> hicFindTADs) at each bin for WT and MUT conditions and divide one track by another element-wise.
-That gives us fold changes of the TAD separation score for each locus (bin).
-Then, we design the values falling above 3 standard deviations of the distributions of fold changes as ectopic insulation.</li>
-<li>To provide quantitative measurement of ectopic insulatory score changes, we use measures of the overlap between ectopic insulation points identified using experimental and predicted maps (Recall, Precision, PR AUC).</li>
-</ul>
+<li>Changes in insulation score.
+For calculating ectopic insulation score, we divide the insulation score (computed using <a href="https://cooltools.readthedocs.io/en/latest/notebooks/insulation_and_boundaries.html" target="_blank">HiCExplorer</a> calculate_insulation_score) at each bin for WT and MUT conditions and divide one track by another element-wise.
+That gives us fold changes of the insulation score for each locus (bin).
 
 <p>Two additional metrics are used to compare predicted and experimental Hi-C contacts with regard to genomic region datasets (Single):</p>
 

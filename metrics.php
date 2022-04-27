@@ -10,6 +10,7 @@ $DBPairedMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics WHERE
 $DBInsOnlyPairedMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics_insp WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics_insp;'));
 $DBSingleMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics_wg WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics_wg;'));
 $DBInsOnlySingleMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM bm_metrics_wg_inss WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM bm_metrics_wg_inss;'));
+$DBPetMetrics = DBSelect((($AuthorID != '') ? 'SELECT * FROM chia_pet WHERE "Metadata.Author"="'.$AuthorID.'";' : 'SELECT * FROM chia_pet;'));
 
 // MAKE TABLE ARRAY
 $TableArray = array(); 
@@ -58,6 +59,17 @@ while ($Row = $DBInsOnlySingleMetrics->fetch()) {
 		'SubmissionDate' => $Row['Metadata.SubmissionDate']
 		)); }
 
+while ($Row = $DBPetMetrics->fetch()) {
+	array_push($TableArray, array(
+		'ID' => $Row['ID'],
+		'Status' => intval($Row['Status']),
+		'Type' => 'ChIA-PET',
+		'Author' => $Row['Metadata.Author'],
+		'ModelName' => $Row['Metadata.ModelName'],
+		'SampleName' => $Row['Metadata.SampleName'],
+		'Resolution' => intval($Row['Metadata.Resolution']),
+		'SubmissionDate' => $Row['Metadata.SubmissionDate']
+		)); }
 // HTML + JS
 
 echo GetHeader('Submissions List');
