@@ -1979,7 +1979,7 @@ To provide quantitative measurement of ectopic interactions overlap, we use visu
 
 <ul>
 <li>Changes in insulation score.
-For calculating ectopic insulation score, we divide the insulation score (computed using <a href="https://cooltools.readthedocs.io/en/latest/notebooks/insulation_and_boundaries.html" target="_blank">HiCExplorer</a> calculate_insulation_score) at each bin for WT and MUT conditions and divide one track by another element-wise.
+For calculating ectopic insulation score, we divide the insulation score (computed using <a href="https://cooltools.readthedocs.io/en/latest/notebooks/insulation_and_boundaries.html" target="_blank">CoolTools</a> calculate_insulation_score) at each bin for WT and MUT conditions and divide one track by another element-wise.
 That gives us fold changes of the insulation score for each locus (bin).
 
 <p>Two additional metrics are used to compare predicted and experimental Hi-C contacts with regard to genomic region datasets (Single):</p>
