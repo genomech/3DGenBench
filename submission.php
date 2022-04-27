@@ -19,6 +19,7 @@ switch ($DataType) {
 	case 'insp': $SamplesList = GetSamples(); break;
 	case 's': $SamplesList = GetSamplesWG(); break;
 	case 'inss': $SamplesList = GetSamplesWG(); break;
+	case 'pet': $SamplesList = GetSamplesPET(); break;
 	default: die(Message('Wrong data type', true)); 
 	}
 $ResolutionsList = GetResolutions();
@@ -34,11 +35,11 @@ $ProcessingList = array();
 
 foreach ($TssList as $index) {
 	
-	$res = $_POST['resolution_'.$index];
+	$res = isset($_POST['resolution_'.$index]) ? $_POST['resolution_'.$index] : '0';
 	$samp = $_POST['sample_'.$index];
 	if (!in_array($res, array_keys($ResolutionsList))) die(Message('Unknown resolution', true));
 	if (!in_array($samp, array_keys($SamplesList))) die(Message('Unknown sample', true));
-	if ($res == '0') die(Message('Resolution not defined', true));
+	if (($res == '0') and ($DataType != 'pet')) die(Message('Resolution not defined', true));
 	if ($samp == '0') die(Message('Sample not defined', true));
 	$ProcessingList[$index] = array(
 		'ID' => 'bm'.strtoupper(dechex(intval($index))),
@@ -74,7 +75,7 @@ foreach ($TssList as $index) {
 
 // SQL
 
-$TableName = array('p' => 'bm_metrics', 'insp' => 'bm_metrics_insp', 's' => 'bm_metrics_wg', 'inss' => 'bm_metrics_wg_inss')[$DataType];
+$TableName = array('p' => 'bm_metrics', 'insp' => 'bm_metrics_insp', 's' => 'bm_metrics_wg', 'inss' => 'bm_metrics_wg_inss', 'pet' => 'chia_pet')[$DataType];
 $dbpath = 'sqlite:'.GetMetrics();
 try { $dbh  = new PDO($dbpath); } catch(Exception $e) { die(Message('Cannot open the database: '.$e, true)); }
 $query = 'INSERT INTO '.$TableName.' ( ID, Status, [Metadata.Author], [Metadata.ModelName], [Metadata.SampleName], [Metadata.Resolution], [Metadata.SubmissionDate]) VALUES ';
@@ -105,7 +106,9 @@ $cmd .= 'CMD=\'\'$CMD\'" | sqlite3 "'.GetMetrics().'"; \'; ';
 	} elseif ($DataType == 'insp') { 
 		$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineInsOnlyPaired().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetRearrTable().'" -W "'.$meta['WT'].'" -M "'.$meta['MUT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; '; 
 	} elseif ($DataType == 'inss') {
-	$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineInsOnlySingle().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetWGTable().'" -P "'.$meta['WT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; ';
+		$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetBenchmarkPipelineInsOnlySingle().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -r "'.$meta['Resolution'].'" -t "'.GetWGTable().'" -P "'.$meta['WT'].'" -d "'.GetMetrics().'" -c "'.GetCool().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; ';
+	} elseif ($DataType == 'pet') {
+		$cmd .= 'CMD=\'\'$CMD\'python3 "'.GetChIAPETBenchmarkPipeline().'" -i "'.$meta['ID'].'" -a "'.$meta['Author'].'" -m "'.$meta['ModelName'].'" -s "'.$meta['SampleName'].'" -t "'.GetPetTable().'" -p "'.$meta['WT'].'" -d "'.GetMetrics().'" -l "'.GetLogs().'/'.$meta['ID'].'.log"; \'; ';
 	}
 	
 	$cmd .= 'CMD=\'\'$CMD\'if [ $? -ne 0 ]; then { echo "\'; ';

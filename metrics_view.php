@@ -11,6 +11,7 @@ $DBPairedData = DBSelect('SELECT * FROM bm_metrics WHERE ID="'.$UnitID.'";');
 $DBInsOnlyPairedData = DBSelect('SELECT * FROM bm_metrics_insp WHERE ID="'.$UnitID.'";');
 $DBSingleData = DBSelect('SELECT * FROM bm_metrics_wg WHERE ID="'.$UnitID.'";');
 $DBInsOnlySingleData = DBSelect('SELECT * FROM bm_metrics_wg_inss WHERE ID="'.$UnitID.'";');
+$DBPetData = DBSelect('SELECT * FROM chia_pet WHERE ID="'.$UnitID.'";');
 
 // PARSE DATA
 $TableArray = array();
@@ -18,6 +19,7 @@ while ($Row = $DBPairedData->fetch()) { $Row['Metadata.Type'] = 'p'; array_push(
 while ($Row = $DBInsOnlyPairedData->fetch()) { $Row['Metadata.Type'] = 'insp'; array_push($TableArray, $Row); }
 while ($Row = $DBSingleData->fetch()) { $Row['Metadata.Type'] = 's'; array_push($TableArray, $Row); }
 while ($Row = $DBInsOnlySingleData->fetch()) { $Row['Metadata.Type'] = 'inss'; array_push($TableArray, $Row); }
+while ($Row = $DBPetData->fetch()) { $Row['Metadata.Type'] = 'pet'; array_push($TableArray, $Row); }
 
 // CHECK EXISTENCE AND UNIQUE
 $RecordExists = count($TableArray);
@@ -38,7 +40,7 @@ if (($DataType == 's') or ($DataType == 'inss')) {
 // print_r($DataArray);
 
 // LOAD metrics_list.php IF THERE ARE NO RESULTS
-if ((!$RecordExists) or (!in_array($DataType, array('p', 's', 'insp', 'inss')))) { include(__DIR__.'/metrics.php'); }
+if ((!$RecordExists) or (!in_array($DataType, array('p', 's', 'insp', 'inss', 'pet')))) { include(__DIR__.'/metrics.php'); }
 $Logs = file_get_contents(GetLogs().'/'.$UnitID.'.log');
 if ($RecordStatus != 0) { 
 	echo GetHeader('ID: '.$UnitID);
@@ -48,16 +50,16 @@ if ($RecordStatus != 0) {
 		
 		<table class="pure-table pure-table-bordered pure-table-striped">
 		<tr><td style="width: 400px;"><b>Author ID:</b></td><td style="width: 800px;">'.$Record['Metadata.Author'].'</td></tr>
-		<tr><td><b>Model Name:</b></td><td>'.$Record['Metadata.ModelName'].'</td></tr>
-		<tr><td><b>Resolution:</b></td><td>'.strval(intval($Record['Metadata.Resolution'] / 1000)).' kb</td></tr>
-		<tr><td><b>Submission Date:</b></td><td>'.date('d M Y, H:i:s', strtotime($Record['Metadata.SubmissionDate'])).'</td></tr>
+		<tr><td><b>Model Name:</b></td><td>'.$Record['Metadata.ModelName'].'</td></tr>';
+		if ($Record['Metadata.Resolution'] != '0') echo '<tr><td><b>Resolution:</b></td><td>'.strval(intval($Record['Metadata.Resolution'] / 1000)).' kb</td></tr>';
+		echo '<tr><td><b>Submission Date:</b></td><td>'.date('d M Y, H:i:s', strtotime($Record['Metadata.SubmissionDate'])).'</td></tr>
 		</table>
 		
 		<h2>Sample Data</h2>
 		<table class="pure-table pure-table-bordered pure-table-striped">
-		<tr><td style="width: 400px;"><b>Sample Name:</b></td><td style="width: 800px;">'.$Record['Metadata.SampleName'].'</td></tr>
-		<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>
-		</table><h2>Processing Info</h2>';
+		<tr><td style="width: 400px;"><b>Sample Name:</b></td><td style="width: 800px;">'.$Record['Metadata.SampleName'].'</td></tr>';
+		if ($Record['Metadata.Type'] != 'pet') echo '<tr><td><b>Coordinates ['.$LocusAssembly.']:</b></td><td>'.$LocusChr.':'.number_format($LocusStart).'-'.number_format($LocusEnd).'</td></tr>';
+		echo '</table><h2>Processing Info</h2>';
 		
 		if ($RecordStatus == 2) { echo '<aside class="button-error"><p>Job failed. See logs below and contact us</p></aside><details><summary>Click here to see logs</summary><div class="code code-wrap"><pre id="logpre" style="display: block; height: 500px; overflow-x: auto; padding: 0.5em; color: rgb(0, 0, 0); background: rgb(248, 248, 255) none repeat scroll 0% 0%;"><code class="language-html" style="white-space: pre;">'.$Logs.'</code></pre></div></details>
 		'; }
@@ -250,6 +252,7 @@ google.charts.setOnLoadCallback(draw'.$Name.');
 		
 	$Record = $TableArray[0];
 	
+	
 	$PairedBaseline = TsvToArray(__DIR__.'/rearr_benchmark_baseline.txt');
 	$FilteredPaired = array();
 	foreach ($PairedBaseline as $value) { 
@@ -271,6 +274,34 @@ google.charts.setOnLoadCallback(draw'.$Name.');
 	}
 	
 	echo GetHeader('ID: '.$UnitID);
+	
+	if ($Record['Metadata.Type'] == 'pet') {
+	
+	$MetricsData = json_decode($Record['Data.JSON'], true);
+		echo '
+		
+		<h2>Unit Data</h2>
+		
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Author ID:</b></td><td style="width: 800px;">'.$Record['Metadata.Author'].'</td></tr>
+		<tr><td><b>Model Name:</b></td><td>'.$Record['Metadata.ModelName'].'</td></tr>
+		<tr><td><b>Submission Date:</b></td><td>'.date('d M Y, H:i:s', strtotime($Record['Metadata.SubmissionDate'])).'</td></tr>
+		</table>
+		
+		<h2>Sample Data</h2>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>Sample Name:</b></td><td style="width: 800px;">'.$Record['Metadata.SampleName'].'</td></tr>
+		</table>
+		
+		<h2>Metrics</h2>
+		<table class="pure-table pure-table-bordered pure-table-striped">
+		<tr><td style="width: 400px;"><b>True positive, fraction of predicted interactions:</b></td><td style="width: 800px;">'.$MetricsData['True positive, fraction of predicted interactions'].'</td></tr>
+		<tr><td><b>False positive, fraction of predicted interactions:</b></td><td>'.$MetricsData['False positive, fraction of predicted interactions:'].'</td></tr>
+		<tr><td><b>False negative fraction, fraction of experimental interactions:</b></td><td>'.$MetricsData['False negative fraction, fraction of experimental interactions:'].'</td></tr>
+		<tr><td><b>PET MSE for overlaping interactions:</b></td><td>'.$MetricsData['PET MSE for overlaping interactions:'].'</td></tr>
+		</table>
+		';
+}
 	
 	if ($Record['Metadata.Type'] == 'insp') {
 		
@@ -443,6 +474,7 @@ google.charts.setOnLoadCallback(draw'.$Name.');
 	echo '<iframe width="1200" height="100" frameBorder="0" scrolling="no" margin="0" src="'.GetHiGlass().'?id='.$UnitID.'&type=inss&pos='.$LocusStart.'&end='.$LocusEnd.'"></iframe>';
 	}
 echo '<details><summary>Click here to see logs</summary><div class="code code-wrap"><pre id="logpre" style="display: block; height: 500px; overflow-x: auto; padding: 0.5em; color: rgb(0, 0, 0); background: rgb(248, 248, 255) none repeat scroll 0% 0%;"><code class="language-html" style="white-space: pre;">'.$Logs.'</code></pre></div></details>';
+echo '<details><summary>Raw</summary>'.htmlspecialchars(json_encode($Record)).'</details>';
 echo GetFooter();
 }
 ?> 

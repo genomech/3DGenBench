@@ -1031,6 +1031,22 @@ The data can be uploaded <a href="upload.php" target="_blank">here</a>.
 The uploaded files will be available in dropdown list <a href="submission_form.php" target="_blank">here</a> (see next Step).
 </p>
 
+<p>
+Also, if you have too many files to upload, you can upload your data via FTP using any FTP client, such as <a href="https://filezilla-project.org/">FileZilla</a> or <a href="https://winscp.net/eng/download.php">WinSCP</a>.
+</p>
+
+<div class="code"><pre style="display: block; overflow-x: auto; padding: 0.5em; color: rgb(0, 0, 0); background: rgb(248, 248, 255) none repeat scroll 0% 0%;">
+Protocol:      SFTP
+Host name:     gate1.cytogen.ru
+Port number:   8046
+Username:      sftp_user
+Password:      3DGenBench
+</pre></div>
+
+<aside><p>
+Note: passive mode must be enabled in your FTP client.
+</p></aside>
+
 <h2 id="compute_metrics" class="content-subhead">Step 4. Provide Sample Metadata &amp; Compute Metrics<a href="#compute_metrics" class="content-link" title="Heading anchor"></a></h2>
 
 <p>

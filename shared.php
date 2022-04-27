@@ -1,5 +1,7 @@
 <?php
 
+ini_set('display_errors', 1); ini_set('display_startup_errors', 1); error_reporting(E_ALL);
+
 // CONST
 
 $GLOBALS['bmRearrTable'] = realpath(__DIR__.'/rearrangements_table.tsv');
@@ -18,6 +20,9 @@ $GLOBALS['bmPipelineScriptInsOnlySingle'] = realpath(__DIR__.'/insulatory_score_
 $GLOBALS['bmSubmission'] = 'submission.php';
 $GLOBALS['bmHiGlass'] = 'higlass.php';
 $GLOBALS['bmMetricsPage'] = 'metrics_view.php';
+$GLOBALS['bmPetTable'] = realpath(__DIR__.'/chia-pet_table.txt');
+$GLOBALS['bmPetScript'] = realpath(__DIR__.'/ChIA-PET-benchmark.py');
+
 
 // GET CONST FUNC
 function GetHeader($Header) { 
@@ -226,13 +231,14 @@ function GetBenchmarkPipelineInsOnlyPaired() { return $GLOBALS['bmPipelineScript
 function GetBenchmarkPipelineInsOnlySingle() { return $GLOBALS['bmPipelineScriptInsOnlySingle']; }
 function GetRearrTable() { return $GLOBALS['bmRearrTable']; }
 function GetWGTable() { return $GLOBALS['bmWGTable']; }
+function GetPetTable() { return $GLOBALS['bmPetTable']; }
 function GetMetrics() { return $GLOBALS['bmMetrics']; }
 function GetLogs() { return $GLOBALS['bmLogs']; }
 function GetCool() { return $GLOBALS['bmCool']; }
 function GetSubmissionScript() { return $GLOBALS['bmSubmission']; }
 function GetHiGlass() { return $GLOBALS['bmHiGlass']; }
 function GetMetricsPage() {  return $GLOBALS['bmMetricsPage']; }
-
+function GetChIAPETBenchmarkPipeline() { return $GLOBALS['bmPetScript']; }
 // FUNC
 
 // Error/Success Message
@@ -283,6 +289,12 @@ function GetSamplesWG() {
 	foreach (TsvToArray($GLOBALS['bmWGTable']) as $Row) $SamplesList[$Row['genome_locus_name']] = $Row['genome_locus_name'];
 	return $SamplesList;
 }
+
+function GetSamplesPET() { 
+	$SamplesList = array('0' => '(none)');
+	foreach (TsvToArray($GLOBALS['bmPetTable']) as $Row) $SamplesList[$Row['genome_locus_name']] = $Row['genome_locus_name'];
+	return $SamplesList;
+	}
 
 function GetUploadedFiles($Username) {
 	$UserDir = $GLOBALS['bmUploads'].'/'.$Username;
