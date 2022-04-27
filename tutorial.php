@@ -959,7 +959,7 @@ Also you can explore dataset folder at our local FTP storage using hyperlinks in
 </figure>
 
 <p>
-The detailed description of files can be found <a href="tutorial.php" target="_blank">here</a>.
+The detailed description of files can be found <a href="https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/file_format_description.txt" target="_blank">here</a>.
 </p>
 
 <p>
