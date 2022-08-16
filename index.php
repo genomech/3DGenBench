@@ -23,6 +23,10 @@ If you have generated 3C-data describing changes of chromatin architecture cause
 
 <p>Now we are at the last stage of data preprocessing, and we are open to discuss the final pipeline suitable for each invited research group as well as benchmarking criteria. For discussions please <a href="https://join.slack.com/t/inc-cost/shared_invite/zt-xg9kj029-XELkAXaOSZisH_Zk9Iuigw" target="blank">join</a> INC-COST slack (channel #benchmarking).</p>
 
+<h2>Cite</h2>
+
+<p>Polina Belokopytova, Emil Viesná, Mateusz Chiliński, Yifeng Qi, Hossein Salari, Marco Di Stefano, et al. “3DGenBench: A Web-Server to Benchmark Computational Models for 3D Genomics.” Nucleic Acids Research. Oxford University Press (OUP), May 25, 2022. doi:<a href="https://doi.org/10.1093/nar/gkac396" target="_blank">10.1093/nar/gkac396</a>.</p>
+
 <h2>How to contribute</h2>
 
 <ul>
