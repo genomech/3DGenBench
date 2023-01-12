@@ -19,7 +19,7 @@ There are five steps required to obtain 3DGenBench scores:
 <ol>
 <li><a href="#Explore_hic_dataset">Explore reference Hi-C dataset</a></li>
 <li><a href="#predict">Generate computational predictions of Hi-C contacts for one or multiple samples</a>
-(<a href="https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/predicted_examples/">see example data</a>)</li>
+(<a href="https://genedev.bionet.nsc.ru/ftp/by_Project/INC_COST_3DBenchmark/predicted_examples/">see example data</a>)</li>
 <li><a href="#uploading">Upload your predictions to 3DGenBench server</a></li>
 <li><a href="#compute_metrics">Provide samples metadata and compute metrics</a></li>
 <li><a href="#explore_metrics">Explore metrics</a></li>
@@ -959,7 +959,7 @@ Also you can explore dataset folder at our local FTP storage using hyperlinks in
 </figure>
 
 <p>
-The detailed description of files can be found <a href="https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/file_format_description.txt" target="_blank">here</a>.
+The detailed description of files can be found <a href="https://genedev.bionet.nsc.ru/ftp/by_Project/INC_COST_3DBenchmark/file_format_description.txt" target="_blank">here</a>.
 </p>
 
 <p>
@@ -967,7 +967,7 @@ If you need to download the entire Hi-C data set, use command:
 </p>
 
 <div class="code"><pre>
-wget -r -np https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/hic_dataset_zipped/
+wget -r -np https://genedev.bionet.nsc.ru/ftp/by_Project/INC_COST_3DBenchmark/hic_dataset_zipped/
 </pre></div>
 
 <aside><p>
@@ -984,7 +984,7 @@ If you want to download the entire CTCF data set, use command:
 </p>
 
 <div class="code"><pre>
-wget -r -np https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/CTCF_data/
+wget -r -np https://genedev.bionet.nsc.ru/ftp/by_Project/INC_COST_3DBenchmark/CTCF_data/
 </pre></div>
 
 <h2 id="predict" class="content-subhead">Step 2. Predict Hi-C Contacts or Insulation Score Data<a href="#predict" class="content-link" title="Heading anchor"></a></h2>
@@ -1010,7 +1010,7 @@ Where contact_start corresponds to the interval (contact_start - resolution)-con
 </p>
 
 <p>
-An example file can be downloaded <a href="https://genedev.bionet.nsc.ru/hic_out/by_Project/INC_COST_3DBenchmark/predicted_examples/" target="_blank">here</a>.
+An example file can be downloaded <a href="https://genedev.bionet.nsc.ru/ftp/by_Project/INC_COST_3DBenchmark/predicted_examples/" target="_blank">here</a>.
 </p>
 
 <h3>Insulation Scores Input</h3>
